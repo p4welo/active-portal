@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <import resource="classpath:spring/mail-context.xml"/>
+    <import resource="classpath:spring/service-configuration-context.xml"/>
+
+    <context:component-scan base-package="co.radomski.setenta.service.impl"/>
+
+    <bean id="templateMailService" class="co.radomski.setenta.service.impl.TemplateMailServiceImpl">
+        <property name="sender" value="${mail.sender}"/>
+    </bean>
+</beans>

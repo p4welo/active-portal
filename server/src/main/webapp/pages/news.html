@@ -1,0 +1,103 @@
+<!--<div class="animation-fadeIn">-->
+<div>
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-fire"></i>Aktualnosci dupa jasiek<br>
+                <small>Lista</small>
+            </h1>
+        </div>
+    </div>
+    <div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Dodaj aktualność</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">Tytuł</label>
+                        <input ng-model="newNews.title" type="text" class="form-control" id="title"
+                               placeholder="Wprowadź tytuł">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Treść</label>
+                        <textarea id="content" ng-model="newNews.content" ck-editor></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageSrc">Ścieżka do zdjęcia
+                            <small>(opcjonalnie)</small>
+                        </label>
+                        <input ng-model="newNews.imageSrc" type="text" class="form-control" id="imageSrc"
+                               placeholder="http://adres.do.zdjecia.pl">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageAlt">Podpis zdjęcia
+                            <small>(opcionalnie)</small>
+                        </label>
+                        <input ng-model="newNews.imageAlt" type="text" class="form-control" id="imageAlt"
+                               placeholder="http://adres.do.zdjecia.pl">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="save(newNews)">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="block-title">
+            <div class="block-options">
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newsModal">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-vcenter table-condensed table-hover table-editable" id="general-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Tytuł</th>
+                    <th>Treść</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table-row" ng-repeat="n in news | orderBy: createdAt" ng-switch="n.state">
+                    <td>
+                        <span>{{n.createdAt}}</span>
+                    </td>
+                    <td>
+                        <span ng-switch-default>{{n.title}}</span>
+                        <textarea style="resize: none;" rows="5" ng-switch-when="editing" class="form-control"
+                                  ng-model="n.edit.title"></textarea>
+                    </td>
+                    <td>
+                        <span ng-switch-default ng-bind-html="n.content"></span>
+                        <textarea style="resize: none" ng-switch-when="editing" rows="5" class="form-control"
+                                  ng-model="n.edit.content"></textarea>
+                    </td>
+                    <td>
+                        <a ng-switch-default ng-click="edit(n)" class="btn btn-default">
+                            <i class="fa fa-edit"/>
+                        </a>
+                        <a ng-switch-when="editing" ng-click="update(n)" class="btn btn-primary">Zapisz</a>
+                        <a ng-switch-when="editing" ng-click="n.state=''" class="btn btn-primary">Anuluj</a>
+                    </td>
+                </tr>
+                <tr ng-show="loading" data-ng-animate="'fade'">
+                    <td colspan="4">
+                        <div class="spinner-icon"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
