@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>co.radomski</groupId>
-    <artifactId>setenta</artifactId>
+    <artifactId>active-portal</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>Setenta Application</name>
+    <name>Active Portal</name>
 
     <modules>
         <module>domain</module>

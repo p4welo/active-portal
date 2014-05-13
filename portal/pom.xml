@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>co.radomski</groupId>
-        <artifactId>setenta</artifactId>
+        <artifactId>active-portal</artifactId>
         <version>1.0</version>
     </parent>
 
@@ -17,7 +17,7 @@
     <name>Portal Module</name>
 
     <build>
-        <finalName>server</finalName>
+        <finalName>portal</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

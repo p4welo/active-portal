@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>co.radomski</groupId>
-        <artifactId>setenta</artifactId>
+        <artifactId>active-portal</artifactId>
         <version>1.0</version>
     </parent>
 
