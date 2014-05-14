@@ -6,11 +6,12 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/pages/admin" access="ROLE_ADMIN" />
-        <intercept-url pattern="/pages/company" access="ROLE_COMPANY" />
-        <intercept-url pattern="/pages/customer" access="ROLE_CUSTOMER" />
-        <intercept-url pattern="/" access="ROLE_USER" />
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/pages/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/pages/company/**" access="hasRole('ROLE_COMPANY')" />
+        <intercept-url pattern="/pages/customer/**" access="hasRole('ROLE_CUSTOMER')" />
+        <intercept-url pattern="/pages/error/**" access="permitAll" />
+        <intercept-url pattern="/" access="hasRole('ROLE_USER')" />
 
         <form-login
                 login-page="/login"

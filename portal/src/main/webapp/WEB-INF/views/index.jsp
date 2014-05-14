@@ -37,12 +37,10 @@
 
     <link href="static/css/style.css" rel="stylesheet" media="screen"/>
     <link href="static/css/animations.css" rel="stylesheet" media="screen"/>
-    <!--<link href="css/animate.css" rel="stylesheet" media="screen"/>-->
 
     <script src="static/lib/pro-ui/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
 <body ng-app="PortalApp">
-<%--<div ng-hide="isLoggedIn()" class="not-logged-in-background"></div>--%>
 <div id="page-container" class="sidebar-partial sidebar-visible-lg" ng-cloak>
     <div id="sidebar" ng-hide="$state.includes('login')">
         <div class="sidebar-scroll">

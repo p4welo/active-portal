@@ -25,7 +25,6 @@ public class TestController
    public ModelAndView login() {
 
       return new ModelAndView("login");
-
    }
 
    @RequestMapping(value = "/admin**", method = RequestMethod.GET)

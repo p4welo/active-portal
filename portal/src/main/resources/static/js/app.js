@@ -22,13 +22,17 @@ angular.module('PortalApp', [
         $stateProvider
             .state('news', {
                 url: "/news",
-                templateUrl: "pages/news.html",
+                templateUrl: "pages/admin/news.html",
                 controller: "NewsCtrl"
             })
             .state('classes', {
                 url: "/classes",
                 templateUrl: "pages/classes.html",
                 controller: "ClassesCtrl"
+            })
+            .state('403', {
+                url: "/403",
+                templateUrl: "pages/error/403.html"
             });
 
         $httpProvider.interceptors.push(function ($q, $rootScope, $location, notificationService) {
@@ -37,7 +41,10 @@ angular.module('PortalApp', [
 
                         var status = rejection.status;
                         if (status == 401) {
-                            $location.path("/login");
+                            window.location.replace("/login");
+                        }
+                        else if (status == 403) {
+                            $location.path("/403");
                         }
                         else if (status == 500){
                             notificationService.error('Internal server error');
