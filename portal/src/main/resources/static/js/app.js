@@ -3,13 +3,13 @@ var SERVER_URL = "http://localhost:8086/api";
 //var SERVER_URL = "http://5.133.13.149/server/api";
 
 angular.module('PortalApp', [
-        'ui.router',
-        'PortalApp.loadingBar',
-        'PortalApp.filters',
-        'PortalApp.services',
-        'PortalApp.directives',
-        'PortalApp.controllers'
-    ])
+    'ui.router',
+    'PortalApp.loadingBar',
+    'PortalApp.filters',
+    'PortalApp.services',
+    'PortalApp.directives',
+    'PortalApp.controllers'
+])
 
     .run(['$rootScope', '$state', '$stateParams',
         function ($rootScope, $state, $stateParams) {
@@ -22,12 +22,12 @@ angular.module('PortalApp', [
         $stateProvider
             .state('news', {
                 url: "/news",
-                templateUrl: "pages/admin/news.html",
+                templateUrl: "pages/company/news.html",
                 controller: "NewsCtrl"
             })
             .state('classes', {
                 url: "/classes",
-                templateUrl: "pages/classes.html",
+                templateUrl: "pages/company/classes.html",
                 controller: "ClassesCtrl"
             })
             .state('403', {
@@ -46,7 +46,7 @@ angular.module('PortalApp', [
                         else if (status == 403) {
                             $location.path("/403");
                         }
-                        else if (status == 500){
+                        else if (status == 500) {
                             notificationService.error('Internal server error');
                         }
                         return $q.reject(rejection);
@@ -55,50 +55,49 @@ angular.module('PortalApp', [
             }
         );
 
-        $httpProvider.interceptors.push(function ($q, $rootScope) {
-                return {
-                    'request': function (config) {
-                        // var isRestCall = config.url.contains('rest');
-                        if (angular.isDefined($rootScope.token)) {
-                            var authToken = $rootScope.token;
-                            config.headers['Authorization'] = authToken;
-                        }
-                        return config || $q.when(config);
-                    }
-                };
-            }
-        );
+//        $httpProvider.interceptors.push(function ($q, $rootScope) {
+//                return {
+//                    'request': function (config) {
+//                        if (angular.isDefined($rootScope.token)) {
+//                            var authToken = $rootScope.token;
+//                            config.headers['Authorization'] = authToken;
+//                        }
+//                        return config || $q.when(config);
+//                    }
+//                };
+//            }
+//        );
     })
-    .run(function($rootScope, $location, $cookieStore, userFactory, menuFactory) {
+    .run(function ($rootScope, $location, $cookieStore, userFactory, menuFactory) {
 
-        $rootScope.hasRole = function(role) {
+        $rootScope.hasRole = function (role) {
             if ($rootScope.user === undefined) {
                 return false;
             }
             return $rootScope.user.type == role;
         };
 
-        $rootScope.logout = function() {
-            userFactory.logout(function() {
-                delete $rootScope.user;
-                delete $rootScope.token;
-                $cookieStore.remove('authToken');
-                $location.path("/login");
-            });
+        $rootScope.injectAuthentication = function (firstName, lastName, type) {
+            $rootScope.user = {
+                "firstName" : firstName,
+                "lastName" : lastName,
+                "type" : type
+            };
         };
 
-        $rootScope.isLoggedIn = function() {
-            return $rootScope.token !== undefined;
+        $rootScope.isLoggedIn = function () {
+            return $rootScope.user !== undefined;
+//            return $rootScope.token !== undefined;
         }
 
-        var token = $cookieStore.get('authToken');
-        if (token !== undefined) {
-            $rootScope.user = userFactory.get(function () {
-                $rootScope.menu = menuFactory.get(function () {
-                    $rootScope.token = token;
-                });
-            });
-        }
+//        var token = $cookieStore.get('authToken');
+//        if (token !== undefined) {
+//            $rootScope.user = userFactory.get(function () {
+//                $rootScope.menu = menuFactory.get(function () {
+//                    $rootScope.token = token;
+//                });
+//            });
+//        }
     });
 
 angular.module('PortalApp.services', ['ngResource']);

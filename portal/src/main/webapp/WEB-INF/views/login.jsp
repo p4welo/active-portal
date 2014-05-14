@@ -37,7 +37,6 @@
 
     <link href="static/css/style.css" rel="stylesheet" media="screen"/>
     <link href="static/css/animations.css" rel="stylesheet" media="screen"/>
-    <!--<link href="css/animate.css" rel="stylesheet" media="screen"/>-->
 
     <script src="static/lib/pro-ui/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
@@ -46,14 +45,12 @@
     <div id="login-container" class="animation-fadeIn" style="z-index:9999;">
         <div class="login-title text-center">
             <h1><i class="gi gi-flash"></i> <strong>ActivePortal</strong><br>
-                <small>Zaloguj się</small>
+                <small>Zaloguj sie</small>
             </h1>
         </div>
 
         <div class="block remove-margin">
             <form name='loginForm' action="auth" method='POST' class="form-horizontal form-bordered form-control-borderless">
-            <%--<form ng-submit="login()" id="form-login" autocomplete="off"--%>
-                  <%--class="form-horizontal form-bordered form-control-borderless">--%>
                 <div class="form-group">
                     <div class="col-xs-12">
                         <div class="input-group">

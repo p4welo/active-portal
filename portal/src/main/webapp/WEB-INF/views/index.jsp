@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="false"%>
 <!DOCTYPE html>
 <!--[if IE 8]>
@@ -37,16 +38,15 @@
 
     <link href="static/css/style.css" rel="stylesheet" media="screen"/>
     <link href="static/css/animations.css" rel="stylesheet" media="screen"/>
-
     <script src="static/lib/pro-ui/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
-<body ng-app="PortalApp">
+<body ng-app="PortalApp" ng-init="injectAuthentication('${user.firstName}','${user.lastName}','${user.type}')">
 <div id="page-container" class="sidebar-partial sidebar-visible-lg" ng-cloak>
-    <div id="sidebar" ng-hide="$state.includes('login')">
+    <div id="sidebar">
         <div class="sidebar-scroll">
             <div class="sidebar-content">
                 <a href="index.html" class="sidebar-brand">
-                    <i class="gi gi-flash"></i><strong>Pro</strong>UI
+                    <i class="gi gi-baseball"></i><strong>Active</strong>Portal
                 </a>
 
                 <div class="sidebar-section sidebar-user clearfix">
@@ -60,33 +60,33 @@
                     <span ng-show="hasRole('ROLE_ADMIN')">
                         Administrator
                     </span>
-                    <span ng-show="hasRole('ROLE_USER')">
-                        Użytkownik
+                    <span ng-show="hasRole('ROLE_COMPANY')">
+                        Firma
                     </span>
                     </div>
                 </div>
 
                 <ul class="sidebar-nav">
-                    <div ng-repeat="group in menu.groups">
+                    <c:forEach var="group" items="${menu}">
                         <li class="sidebar-header">
-                            <span class="sidebar-header-title" ng-bind="group.header"></span>
+                            <span class="sidebar-header-title">${group.header}</span>
                         </li>
-                        <li ng-repeat="item in group.items">
-                            <a href="{{item.uri}}" class="sidebar-nav-menu"
-                            <%--<a href="#{{item.uri}}" class="sidebar-nav-menu"--%>
-                               ng-class="{active: $state.includes(item.state)}">
-                                <i ng-class="item.icon"></i>
-                                {{item.label}}
-                            </a>
-                        </li>
-                    </div>
+                        <c:forEach var="item" items="${group.items}">
+                            <li>
+                                <a ui-sref="${item.state}" class="sidebar-nav-menu" ng-class="{active: $state.includes('${item.state}')}">
+                                    <i class="${item.icon} sidebar-nav-icon"></i>
+                                    ${item.label}
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
     </div>
 
     <div id="main-container">
-        <header class="navbar navbar-default" ng-hide="$state.includes('login')">
+        <header class="navbar navbar-default">
             <ul class="nav navbar-nav-custom">
                 <li>
                     <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
@@ -114,7 +114,6 @@
                 </li>
                 <li>
                     <a href="logout" data-toggle="tooltip" data-placement="bottom" title="Wyloguj">
-                    <%--<a ng-click="logout()" href="#" data-toggle="tooltip" data-placement="bottom" title="Wyloguj">--%>
                         <i class="gi gi-gi gi-exit"></i>
                     </a>
                 </li>
@@ -122,17 +121,15 @@
         </header>
 
         <div id="page-content">
-            <h1>Title : ${title}</h1>
-            <h1>Message : ${message}</h1>
             <div class="angular-view" ui-view></div>
         </div>
 
-        <footer class="clearfix" ng-hide="$state.includes('login')">
+        <footer class="clearfix">
             <div class="pull-right">
                 Crafted with <i class="fa fa-heart text-danger"></i> by <a href="http://goo.gl/vNS3I" target="_blank">pixelcave</a>
             </div>
             <div class="pull-left">
-                <span id="year-copy"></span> &copy; <a href="http://goo.gl/TDOSuC" target="_blank">ProUI 1.2</a>
+                <span id="year-copy"></span> &copy; <a href="http://goo.gl/TDOSuC" target="_blank">Active-Portal 1.2</a>
             </div>
         </footer>
     </div>

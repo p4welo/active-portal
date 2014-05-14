@@ -10,5 +10,6 @@ package co.radomski.setenta.domain.enums;
 public enum UserTypeEnum
 {
    ROLE_ADMIN,
-   ROLE_USER
+   ROLE_COMPANY,
+   ROLE_CUSTOMER
 }
