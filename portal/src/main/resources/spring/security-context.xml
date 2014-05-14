@@ -11,6 +11,11 @@
         <intercept-url pattern="/pages/company/**" access="hasRole('ROLE_COMPANY')" />
         <intercept-url pattern="/pages/customer/**" access="hasRole('ROLE_CUSTOMER')" />
         <intercept-url pattern="/pages/error/**" access="permitAll" />
+
+        <intercept-url pattern="/rest/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/rest/company/**" access="hasRole('ROLE_COMPANY')" />
+        <intercept-url pattern="/rest/customer/**" access="hasRole('ROLE_CUSTOMER')" />
+
         <intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COMPANY', 'ROLE_CUSTOMER')" />
 
         <form-login

@@ -1,1 +1,37 @@
-news list
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-fire"></i>Aktualnosci<br>
+            <small>Professional looking tables for your data!</small>
+        </h1>
+    </div>
+</div>
+
+<div class="block">
+
+</div>
+
+<div class="block">
+    <span ng-show="loading">
+        loading...
+    </span>
+    <div class="table-options clearfix">
+        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+            <button class="btn btn-primary">Nowy</button>
+        </div>
+    </div>
+    <table class="table table-vcenter table-hover table-editable">
+        <thead>
+        <tr>
+            <th class="text-center">Tytul</th>
+            <th class="text-center">Treść</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="n in news">
+            <td class="text-center" ng-bind="n.title"/>
+            <td ng-bind-html="n.content"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

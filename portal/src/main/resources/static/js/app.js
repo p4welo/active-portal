@@ -54,19 +54,6 @@ angular.module('PortalApp', [
                 };
             }
         );
-
-//        $httpProvider.interceptors.push(function ($q, $rootScope) {
-//                return {
-//                    'request': function (config) {
-//                        if (angular.isDefined($rootScope.token)) {
-//                            var authToken = $rootScope.token;
-//                            config.headers['Authorization'] = authToken;
-//                        }
-//                        return config || $q.when(config);
-//                    }
-//                };
-//            }
-//        );
     })
     .run(function ($rootScope, $location, $cookieStore, userFactory, menuFactory) {
 
@@ -87,17 +74,7 @@ angular.module('PortalApp', [
 
         $rootScope.isLoggedIn = function () {
             return $rootScope.user !== undefined;
-//            return $rootScope.token !== undefined;
         }
-
-//        var token = $cookieStore.get('authToken');
-//        if (token !== undefined) {
-//            $rootScope.user = userFactory.get(function () {
-//                $rootScope.menu = menuFactory.get(function () {
-//                    $rootScope.token = token;
-//                });
-//            });
-//        }
     });
 
 angular.module('PortalApp.services', ['ngResource']);

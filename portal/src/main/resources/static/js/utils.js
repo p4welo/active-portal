@@ -1,7 +1,8 @@
 function getRestUrl(uri)
 {
     var REST_PART = "/rest";
-    return SERVER_URL + REST_PART + uri;
+    return REST_PART + uri;
+//    return SERVER_URL + REST_PART + uri;
 }
 
 function getPublicUrl(uri)
