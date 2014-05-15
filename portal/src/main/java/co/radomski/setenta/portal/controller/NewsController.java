@@ -2,7 +2,7 @@ package co.radomski.setenta.portal.controller;
 
 import co.radomski.setenta.domain.News;
 import co.radomski.setenta.portal.api.ApiKeys;
-import co.radomski.setenta.portal.api.RestApiMappings;
+import co.radomski.setenta.portal.api.CompanyApiMappings;
 import co.radomski.setenta.service.INewsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ public class NewsController
    @Resource
    private INewsService newsService;
 
-   @RequestMapping(value = RestApiMappings.GET_NEWS_LIST, method = RequestMethod.GET)
+   @RequestMapping(value = CompanyApiMappings.GET_NEWS_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
    public List<News> getNewsList()
@@ -29,7 +29,7 @@ public class NewsController
       return newsService.findNewsList();
    }
 
-   @RequestMapping(value = RestApiMappings.GET_NEWS, method = RequestMethod.PUT)
+   @RequestMapping(value = CompanyApiMappings.GET_NEWS, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
    public News updateNews(@RequestBody News news,
@@ -42,7 +42,7 @@ public class NewsController
       return newsService.update(oldNews);
    }
 
-   @RequestMapping(value = RestApiMappings.CREATE_NEWS, method = RequestMethod.POST)
+   @RequestMapping(value = CompanyApiMappings.CREATE_NEWS, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
    public News createNews(@RequestBody News news)
