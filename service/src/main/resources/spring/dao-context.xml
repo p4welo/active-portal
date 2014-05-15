@@ -12,7 +12,7 @@
     <context:annotation-config/>
     <tx:annotation-driven order="1000"/>
 
-    <context:component-scan base-package="co.radomski.setenta.dao.impl"/>
+    <context:component-scan base-package="pl.ap.dao.impl"/>
 
     <bean id="validatorFactory" class="javax.validation.Validation" factory-method="buildDefaultValidatorFactory"/>
 
@@ -43,7 +43,7 @@
     </bean>
 
     <utils:list id="sessionFactoryDomainToScan">
-        <value>co.radomski.setenta.domain</value>
+        <value>pl.ap.domain</value>
     </utils:list>
 
     <utils:list id="sessionFactoryAnnotatedClasses">

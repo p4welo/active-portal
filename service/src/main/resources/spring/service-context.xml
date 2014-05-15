@@ -8,9 +8,9 @@
     <import resource="classpath:spring/mail-context.xml"/>
     <import resource="classpath:spring/service-configuration-context.xml"/>
 
-    <context:component-scan base-package="co.radomski.setenta.service.impl"/>
+    <context:component-scan base-package="pl.ap.service.impl"/>
 
-    <bean id="templateMailService" class="co.radomski.setenta.service.impl.TemplateMailServiceImpl">
+    <bean id="templateMailService" class="pl.ap.service.impl.TemplateMailServiceImpl">
         <property name="sender" value="${mail.sender}"/>
     </bean>
 </beans>

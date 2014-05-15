@@ -4,24 +4,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>co.radomski</groupId>
+    <groupId>pl.ap</groupId>
     <artifactId>active-portal</artifactId>
-    <version>1.0</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
-    <name>Active Portal</name>
+    <name>Active Portal Application</name>
 
     <modules>
         <module>domain</module>
         <module>service</module>
         <module>server</module>
-        <module>portal</module>
     </modules>
 
     <properties>
+        <ap.server.version>1.1.0</ap.server.version>
+        <ap.service.version>1.1.0</ap.service.version>
+        <ap.domain.version>1.1.0</ap.domain.version>
+
         <spring.version>4.0.3.RELEASE</spring.version>
-        <!--<spring.version>3.2.5.RELEASE</spring.version>-->
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <slf4j.version>1.7.5</slf4j.version>
+        <aspectj.version>1.8.0</aspectj.version>
         <javax.mail.version>1.4.3</javax.mail.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <javax.servlet.version>2.5</javax.servlet.version>
@@ -32,15 +35,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>co.radomski</groupId>
+                <groupId>pl.ap</groupId>
                 <artifactId>domain</artifactId>
-                <version>${project.version}</version>
+                <version>${ap.domain.version}</version>
             </dependency>
             <dependency>
-                <groupId>co.radomski</groupId>
+                <groupId>pl.ap</groupId>
                 <artifactId>service</artifactId>
-                <version>${project.version}</version>
+                <version>${ap.service.version}</version>
             </dependency>
+            <dependency>
+                <groupId>pl.ap</groupId>
+                <artifactId>server</artifactId>
+                <version>${ap.server.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
@@ -105,6 +114,21 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
                 <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
@@ -223,6 +247,7 @@
                 <artifactId>jstl</artifactId>
                 <version>1.2</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
