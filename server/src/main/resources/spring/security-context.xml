@@ -1,8 +1,11 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
@@ -28,14 +31,11 @@
         <logout logout-url="/logout" logout-success-url="/" />
     </http>
 
+    <context:component-scan base-package="pl.ap.server.security"/>
     <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
 
     <authentication-manager>
-        <authentication-provider >
-            <user-service>
-                <user name="test" password="test" authorities="ROLE_COMPANY" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="userDetailsService" />
     </authentication-manager>
 
 </beans:beans>
