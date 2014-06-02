@@ -45,7 +45,7 @@
     <div id="login-container" class="animation-fadeIn" style="z-index:9999;">
         <div class="login-title text-center">
             <h1><i class="gi gi-flash"></i> <strong>ActivePortal</strong><br>
-                <small>Zaloguj sie</small>
+                <small>Zaloguj się</small>
             </h1>
         </div>
 

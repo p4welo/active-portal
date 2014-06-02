@@ -4,6 +4,7 @@ var SERVER_URL = "http://localhost:8086/api";
 
 angular.module('PortalApp', [
     'ui.router',
+    'ngAnimate',
     'PortalApp.loadingBar',
     'PortalApp.filters',
     'PortalApp.services',

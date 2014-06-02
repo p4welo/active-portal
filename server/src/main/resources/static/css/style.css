@@ -54,16 +54,60 @@
     position: fixed;
 }
 
-.not-logged-in-background {
-    z-index: 995;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+}
+
+/*.details-block {*/
+    /*max-height: 0;*/
+    /*overflow: hidden;*/
+    /*-webkit-transition: all 0.25s ease;*/
+    /*-moz-transition: all 0.25s ease;*/
+    /*-ms-transition: all 0.25s ease;*/
+    /*-o-transition: all 0.25s ease;*/
+    /*transition: all 0.25s ease;*/
+/*}*/
+
+/*.details-block.editing {*/
+    /*max-height: 500px !important;*/
+/*}*/
+
+/*.box { color: white; text-align: center; height: 100px; font-size: 86px; }*/
+/*.on  { background-color: green; }*/
+/*.off { background-color: red; }*/
+
+
+/*.details-show-setup, .details-hide-setup {*/
+    /*-webkit-transition:all linear 0.3s;*/
+    /*-moz-transition:all linear 0.3s;*/
+    /*-ms-transition:all linear 0.3s;*/
+    /*-o-transition:all linear 0.3s;*/
+    /*transition:all linear 0.3s;*/
+/*}*/
+
+/*.details-show-setup { max-height: 0px; overflow: hidden }*/
+/*.details-show-setup.details-show-start { max-height: 500px; }*/
+
+/*.details-hide-setup { max-height: 500px; }*/
+/*.details-hide-setup.details-hide-start { max-height: 0px; overflow: hidden }*/
+
+.animation.ng-enter,
+.animation.ng-leave{
+    -webkit-transition: 1s;
+}
+
+.animation.ng-enter {
+    opacity: 0;
+}
+
+.animation.ng-leave {
+    opacity: 1;
+}
+
+.animation.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.animation.ng-leave.ng-leave-active {
+    opacity: 0;
 }

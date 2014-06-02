@@ -1,36 +1,70 @@
 <div class="content-header">
     <div class="header-section">
         <h1>
-            <i class="gi gi-fire"></i>Aktualnosci<br>
+            <i class="gi gi-fire"></i>Aktualności<br>
             <small>Professional looking tables for your data!</small>
         </h1>
     </div>
 </div>
 
 <div class="block">
-
-</div>
-
-<div class="block">
     <span ng-show="loading">
         loading...
     </span>
+
     <div class="table-options clearfix">
         <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
             <button class="btn btn-primary">Nowy</button>
         </div>
     </div>
-    <table class="table table-vcenter table-hover table-editable">
+    <table class="table table-vcenter table-editable">
+        <!--<table class="table table-vcenter table-hover table-editable">-->
         <thead>
         <tr>
-            <th class="text-center">Tytul</th>
-            <th class="text-center">Treść</th>
+            <th class="text-center">Utworzony</th>
+            <th class="text-center">Tytuł</th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="n in news">
+        <!--TODO: http://johnculviner.com/expandable-collapsable-detail-in-a-table-with-angular-js/-->
+        <tr ng-repeat-start="n in news" ng-class="{'warning': isExpanded(n)}">
+            <td ng-bind="n.createdAt"/>
             <td class="text-center" ng-bind="n.title"/>
-            <td ng-bind-html="n.content"></td>
+            <td class="block-options">
+                <a ng-if="!n.editing" class="btn btn-sm btn-default btn-option" ng-click="edit(n)">
+                    <i class="fa fa-angle-double-up"></i>
+                </a>
+                <a ng-if="n.editing" class="btn btn-sm btn-default btn-option" ng-click="collapse(n)">
+                    <i class="fa fa-angle-double-down"></i>
+                </a>
+            </td>
+        </tr>
+        <tr class="details animation" ng-show="n.editing" ng-repeat-end="">
+            <td colspan="3">
+                <div class="block">
+                    <form class="form-horizontal form-bordered">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="title">Tytuł</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="title" name="title" class="form-control" value="{{n.title}}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="content">Treść</label>
+                            <div class="col-sm-9">
+                                <textarea ck-editor id="content">{{n.content}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="content">Zdjęcie</label>
+                            <div class="col-sm-9">
+                                <img class="img-responsive" src="{{n.imageSrc}}"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
