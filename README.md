@@ -15,4 +15,8 @@ Bezpośrednia interakcja z klientem, począwszy od podstawowej możliwości kont
 <br /><br />
 ### Public REST
 
-Proste API pozwalające na odczyt podstawowych informacji z bazy danych. Udostępnione na potrzeby strony internetowej, urządzeń mobilnych itp. wedle uznania użytkownika końcowego. Przypadek użycia: pobieranie aktualnej listy zajęc do wyświetlenia grafiku na stronie internetowej.
+Proste API pozwalające na odczyt podstawowych informacji z bazy danych. Udostępnione na potrzeby strony internetowej, urządzeń mobilnych itp. wedle uznania użytkownika końcowego. Przypadek użycia: pobieranie aktualnej listy zajęc do wyświetlenia
+grafiku na stronie internetowej.
+<br /><br />
+## Demo
+[www.active-portal.pl](http://www.active-portal.pl)
