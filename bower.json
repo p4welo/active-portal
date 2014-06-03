@@ -1,0 +1,8 @@
+{
+    "name": "active-portal",
+    "version": "0.0.1",
+    "dependencies": {
+        "angular": "~1.2.6",
+        "requirejs": "~2.1.9"
+    }
+}
