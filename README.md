@@ -17,3 +17,8 @@ grafiku na stronie internetowej.
 ## Demo
 [www.active-portal.pl](http://www.active-portal.pl)
 <br /><br />
+## Checkout tips
+```
+bower install
+
+```

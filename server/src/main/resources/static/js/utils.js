@@ -1,6 +1,6 @@
 function getRestUrl(uri)
 {
-    var REST_PART = "/rest/company";
+    var REST_PART = "/ap/rest/company";
     return REST_PART + uri;
 //    return SERVER_URL + REST_PART + uri;
 }

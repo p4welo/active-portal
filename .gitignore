@@ -2,3 +2,4 @@
 .svn/
 *.iml
 target/
+bower/
