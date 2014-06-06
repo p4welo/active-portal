@@ -1,4 +1,4 @@
-package pl.ap.server.utils;
+package pl.ap.service.util;
 
 
 import pl.ap.domain.menu.MenuGroup;

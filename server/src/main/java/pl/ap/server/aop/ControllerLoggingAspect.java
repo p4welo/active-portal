@@ -10,15 +10,12 @@ import org.springframework.stereotype.Component;
  * Created by parado on 2014-05-14.
  */
 @Aspect
-//@Component
+@Component
 public class ControllerLoggingAspect
 {
-//   @Before("execution(* co.radomski.setenta.portal.web.TestController.login(..))")
-//   public void logBefore(JoinPoint joinPoint) {
-//
-//      System.out.println("logBefore() is running!");
-//      System.out.println("hijacked : " + joinPoint.getSignature().getName());
-//      System.out.println("******");
-//      Logger.getLogger(this.getClass()).error("========================DUPA");
-//   }
+   @Before("execution(* pl.ap.server.controller.NewsController.*(..))")
+   public void logBefore(JoinPoint joinPoint) {
+
+      Logger.getLogger(joinPoint.getTarget().getClass()).debug(joinPoint.getSignature());
+   }
 }

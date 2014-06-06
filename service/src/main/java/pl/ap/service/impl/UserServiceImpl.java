@@ -49,7 +49,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements IUserS
       user.setLastName("Testowy");
       user.setLogin("test");
       user.setPassword(passwordEncoder.encode("test"));
-      user.setType(UserTypeEnum.ROLE_ADMIN);
+      user.setType(UserTypeEnum.ROLE_COMPANY);
       user.setEmail("test@mail.com");
       save(user);
    }

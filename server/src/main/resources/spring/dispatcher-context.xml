@@ -17,10 +17,10 @@
     <mvc:resources mapping="static/**" location="classpath:static/"/>
     <mvc:resources mapping="pages/**" location="classpath:pages/"/>
 
-    <!--<context:component-scan base-package="pl.ap.server.aop"/>-->
+    <context:component-scan base-package="pl.ap.server.aop"/>
     <context:component-scan base-package="pl.ap.server.controller"/>
 
-    <!--<aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
