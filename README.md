@@ -18,7 +18,4 @@ grafiku na stronie internetowej.
 [www.active-portal.pl](http://www.active-portal.pl)
 <br /><br />
 ## Checkout tips
-```
 bower install
-
-```
