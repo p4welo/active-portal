@@ -58,56 +58,35 @@
     display: none !important;
 }
 
-/*.details-block {*/
-    /*max-height: 0;*/
-    /*overflow: hidden;*/
-    /*-webkit-transition: all 0.25s ease;*/
-    /*-moz-transition: all 0.25s ease;*/
-    /*-ms-transition: all 0.25s ease;*/
-    /*-o-transition: all 0.25s ease;*/
-    /*transition: all 0.25s ease;*/
-/*}*/
-
-/*.details-block.editing {*/
-    /*max-height: 500px !important;*/
-/*}*/
-
-/*.box { color: white; text-align: center; height: 100px; font-size: 86px; }*/
-/*.on  { background-color: green; }*/
-/*.off { background-color: red; }*/
-
-
-/*.details-show-setup, .details-hide-setup {*/
-    /*-webkit-transition:all linear 0.3s;*/
-    /*-moz-transition:all linear 0.3s;*/
-    /*-ms-transition:all linear 0.3s;*/
-    /*-o-transition:all linear 0.3s;*/
-    /*transition:all linear 0.3s;*/
-/*}*/
-
-/*.details-show-setup { max-height: 0px; overflow: hidden }*/
-/*.details-show-setup.details-show-start { max-height: 500px; }*/
-
-/*.details-hide-setup { max-height: 500px; }*/
-/*.details-hide-setup.details-hide-start { max-height: 0px; overflow: hidden }*/
-
-.animation.ng-enter,
-.animation.ng-leave{
-    -webkit-transition: 1s;
+.animate-enter,
+.animate-leave {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
 }
 
-.animation.ng-enter {
+.animate-leave.animate-leave-active,
+.animate-enter {
+    -webkit-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    transform: scaleY(0);
+    height: 0px;
     opacity: 0;
 }
 
-.animation.ng-leave {
+.animate-enter.animate-enter-active,
+.animate-leave {
+    -webkit-transform: scaleY(1);
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    transform: scaleY(1);
+    height: 30px;
     opacity: 1;
-}
-
-.animation.ng-enter.ng-enter-active {
-    opacity: 1;
-}
-
-.animation.ng-leave.ng-leave-active {
-    opacity: 0;
 }

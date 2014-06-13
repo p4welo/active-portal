@@ -8,6 +8,7 @@ angular.module('PortalApp.controllers')
          */
         $scope.loading = true;
         $scope.news = newsFactory.find(function () {
+
             $scope.loading = false;
         });
 
@@ -16,16 +17,19 @@ angular.module('PortalApp.controllers')
          NEWS UPDATE
          =================================================================
          */
-        $scope.isExpanded = function (news) {
-            return news.state == 'editing';
+        $scope.toggle = function (news) {
+
+            news.editing = !news.editing;
+            if (news.editing) {
+                news.edit = {};
+                newsService.copyProperties(news, news.edit);
+            }
         }
-        $scope.edit = function (news) {
-            news.editing = true;
-            news.edit = {};
-            newsService.copyProperties(news, news.edit);
-        }
-        $scope.collapse = function (news) {
-            news.editing = false;
+        $scope.reset = function (news) {
+            if (news.editing) {
+                news.edit = {};
+                newsService.copyProperties(news, news.edit);
+            }
         }
         $scope.update = function (news) {
 
@@ -37,6 +41,7 @@ angular.module('PortalApp.controllers')
         }
 
         $scope.isExpanded = function (news) {
+
             return news.editing;
         }
 
@@ -47,15 +52,12 @@ angular.module('PortalApp.controllers')
          */
         $scope.newNews = {};
         $scope.save = function (news) {
+
             var nNews = newsFactory.create(news, function () {
                 hideModal("#newsModal");
                 $scope.newNews = {};
                 $scope.news.push(nNews);
                 notificationService.success("Pomyślnie zapisano");
             });
-        }
-        $scope.saveCancel = function () {
-            $scope.newNews = {};
-            hideModal("#newsModal");
         }
     });

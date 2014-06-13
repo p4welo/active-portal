@@ -3366,6 +3366,42 @@ pullDown
 
 /*
 ==============================================
+pullDown-Simple
+==============================================
+*/
+
+.animation-pullDown-simple {
+    animation-name: pullDown-simple;
+    -webkit-animation-name: pullDown-simple;
+    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+    transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    -webkit-transform-origin: 50% 0%;
+}
+
+@keyframes pullDown-simple {
+    0% {
+        transform: scaleY(0.1);
+    }
+    40% {
+        transform: scaleY(1);
+    }
+}
+
+@-webkit-keyframes pullDown-simple {
+    0% {
+        -webkit-transform: scaleY(0.1);
+    }
+    40% {
+        -webkit-transform: scaleY(1);
+    }
+}
+
+/*
+==============================================
 stretchLeft
 ==============================================
 */
