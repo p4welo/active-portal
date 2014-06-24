@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
