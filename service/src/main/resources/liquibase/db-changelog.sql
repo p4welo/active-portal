@@ -202,3 +202,7 @@ INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
 
 INSERT INTO user (sid, first_name, last_name, login, password, email, type) VALUES
   ('hdjfkhdjfkhdjfkhdjfkhdjfkhdjfkpp', 'Pawel', 'Radomski', 'test', 'test', 'test@mail.com', 1);
+
+--changeset pawel:3
+INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
+('g5557844k5vnncamnn6j0plmxzvycjck', 'Nowy sezon taneczny', '2014-08-19 10:17','Wkrótce udostępnimy rozkład zajęć na nowy sezon taneczny. Więcej szczegółów już niedługo!','https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10446669_671875722896214_5959040016819759075_n.jpg?oh=23cff3609a091378d531443a8e44a6aa&oe=5469E1AB&__gda__=1415565075_77ba39a6598ae3ca2a3f9beed3902080','zajęcia taneczne jesień');
