@@ -206,3 +206,7 @@ INSERT INTO user (sid, first_name, last_name, login, password, email, type) VALU
 --changeset pawel:3
 INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
 ('g5557844k5vnncamnn6j0plmxzvycjck', 'Nowy sezon taneczny', '2014-08-19 10:17','Wkrótce udostępnimy rozkład zajęć na nowy sezon taneczny. Więcej szczegółów już niedługo!','https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10446669_671875722896214_5959040016819759075_n.jpg?oh=23cff3609a091378d531443a8e44a6aa&oe=5469E1AB&__gda__=1415565075_77ba39a6598ae3ca2a3f9beed3902080','zajęcia taneczne jesień');
+
+--changeset pawel:4
+INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
+('g55578jdkeenncamnn6j0plmxzvycjck', 'Zajęcia dla dzieci od września', '2014-08-21 16:06','Już od września ruszamy z naborem do nowych grup taneczny dla dzieci i młodzieży:<ul><li>balet (4-7 lat)</li><li>balet z elementami gimnastyki artystycznej</li><li>balet dla 3-latków</li><li>grupa pokazowa - formacja taneczna (<strong>konkursy, pokazy plenerowe</strong>)</li><li>taniec towarzyski (<strong>wyjazdy na turnieje, możliwość zdobycia pierwszych klas tanecznych</strong>)</li><li>mix dance</li><li>zajęcia ruchowo taneczne w języku angielskim</li><li>hip-hop dla malucha</li><li>hip-hop dla młodzieży (12-18 lat)</li></ul><br /><br/>Zadzwoń i zapisz swoje dziecko: 695 081 437','http://bielskiemamy.pl/wp-content/uploads/2013/05/po-co-dziecku-taniec_slider2.jpg','zajęcia taneczne dla dzieci');
