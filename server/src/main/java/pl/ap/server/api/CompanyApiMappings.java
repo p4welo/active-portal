@@ -32,4 +32,12 @@ public interface CompanyApiMappings
    public static final String CREATE_INSTRUCTOR = REST_PREFIX + "/instructor";
 
    public static final String GET_INSTRUCTOR = REST_PREFIX + "/instructor/{" + ApiKeys.SID + "}";
+
+//   CATEGORIES
+
+   public static final String GET_CATEGORY_LIST = REST_PREFIX + "/category/list";
+
+   public static final String CREATE_CATEGORY = REST_PREFIX + "/category";
+
+   public static final String GET_CATEGORY = REST_PREFIX + "/category/{" + ApiKeys.SID + "}";
 }

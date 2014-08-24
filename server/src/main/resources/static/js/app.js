@@ -17,8 +17,8 @@ angular.module('PortalApp', [
         }])
     .config(function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
 
-        $urlRouterProvider.otherwise("/rooms");
-//        $urlRouterProvider.otherwise("/news");
+//        $urlRouterProvider.otherwise("/rooms");
+        $urlRouterProvider.otherwise("/news");
         $stateProvider
             .state('news', {
                 url: "/news",
@@ -39,6 +39,11 @@ angular.module('PortalApp', [
                 url: "/instructors",
                 templateUrl: "pages/company/instructors.html",
                 controller: "instructor-controller"
+            })
+            .state('categories', {
+                url: "/categories",
+                templateUrl: "pages/company/categories.html",
+                controller: "category-controller"
             })
             .state('403', {
                 url: "/403",

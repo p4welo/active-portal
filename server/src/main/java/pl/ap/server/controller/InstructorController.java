@@ -24,7 +24,7 @@ public class InstructorController
    @RequestMapping(value = CompanyApiMappings.GET_INSTRUCTOR_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
-   public List<Instructor> getRoomList()
+   public List<Instructor> getInstructorList()
    {
       return instructorService.findAll();
    }
@@ -32,7 +32,7 @@ public class InstructorController
    @RequestMapping(value = CompanyApiMappings.CREATE_INSTRUCTOR, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
-   public Instructor createRoom(@RequestBody Instructor instructor)
+   public Instructor createInstructor(@RequestBody Instructor instructor)
    {
       return instructorService.save(instructor);
    }
@@ -40,7 +40,7 @@ public class InstructorController
    @RequestMapping(value = CompanyApiMappings.GET_INSTRUCTOR, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
-   public Instructor updateRoom(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid)
+   public Instructor updateInstructor(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid)
    {
       Instructor oldInstructor = instructorService.getBySid(sid);
       Assert.notNull(oldInstructor);
