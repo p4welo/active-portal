@@ -20,7 +20,7 @@ public class MenuUtils
       news.setState("news");
 
       MenuGroup group1 = new MenuGroup();
-      group1.setHeader("AKTUALNOSCI");
+      group1.setHeader("AKTUALNOŚCI");
       group1.setItems(Arrays.asList(news));
 
       MenuItem rooms = new MenuItem();
@@ -38,6 +38,11 @@ public class MenuUtils
       categories.setIcon("gi gi-folder_open");
       categories.setState("categories");
 
+      MenuItem styles = new MenuItem();
+      styles.setLabel("Style");
+      styles.setIcon("gi gi-eyedropper");
+      styles.setState("styles");
+
       MenuItem classes = new MenuItem();
       classes.setLabel("Zajęcia");
       classes.setIcon("gi gi-table");
@@ -45,9 +50,8 @@ public class MenuUtils
 
       MenuGroup group2 = new MenuGroup();
       group2.setHeader("GRAFIK");
-      group2.setItems(Arrays.asList(rooms, instructors, categories, classes));
+      group2.setItems(Arrays.asList(rooms, instructors, categories, styles, classes));
 
-//      return Arrays.asList(group2);
       return Arrays.asList(group1,group2);
    }
 }

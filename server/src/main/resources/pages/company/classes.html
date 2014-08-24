@@ -1,1 +1,121 @@
-classes
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-table"></i>Zajęcia<br>
+        </h1>
+    </div>
+</div>
+
+<div class="block">
+    <div class="table-options clearfix">
+        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+            <button class="btn btn-success" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj zajęcia
+            </button>
+        </div>
+    </div>
+    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+        <thead>
+        <tr>
+            <th class="text-center" style="width: 50px">Id</th>
+            <th>Nazwa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="class in classes" ng-click="edit(class)">
+            <td ng-bind="class.id"></td>
+            <td ng-bind="class.style.name"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="add-class-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="add-modal-label">Dodaj zajęcia</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="newName" class="col-sm-2 control-label">Nazwa</label>
+
+                        <div class="col-sm-10">
+                            <select size="1" class="form-control" id="newName" ng-model="new.style.sid">
+                                <option ng-repeat="style in styles" value="{{style.sid}}">{{style.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newLevel" class="col-sm-2 control-label">Poziom</label>
+
+                        <div class="col-sm-10">
+                            <select size="1" class="form-control" id="newLevel" ng-model="new.level">
+                                <option ng-repeat="level in levels" value="{{level.code}}">{{level.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newDay" class="col-sm-2 control-label">Dzień</label>
+
+                        <div class="col-sm-10">
+                            <select size="1" class="form-control" id="newDay" ng-model="new.day">
+                                <option ng-repeat="day in days" value="{{day.code}}">{{day.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newStart" class="col-sm-2 control-label">Start</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newStart" placeholder="00:00" ng-model="new.startTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newEnd" class="col-sm-2 control-label">Koniec</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newEnd" placeholder="00:00" ng-model="new.endTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newInstructor" class="col-sm-2 control-label">Instruktor</label>
+
+                        <div class="col-sm-10">
+                            <select size="1" class="form-control" id="newInstructor" ng-model="new.instructor.sid">
+                                <option ng-repeat="instructor in instructors" value="{{instructor.sid}}">{{instructor.firstName + " " + instructor.lastName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newRoom" class="col-sm-2 control-label">Sala</label>
+
+                        <div class="col-sm-10">
+                            <select size="1" class="form-control" id="newRoom" ng-model="new.room.sid">
+                                <option ng-repeat="room in rooms" value="{{room.sid}}">{{room.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newType" class="col-sm-2 control-label">Typ</label>
+
+                        <div class="col-sm-10">
+                            <select size="1" class="form-control" id="newType" ng-model="new.type">
+                                <option ng-repeat="type in types" value="{{type.code}}">{{type.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                <button ng-click="create(new)" class="btn btn-success">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>

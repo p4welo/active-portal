@@ -213,3 +213,6 @@ INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
 
 --changeset pawel:5
 UPDATE news SET image_src='http://www.fit.pl/g/str/image/dziecko%20fit/ChildrenDancing.jpg' WHERE sid='g55578jdkeenncamnn6j0plmxzvycjck';
+
+--changeset pawel:6
+TRUNCATE dance_class;

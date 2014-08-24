@@ -159,6 +159,7 @@
 <script src="static/js/app.js"></script>
 <script src="static/js/utils.js"></script>
 
+<script src="static/js/services/class-service.js"></script>
 <script src="static/js/services/news-service.js"></script>
 <script src="static/js/services/notification-service.js"></script>
 <script src="static/js/services/user-service.js"></script>
@@ -166,6 +167,7 @@
 <script src="static/js/services/room-service.js"></script>
 <script src="static/js/services/instructor-service.js"></script>
 <script src="static/js/services/category-service.js"></script>
+<script src="static/js/services/style-service.js"></script>
 
 <script src="static/js/controllers/class-controller.js"></script>
 <script src="static/js/controllers/news-controller.js"></script>
@@ -173,6 +175,7 @@
 <script src="static/js/controllers/room-controller.js"></script>
 <script src="static/js/controllers/instructor-controller.js"></script>
 <script src="static/js/controllers/category-controller.js"></script>
+<script src="static/js/controllers/style-controller.js"></script>
 
 <script src="static/js/filters.js"></script>
 <script src="static/js/directives.js"></script>

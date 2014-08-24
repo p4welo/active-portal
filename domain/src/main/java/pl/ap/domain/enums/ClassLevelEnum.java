@@ -5,6 +5,7 @@ package pl.ap.domain.enums;
  */
 public enum ClassLevelEnum
 {
+   OPEN,
    BEGINNER,
    INTERMEDIATE,
    ADVANCED

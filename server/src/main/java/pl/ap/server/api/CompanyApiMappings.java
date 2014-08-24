@@ -40,4 +40,20 @@ public interface CompanyApiMappings
    public static final String CREATE_CATEGORY = REST_PREFIX + "/category";
 
    public static final String GET_CATEGORY = REST_PREFIX + "/category/{" + ApiKeys.SID + "}";
+
+//   STYLES
+
+   public static final String GET_STYLE_LIST = REST_PREFIX + "/style/list";
+
+   public static final String CREATE_STYLE = REST_PREFIX + "/style";
+
+   public static final String GET_STYLE = REST_PREFIX + "/style/{" + ApiKeys.SID + "}";
+
+//   DANCE CLASS
+
+   public static final String GET_DANCE_CLASS_LIST = REST_PREFIX + "/danceClass/list";
+
+   public static final String CREATE_DANCE_CLASS = REST_PREFIX + "/danceClass";
+
+   public static final String GET_DANCE_CLASS = REST_PREFIX + "/danceClass/{" + ApiKeys.SID + "}";
 }
