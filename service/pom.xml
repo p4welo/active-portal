@@ -12,7 +12,6 @@
 
     <groupId>pl.ap</groupId>
     <artifactId>service</artifactId>
-    <version>${ap.service.version}</version>
     <packaging>jar</packaging>
     <name>Service Module</name>
 

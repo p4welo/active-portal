@@ -14,3 +14,7 @@ function getPublicUrl(uri)
 function hideModal(id) {
     $(id).modal("hide");
 }
+
+function showModal(id) {
+    $(id).modal("show");
+}

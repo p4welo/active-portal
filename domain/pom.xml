@@ -12,7 +12,6 @@
 
     <groupId>pl.ap</groupId>
     <artifactId>domain</artifactId>
-    <version>${ap.domain.version}</version>
     <packaging>jar</packaging>
     <name>Domain Module</name>
 

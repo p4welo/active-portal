@@ -4,10 +4,10 @@
  *  Description: Custom javascript code used in Timeline page
  */
 
-var ReadyTimeline = function () {
+var ReadyTimeline = function() {
 
     return {
-        init: function () {
+        init: function() {
             /*
              * With Gmaps.js, Check out examples and documentation at http://hpneo.github.io/gmaps/examples.html
              */
@@ -24,13 +24,13 @@ var ReadyTimeline = function () {
                 disableDefaultUI: true,
                 scrollwheel: false
             }).addMarkers([
-                    {
-                        lat: -33.863,
-                        lng: 151.202,
-                        animation: google.maps.Animation.DROP,
-                        infoWindow: {content: '<strong>Cafe-Bar: Example Address</strong>'}
-                    }
-                ]);
+                {
+                    lat: -33.863,
+                    lng: 151.202,
+                    animation: google.maps.Animation.DROP,
+                    infoWindow: {content: '<strong>Cafe-Bar: Example Address</strong>'}
+                }
+            ]);
 
             // Initialize Feed map
             new GMaps({
@@ -41,13 +41,13 @@ var ReadyTimeline = function () {
                 disableDefaultUI: true,
                 scrollwheel: false
             }).addMarkers([
-                    {
-                        lat: -33.865,
-                        lng: 151.215,
-                        animation: google.maps.Animation.DROP,
-                        infoWindow: {content: '<strong>Cafe-Bar: Example Address</strong>'}
-                    }
-                ]);
+                {
+                    lat: -33.865,
+                    lng: 151.215,
+                    animation: google.maps.Animation.DROP,
+                    infoWindow: {content: '<strong>Cafe-Bar: Example Address</strong>'}
+                }
+            ]);
         }
     };
 }();

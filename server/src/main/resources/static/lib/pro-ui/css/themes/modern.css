@@ -157,7 +157,10 @@ li.dropdown-header,
 .chosen-container-single .chosen-single,
 .chosen-container-single .chosen-search input[type="text"],
 .chosen-container-multi .chosen-choices,
-div.tagsinput {
+div.tagsinput,
+.select2-container .select2-choice,
+.select2-search input,
+.select2-container-multi .select2-choices {
     border-color: #dae7e8;
 }
 
@@ -298,7 +301,9 @@ a.list-group-item.active:focus,
 .bootstrap-timepicker-widget table td a:hover,
 div.tagsinput span.tag,
 .slider-selection,
-.themed-background {
+.themed-background,
+.select2-results .select2-highlighted,
+.select2-container-multi .select2-choices .select2-search-choice {
     background-color: #46b7bf;
 }
 
@@ -317,7 +322,14 @@ a.list-group-item.active:focus,
 .chosen-container-active.chosen-with-drop .chosen-single,
 .chosen-container-active .chosen-choices,
 div.tagsinput span.tag,
-.themed-border {
+.themed-border,
+.select2-drop-active,
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices,
+.select2-dropdown-open.select2-drop-above .select2-choice,
+.select2-dropdown-open.select2-drop-above .select2-choices,
+.select2-results .select2-highlighted,
+.select2-container-multi.select2-container-active .select2-choices {
     border-color: #46b7bf;
 }
 
@@ -332,6 +344,10 @@ div.tagsinput span.tag,
 .sidebar-nav ul a.active,
 .sidebar-nav ul a.active:hover {
     border-left-color: #46b7bf;
+}
+
+.select2-drop.select2-drop-above.select2-drop-active {
+    border-top-color: #46b7bf;
 }
 
 /* NProgress */

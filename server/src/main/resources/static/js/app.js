@@ -1,6 +1,4 @@
 var SERVER_URL = "http://localhost:8086/api";
-//var SERVER_URL = "http://vs8123.gensys.pl/server/api";
-//var SERVER_URL = "http://5.133.13.149/server/api";
 
 angular.module('PortalApp', [
     'ui.router',
@@ -19,17 +17,23 @@ angular.module('PortalApp', [
         }])
     .config(function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
 
-        $urlRouterProvider.otherwise("/news");
+        $urlRouterProvider.otherwise("/rooms");
+//        $urlRouterProvider.otherwise("/news");
         $stateProvider
             .state('news', {
                 url: "/news",
                 templateUrl: "pages/company/news.html",
-                controller: "NewsCtrl"
+                controller: "news-controller"
             })
             .state('classes', {
                 url: "/classes",
                 templateUrl: "pages/company/classes.html",
-                controller: "ClassesCtrl"
+                controller: "class-controller"
+            })
+            .state('rooms', {
+                url: "/rooms",
+                templateUrl: "pages/company/rooms.html",
+                controller: "room-controller"
             })
             .state('403', {
                 url: "/403",

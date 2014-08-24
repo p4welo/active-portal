@@ -4,12 +4,12 @@
  *  Description: Custom javascript code used in Calendar page
  */
 
-var CompCalendar = function () {
-    var calendarEvents = $('.calendar-events');
+var CompCalendar = function() {
+    var calendarEvents  = $('.calendar-events');
 
     /* Function for initializing drag and drop event functionality */
-    var initEvents = function () {
-        calendarEvents.find('li').each(function () {
+    var initEvents = function() {
+        calendarEvents.find('li').each(function() {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             var eventObject = { title: $.trim($(this).text()), color: $(this).css('background-color') };
 
@@ -22,21 +22,21 @@ var CompCalendar = function () {
     };
 
     return {
-        init: function () {
+        init: function() {
             /* Initialize drag and drop event functionality */
             initEvents();
 
             /* Add new event in the events list */
-            var eventInput = $('#add-event');
-            var eventInputVal = '';
+            var eventInput      = $('#add-event');
+            var eventInputVal   = '';
 
             // When the add button is clicked
-            $('#add-event-btn').on('click', function () {
+            $('#add-event-btn').on('click', function(){
                 // Get input value
                 eventInputVal = eventInput.prop('value');
 
                 // Check if the user entered something
-                if (eventInputVal) {
+                if ( eventInputVal ) {
                     // Add it to the events list
                     calendarEvents.append('<li class="animation-slideDown">' + $('<div />').text(eventInputVal).html() + '</li>');
 
@@ -66,7 +66,7 @@ var CompCalendar = function () {
                 firstDay: 1,
                 editable: true,
                 droppable: true,
-                drop: function (date, allDay) { // this function is called when something is dropped
+                drop: function(date, allDay) { // this function is called when something is dropped
 
                     // retrieve the dropped element's stored Event Object
                     var originalEventObject = $(this).data('eventObject');
@@ -76,7 +76,6 @@ var CompCalendar = function () {
 
                     // assign it the date that was reported
                     copiedEventObject.start = date;
-                    copiedEventObject.allDay = allDay;
 
                     // render the event on the calendar
                     // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)

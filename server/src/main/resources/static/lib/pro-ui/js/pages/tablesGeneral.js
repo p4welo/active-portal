@@ -4,16 +4,16 @@
  *  Description: Custom javascript code used in Tables General page
  */
 
-var TablesGeneral = function () {
+var TablesGeneral = function() {
 
     return {
-        init: function () {
+        init: function() {
             /* Select/Deselect all checkboxes in tables */
-            $('thead input:checkbox').click(function () {
-                var checkedStatus = $(this).prop('checked');
-                var table = $(this).closest('table');
+            $('thead input:checkbox').click(function() {
+                var checkedStatus   = $(this).prop('checked');
+                var table           = $(this).closest('table');
 
-                $('tbody input:checkbox', table).each(function () {
+                $('tbody input:checkbox', table).each(function() {
                     $(this).prop('checked', checkedStatus);
                 });
             });
@@ -21,17 +21,11 @@ var TablesGeneral = function () {
             /* Table Styles Switcher */
             var genTable = $('#general-table');
 
-            $('#style-default').click(function () {
-                genTable.removeClass('table-bordered').removeClass('table-borderless');
-            });
-            $('#style-bordered').click(function () {
-                genTable.removeClass('table-borderless').addClass('table-bordered');
-            });
-            $('#style-borderless').click(function () {
-                genTable.removeClass('table-bordered').addClass('table-borderless');
-            });
+            $('#style-default').click(function(){ genTable.removeClass('table-bordered').removeClass('table-borderless'); });
+            $('#style-bordered').click(function(){ genTable.removeClass('table-borderless').addClass('table-bordered'); });
+            $('#style-borderless').click(function(){ genTable.removeClass('table-bordered').addClass('table-borderless'); });
 
-            $('#style-striped').on('click', function () {
+            $('#style-striped').on('click', function() {
                 $(this).toggleClass('active');
 
                 if ($(this).hasClass('active')) {
@@ -41,7 +35,7 @@ var TablesGeneral = function () {
                 }
             });
 
-            $('#style-condensed').on('click', function () {
+            $('#style-condensed').on('click', function() {
                 $(this).toggleClass('active');
 
                 if ($(this).hasClass('active')) {
@@ -51,7 +45,7 @@ var TablesGeneral = function () {
                 }
             });
 
-            $('#style-hover').on('click', function () {
+            $('#style-hover').on('click', function() {
                 $(this).toggleClass('active');
 
                 if ($(this).hasClass('active')) {

@@ -14,6 +14,7 @@
  *      (#m08ths) THEMES
  *      (#m09res) RESPONSIVE
  *      (#m10rts) RETINA
+ *      (#m11prs) PRINT
  */
 
 /*
@@ -23,9 +24,67 @@
 */
 
 /* Include Open Sans font from Google Web Fonts */
-/*@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic');*/
-@import url('font.css');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic');
 
+/* Preloader */
+body.page-loading {
+    overflow: hidden;
+}
+
+body.page-loading .preloader {
+    display: block;
+}
+
+body.page-loading #page-container {
+    opacity: 0;
+}
+
+.preloader {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333333;
+    z-index: 99999;
+}
+
+.preloader .inner {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin: 0 0 0 -50px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.preloader-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid transparent;
+    border-left-color: #ffffff;
+    border-right-color: #ffffff;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    -webkit-animation: nprogress-spinner .4s linear infinite;
+    -moz-animation: nprogress-spinner .4s linear infinite;
+    -ms-animation: nprogress-spinner .4s linear infinite;
+    -o-animation: nprogress-spinner .4s linear infinite;
+    animation: nprogress-spinner .4s linear infinite;
+}
+
+.preloader-spinner {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-width: 3px;
+}
+
+/* Main Structure */
 body {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #394263;
@@ -44,8 +103,8 @@ body {
     padding: 0;
     margin: 0 auto;
     overflow-x: hidden;
-    -webkit-transition: background-color 0.2s ease-out;
-    transition: background-color 0.2s ease-out;
+    -webkit-transition: background-color 0.2s ease-out, opacity 0.3s ease-out;
+    transition: background-color 0.2s ease-out, opacity 0.3s ease-out;
 }
 
 #page-container,
@@ -449,7 +508,7 @@ a.sidebar-title:focus {
 .sidebar-user-links a {
     color: #ffffff;
     opacity: 0.3;
-    filter: alpha(opacity: 30);
+    filter: alpha(opacity=30);
     margin-right: 5px;
 }
 
@@ -458,7 +517,7 @@ a.sidebar-title:focus {
     color: #ffffff;
     text-decoration: none;
     opacity: 1;
-    filter: alpha(opacity: 100);
+    filter: alpha(opacity=100);
 }
 
 .sidebar-user-links a > i {
@@ -675,7 +734,7 @@ a.sidebar-title:focus {
 .sidebar-nav a > .sidebar-nav-indicator {
     display: inline-block;
     opacity: 0.5;
-    filter: alpha(opacity: 50);
+    filter: alpha(opacity=50);
     width: 18px;
     font-size: 14px;
     text-align: center;
@@ -694,7 +753,7 @@ a.sidebar-title:focus {
 .sidebar-nav li.active > a > .sidebar-nav-icon,
 .sidebar-nav li.active > a > .sidebar-nav-indicator {
     opacity: 1;
-    filter: alpha(opacity: 100);
+    filter: alpha(opacity=100);
 }
 
 .sidebar-nav a.active > .sidebar-nav-indicator,
@@ -762,7 +821,7 @@ a.sidebar-title:focus {
     font-size: 11px;
     text-transform: uppercase;
     opacity: 0.5;
-    filter: alpha(opacity: 50);
+    filter: alpha(opacity=50);
 }
 
 .sidebar-header-options {
@@ -782,7 +841,7 @@ a.sidebar-title:focus {
     text-align: center;
     color: #ffffff;
     opacity: 0.3;
-    filter: alpha(opacity: 30);
+    filter: alpha(opacity=30);
 }
 
 .sidebar-header-options a.active,
@@ -794,7 +853,7 @@ a.sidebar-title:focus {
     background: none;
     color: #ffffff;
     opacity: 1;
-    filter: alpha(opacity: 100);
+    filter: alpha(opacity=100);
 }
 
 .sidebar-header-options a > i {
@@ -1193,6 +1252,66 @@ a.sidebar-title:focus {
     min-height: 150px;
 }
 
+/* Link Widgets */
+a.widget {
+    display: block;
+    -webkit-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+a.widget:hover,
+a.widget:active {
+    text-decoration: none;
+}
+
+a.widget.widget-hover-effect1:hover {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+a.widget.widget-hover-effect1:active {
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+a.widget.widget-hover-effect2:hover {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.2);
+}
+
+a.widget.widget-hover-effect2:active {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+a.widget.widget-hover-effect3:hover {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+}
+
+a.widget.widget-hover-effect3:active {
+    -webkit-transform: rotate(2deg) scale(0.95);
+    transform: rotate(2deg) scale(0.95);
+}
+
+a.widget.widget-hover-effect4:hover {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+}
+
+a.widget.widget-hover-effect4:active {
+    -webkit-transform: rotate(-1deg) scale(0.95);
+    transform: rotate(-1deg) scale(0.95);
+}
+
 /* Content which contains floats */
 .content-float .pull-left {
     margin: 0 20px 20px 0;
@@ -1200,6 +1319,17 @@ a.sidebar-title:focus {
 
 .content-float .pull-right {
     margin: 0 0 20px 20px;
+}
+
+/* Draggable Blocks */
+.draggable-blocks .block-title {
+    cursor: move;
+}
+
+.draggable-placeholder {
+    background-color: #dddddd;
+    border: 1px dashed #999999;
+    margin-bottom: 10px;
 }
 
 /* Scroll to top link */
@@ -1248,7 +1378,12 @@ a.sidebar-title:focus {
     margin-left: -1280px;
 }
 
-#login-container {
+#login-alt-container {
+    display: none;
+}
+
+#login-container,
+#login-alt-container {
     position: absolute;
     width: 300px;
     top: 10px;
@@ -1264,12 +1399,14 @@ a.sidebar-title:focus {
     background: rgba(0, 0, 0, 0.6);
 }
 
-#login-container .login-title h1 {
+#login-container .login-title h1,
+#login-alt-container h1 {
     font-size: 26px;
     color: #ffffff;
 }
 
-#login-container .login-title small {
+#login-container .login-title h1 small,
+#login-alt-container h1 small {
     font-size: 16px;
     color: #dddddd;
 }
@@ -1282,6 +1419,24 @@ a.sidebar-title:focus {
     line-height: 30px;
     margin-right: 10px;
     float: left;
+}
+
+/* Full Background Image */
+img.full-bg {
+    min-height: 100%;
+    min-width: 1280px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 1280px) {
+    img.full-bg {
+        left: 50%;
+        margin-left: -640px;
+    }
 }
 
 /* Calendar */
@@ -1568,6 +1723,164 @@ a[data-toggle="lightbox-image"]:hover img {
     color: #ffffff;
 }
 
+/* Chat UI */
+.chatui-container {
+    position: relative;
+}
+
+.chatui-people,
+.chatui-talk {
+    overflow-y: hidden;
+}
+
+.chatui-people .chatui-header {
+    font-size: 14px;
+    line-height: 14px;
+    color: #999999;
+    text-transform: uppercase;
+    padding: 5px 20px;
+}
+
+.chatui-people hr {
+    border-top-color: #252525;
+    border-top-color: rgba(0, 0, 0, 0.25);
+}
+
+.chatui-people .list-group-item {
+    background: transparent;
+    min-height: 52px;
+    border: 0;
+    border-radius: 0 !important;
+}
+
+.chatui-people .list-group-item .badge {
+    margin-top: 7px;
+}
+
+.chatui-people .list-group-item .list-group-item-heading {
+    color: #ffffff;
+    line-height: 32px;
+    margin: 0;
+}
+
+.chatui-people .list-group-item:hover {
+    background: url('../img/template/ie8_opacity_dark_20.png') repeat;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.chatui-people .list-group-item img {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.chatui-talk {
+    top: 0;
+    bottom: 50px;
+}
+
+.chatui-talk ul {
+    padding: 15px;
+    margin: 0;
+    list-style: none;
+}
+
+.chatui-talk li {
+    padding: 5px 10px;
+    margin-bottom: 7px;
+}
+
+.chatui-talk .chatui-talk-msg {
+    padding: 15px 10px;
+    padding-right: 50px;
+    border-left: 5px solid #333333;
+    background-color: #f6f6f6;
+    position: relative;
+}
+
+.chatui-talk .chatui-talk-msg.chatui-talk-msg-highlight {
+    padding-left: 50px;
+    border-left: none;
+    border-right-width: 5px;
+    border-right-style: solid;
+}
+
+.chatui-talk-msg .chatui-talk-msg-avatar {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+.chatui-talk-msg.chatui-talk-msg-highlight .chatui-talk-msg-avatar {
+    top: 8px;
+    right: auto;
+    left: 8px;
+}
+
+.chatui-input {
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px solid #eeeeee;
+}
+
+/* Tasks */
+.task-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.task-list li {
+    padding: 15px 40px 15px 15px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    position: relative;
+    -webkit-transition: box-shadow 0.15s ease-out;
+    transition: box-shadow 0.15s ease-out;
+}
+
+.task-list li:hover {
+    -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-list li.in-1x {
+    margin-left: 15px;
+}
+
+.task-list li.in-2x {
+    margin-left: 30px;
+}
+
+.task-list li > .task-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #000000;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+}
+
+.task-list li:hover > .task-close {
+    opacity: .25;
+    filter: alpha(opacity=25);
+}
+
+.task-list li.task-done {
+    opacity: .50;
+    filter: alpha(opacity=50);
+}
+
+.task-list li.task-done > label {
+    text-decoration: line-through;
+}
+
 /*
 =================================================================
 (#m06bos) BOOTSTRAP OVERWRITE/EXTEND STYLES
@@ -1610,7 +1923,10 @@ h1, h2, h3 {
 .text-primary:hover,
 a,
 a:hover,
-a:focus {
+a:focus,
+a.text-primary,
+a.text-primary:hover,
+a.text-primary:focus {
     color: #1bbae1;
 }
 
@@ -1652,6 +1968,14 @@ a.text-muted,
 a.text-muted:hover,
 a.text-muted:focus {
     color: #999999;
+}
+
+.text-light,
+.text-light:hover,
+a.text-light,
+a.text-light:hover,
+a.text-light:focus {
+    color: #ffffff;
 }
 
 b, strong {
@@ -1812,8 +2136,6 @@ textarea.form-control {
 .form-bordered .form-group.form-actions {
     background-color: #f9fafc;
     border-bottom: none;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
 }
 
 .form-horizontal.form-bordered .form-group {
@@ -1823,6 +2145,13 @@ textarea.form-control {
 
 .form-bordered .help-block {
     margin-bottom: 0;
+}
+
+.has-success .form-control,
+.has-warning .form-control,
+.has-error .form-control {
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 .has-success .help-block,
@@ -3064,10 +3393,6 @@ p, .table, .alert, .carousel {
     margin-bottom: 40px;
 }
 
-.lt-ie9 .hidden-lt-ie9 {
-    display: none !important;
-}
-
 .display-none {
     display: none;
 }
@@ -3097,6 +3422,21 @@ p, .table, .alert, .carousel {
     -moz-transition: none !important;
     -webkit-transition: none !important;
     transition: none !important;
+}
+
+.lt-ie9 .hidden-lt-ie9,
+.lt-ie10 .hidden-lt-ie10 {
+    display: none !important;
+}
+
+.visible-lt-ie9,
+.visible-lt-ie10 {
+    display: none;
+}
+
+.lt-ie9 .visible-lt-ie9,
+.lt-ie10 .visible-lt-ie10 {
+    display: block;
 }
 
 :focus {
@@ -3142,7 +3482,8 @@ p, .table, .alert, .carousel {
     border-top-color: #eaedf1;
 }
 
-.style-alt .widget {
+.style-alt .widget,
+.style-alt .task-list li {
     background-color: #f6f6f6;
 }
 
@@ -3205,7 +3546,8 @@ p, .table, .alert, .carousel {
         top: 0;
     }
 
-    #login-container {
+    #login-container,
+    #login-alt-container {
         width: 480px;
         top: 186px;
         margin-left: -240px;
@@ -3255,6 +3597,10 @@ p, .table, .alert, .carousel {
         margin-right: -20px;
     }
 
+    .draggable-placeholder {
+        margin-bottom: 20px;
+    }
+
     /* Forms */
     .form-bordered {
         margin-left: -20px;
@@ -3278,10 +3624,54 @@ p, .table, .alert, .carousel {
         margin-left: 3px;
         margin-right: 3px;
     }
+
+    /* Chat UI */
+    .chatui-people,
+    .chatui-talk,
+    .chatui-input {
+        position: absolute;
+    }
+
+    .chatui-talk,
+    .chatui-input {
+        right: 250px;
+        left: 0;
+    }
+
+    .chatui-people {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 250px;
+        height: auto;
+    }
+
+    .chatui-talk {
+        height: auto;
+    }
+
+    .chatui-talk .chatui-talk-msg {
+        width: 50%;
+        margin-left: 50%;
+    }
+
+    .chatui-talk .chatui-talk-msg.chatui-talk-msg-highlight {
+        margin-left: 0;
+        margin-right: 50%;
+    }
+
+    .chatui-input {
+        bottom: 0;
+    }
 }
 
 /* Medium devices, Desktops (>991px) */
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
+
+    /* General */
+    #login-alt-container {
+        display: block;
+    }
 
     /* Sidebar Animations */
     .sidebar-no-animations #sidebar,
@@ -3410,7 +3800,7 @@ p, .table, .alert, .carousel {
 }
 
 /* Large devices, Desktops (>1199px) */
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
 
     /* Main Layout */
     .header-fixed-top .sidebar-content,
@@ -3435,6 +3825,20 @@ p, .table, .alert, .carousel {
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
-    /* If you used a CSS img background, you can put your high resolution here */
+    /* If you did use a CSS image background, you can put your high resolution image here */
 
+}
+
+/*
+=================================================================
+(#m11prs) PRINT
+=================================================================
+*/
+
+@media print {
+    #sidebar, #sidebar-alt, .content-header, .breadcrumb-top, .block-title .block-options, #page-content + footer, #to-top {display: none !important;}
+    #page-content {min-height: 0 !important; height: auto !important; padding: 0 !important;}
+    #main-container {margin: 0 !important;}
+    .block, .block.full {border: none !important; padding: 0 !important;}
+    .block-title {margin: 0 0 20px !important;}
 }

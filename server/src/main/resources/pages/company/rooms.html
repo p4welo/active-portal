@@ -1,0 +1,60 @@
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-bank"></i>Sale taneczne<br>
+        </h1>
+    </div>
+</div>
+
+<div class="block">
+    <div class="table-options clearfix">
+        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+            <button class="btn btn-success" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj salę
+            </button>
+        </div>
+    </div>
+    <table class="table table-striped table-vcenter table-condensed table-hover">
+        <thead>
+        <tr>
+            <th class="text-center" style="width: 50px">Id</th>
+            <th>Nazwa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="room in rooms">
+            <td ng-bind="room.id"></td>
+            <td ng-bind="room.name"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="add-room-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Dodaj salę</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="newName" class="col-sm-2 control-label">Nazwa</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newName" placeholder="Nazwa" ng-model="new.name">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                <button ng-click="create(new)" class="btn btn-success">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>

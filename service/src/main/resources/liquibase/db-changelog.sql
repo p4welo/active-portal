@@ -210,3 +210,6 @@ INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
 --changeset pawel:4
 INSERT INTO news (sid, title, created_at, content, image_src, image_alt) VALUES
 ('g55578jdkeenncamnn6j0plmxzvycjck', 'Zajęcia dla dzieci od września', '2014-08-21 16:06','Już od września ruszamy z naborem do nowych grup taneczny dla dzieci i młodzieży:<ul><li>balet (4-7 lat)</li><li>balet z elementami gimnastyki artystycznej</li><li>balet dla 3-latków</li><li>grupa pokazowa - formacja taneczna (<strong>konkursy, pokazy plenerowe</strong>)</li><li>taniec towarzyski (<strong>wyjazdy na turnieje, możliwość zdobycia pierwszych klas tanecznych</strong>)</li><li>mix dance</li><li>zajęcia ruchowo taneczne w języku angielskim</li><li>hip-hop dla malucha</li><li>hip-hop dla młodzieży (12-18 lat)</li></ul><br /><br/>Zadzwoń i zapisz swoje dziecko: 695 081 437','http://bielskiemamy.pl/wp-content/uploads/2013/05/po-co-dziecku-taniec_slider2.jpg','zajęcia taneczne dla dzieci');
+
+--changeset pawel:5
+UPDATE news SET image_src='http://www.fit.pl/g/str/image/dziecko%20fit/ChildrenDancing.jpg' WHERE sid='g55578jdkeenncamnn6j0plmxzvycjck';

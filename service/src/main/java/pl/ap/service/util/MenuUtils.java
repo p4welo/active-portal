@@ -23,6 +23,11 @@ public class MenuUtils
       group1.setHeader("AKTUALNOSCI");
       group1.setItems(Arrays.asList(news));
 
+      MenuItem rooms = new MenuItem();
+      rooms.setLabel("Sale taneczne");
+      rooms.setIcon("fa fa-bank");
+      rooms.setState("rooms");
+
       MenuItem classes = new MenuItem();
       classes.setLabel("Zajecia");
       classes.setIcon("gi gi-table");
@@ -30,8 +35,9 @@ public class MenuUtils
 
       MenuGroup group2 = new MenuGroup();
       group2.setHeader("GRAFIK");
-      group2.setItems(Arrays.asList(classes));
+      group2.setItems(Arrays.asList(rooms, classes));
 
-      return Arrays.asList(group1,group2);
+      return Arrays.asList(group2);
+//      return Arrays.asList(group1,group2);
    }
 }

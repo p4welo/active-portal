@@ -157,7 +157,10 @@ li.dropdown-header,
 .chosen-container-single .chosen-single,
 .chosen-container-single .chosen-search input[type="text"],
 .chosen-container-multi .chosen-choices,
-div.tagsinput {
+div.tagsinput,
+.select2-container .select2-choice,
+.select2-search input,
+.select2-container-multi .select2-choices {
     border-color: #e8dade;
 }
 
@@ -193,7 +196,7 @@ a:focus,
 .btn-link.btn-icon:hover,
 .btn-link.btn-icon:focus,
 .themed-color {
-    color: #f31455;
+    color: #d9416c;
 }
 
 .nav.navbar-nav-custom > li.open > a,
@@ -298,8 +301,10 @@ a.list-group-item.active:focus,
 .bootstrap-timepicker-widget table td a:hover,
 div.tagsinput span.tag,
 .slider-selection,
-.themed-background {
-    background-color: #f31455;
+.themed-background,
+.select2-results .select2-highlighted,
+.select2-container-multi .select2-choices .select2-search-choice {
+    background-color: #d9416c;
 }
 
 .timeline-list .active .timeline-icon,
@@ -317,48 +322,59 @@ a.list-group-item.active:focus,
 .chosen-container-active.chosen-with-drop .chosen-single,
 .chosen-container-active .chosen-choices,
 div.tagsinput span.tag,
-.themed-border {
-    border-color: #f31455;
+.themed-border,
+.select2-drop-active,
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices,
+.select2-dropdown-open.select2-drop-above .select2-choice,
+.select2-dropdown-open.select2-drop-above .select2-choices,
+.select2-results .select2-highlighted,
+.select2-container-multi.select2-container-active .select2-choices {
+    border-color: #d9416c;
 }
 
 .nav .caret,
 .nav a:hover .caret,
 .nav a:focus .caret {
-    border-top-color: #f31455;
-    border-bottom-color: #f31455;
+    border-top-color: #d9416c;
+    border-bottom-color: #d9416c;
 }
 
 .sidebar-nav a.active,
 .sidebar-nav ul a.active,
 .sidebar-nav ul a.active:hover {
-    border-left-color: #f31455;
+    border-left-color: #d9416c;
+}
+
+.select2-drop.select2-drop-above.select2-drop-active {
+    border-top-color: #d9416c;
 }
 
 /* NProgress */
 #nprogress .bar {
-    background-color: #f31455;
+    background-color: #d9416c;
 }
 
 #nprogress .peg {
-    box-shadow: 0 0 10px #f31455, 0 0 5px #f31455;
+    box-shadow: 0 0 10px #d9416c, 0 0 5px #d9416c;
 }
 
 #nprogress .spinner-icon {
-    border-top-color:  #f31455;
-    border-left-color: #f31455;
+    border-top-color:  #d9416c;
+    border-left-color: #d9416c;
 }
 
 /* FullCalendar buttons */
 .fc-state-default {
     background-color: #eb6a8e;
-    border-color: #f31455;
+    border-color: #d9416c;
 }
 
 .fc-state-hover,
 .fc-state-down,
 .fc-state-active,
 .fc-state-disabled {
-    background-color: #f31455;
+    background-color: #d9416c;
 }
 
 .fc-state-highlight {
@@ -404,15 +420,15 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
     background-color: #eb6a8e;
-    border-color: #f31455;
+    border-color: #d9416c;
 }
 
 .btn-primary.btn-alt {
-    color: #f31455;
+    color: #d9416c;
 }
 
 .btn-primary:hover {
-    background-color: #f31455;
+    background-color: #d9416c;
     border-color: #b31542;
     color: #ffffff;
 }
@@ -421,8 +437,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open .btn-primary.dropdown-toggle {
-    background-color: #f31455;
-    border-color: #f31455;
+    background-color: #d9416c;
+    border-color: #d9416c;
     color: #ffffff;
 }
 
@@ -439,6 +455,6 @@ fieldset[disabled] .btn-primary:hover,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
-    background-color: #f31455;
-    border-color: #f31455;
+    background-color: #d9416c;
+    border-color: #d9416c;
 }

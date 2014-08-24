@@ -1,6 +1,6 @@
 angular.module('PortalApp.controllers')
 
-    .controller('NewsCtrl', function ($scope, newsFactory, newsService, notificationService) {
+    .controller('news-controller', function ($scope, newsFactory, newsService, notificationService) {
         /*
          =================================================================
          NEWS LOADING

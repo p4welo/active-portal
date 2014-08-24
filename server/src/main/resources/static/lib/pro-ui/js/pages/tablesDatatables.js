@@ -18,9 +18,8 @@ var TablesDatatables = function() {
                 "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
             });
 
-            /* Add Bootstrap classes to select and input elements added by datatables above the table */
-            $('.dataTables_filter input').addClass('form-control').attr('placeholder', 'Search');
-            $('.dataTables_length select').addClass('form-control');
+            /* Add placeholder attribute to the search input */
+            $('.dataTables_filter input').attr('placeholder', 'Search');
         }
     };
 }();

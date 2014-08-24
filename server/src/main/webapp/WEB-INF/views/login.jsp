@@ -41,7 +41,7 @@
 
     <script src="static/lib/pro-ui/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
-<body>
+<body class="page-loading">
 <div class="login-background">
     <div id="login-container" class="animation-fadeIn" style="z-index:9999;">
         <div class="login-title text-center">

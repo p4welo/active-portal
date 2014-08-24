@@ -139,7 +139,7 @@
 <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
 
 <script src="static/lib/jquery/jquery.min.js"></script>
-<script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="static/lib/pro-ui/js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
 
 <script src="static/lib/pro-ui/js/vendor/bootstrap.min.js"></script>
 <script src="static/lib/pro-ui/js/plugins.js"></script>
@@ -159,14 +159,16 @@
 <script src="static/js/app.js"></script>
 <script src="static/js/utils.js"></script>
 
-<script src="static/js/services/service-news.js"></script>
-<script src="static/js/services/service-notifications.js"></script>
-<script src="static/js/services/service-user.js"></script>
-<script src="static/js/services/service-menu.js"></script>
+<script src="static/js/services/news-service.js"></script>
+<script src="static/js/services/notification-service.js"></script>
+<script src="static/js/services/user-service.js"></script>
+<script src="static/js/services/menu-service.js"></script>
+<script src="static/js/services/room-service.js"></script>
 
-<script src="static/js/controllers/controller-classes.js"></script>
-<script src="static/js/controllers/controller-news.js"></script>
-<script src="static/js/controllers/controller-user.js"></script>
+<script src="static/js/controllers/class-controller.js"></script>
+<script src="static/js/controllers/news-controller.js"></script>
+<script src="static/js/controllers/user-controller.js"></script>
+<script src="static/js/controllers/room-controller.js"></script>
 
 <script src="static/js/filters.js"></script>
 <script src="static/js/directives.js"></script>

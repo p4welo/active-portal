@@ -22,7 +22,7 @@ var Icons = function() {
 
                 // Animate scrolling to the icon generator
                 $('html,body')
-                    .animate({ scrollTop: $("#icon-gen").offset().top - 15 });
+                    .animate({ scrollTop: $('#icon-gen').offset().top - 15 });
 
                 return false;
             });
