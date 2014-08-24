@@ -91,6 +91,7 @@ angular.module('PortalApp.controllers')
                 danceClass.canRegister = false;
                 danceClass.inProgress = true;
             }
+            delete danceClass['type'];
             classFactory.create(danceClass, function () {
                 $scope.classes = classFactory.find();
                 hideModal("#add-class-modal");
