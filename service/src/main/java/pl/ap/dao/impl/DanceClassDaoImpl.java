@@ -21,7 +21,7 @@ public class DanceClassDaoImpl extends AbstractDaoImpl<DanceClass> implements ID
    public List<DanceClass> findScheduleClasses()
    {
       Criteria criteria = createCriteria();
-      criteria.add(Restrictions.eq(DanceClass.FIELD_IN_PROGRESS, true));
+//      criteria.add(Restrictions.eq(DanceClass.FIELD_IN_PROGRESS, true));
       criteria.addOrder(Order.asc(DanceClass.FIELD_START_TIME));
       return criteria.list();
    }
