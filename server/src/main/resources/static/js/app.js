@@ -35,6 +35,11 @@ angular.module('PortalApp', [
                 templateUrl: "pages/company/rooms.html",
                 controller: "room-controller"
             })
+            .state('instructors', {
+                url: "/instructors",
+                templateUrl: "pages/company/instructors.html",
+                controller: "instructor-controller"
+            })
             .state('403', {
                 url: "/403",
                 templateUrl: "pages/error/403.html"

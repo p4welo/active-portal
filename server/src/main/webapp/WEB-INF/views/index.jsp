@@ -164,11 +164,13 @@
 <script src="static/js/services/user-service.js"></script>
 <script src="static/js/services/menu-service.js"></script>
 <script src="static/js/services/room-service.js"></script>
+<script src="static/js/services/instructor-service.js"></script>
 
 <script src="static/js/controllers/class-controller.js"></script>
 <script src="static/js/controllers/news-controller.js"></script>
 <script src="static/js/controllers/user-controller.js"></script>
 <script src="static/js/controllers/room-controller.js"></script>
+<script src="static/js/controllers/instructor-controller.js"></script>
 
 <script src="static/js/filters.js"></script>
 <script src="static/js/directives.js"></script>

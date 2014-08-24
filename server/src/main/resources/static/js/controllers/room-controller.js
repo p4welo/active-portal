@@ -2,13 +2,12 @@ angular.module('PortalApp.controllers')
 
     .controller('room-controller', function ($scope, roomFactory, roomService, notificationService) {
 
-        $scope.updateLoading = false;
         $scope.rooms = roomFactory.find();
 
         $scope.add = function() {
             $scope.new = {};
             showModal("#add-room-modal")
-        }
+        };
 
         $scope.create = function (room) {
 
@@ -17,14 +16,14 @@ angular.module('PortalApp.controllers')
                 hideModal("#add-room-modal");
                 notificationService.success("Pomyślnie zapisano");
             });
-        }
+        };
 
-        $scope.select = function (room) {
+        $scope.edit = function (room) {
 
             $scope.selected = {};
             roomService.copyProperties(room, $scope.selected);
             showModal("#edit-room-modal");
-        }
+        };
 
         $scope.update = function (room) {
 
@@ -39,5 +38,5 @@ angular.module('PortalApp.controllers')
             }, function () {
                 notificationService.error("Error occured");
             });
-        }
+        };
     });

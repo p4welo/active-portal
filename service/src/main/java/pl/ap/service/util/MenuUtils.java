@@ -28,14 +28,19 @@ public class MenuUtils
       rooms.setIcon("fa fa-bank");
       rooms.setState("rooms");
 
+      MenuItem instructors = new MenuItem();
+      instructors.setLabel("Instruktorzy");
+      instructors.setIcon("hi hi-user");
+      instructors.setState("instructors");
+
       MenuItem classes = new MenuItem();
-      classes.setLabel("Zajecia");
+      classes.setLabel("Zajęcia");
       classes.setIcon("gi gi-table");
       classes.setState("classes");
 
       MenuGroup group2 = new MenuGroup();
       group2.setHeader("GRAFIK");
-      group2.setItems(Arrays.asList(rooms, classes));
+      group2.setItems(Arrays.asList(rooms, instructors, classes));
 
       return Arrays.asList(group2);
 //      return Arrays.asList(group1,group2);

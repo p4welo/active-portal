@@ -17,9 +17,19 @@ public interface CompanyApiMappings
 
    public static final String GET_MENU = REST_PREFIX + "/menu";
 
+//   ROOMS
+
    public static final String GET_ROOM_LIST = REST_PREFIX + "/room/list";
 
    public static final String CREATE_ROOM = REST_PREFIX + "/room";
 
    public static final String GET_ROOM = REST_PREFIX + "/room/{" + ApiKeys.SID + "}";
+
+//   INSTRUCTORS
+
+   public static final String GET_INSTRUCTOR_LIST = REST_PREFIX + "/instructor/list";
+
+   public static final String CREATE_INSTRUCTOR = REST_PREFIX + "/instructor";
+
+   public static final String GET_INSTRUCTOR = REST_PREFIX + "/instructor/{" + ApiKeys.SID + "}";
 }
