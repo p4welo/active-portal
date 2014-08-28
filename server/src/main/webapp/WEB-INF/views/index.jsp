@@ -74,7 +74,7 @@
                         </li>
                         <c:forEach var="item" items="${group.items}">
                             <li>
-                                <a ui-sref="${item.state}" class="sidebar-nav-menu" ng-class="{active: $state.includes('${item.state}')}">
+                                <a ui-sref="${item.state}" class="sidebar-nav-menu" ui-sref-active="active">
                                     <i class="${item.icon} sidebar-nav-icon"></i>
                                     ${item.label}
                                 </a>
