@@ -216,3 +216,6 @@ UPDATE news SET image_src='http://www.fit.pl/g/str/image/dziecko%20fit/ChildrenD
 
 --changeset pawel:6
 TRUNCATE dance_class;
+
+--changeset pawel:7
+ALTER TABLE dance_class ADD COLUMN comment TEXT;

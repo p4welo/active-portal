@@ -33,6 +33,8 @@ public class DanceClass extends IdentifiableEntity
 
    public static final String FIELD_ROOM = "room";
 
+   public static final String FIELD_COMMENT = "comment";
+
    @Id
    @GeneratedValue
    @Column
@@ -76,6 +78,9 @@ public class DanceClass extends IdentifiableEntity
    @Enumerated(EnumType.STRING)
    @NotNull
    private ClassLevelEnum level;
+
+   @Column
+   private String comment;
 
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "room_id", nullable = true)
@@ -189,5 +194,15 @@ public class DanceClass extends IdentifiableEntity
    public void setRoom(Room room)
    {
       this.room = room;
+   }
+
+   public String getComment()
+   {
+      return comment;
+   }
+
+   public void setComment(String comment)
+   {
+      this.comment = comment;
    }
 }
