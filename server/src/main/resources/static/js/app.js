@@ -22,42 +22,42 @@ angular.module('PortalApp', [
         $stateProvider
             .state('news', {
                 url: "/news",
-                templateUrl: "pages/company/news.html",
+                templateUrl: "pages/news/news.html",
                 controller: "newsController"
             })
             .state('classes', {
                 url: "/classes",
-                templateUrl: "pages/company/classes.html",
+                templateUrl: "pages/classes/classes.html",
                 controller: "classController"
             })
             .state('rooms', {
                 url: "/rooms",
-                templateUrl: "pages/company/rooms.html",
+                templateUrl: "pages/rooms/rooms.html",
                 controller: "roomController"
             })
             .state('instructors', {
                 url: "/instructors",
-                templateUrl: "pages/company/instructors.html",
+                templateUrl: "pages/instructors/instructors.html",
                 controller: "instructorController"
             })
             .state('categories', {
                 url: "/categories",
-                templateUrl: "pages/company/categories.html",
+                templateUrl: "pages/categories/categories.html",
                 controller: "categoryController"
             })
             .state('styles', {
                 url: "/styles",
-                templateUrl: "pages/company/styles.html",
+                templateUrl: "pages/styles/styles.html",
                 controller: "styleController"
             })
             .state('customerBase', {
                 url: "/customerBase",
-                templateUrl: "pages/company/customerBase.html",
+                templateUrl: "pages/customerBase/customerBase.html",
                 controller: "customerBaseController"
             })
             .state('presence', {
                 url: "/presence",
-                templateUrl: "pages/company/presence.html",
+                templateUrl: "pages/presence/presence.html",
                 controller: "presenceController"
             })
             .state('403', {
