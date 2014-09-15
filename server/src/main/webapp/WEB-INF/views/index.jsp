@@ -176,6 +176,8 @@
 <script src="static/js/controllers/instructor-controller.js"></script>
 <script src="static/js/controllers/category-controller.js"></script>
 <script src="static/js/controllers/style-controller.js"></script>
+<script src="static/js/controllers/customer-base-controller.js"></script>
+<script src="static/js/controllers/presence-controller.js"></script>
 
 <script src="static/js/filters.js"></script>
 <script src="static/js/directives.js"></script>

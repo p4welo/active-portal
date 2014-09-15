@@ -23,32 +23,42 @@ angular.module('PortalApp', [
             .state('news', {
                 url: "/news",
                 templateUrl: "pages/company/news.html",
-                controller: "news-controller"
+                controller: "newsController"
             })
             .state('classes', {
                 url: "/classes",
                 templateUrl: "pages/company/classes.html",
-                controller: "class-controller"
+                controller: "classController"
             })
             .state('rooms', {
                 url: "/rooms",
                 templateUrl: "pages/company/rooms.html",
-                controller: "room-controller"
+                controller: "roomController"
             })
             .state('instructors', {
                 url: "/instructors",
                 templateUrl: "pages/company/instructors.html",
-                controller: "instructor-controller"
+                controller: "instructorController"
             })
             .state('categories', {
                 url: "/categories",
                 templateUrl: "pages/company/categories.html",
-                controller: "category-controller"
+                controller: "categoryController"
             })
             .state('styles', {
                 url: "/styles",
                 templateUrl: "pages/company/styles.html",
-                controller: "style-controller"
+                controller: "styleController"
+            })
+            .state('customerBase', {
+                url: "/customerBase",
+                templateUrl: "pages/company/customerBase.html",
+                controller: "customerBaseController"
+            })
+            .state('presence', {
+                url: "/presence",
+                templateUrl: "pages/company/presence.html",
+                controller: "presenceController"
             })
             .state('403', {
                 url: "/403",

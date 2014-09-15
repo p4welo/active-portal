@@ -1,6 +1,6 @@
 angular.module('PortalApp.controllers')
 
-    .controller('category-controller', function ($scope, categoryFactory, categoryService, notificationService) {
+    .controller('categoryController', function ($scope, categoryFactory, categoryService, notificationService) {
 
         $scope.categories = categoryFactory.find();
 

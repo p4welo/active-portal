@@ -1,6 +1,6 @@
 angular.module('PortalApp.controllers')
 
-    .controller('style-controller', function ($scope, styleFactory, styleService, categoryFactory, notificationService) {
+    .controller('styleController', function ($scope, styleFactory, styleService, categoryFactory, notificationService) {
 
         $scope.styles = styleFactory.find();
         $scope.categories = categoryFactory.find();

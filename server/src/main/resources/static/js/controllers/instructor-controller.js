@@ -1,6 +1,6 @@
 angular.module('PortalApp.controllers')
 
-    .controller('instructor-controller', function ($scope, instructorFactory, instructorService, notificationService) {
+    .controller('instructorController', function ($scope, instructorFactory, instructorService, notificationService) {
 
         $scope.instructors = instructorFactory.find();
 

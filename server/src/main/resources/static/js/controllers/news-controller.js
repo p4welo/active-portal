@@ -1,16 +1,12 @@
 angular.module('PortalApp.controllers')
 
-    .controller('news-controller', function ($scope, newsFactory, newsService, notificationService) {
+    .controller('newsController', function ($scope, newsFactory, newsService, notificationService) {
         /*
          =================================================================
          NEWS LOADING
          =================================================================
          */
-        $scope.loading = true;
-        $scope.news = newsFactory.find(function () {
-
-            $scope.loading = false;
-        });
+        $scope.news = newsFactory.find();
 
         /*
          =================================================================

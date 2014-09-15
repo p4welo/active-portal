@@ -90,3 +90,7 @@
     height: 30px;
     opacity: 1;
 }
+
+.day-select li {
+    cursor: pointer;
+}

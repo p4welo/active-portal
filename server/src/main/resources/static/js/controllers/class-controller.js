@@ -1,7 +1,8 @@
 angular.module('PortalApp.controllers')
 
-    .controller('class-controller', function ($scope, styleFactory, instructorFactory, roomFactory, classService, classFactory, notificationService) {
+    .controller('classController', function ($scope, styleFactory, instructorFactory, roomFactory, classService, classFactory, notificationService) {
 
+        $scope.day = '';
         $scope.classes = classFactory.find();
         $scope.styles = styleFactory.find();
         $scope.instructors = instructorFactory.find();
@@ -72,6 +73,34 @@ angular.module('PortalApp.controllers')
         $scope.add = function () {
             $scope.new = {};
             showModal("#add-class-modal")
+        };
+
+        $scope.edit = function (danceClass) {
+            $scope.selected = {};
+            classService.copyProperties(danceClass, $scope.selected);
+
+            if (!danceClass.canJoin && danceClass.canRegister && !danceClass.inProgress) {
+                $scope.selected.type = 'registration';
+            }
+            else if (danceClass.canJoin && !danceClass.canRegister && danceClass.inProgress) {
+                $scope.selected.type = 'open';
+            }
+            else if (!danceClass.canJoin && !danceClass.canRegister && danceClass.inProgress) {
+                $scope.selected.type = 'closed';
+            }
+            showModal("#edit-class-modal");
+        };
+
+        $scope.update = function (danceClass) {
+
+            delete danceClass.type;
+            classFactory.update({sid: danceClass.sid}, danceClass, function () {
+
+                $scope.classes = classFactory.find();
+                hideModal("#edit-class-modal");
+                notificationService.success("Pomyślnie zapisano");
+
+            });
         };
 
         $scope.create = function (danceClass) {

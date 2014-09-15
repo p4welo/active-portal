@@ -1,6 +1,6 @@
 angular.module('PortalApp.controllers')
 
-    .controller('room-controller', function ($scope, roomFactory, roomService, notificationService) {
+    .controller('roomController', function ($scope, roomFactory, roomService, notificationService) {
 
         $scope.rooms = roomFactory.find();
 

@@ -14,14 +14,21 @@ public class MenuUtils
 {
    public static List<MenuGroup> provideDefaultCompanyMenu()
    {
+      MenuItem users = new MenuItem();
+      users.setLabel("Użytkownicy");
+      users.setIcon("gi gi-user");
+      users.setState("users");
+
+      MenuGroup systemGroup = new MenuGroup("SYSTEM");
+      systemGroup.setItems(Arrays.asList(users));
+
       MenuItem news = new MenuItem();
       news.setLabel("Lista");
       news.setIcon("gi gi-fire");
       news.setState("news");
 
-      MenuGroup group1 = new MenuGroup();
-      group1.setHeader("AKTUALNOŚCI");
-      group1.setItems(Arrays.asList(news));
+      MenuGroup newsGroup = new MenuGroup("AKTUALNOŚCI");
+      newsGroup.setItems(Arrays.asList(news));
 
       MenuItem rooms = new MenuItem();
       rooms.setLabel("Sale taneczne");
@@ -30,7 +37,7 @@ public class MenuUtils
 
       MenuItem instructors = new MenuItem();
       instructors.setLabel("Instruktorzy");
-      instructors.setIcon("gi gi-parents");
+      instructors.setIcon("gi gi-certificate");
       instructors.setState("instructors");
 
       MenuItem categories = new MenuItem();
@@ -39,19 +46,31 @@ public class MenuUtils
       categories.setState("categories");
 
       MenuItem styles = new MenuItem();
-      styles.setLabel("Style");
+      styles.setLabel("Style taneczne");
       styles.setIcon("gi gi-eyedropper");
       styles.setState("styles");
 
       MenuItem classes = new MenuItem();
-      classes.setLabel("Zajęcia");
+      classes.setLabel("Grafik zajęć");
       classes.setIcon("gi gi-table");
       classes.setState("classes");
 
-      MenuGroup group2 = new MenuGroup();
-      group2.setHeader("GRAFIK");
-      group2.setItems(Arrays.asList(rooms, instructors, categories, styles, classes));
+      MenuGroup scheduleGroup = new MenuGroup("GRAFIK");
+      scheduleGroup.setItems(Arrays.asList(rooms, instructors, categories, styles, classes));
 
-      return Arrays.asList(group1,group2);
+      MenuItem customerBase = new MenuItem();
+      customerBase.setLabel("Baza klientów");
+      customerBase.setIcon("gi gi-parents");
+      customerBase.setState("customerBase");
+
+      MenuItem customerPresence = new MenuItem();
+      customerPresence.setLabel("Obecności");
+      customerPresence.setIcon("gi gi-check");
+      customerPresence.setState("presence");
+
+      MenuGroup customersGroup = new MenuGroup("Klienci");
+      customersGroup.setItems(Arrays.asList(customerBase, customerPresence));
+
+      return Arrays.asList(systemGroup, newsGroup,scheduleGroup, customersGroup);
    }
 }

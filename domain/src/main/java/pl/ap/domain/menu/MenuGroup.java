@@ -12,6 +12,11 @@ public class MenuGroup implements Serializable
 
    private List<MenuItem> items;
 
+   public MenuGroup(String header)
+   {
+      this.header = header;
+   }
+
    public String getHeader()
    {
       return header;
