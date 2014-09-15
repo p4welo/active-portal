@@ -62,8 +62,11 @@ public class DanceClassServiceImpl extends AbstractServiceImpl<DanceClass> imple
    {
       Style style = styleService.getBySid(danceClass.getStyle().getSid());
       danceClass.setStyle(style);
-      Instructor instructor = instructorService.getBySid(danceClass.getInstructor().getSid());
-      danceClass.setInstructor(instructor);
+      Instructor oldInstructor = danceClass.getInstructor();
+      if (oldInstructor  != null) {
+         Instructor instructor = instructorService.getBySid(danceClass.getInstructor().getSid());
+         danceClass.setInstructor(instructor);
+      }
       Room room = roomService.getBySid(danceClass.getRoom().getSid());
       danceClass.setRoom(room);
       return super.save(danceClass);
