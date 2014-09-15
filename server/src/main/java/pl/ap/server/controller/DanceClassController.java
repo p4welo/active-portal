@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.DanceClass;
+import pl.ap.server.api.ApiKeys;
 import pl.ap.server.api.CompanyApiMappings;
 import pl.ap.service.IDanceClassService;
 
@@ -34,8 +35,21 @@ public class DanceClassController
    public DanceClass createDanceClass(@RequestBody DanceClass danceClass)
    {
       Assert.notNull(danceClass.getStyle());
-      Assert.notNull(danceClass.getInstructor());
+//      Assert.notNull(danceClass.getInstructor());
       Assert.notNull(danceClass.getRoom());
       return danceClassService.save(danceClass);
+   }
+
+   @RequestMapping(value = CompanyApiMappings.GET_DANCE_CLASS, method = RequestMethod.PUT)
+   @ResponseStatus(value = HttpStatus.OK)
+   @ResponseBody
+   public DanceClass updateDanceClass(@RequestBody DanceClass danceClass, @PathVariable(ApiKeys.SID) String sid)
+   {
+      DanceClass oldDanceClass = danceClassService.getBySid(sid);
+      Assert.notNull(oldDanceClass);
+      Assert.notNull(danceClass);
+      Assert.isTrue(sid.equals(danceClass.getSid()));
+
+      return danceClassService.update(danceClass);
    }
 }
