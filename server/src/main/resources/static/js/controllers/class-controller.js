@@ -1,6 +1,6 @@
 angular.module('PortalApp.controllers')
 
-    .controller('classController', function ($scope, styleFactory, instructorFactory, roomFactory, classService, classFactory, notificationService) {
+    .controller('classController', function ($scope, styleFactory, instructorFactory, roomFactory, classService, classFactory, notificationService, $modal) {
 
         $scope.day = '';
         $scope.classes = classFactory.find();

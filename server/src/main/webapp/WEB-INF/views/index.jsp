@@ -147,16 +147,17 @@
 <script src="static/lib/pro-ui/js/ckeditor/ckeditor.js"></script>
 <script src="static/lib/pnotify/jquery.pnotify.js"></script>
 
-<script src="static/lib/angular/angular.min.js"></script>
-<script src="static/lib/angular/angular-sanitize.min.js"></script>
-<script src="static/lib/angular/angular-resource.min.js"></script>
-<script src="static/lib/angular/angular-cookies.js"></script>
-<script src="static/lib/angular/angular-animate.js"></script>
-<script src="static/lib/angular-ui/ng-grid.js"></script>
-<script src="static/lib/angular-ui/angular-ui-router.min.js"></script>
+<script src="static/lib/angular/angular.js"></script>
+<script src="static/lib/angular-sanitize/angular-sanitize.js"></script>
+<script src="static/lib/angular-resource/angular-resource.js"></script>
+<script src="static/lib/angular-animate/angular-animate.js"></script>
+<script src="static/lib/angular-translate/angular-translate.min.js"></script>
+<script src="static/lib/angular-ui-router/angular-ui-router.min.js"></script>
+<script src="static/lib/angular-ui-bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
 <script src="static/lib/loading-bar/loading-bar.js"></script>
 
 <script src="static/js/app.js"></script>
+<script src="static/js/i18n.js"></script>
 <script src="static/js/utils.js"></script>
 
 <script src="static/js/services/class-service.js"></script>
@@ -171,7 +172,6 @@
 
 <script src="static/js/controllers/class-controller.js"></script>
 <script src="static/js/controllers/news-controller.js"></script>
-<script src="static/js/controllers/user-controller.js"></script>
 <script src="static/js/controllers/room-controller.js"></script>
 <script src="static/js/controllers/instructor-controller.js"></script>
 <script src="static/js/controllers/category-controller.js"></script>

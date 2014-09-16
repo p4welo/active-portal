@@ -17,7 +17,6 @@ angular.module('PortalApp', [
         }])
     .config(function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
 
-//        $urlRouterProvider.otherwise("/rooms");
         $urlRouterProvider.otherwise("/news");
         $stateProvider
             .state('news', {
@@ -60,6 +59,10 @@ angular.module('PortalApp', [
                 templateUrl: "pages/presence/presence.html",
                 controller: "presenceController"
             })
+            .state('users', {
+                url: "/users",
+                templateUrl: "pages/users/users.html"
+            })
             .state('403', {
                 url: "/403",
                 templateUrl: "pages/error/403.html"
@@ -85,7 +88,7 @@ angular.module('PortalApp', [
             }
         );
     })
-    .run(function ($rootScope, $location, $cookieStore, userFactory, menuFactory) {
+    .run(function ($rootScope) {
 
         $rootScope.hasRole = function (role) {
             if ($rootScope.user === undefined) {
@@ -108,4 +111,4 @@ angular.module('PortalApp', [
     });
 
 angular.module('PortalApp.services', ['ngResource']);
-angular.module('PortalApp.controllers', ['ngSanitize', 'ngCookies']);
+angular.module('PortalApp.controllers', ['ngSanitize', 'pascalprecht.translate','ui.bootstrap']);
