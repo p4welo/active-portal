@@ -1,3 +1,3 @@
 {
-    "directory" : "server/src/main/resources/static/lib/bower"
+    "directory" : "server/src/main/webapp/vendor"
 }
