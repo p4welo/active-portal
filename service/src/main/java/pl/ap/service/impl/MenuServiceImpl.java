@@ -20,14 +20,15 @@ public class MenuServiceImpl implements IMenuService
    @Override
    public List<MenuGroup> getByUser(User user)
    {
-      if (UserTypeEnum.ROLE_COMPANY == user.getType())
-      {
-         return MenuUtils.provideDefaultCompanyMenu();
-      }
-      else if (UserTypeEnum.ROLE_CUSTOMER == user.getType())
-      {
-         return MenuUtils.provideDefaultCompanyMenu();
-      }
-      return null;
+      return MenuUtils.provideDefaultCompanyMenu();
+//      if (UserTypeEnum.ROLE_COMPANY == user.getType())
+//      {
+//         return MenuUtils.provideDefaultCompanyMenu();
+//      }
+//      else if (UserTypeEnum.ROLE_CUSTOMER == user.getType())
+//      {
+//         return MenuUtils.provideDefaultCompanyMenu();
+//      }
+//      return null;
    }
 }

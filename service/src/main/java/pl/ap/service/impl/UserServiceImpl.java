@@ -20,8 +20,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements IUserS
 {
    public static final String BEAN_NAME = "userService";
 
-   @Resource
-   private PasswordEncoder passwordEncoder;
+//   @Resource
+//   private PasswordEncoder passwordEncoder;
 
    @Resource
    private IUserDao userDao;
@@ -48,7 +48,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements IUserS
       user.setFirstName("User");
       user.setLastName("Testowy");
       user.setLogin("test");
-      user.setPassword(passwordEncoder.encode("test"));
+      user.setPassword("test");
       user.setType(UserTypeEnum.ROLE_COMPANY);
       user.setEmail("test@mail.com");
       save(user);
