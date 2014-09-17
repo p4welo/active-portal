@@ -6,7 +6,8 @@ define([
         $stateProvider
             .state('users', {
                 url: "/users",
-                templateUrl: "app/system/users/users.html"
+                templateUrl: "app/system/users/users.html",
+                controller: "userController"
             });
     });
 });

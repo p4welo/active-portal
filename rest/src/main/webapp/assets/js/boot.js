@@ -21,7 +21,8 @@
                     'ngTranslate': "../assets/lib/angular-translate/angular-translate",
                     'ngAnimate': "../assets/lib/angular-animate/angular-animate",
                     'ngTouch': "../assets/lib/angular-touch/angular-touch",
-                    'loadingBar': "../assets/lib/angular-loading-bar/build/loading-bar"
+                    'loadingBar': "../assets/lib/angular-loading-bar/build/loading-bar",
+                    'pnotify': "../assets/lib/pnotify/pnotify.core"
                 },
                 shim: {
                     'ngAnimate': {'exports': 'ngAnimate'},

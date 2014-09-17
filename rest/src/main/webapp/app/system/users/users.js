@@ -1,8 +1,8 @@
 define([
     'system/module'
-], function (system) {
+], function (module) {
 
-    system.controller("userController", function ($scope) {
+    module.controller("userController", function ($scope) {
 
     });
 });
