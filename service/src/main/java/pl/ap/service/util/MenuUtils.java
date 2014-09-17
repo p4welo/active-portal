@@ -1,6 +1,5 @@
 package pl.ap.service.util;
 
-
 import pl.ap.domain.menu.MenuGroup;
 import pl.ap.domain.menu.MenuItem;
 
@@ -71,6 +70,6 @@ public class MenuUtils
       MenuGroup customersGroup = new MenuGroup("Klienci");
       customersGroup.setItems(Arrays.asList(customerBase, customerPresence));
 
-      return Arrays.asList(systemGroup, newsGroup,scheduleGroup, customersGroup);
+      return Arrays.asList(systemGroup, newsGroup, scheduleGroup, customersGroup);
    }
 }

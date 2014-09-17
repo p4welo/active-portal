@@ -11,8 +11,6 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <mvc:annotation-driven/>
-    <mvc:resources mapping="static/**" location="classpath:static/"/>
-    <mvc:resources mapping="pages/**" location="classpath:pages/"/>
 
     <context:component-scan base-package="pl.ap.server.controller"/>
 

@@ -5,7 +5,9 @@
         { jquery: "./assets/lib/jquery/dist/jquery.js" },
         { angular: "./assets/lib/angular/angular.js" },
         { ngLocale: "./assets/lib/angular-locale/angular-locale_pl-pl.js" },
-        { bootstrap: "./assets/lib/bootstrap/dist/js/bootstrap.js" }
+        { bootstrap: "./assets/lib/bootstrap/dist/js/bootstrap.js" },
+        { proUiPlugins: "./assets/lib/pro-ui/js/plugins.js"},
+        { proUiApp: "./assets/lib/pro-ui/js/app.js"}
     )
         .ready("ALL", function () {
 
