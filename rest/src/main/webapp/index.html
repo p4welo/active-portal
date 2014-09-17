@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <title>EFL-FES</title>
+
+    <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <!--<link href="assets/lib/bootstrap/dist/css/simplex.css" rel="stylesheet" media="screen"/>-->
+    <link href="assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen"/>
+    <link href="assets/lib/glyphicons-pro/glyphicons-pro.css" rel="stylesheet" media="screen"/>
+    <link href="assets/lib/pnotify/pnotify.core.css" rel="stylesheet" media="screen"/>
+    <link href="assets/lib/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" media="screen"/>
+
+    <link href="assets/css/style.css" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="navbar navbar-default ">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+        </a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="active">
+                    <a ui-sref="attendance">
+                        <i class="gi gi-car"></i>
+                        attendance
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="customerBase">
+                        <i class="gi gi-google_maps"></i>
+                        customerBase
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        Wyloguj
+                        <i class="fa fa-sign-out"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div ui-view></div>
+</div>
+
+<script src="./assets/lib/headjs-notify/dist/head.load.min.js" type="text/javascript"></script>
+<script src="./assets/js/boot.js" type="text/javascript"></script>
+</body>
+</html>
