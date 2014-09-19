@@ -18,6 +18,8 @@ angular.module('PortalApp.controllers')
             });
         };
 
+
+
         $scope.edit = function (room) {
 
             $scope.selected = {};

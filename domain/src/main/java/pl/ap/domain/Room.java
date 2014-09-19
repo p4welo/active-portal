@@ -1,5 +1,7 @@
 package pl.ap.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -11,6 +13,9 @@ import javax.validation.constraints.NotNull;
 public class Room extends IdentifiableEntity
 {
    public static final String FIELD_NAME = "name";
+   public static final String FIELD_CODE = "code";
+
+   public static final int MAX_LENGTH_CODE = 16;
 
    @Id
    @GeneratedValue
@@ -20,6 +25,11 @@ public class Room extends IdentifiableEntity
    @Column(nullable = false)
    @NotNull
    private String name;
+
+   @Column(nullable = false, length = MAX_LENGTH_CODE)
+   @Length(max = MAX_LENGTH_CODE)
+   @NotNull
+   private String code;
 
    public String getName()
    {
@@ -39,5 +49,15 @@ public class Room extends IdentifiableEntity
    public void setId(Long id)
    {
       this.id = id;
+   }
+
+   public String getCode()
+   {
+      return code;
+   }
+
+   public void setCode(String code)
+   {
+      this.code = code;
    }
 }

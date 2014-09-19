@@ -1,5 +1,6 @@
 define([
-    'services/module'
+    'services/module',
+    'pnotify'
 ], function (module) {
 
     module.service('notificationService', function () {

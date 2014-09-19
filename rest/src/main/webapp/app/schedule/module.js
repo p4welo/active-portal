@@ -1,8 +1,8 @@
 define([
-
+    'uiBootstrap'
 ], function () {
 
-    return angular.module('activePortal.schedule', [], function ($stateProvider) {
+    return angular.module('activePortal.schedule', ['ui.bootstrap'], function ($stateProvider) {
         $stateProvider
             .state('categories', {
                 url: "/categories",

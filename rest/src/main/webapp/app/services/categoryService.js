@@ -3,9 +3,9 @@ define([
 ], function (module) {
 
     module.factory('categoryFactory', function ($resource) {
-        var CATEGORY_LIST_KEY = getRestUrl("/category/list");
-        var CREATE_CATEGORY_KEY = getRestUrl("/category");
-        var GET_CATEGORY_KEY = getRestUrl("/category/:sid");
+        var CATEGORY_LIST_KEY = "rest/category/list";
+        var CREATE_CATEGORY_KEY = "rest/category";
+        var GET_CATEGORY_KEY = "rest/category/:sid";
 
         return $resource(null, null, {
             find: {

@@ -1,1 +1,124 @@
-customerBase
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-parents"></i>Baza klientów<br>
+        </h1>
+    </div>
+</div>
+
+<h3 class="sub-header">Zajęcia</h3>
+<div class="row">
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Poniedziałek</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Wtorek</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Środa</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Czwartek</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Piątek</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Sobota</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>Niedziela</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-folder"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong>WSZYSTKIE</strong><br>
+                </h3>
+            </div>
+        </a>
+    </div>
+</div>
+
+<h3 class="sub-header">Style taneczne</h3>
+<div class="row">
+    <div class="col-sm-6 col-lg-3" ng-repeat="category in categories | orderBy: 'name'">
+        <a href="#" class="widget widget-hover-effect1">
+            <div class="widget-simple">
+                <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                    <i class="gi gi-folder_open"></i>
+                </div>
+                <h3 class="widget-content text-right animation-pullDown">
+                    <strong ng-bind="category.name"></strong>
+                </h3>
+            </div>
+        </a>
+    </div>
+</div>
+

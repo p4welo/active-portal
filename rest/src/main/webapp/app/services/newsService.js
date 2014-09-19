@@ -4,9 +4,9 @@ define([
 
     module.factory('newsFactory', function ($resource) {
 
-        var NEWS_LIST_KEY = getRestUrl("/news/list");
-        var CREATE_NEWS_KEY = getRestUrl("/news");
-        var GET_NEWS_KEY = getRestUrl("/news/:sid");
+        var NEWS_LIST_KEY = "rest/news/list";
+        var CREATE_NEWS_KEY = "rest/news";
+        var GET_NEWS_KEY = "rest/news/:sid";
 
         return $resource(null, null, {
             find: {

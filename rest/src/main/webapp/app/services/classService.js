@@ -3,9 +3,9 @@ define([
 ], function (module) {
 
     module.factory('classFactory', function ($resource) {
-        var CLASS_LIST_KEY = getRestUrl("/danceClass/list");
-        var CREATE_CLASS_KEY = getRestUrl("/danceClass");
-        var GET_CLASS_KEY = getRestUrl("/danceClass/:sid");
+        var CLASS_LIST_KEY = "rest/danceClass/list";
+        var CREATE_CLASS_KEY = "rest/danceClass";
+        var GET_CLASS_KEY = "rest/danceClass/:sid";
 
         return $resource(null, null, {
             find: {

@@ -3,9 +3,9 @@ define([
 ], function (module) {
 
     module.factory('roomFactory', function ($resource) {
-        var ROOM_LIST_KEY = getRestUrl("/room/list");
-        var CREATE_ROOM_KEY = getRestUrl("/room");
-        var GET_ROOM_KEY = getRestUrl("/room/:sid");
+        var ROOM_LIST_KEY = "rest/room/list";
+        var CREATE_ROOM_KEY = "rest/room";
+        var GET_ROOM_KEY = "rest/room/:sid";
 
         return $resource(null, null, {
             find: {

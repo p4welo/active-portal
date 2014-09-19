@@ -3,7 +3,7 @@ define([
 ], function (module) {
 
     module.factory('menuFactory', function ($resource) {
-        var GET_MENU_KEY = getRestUrl("/menu");
+        var GET_MENU_KEY = "rest/menu";
 
         return $resource(null, null, {
             get: {

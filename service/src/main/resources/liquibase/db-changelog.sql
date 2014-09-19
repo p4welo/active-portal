@@ -219,3 +219,6 @@ TRUNCATE dance_class;
 
 --changeset pawel:7
 ALTER TABLE dance_class ADD COLUMN comment TEXT;
+
+--changeset pawel:8
+ALTER TABLE room ADD COLUMN code VARCHAR(16) NOT NULL DEFAULT "test";

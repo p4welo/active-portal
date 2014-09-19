@@ -3,9 +3,9 @@ define([
 ], function (module) {
 
     module.factory('styleFactory', function ($resource) {
-        var STYLE_LIST_KEY = getRestUrl("/style/list");
-        var CREATE_STYLE_KEY = getRestUrl("/style");
-        var GET_STYLE_KEY = getRestUrl("/style/:sid");
+        var STYLE_LIST_KEY = "rest/style/list";
+        var CREATE_STYLE_KEY = "rest/style";
+        var GET_STYLE_KEY = "test/style/:sid";
 
         return $resource(null, null, {
             find: {
