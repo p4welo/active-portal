@@ -1,1 +1,34 @@
-categories
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-folder_open"></i>Kategorie zajęć<br>
+        </h1>
+    </div>
+</div>
+
+<div class="block">
+    <div class="table-options clearfix">
+        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+            <button class="btn btn-success" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj kategorię
+            </button>
+        </div>
+    </div>
+    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+        <thead>
+        <tr>
+            <th class="text-center" style="width: 50px">Id</th>
+            <th>Symbol</th>
+            <th>Nazwa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="category in categories" ng-click="edit(category)">
+            <td ng-bind="category.id"></td>
+            <td ng-bind="category.code"></td>
+            <td ng-bind="category.name"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
