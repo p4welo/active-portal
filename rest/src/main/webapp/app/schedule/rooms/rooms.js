@@ -10,7 +10,6 @@ define([
         $scope.rooms = roomFactory.find();
 
         $scope.add = function () {
-            $scope.new = {};
 
             var modalInstance = $modal.open(
                 {
