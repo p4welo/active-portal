@@ -1,0 +1,7 @@
+.table-editable tbody {
+    cursor: pointer;
+}
+
+.day-select li {
+    cursor: pointer;
+}

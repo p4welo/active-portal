@@ -6,17 +6,17 @@
 <div class="modal-body">
     <form class="form-horizontal" role="form">
         <div class="form-group">
-            <label for="newName" class="col-sm-2 control-label">Nazwa</label>
+            <label for="newName" class="col-sm-3 control-label">Nazwa</label>
 
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <input type="text" class="form-control" id="newName" placeholder="Nazwa"
                        ng-model="new.name">
             </div>
         </div>
         <div class="form-group">
-            <label for="newCategory" class="col-sm-2 control-label">Kategoria</label>
+            <label for="newCategory" class="col-sm-3 control-label">Kategoria</label>
 
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <select size="1" class="form-control" name="example-select" id="newCategory"
                         ng-model="new.category.sid">
                     <option ng-repeat="category in categories" value="{{category.sid}}">{{category.name}}
