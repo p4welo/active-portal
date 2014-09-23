@@ -1,8 +1,9 @@
 define([
-    'uiBootstrap'
+    'uiBootstrap',
+    'ngTranslate'
 ], function () {
 
-    return angular.module('activePortal.schedule', ['ui.bootstrap'], function ($stateProvider) {
+    return angular.module('activePortal.schedule', ['pascalprecht.translate','ui.bootstrap'], function ($stateProvider) {
         $stateProvider
             .state('categories', {
                 url: "/categories",

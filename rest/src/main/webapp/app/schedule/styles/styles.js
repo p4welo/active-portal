@@ -2,14 +2,12 @@ define([
     'schedule/module',
     'schedule/styles/modal/addStyle',
     'services/styleService',
-    'services/categoryService',
     'services/notificationService'
 ], function (module) {
 
-    module.controller("stylesController", function ($scope, $modal, styleFactory, categoryFactory, notificationService) {
+    module.controller("stylesController", function ($scope, $modal, styleFactory, notificationService) {
 
         $scope.styles = styleFactory.find();
-        $scope.categories = categoryFactory.find();
 
         $scope.add = function () {
             var modalInstance = $modal.open(
