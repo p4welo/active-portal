@@ -6,119 +6,132 @@
     </div>
 </div>
 
-<h3 class="sub-header">Zajęcia</h3>
+
 <div class="row">
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+    <div class="col-lg-8">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options text-center">
+                    <div class="col-sm-3 pull-right">
+                        <div class="input-group">
+                            <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control ng-valid">
+                             <span class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Poniedziałek</strong><br>
-                </h3>
             </div>
-        </a>
+            <div class="row style-alt">
+                <div class="col-sm-6 col-lg-4" ng-repeat="customer in customers | orderBy: 'firstName' | filter: filterName">
+                    <a class="widget widget-hover-effect1">
+                        <div class="widget-simple" style="height: 120px">
+                            <div class="widget-icon pull-left themed-background-spring animation-fadeIn" ng-if="customer.gender == 'M'">
+                                <i class="gi gi-user"></i>
+                            </div>
+                            <div class="widget-icon pull-left themed-background-autumn animation-fadeIn" ng-if="customer.gender == 'F'">
+                                <i class="gi gi-girl"></i>
+                            </div>
+                            <h4 class="widget-content text-right">
+                                <strong ng-bind="customer.firstName"></strong>
+                                <strong ng-bind="customer.lastName"></strong>
+                                <small ng-bind="customer.mobile"></small>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+    <div class="col-lg-4">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <a title="" data-toggle="block-hide" class="btn btn-sm btn-alt btn-danger enable-tooltip"
+                       href="javascript:void(0)" data-original-title="Remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Wtorek</strong><br>
-                </h3>
+                <h2><i class="fa fa-pencil"></i> John Doe</h2>
             </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+            <form onsubmit="return false;" class="form-horizontal form-bordered" method="post"
+                  action="page_ready_contacts.php">
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">
+                        <img class="img-circle" alt="avatar" src="img/placeholders/avatars/avatar2.jpg">
+                    </label>
+
+                    <div class="col-xs-9">
+                        <i class="fa fa-fw fa-upload"></i> <a href="javascript:void(0)">Upload New Avatar</a><br>
+                        <i class="fa fa-fw fa-picture-o"></i> <a href="javascript:void(0)">Choose from
+                        Library</a><br><br>
+                        <i class="fa fa-fw fa-times"></i> <a class="text-danger" href="javascript:void(0)">Remove
+                        Avatar</a>
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Środa</strong><br>
-                </h3>
-            </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+                <div class="form-group">
+                    <label for="edit-contact-name" class="col-xs-3 control-label">Name</label>
+
+                    <div class="col-xs-9">
+                        <input type="text" placeholder="Enter Full Name.." value="John Doe" class="form-control"
+                               name="edit-contact-name" id="edit-contact-name">
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Czwartek</strong><br>
-                </h3>
-            </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+                <div class="form-group">
+                    <label for="edit-contact-email" class="col-xs-3 control-label">Email</label>
+
+                    <div class="col-xs-9">
+                        <input type="email" placeholder="Enter Email.." value="test@example.com" class="form-control"
+                               name="edit-contact-email" id="edit-contact-email">
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Piątek</strong><br>
-                </h3>
-            </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+                <div class="form-group">
+                    <label for="edit-contact-phone" class="col-xs-3 control-label">Phone</label>
+
+                    <div class="col-xs-9">
+                        <input type="text" placeholder="(000) 000-0000" value="(999) 999-9999" class="form-control"
+                               name="edit-contact-phone" id="edit-contact-phone">
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Sobota</strong><br>
-                </h3>
-            </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+                <div class="form-group">
+                    <label for="edit-contact-mobile" class="col-xs-3 control-label">Mobile</label>
+
+                    <div class="col-xs-9">
+                        <input type="text" placeholder="Enter Mobile Number.." class="form-control"
+                               name="edit-contact-mobile" id="edit-contact-mobile">
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>Niedziela</strong><br>
-                </h3>
-            </div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                    <i class="fa fa-folder"></i>
+                <div class="form-group">
+                    <label for="edit-contact-address" class="col-xs-3 control-label">Address</label>
+
+                    <div class="col-xs-9">
+                        <input type="text" placeholder="Enter Address.." value="Earth" class="form-control"
+                               name="edit-contact-address" id="edit-contact-address">
+                    </div>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong>WSZYSTKIE</strong><br>
-                </h3>
-            </div>
-        </a>
+                <div class="form-group">
+                    <label for="edit-contact-group" class="col-xs-3 control-label">Group</label>
+
+                    <div class="col-xs-9">
+                        <input type="text" value="Friends" class="input-tags" name="edit-contact-group"
+                               id="edit-contact-group" style="display: none;">
+
+                        <div class="tagsinput" id="edit-contact-group_tagsinput" style="width: auto; height: auto;">
+                            <span class="tag"><span>Friends  </span><a href="#" title="Removing tag">x</a></span>
+
+                            <div id="edit-contact-group_addTag"><input data-default="add a tag" value=""
+                                                                       id="edit-contact-group_tag"
+                                                                       style="color: rgb(102, 102, 102); width: 68px;">
+                            </div>
+                            <div class="tags_clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-actions">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-check"></i> Save Changes
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<h3 class="sub-header">Style taneczne</h3>
-<div class="row">
-    <div class="col-sm-6 col-lg-3" ng-repeat="category in categories | orderBy: 'name'">
-        <a href="#" class="widget widget-hover-effect1">
-            <div class="widget-simple">
-                <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
-                    <i class="gi gi-folder_open"></i>
-                </div>
-                <h3 class="widget-content text-right animation-pullDown">
-                    <strong ng-bind="category.name"></strong>
-                </h3>
-            </div>
-        </a>
-    </div>
-</div>
-
