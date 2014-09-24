@@ -60,7 +60,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return (T) criteria.uniqueResult();
    }
 
-   @Override
    public List<T> find(int first, int count, String property, boolean ascending)
    {
       Criteria criteria = createCriteria();
@@ -77,14 +76,12 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return criteria.list();
    }
 
-   @Override
    public long getCount()
    {
       Criteria criteria = createCriteria();
       return criteria.list().size();
    }
 
-   @Override
    public T getBySid(String sid)
    {
       Criteria criteria = createCriteria();
@@ -133,7 +130,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return sessionFactory;
    }
 
-   @Override
    public long countBySearchParams(AbstractFilter filter)
    {
       Criteria criteria = createCriteriaFromSearchParams(filter);
@@ -141,7 +137,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return (Long) criteria.uniqueResult();
    }
 
-   @Override
    public List<T> findBySearchParams(AbstractFilter filter, SortFilterChain sortFilterChain, int offset, int limit)
    {
       Criteria criteria = createCriteriaFromSearchParams(filter);
@@ -150,7 +145,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return criteria.list();
    }
 
-   @Override
    public List<T> saveAll(List<T> entities)
    {
       for (T entity : entities)
@@ -160,7 +154,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return entities;
    }
 
-   @Override
    public T getBy(String propertyName, Object value)
    {
       Criteria criteria = createCriteria();
@@ -168,7 +161,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return (T) criteria.uniqueResult();
    }
 
-   @Override
    public List<T> findBy(String propertyName, Object value)
    {
       Criteria criteria = createCriteria();
