@@ -3,6 +3,20 @@ define([
 ], function (module) {
 
     module.controller("customerBaseController", function ($scope) {
+        $scope.select = function (customer) {
+            if ($scope.selected == customer) {
+                $scope.selected = null;
+                return;
+            }
+            $scope.selected = customer;
+        }
+        $scope.deselect = function () {
+            $scope.selected = null;
+            return;
+        }
+        $scope.edit = function () {
+            $scope.selected.edit == true;
+        }
 
         $scope.customers = [
             {"firstName": "Anna", "lastName": "Fotyga", "gender": "F", "mobile": "789132665"},

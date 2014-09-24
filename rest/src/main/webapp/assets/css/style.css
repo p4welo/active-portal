@@ -20,3 +20,7 @@
     font-size: 16px;
     margin: 0;
 }
+
+.customer-base .customer-record {
+    cursor: pointer;
+}

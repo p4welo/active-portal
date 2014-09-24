@@ -30,15 +30,15 @@
             </div>
             <div class="row style-alt">
                 <div class="col-sm-6 col-lg-4" ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName">
-                    <a class="widget widget-hover-effect1">
-                        <div class="widget-simple">
+                    <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
+                        <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
                             <div class="widget-icon pull-left themed-background-spring animation-fadeIn" ng-if="customer.gender == 'M'">
                                 <i class="gi gi-user"></i>
                             </div>
                             <div class="widget-icon pull-left themed-background-autumn animation-fadeIn" ng-if="customer.gender == 'F'">
                                 <i class="gi gi-girl"></i>
                             </div>
-                            <h4 class="widget-content text-right">
+                            <h4 class="widget-content text-right" ng-class="{'widget-content-light': customer == selected}">
                                 <span ng-bind="customer.firstName"></span>
                                 <br />
                                 <strong ng-bind="customer.lastName"></strong>
@@ -50,95 +50,83 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="block">
+    <div class="col-lg-4" ng-if="selected != null">
+        <div class="block animation-fadeInLeft">
             <div class="block-title">
                 <div class="block-options pull-right">
-                    <a title="" data-toggle="block-hide" class="btn btn-sm btn-alt btn-danger enable-tooltip"
-                       href="javascript:void(0)" data-original-title="Remove"><i class="fa fa-times"></i></a>
+                    <a ng-click="edit()" class="btn btn-sm btn-alt btn-warning enable-tooltip">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a ng-click="deselect()" class="btn btn-sm btn-alt btn-danger enable-tooltip">
+                        <i class="fa fa-times"></i>
+                    </a>
                 </div>
-                <h2><i class="fa fa-pencil"></i> John Doe</h2>
+                <h2>
+                    <i class="fa fa-pencil"></i>
+                    {{selected.firstName + ' ' + selected.lastName}}
+                </h2>
             </div>
-            <form onsubmit="return false;" class="form-horizontal form-bordered" method="post"
-                  action="page_ready_contacts.php">
+            <div class="block-title">
+                <div class="block-options text-center">
+                    <a class="btn btn-sm btn-alt btn-success">
+                        <i class="fa fa-times"></i>
+                        Zapisz na zajęcia
+                    </a>
+                    <a class="btn btn-sm btn-alt btn-info">
+                        <i class="fa fa-times"></i>
+                        Dopisz do grupy
+                    </a>
+                </div>
+            </div>
+            <form class="form-horizontal form-bordered" method="post">
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">
-                        <img class="img-circle" alt="avatar" src="img/placeholders/avatars/avatar2.jpg">
-                    </label>
+                    <label for="firstName" class="col-xs-3 control-label">Imię</label>
 
                     <div class="col-xs-9">
-                        <i class="fa fa-fw fa-upload"></i> <a href="javascript:void(0)">Upload New Avatar</a><br>
-                        <i class="fa fa-fw fa-picture-o"></i> <a href="javascript:void(0)">Choose from
-                        Library</a><br><br>
-                        <i class="fa fa-fw fa-times"></i> <a class="text-danger" href="javascript:void(0)">Remove
-                        Avatar</a>
+                        <input type="text" placeholder="Imię" class="form-control" id="firstName" ng-model="selected.firstName" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit-contact-name" class="col-xs-3 control-label">Name</label>
+                    <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
 
                     <div class="col-xs-9">
-                        <input type="text" placeholder="Enter Full Name.." value="John Doe" class="form-control"
-                               name="edit-contact-name" id="edit-contact-name">
+                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName" ng-model="selected.lastName" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit-contact-email" class="col-xs-3 control-label">Email</label>
+                    <label for="mobile" class="col-xs-3 control-label">Telefon</label>
 
                     <div class="col-xs-9">
-                        <input type="email" placeholder="Enter Email.." value="test@example.com" class="form-control"
-                               name="edit-contact-email" id="edit-contact-email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-contact-phone" class="col-xs-3 control-label">Phone</label>
-
-                    <div class="col-xs-9">
-                        <input type="text" placeholder="(000) 000-0000" value="(999) 999-9999" class="form-control"
-                               name="edit-contact-phone" id="edit-contact-phone">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-contact-mobile" class="col-xs-3 control-label">Mobile</label>
-
-                    <div class="col-xs-9">
-                        <input type="text" placeholder="Enter Mobile Number.." class="form-control"
-                               name="edit-contact-mobile" id="edit-contact-mobile">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-contact-address" class="col-xs-3 control-label">Address</label>
-
-                    <div class="col-xs-9">
-                        <input type="text" placeholder="Enter Address.." value="Earth" class="form-control"
-                               name="edit-contact-address" id="edit-contact-address">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-contact-group" class="col-xs-3 control-label">Group</label>
-
-                    <div class="col-xs-9">
-                        <input type="text" value="Friends" class="input-tags" name="edit-contact-group"
-                               id="edit-contact-group" style="display: none;">
-
-                        <div class="tagsinput" id="edit-contact-group_tagsinput" style="width: auto; height: auto;">
-                            <span class="tag"><span>Friends  </span><a href="#" title="Removing tag">x</a></span>
-
-                            <div id="edit-contact-group_addTag"><input data-default="add a tag" value=""
-                                                                       id="edit-contact-group_tag"
-                                                                       style="color: rgb(102, 102, 102); width: 68px;">
-                            </div>
-                            <div class="tags_clear"></div>
-                        </div>
+                        <input type="text" placeholder="Telefon" class="form-control" id="mobile" ng-model="selected.mobile" />
                     </div>
                 </div>
                 <div class="form-group form-actions">
                     <div class="col-xs-9 col-xs-offset-3">
-                        <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-check"></i> Save Changes
+                        <button class="btn btn-sm btn-primary">
+                            <i class="fa fa-check"></i>
+                            Zapisz
                         </button>
                     </div>
                 </div>
             </form>
+            <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Kurs</th>
+                    <th>Obecność</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>21.08.14 15:00</td>
+                    <td>Bachata</td>
+                    <td>
+                        <span class="label label-success">TAK</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
