@@ -9,13 +9,11 @@ define([
                 return;
             }
             $scope.selected = customer;
+            $scope.selected.edit == false;
         }
         $scope.deselect = function () {
             $scope.selected = null;
             return;
-        }
-        $scope.edit = function () {
-            $scope.selected.edit == true;
         }
 
         $scope.customers = [
