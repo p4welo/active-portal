@@ -16,7 +16,7 @@
     <name>Rest Server Module</name>
 
     <build>
-        <finalName>portal</finalName>
+        <finalName>rest</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
