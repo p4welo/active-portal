@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+            class="sr-only">Close</span></button>
+    <h4 class="modal-title" id="add-modal-label">Dołącz do grupy</h4>
+</div>
+<div class="modal-body">
+    <ul class="nav nav-pills day-select">
+        <li ng-class="{'active' : day=='PN'}">
+            <a ng-click="day='PN'">Poniedziałek</a>
+        </li>
+        <li ng-class="{'active' : day=='WT'}">
+            <a ng-click="day='WT'">Wtorek</a>
+        </li>
+        <li ng-class="{'active' : day=='SR'}">
+            <a ng-click="day='SR'">Środa</a>
+        </li>
+        <li ng-class="{'active' : day=='CZ'}">
+            <a ng-click="day='CZ'">Czwartek</a>
+        </li>
+        <li ng-class="{'active' : day=='PT'}">
+            <a ng-click="day='PT'">Piątek</a>
+        </li>
+        <li ng-class="{'active' : day=='SB'}">
+            <a ng-click="day='SB'">Sobota</a>
+        </li>
+        <li ng-class="{'active' : day=='ND'}">
+            <a ng-click="day='ND'">Niedziela</a>
+        </li>
+    </ul>
+    <ul>
+        <li ng-repeat="c in classes | filter: { day : day}">
+            {{c.style.name}}
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+
+</div>

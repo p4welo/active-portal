@@ -2,7 +2,7 @@ define([
     'schedule/module',
     'schedule/classes/modal/addClass',
     'services/notificationService',
-    'services/classService',
+    'services/classService'
 ], function (module) {
 
     module.controller("classesController", function ($scope, classFactory, notificationService, $modal) {
