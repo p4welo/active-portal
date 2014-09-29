@@ -1,8 +1,8 @@
 define([
-
+    'uiBootstrap'
 ], function () {
 
-    return angular.module('activePortal.customers', [], function ($stateProvider) {
+    return angular.module('activePortal.customers', ['ui.bootstrap.modal'], function ($stateProvider) {
         $stateProvider
             .state('attendance', {
                 url: "/attendance",
