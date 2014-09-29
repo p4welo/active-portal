@@ -31,15 +31,15 @@
             </div>
             <div class="row style-alt">
                 <div class="col-sm-6 col-lg-4"
-                     ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName">
+                     ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
                     <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
                         <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
                             <div class="widget-icon pull-left themed-background-spring animation-fadeIn"
-                                 ng-if="customer.gender == 'M'">
+                                 ng-if="customer.gender == 'male'">
                                 <i class="gi gi-user"></i>
                             </div>
                             <div class="widget-icon pull-left themed-background-autumn animation-fadeIn"
-                                 ng-if="customer.gender == 'F'">
+                                 ng-if="customer.gender == 'female'">
                                 <i class="gi gi-girl"></i>
                             </div>
                             <h4 class="widget-content text-right"
@@ -59,12 +59,10 @@
         <div class="block animation-fadeInLeft">
             <div class="block-title">
                 <div class="block-options pull-right">
-                    <a ng-click="selected.edit = !selected.edit" class="btn btn-sm btn-alt btn-warning enable-tooltip">
+                    <a ng-click="selected.edit = !selected.edit" class="btn btn-sm btn-alt btn-warning enable-tooltip" ng-class="{'active': selected.edit}">
                         <i class="fa fa-pencil"></i>
+                        Edytuj
                     </a>
-                    <!--<a ng-click="deselect()" class="btn btn-sm btn-alt btn-danger enable-tooltip">-->
-                        <!--<i class="fa fa-times"></i>-->
-                    <!--</a>-->
                 </div>
                 <h2>
                     <i class="fa fa-pencil"></i>
@@ -83,58 +81,43 @@
                     </a>
                 </div>
             </div>
+
             <form class="form-horizontal form-bordered" method="post">
-                <div ng-if="selected.edit">
-                    <div class="form-group">
-                        <label for="firstName" class="col-xs-3 control-label">Imię</label>
+                <div class="form-group">
+                    <label for="firstName" class="col-xs-3 control-label">Imię</label>
 
-                        <div class="col-xs-9">
-                            <input type="text" placeholder="Imię" class="form-control" id="firstName"
-                                   ng-model="selected.firstName"/>
-                        </div>
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Imię" class="form-control" id="firstName"
+                               ng-model="selected.firstName"/>
                     </div>
-                    <div class="form-group">
-                        <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
-
-                        <div class="col-xs-9">
-                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
-                                   ng-model="selected.lastName"/>
-                        </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.firstName"></p>
                     </div>
-                    <div class="form-group">
-                        <label for="mobile" class="col-xs-3 control-label">Telefon</label>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
 
-                        <div class="col-xs-9">
-                            <input type="text" placeholder="Telefon" class="form-control" id="mobile"
-                                   ng-model="selected.mobile"/>
-                        </div>
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
+                               ng-model="selected.lastName"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.firstName"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mobile" class="col-xs-3 control-label">Telefon</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Telefon" class="form-control" id="mobile"
+                               ng-model="selected.mobile"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.mobile"></p>
                     </div>
                 </div>
 
-                <div ng-if="!selected.edit">
-                    <div class="form-group">
-                        <label for="firstName" class="col-xs-3 control-label">Imię</label>
-
-                        <div class="col-xs-9">
-                            <p class="form-control-static" ng-bind="selected.firstName"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
-
-                        <div class="col-xs-9">
-                            <p class="form-control-static" ng-bind="selected.firstName"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="mobile" class="col-xs-3 control-label">Telefon</label>
-
-                        <div class="col-xs-9">
-                            <p class="form-control-static" ng-bind="selected.mobile"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-actions">
+                <div class="form-group form-actions" ng-if="selected.edit">
                     <div class="col-xs-9 col-xs-offset-3">
                         <button class="btn btn-sm btn-primary">
                             <i class="fa fa-check"></i>
@@ -142,26 +125,27 @@
                         </button>
                     </div>
                 </div>
+            </form>
+
+            <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Kurs</th>
+                    <th>Obecność</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="presence in customerPresence | orderBy: '-date'">
+                    <td ng-bind="presence.date | date:'dd.MM.yyyy hh:mm'"></td>
+                    <td ng-bind="presence.course"></td>
+                    <td>
+                        <span class="label label-success" ng-if="presence.present">TAK</span>
+                        <span class="label label-danger" ng-if="!presence.present">NIE</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        </form>
-        <table class="table table-vcenter table-bordered table-condensed" id="general-table">
-            <thead>
-            <tr>
-                <th>Data</th>
-                <th>Kurs</th>
-                <th>Obecność</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>21.08.14 15:00</td>
-                <td>Bachata</td>
-                <td>
-                    <span class="label label-success">TAK</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
     </div>
-</div>
 </div>
