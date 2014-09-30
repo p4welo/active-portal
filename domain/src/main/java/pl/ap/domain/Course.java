@@ -1,6 +1,6 @@
 package pl.ap.domain;
 
-import pl.ap.domain.enums.ClassLevelEnum;
+import pl.ap.domain.enums.CourseLevelEnum;
 import pl.ap.domain.enums.DayEnum;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "dance_class")
-public class DanceClass extends IdentifiableEntity
+public class Course extends IdentifiableEntity
 {
    public static final String FIELD_STYLE = "style";
 
@@ -77,7 +77,7 @@ public class DanceClass extends IdentifiableEntity
    @Column(nullable = false)
    @Enumerated(EnumType.STRING)
    @NotNull
-   private ClassLevelEnum level;
+   private CourseLevelEnum level;
 
    @Column
    private String comment;
@@ -176,12 +176,12 @@ public class DanceClass extends IdentifiableEntity
       this.id = id;
    }
 
-   public ClassLevelEnum getLevel()
+   public CourseLevelEnum getLevel()
    {
       return level;
    }
 
-   public void setLevel(ClassLevelEnum level)
+   public void setLevel(CourseLevelEnum level)
    {
       this.level = level;
    }

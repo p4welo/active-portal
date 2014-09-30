@@ -2,9 +2,6 @@ package pl.ap.dao;
 
 
 import pl.ap.domain.DataEntity;
-import pl.ap.domain.filter.AbstractFilter;
-import pl.ap.domain.filter.SortFilterChain;
-
 import java.util.List;
 
 /**
@@ -35,10 +32,6 @@ public interface IAbstractDao<T extends DataEntity>
    long getCount();
 
    T getBySid(String sid);
-
-   long countBySearchParams(AbstractFilter filter);
-
-   List<T> findBySearchParams(AbstractFilter filter, SortFilterChain sortFilterChain, int offset, int limit);
 
    List<T> saveAll(List<T> entities);
 

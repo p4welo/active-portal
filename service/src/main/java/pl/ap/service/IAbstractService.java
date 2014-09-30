@@ -2,9 +2,6 @@ package pl.ap.service;
 
 
 import pl.ap.domain.IdentifiableEntity;
-import pl.ap.domain.filter.AbstractFilter;
-import pl.ap.domain.filter.SortFilterChain;
-
 import java.util.List;
 
 /**
@@ -33,10 +30,6 @@ public interface IAbstractService<T extends IdentifiableEntity>
    long getCount();
 
    T getBySid(String sid);
-
-   List<T> findBySearchParams(AbstractFilter filter, SortFilterChain sortFilterChain, int offset, int limit);
-
-   long countBySearchParams(AbstractFilter filter);
 
    List<T> saveAll(List<T> entities);
 

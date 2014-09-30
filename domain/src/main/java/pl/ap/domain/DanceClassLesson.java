@@ -8,18 +8,18 @@ import org.joda.time.DateTime;
 public class DanceClassLesson
 {
 
-   private DanceClass danceClass;
+   private Course course;
 
    private DateTime dateTime;
 
-   public DanceClass getDanceClass()
+   public Course getCourse()
    {
-      return danceClass;
+      return course;
    }
 
-   public void setDanceClass(DanceClass danceClass)
+   public void setCourse(Course course)
    {
-      this.danceClass = danceClass;
+      this.course = course;
    }
 
    public DateTime getDateTime()

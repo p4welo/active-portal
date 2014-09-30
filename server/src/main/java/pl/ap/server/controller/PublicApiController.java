@@ -35,7 +35,7 @@ public class PublicApiController
    private ICategoryService categoryService;
 
    @Resource
-   private IDanceClassService danceClassService;
+   private ICourseService danceClassService;
 
    @RequestMapping(value = PublicApiMappings.GET_CATEGORIES, method = RequestMethod.GET)
    @ResponseBody
@@ -46,14 +46,14 @@ public class PublicApiController
 
    @RequestMapping(value = PublicApiMappings.GET_CLASSES, method = RequestMethod.GET)
    @ResponseBody
-   public List<DanceClass> getClasses()
+   public List<Course> getClasses()
    {
       return danceClassService.findScheduleClasses();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_FUTURE_CLASSES, method = RequestMethod.GET)
    @ResponseBody
-   public List<DanceClass> getFutureClasses()
+   public List<Course> getFutureClasses()
    {
       return danceClassService.findFutureClasses();
    }

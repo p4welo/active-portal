@@ -7,7 +7,7 @@ public class CustomerSubscription
 {
    private Customer customer;
 
-   private DanceClass danceClass;
+   private Course course;
 
    public Customer getCustomer()
    {
@@ -19,13 +19,13 @@ public class CustomerSubscription
       this.customer = customer;
    }
 
-   public DanceClass getDanceClass()
+   public Course getCourse()
    {
-      return danceClass;
+      return course;
    }
 
-   public void setDanceClass(DanceClass danceClass)
+   public void setCourse(Course course)
    {
-      this.danceClass = danceClass;
+      this.course = course;
    }
 }

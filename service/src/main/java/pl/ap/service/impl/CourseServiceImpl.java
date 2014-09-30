@@ -1,12 +1,12 @@
 package pl.ap.service.impl;
 
 import pl.ap.dao.IAbstractDao;
-import pl.ap.dao.IDanceClassDao;
-import pl.ap.domain.DanceClass;
+import pl.ap.dao.ICourseDao;
+import pl.ap.domain.Course;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.Room;
 import pl.ap.domain.Style;
-import pl.ap.service.IDanceClassService;
+import pl.ap.service.ICourseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.service.IInstructorService;
@@ -19,13 +19,13 @@ import java.util.List;
 /**
  * Created by parado on 19.03.14.
  */
-@Service(DanceClassServiceImpl.BEAN_NAME)
-public class DanceClassServiceImpl extends AbstractServiceImpl<DanceClass> implements IDanceClassService
+@Service(CourseServiceImpl.BEAN_NAME)
+public class CourseServiceImpl extends AbstractServiceImpl<Course> implements ICourseService
 {
    public static final String BEAN_NAME = "danceClassService";
 
    @Resource
-   private IDanceClassDao danceClassDao;
+   private ICourseDao danceClassDao;
 
    @Resource
    private IInstructorService instructorService;
@@ -37,38 +37,38 @@ public class DanceClassServiceImpl extends AbstractServiceImpl<DanceClass> imple
    private IRoomService roomService;
 
    @Override
-   protected IAbstractDao<DanceClass> getDao()
+   protected IAbstractDao<Course> getDao()
    {
       return danceClassDao;
    }
 
    @Override
    @Transactional(readOnly = true)
-   public List<DanceClass> findScheduleClasses()
+   public List<Course> findScheduleClasses()
    {
       return danceClassDao.findScheduleClasses();
    }
 
    @Override
    @Transactional(readOnly = true)
-   public List<DanceClass> findFutureClasses()
+   public List<Course> findFutureClasses()
    {
       return danceClassDao.findFutureClasses();
    }
 
    @Override
    @Transactional(readOnly = false)
-   public DanceClass save(DanceClass danceClass)
+   public Course save(Course course)
    {
-      Style style = styleService.getBySid(danceClass.getStyle().getSid());
-      danceClass.setStyle(style);
-      Instructor oldInstructor = danceClass.getInstructor();
+      Style style = styleService.getBySid(course.getStyle().getSid());
+      course.setStyle(style);
+      Instructor oldInstructor = course.getInstructor();
       if (oldInstructor  != null) {
-         Instructor instructor = instructorService.getBySid(danceClass.getInstructor().getSid());
-         danceClass.setInstructor(instructor);
+         Instructor instructor = instructorService.getBySid(course.getInstructor().getSid());
+         course.setInstructor(instructor);
       }
-      Room room = roomService.getBySid(danceClass.getRoom().getSid());
-      danceClass.setRoom(room);
-      return super.save(danceClass);
+      Room room = roomService.getBySid(course.getRoom().getSid());
+      course.setRoom(room);
+      return super.save(course);
    }
 }

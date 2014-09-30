@@ -3,8 +3,6 @@ package pl.ap.dao.impl;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.domain.DataEntity;
 import pl.ap.domain.IdentifiableEntity;
-import pl.ap.domain.filter.AbstractFilter;
-import pl.ap.domain.filter.SortFilterChain;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -130,21 +128,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       return sessionFactory;
    }
 
-   public long countBySearchParams(AbstractFilter filter)
-   {
-      Criteria criteria = createCriteriaFromSearchParams(filter);
-      criteria.setProjection(Projections.rowCount());
-      return (Long) criteria.uniqueResult();
-   }
-
-   public List<T> findBySearchParams(AbstractFilter filter, SortFilterChain sortFilterChain, int offset, int limit)
-   {
-      Criteria criteria = createCriteriaFromSearchParams(filter);
-      addOrder(criteria, sortFilterChain);
-      applyPaging(criteria, offset, limit);
-      return criteria.list();
-   }
-
    public List<T> saveAll(List<T> entities)
    {
       for (T entity : entities)
@@ -174,63 +157,9 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
       criteria.setFirstResult(offset);
    }
 
-   public Criteria createCriteriaFromSearchParams(AbstractFilter abstractFilter)
-   {
-      return createCriteria();
-   }
-
    protected String[] getAllowedSortFields()
    {
       return null;
-   }
-
-   public boolean isSortFieldAllowed(SortFilterChain sortFilterChain)
-   {
-      if (!StringUtils.isBlank(sortFilterChain.getField()))
-      {
-         String[] sortFields = getAllowedSortFields();
-         if (sortFields == null)
-         {
-            return true;
-         }
-         else
-         {
-            for (String sortField : sortFields)
-            {
-               if (sortFilterChain.getField().equals(sortField))
-               {
-                  return true;
-               }
-            }
-         }
-      }
-      return false;
-   }
-
-   private void addOrder(Criteria criteria, SortFilterChain sortFilterChain)
-   {
-      if (sortFilterChain != null)
-      {
-         while (sortFilterChain != null)
-         {
-            if (isSortFieldAllowed(sortFilterChain))
-            {
-               criteria.addOrder(sortFilterChain.isAscending() ? Order.asc(sortFilterChain.getField()) : Order
-                       .desc(sortFilterChain.getField()));
-            }
-            sortFilterChain = sortFilterChain.getNext();
-         }
-      }
-      else
-      {
-         if (getOrderFields() != null && getOrderFields().length > 0)
-         {
-            for (String sortField : getOrderFields())
-            {
-               criteria.addOrder(isOrderAsc() ? Order.asc(sortField) : Order.desc(sortField));
-            }
-         }
-      }
    }
 
    protected boolean isOrderAsc()

@@ -2,8 +2,6 @@ package pl.ap.service.impl;
 
 import pl.ap.dao.IAbstractDao;
 import pl.ap.domain.IdentifiableEntity;
-import pl.ap.domain.filter.AbstractFilter;
-import pl.ap.domain.filter.SortFilterChain;
 import pl.ap.service.IAbstractService;
 import pl.ap.service.util.SidUtils;
 import org.springframework.stereotype.Service;
@@ -86,20 +84,6 @@ public abstract class AbstractServiceImpl<T extends IdentifiableEntity> implemen
    public T getBySid(String sid)
    {
       return getDao().getBySid(sid);
-   }
-
-   @Override
-   @Transactional(readOnly = true)
-   public List<T> findBySearchParams(AbstractFilter filter, SortFilterChain sortFilterChain, int offset, int limit)
-   {
-      return getDao().findBySearchParams(filter, sortFilterChain, offset, limit);
-   }
-
-   @Override
-   @Transactional(readOnly = true)
-   public long countBySearchParams(AbstractFilter filter)
-   {
-      return getDao().countBySearchParams(filter);
    }
 
    @Override
