@@ -1,13 +1,12 @@
 package pl.ap.rest.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import pl.ap.domain.Category;
+import pl.ap.domain.CourseCategory;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CompanyApiMappings;
-import pl.ap.service.ICategoryService;
+import pl.ap.service.ICourseCategoryService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,11 +18,11 @@ import java.util.List;
 public class CategoryController
 {
    @Resource
-   private ICategoryService categoryService;
+   private ICourseCategoryService categoryService;
 
    @RequestMapping(value = CompanyApiMappings.GET_CATEGORY_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<Category> getCategoryList()
+   public List<CourseCategory> getCategoryList()
    {
       return categoryService.findAll();
    }
@@ -31,20 +30,20 @@ public class CategoryController
    @RequestMapping(value = CompanyApiMappings.CREATE_CATEGORY, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
    @ResponseBody
-   public Category createCategory(@RequestBody Category category)
+   public CourseCategory createCategory(@RequestBody CourseCategory courseCategory)
    {
-      return categoryService.save(category);
+      return categoryService.save(courseCategory);
    }
 
    @RequestMapping(value = CompanyApiMappings.GET_CATEGORY, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
-   public Category updateCategory(@RequestBody Category category, @PathVariable(ApiKeys.SID) String sid)
+   public CourseCategory updateCategory(@RequestBody CourseCategory courseCategory, @PathVariable(ApiKeys.SID) String sid)
    {
-      Category oldCategory = categoryService.getBySid(sid);
-      Assert.notNull(oldCategory);
-      Assert.notNull(category);
-      Assert.isTrue(sid.equals(category.getSid()));
+      CourseCategory oldCourseCategory = categoryService.getBySid(sid);
+      Assert.notNull(oldCourseCategory);
+      Assert.notNull(courseCategory);
+      Assert.isTrue(sid.equals(courseCategory.getSid()));
 
-      return categoryService.update(category);
+      return categoryService.update(courseCategory);
    }
 }

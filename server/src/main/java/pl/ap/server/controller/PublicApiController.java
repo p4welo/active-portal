@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by parado on 13.04.14.
  */
-@Controller
+@RestController
 public class PublicApiController
 {
    @Resource
@@ -32,34 +32,30 @@ public class PublicApiController
    private IMailService mailService;
 
    @Resource
-   private ICategoryService categoryService;
+   private ICourseCategoryService categoryService;
 
    @Resource
    private ICourseService danceClassService;
 
    @RequestMapping(value = PublicApiMappings.GET_CATEGORIES, method = RequestMethod.GET)
-   @ResponseBody
-   public List<Category> getCategories()
+   public List<CourseCategory> getCategories()
    {
       return categoryService.findAll();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_CLASSES, method = RequestMethod.GET)
-   @ResponseBody
    public List<Course> getClasses()
    {
       return danceClassService.findScheduleClasses();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_FUTURE_CLASSES, method = RequestMethod.GET)
-   @ResponseBody
    public List<Course> getFutureClasses()
    {
       return danceClassService.findFutureClasses();
    }
 
    @RequestMapping(value = PublicApiMappings.SEND_EMAIL, method = RequestMethod.POST)
-   @ResponseBody
    public Object sendMail(@RequestParam(ApiKeys.PHONE) String phone,
                           @RequestParam(ApiKeys.EMAIL) String from,
                           @RequestParam(ApiKeys.CONTENT) String content) throws MessagingException
@@ -77,14 +73,12 @@ public class PublicApiController
    }
 
    @RequestMapping(value = PublicApiMappings.GET_INSTRUCTORS, method = RequestMethod.GET)
-   @ResponseBody
    public List<Instructor> getInstructors()
    {
       return instructorService.findAll();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_INSTRUCTOR_DESCRIPTION, method = RequestMethod.GET)
-   @ResponseBody
    public InstructorDescription getDescription(@PathVariable String sid)
    {
       Instructor instructor = instructorService.getBySid(sid);
@@ -97,7 +91,6 @@ public class PublicApiController
 
    @RequestMapping(value = PublicApiMappings.GET_NEWS_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   @ResponseBody
    public List<News> getNewsList()
    {
       return newsService.findNewsList();
@@ -105,7 +98,6 @@ public class PublicApiController
 
    @RequestMapping(value = PublicApiMappings.GET_NEWS, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   @ResponseBody
    public News getNews(@PathVariable(ApiKeys.SID) String sid)
    {
       return newsService.getBySid(sid);

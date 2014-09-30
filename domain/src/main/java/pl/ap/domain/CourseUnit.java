@@ -5,9 +5,8 @@ import org.joda.time.DateTime;
 /**
  * Created by parado on 2014-09-24.
  */
-public class DanceClassLesson
+public class CourseUnit
 {
-
    private Course course;
 
    private DateTime dateTime;

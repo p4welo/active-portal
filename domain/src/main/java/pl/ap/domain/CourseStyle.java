@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "style")
-public class Style extends IdentifiableEntity
+public class CourseStyle extends IdentifiableEntity
 {
    public static final String FIELD_NAME = "name";
 
@@ -30,7 +30,7 @@ public class Style extends IdentifiableEntity
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "category_id", nullable = false)
    @NotNull
-   private Category category;
+   private CourseCategory category;
 
    public String getName()
    {
@@ -42,12 +42,12 @@ public class Style extends IdentifiableEntity
       this.name = name;
    }
 
-   public Category getCategory()
+   public CourseCategory getCategory()
    {
       return category;
    }
 
-   public void setCategory(Category category)
+   public void setCategory(CourseCategory category)
    {
       this.category = category;
    }

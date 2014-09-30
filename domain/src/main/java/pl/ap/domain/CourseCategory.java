@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "category")
-public class Category extends IdentifiableEntity
+public class CourseCategory extends IdentifiableEntity
 {
    public static final String FIELD_NAME = "name";
 

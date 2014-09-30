@@ -7,7 +7,7 @@ public class CustomerPresence
 {
    private Customer customer;
 
-   private DanceClassLesson lesson;
+   private CourseUnit lesson;
 
    private boolean present;
 
@@ -21,12 +21,12 @@ public class CustomerPresence
       this.customer = customer;
    }
 
-   public DanceClassLesson getLesson()
+   public CourseUnit getLesson()
    {
       return lesson;
    }
 
-   public void setLesson(DanceClassLesson lesson)
+   public void setLesson(CourseUnit lesson)
    {
       this.lesson = lesson;
    }

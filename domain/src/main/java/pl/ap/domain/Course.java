@@ -43,7 +43,7 @@ public class Course extends IdentifiableEntity
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "style_id", nullable = false)
    @NotNull
-   private Style style;
+   private CourseStyle style;
 
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "instructor_id", nullable = true)
@@ -146,12 +146,12 @@ public class Course extends IdentifiableEntity
       this.instructor = instructor;
    }
 
-   public Style getStyle()
+   public CourseStyle getStyle()
    {
       return style;
    }
 
-   public void setStyle(Style style)
+   public void setStyle(CourseStyle style)
    {
       this.style = style;
    }

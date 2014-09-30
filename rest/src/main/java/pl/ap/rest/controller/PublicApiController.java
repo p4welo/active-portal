@@ -31,13 +31,13 @@ public class PublicApiController
    private IMailService mailService;
 
    @Resource
-   private ICategoryService categoryService;
+   private ICourseCategoryService categoryService;
 
    @Resource
    private ICourseService danceClassService;
 
    @RequestMapping(value = PublicApiMappings.GET_CATEGORIES, method = RequestMethod.GET)
-   public List<Category> getCategories()
+   public List<CourseCategory> getCategories()
    {
       return categoryService.findAll();
    }
