@@ -1,4 +1,4 @@
-package pl.ap.domain;
+package pl.ap.domain.common;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;

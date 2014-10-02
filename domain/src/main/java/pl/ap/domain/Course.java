@@ -1,5 +1,6 @@
 package pl.ap.domain;
 
+import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.CourseLevelEnum;
 import pl.ap.domain.enums.DayEnum;
 

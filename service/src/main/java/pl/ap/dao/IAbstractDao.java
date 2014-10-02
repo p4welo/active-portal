@@ -1,7 +1,7 @@
 package pl.ap.dao;
 
 
-import pl.ap.domain.DataEntity;
+import pl.ap.domain.common.DataEntity;
 import java.util.List;
 
 /**

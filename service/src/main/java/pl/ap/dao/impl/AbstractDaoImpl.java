@@ -1,13 +1,11 @@
 package pl.ap.dao.impl;
 
 import pl.ap.dao.IAbstractDao;
-import pl.ap.domain.DataEntity;
-import pl.ap.domain.IdentifiableEntity;
-import org.apache.commons.lang3.StringUtils;
+import pl.ap.domain.common.DataEntity;
+import pl.ap.domain.common.IdentifiableEntity;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.annotation.Resource;

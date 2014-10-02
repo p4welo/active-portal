@@ -1,7 +1,7 @@
 package pl.ap.service.impl;
 
 import pl.ap.dao.IAbstractDao;
-import pl.ap.domain.IdentifiableEntity;
+import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.service.IAbstractService;
 import pl.ap.service.util.SidUtils;
 import org.springframework.stereotype.Service;

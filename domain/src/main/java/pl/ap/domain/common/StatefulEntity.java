@@ -1,4 +1,4 @@
-package pl.ap.domain;
+package pl.ap.domain.common;
 
 import pl.ap.domain.enums.ObjectStateEnum;
 

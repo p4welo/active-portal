@@ -2,6 +2,7 @@ package pl.ap.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

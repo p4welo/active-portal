@@ -13,10 +13,10 @@
     <groupId>pl.ap</groupId>
     <artifactId>rest</artifactId>
     <packaging>war</packaging>
-    <name>Rest Server Module</name>
+    <name>Rest API Server Module</name>
 
     <build>
-        <finalName>rest</finalName>
+        <finalName>rest-api</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

@@ -1,7 +1,7 @@
 package pl.ap.service;
 
 
-import pl.ap.domain.IdentifiableEntity;
+import pl.ap.domain.common.IdentifiableEntity;
 import java.util.List;
 
 /**
