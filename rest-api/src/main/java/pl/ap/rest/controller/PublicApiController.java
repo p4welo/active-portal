@@ -1,5 +1,6 @@
 package pl.ap.rest.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ import java.util.List;
 @RestController
 public class PublicApiController
 {
+   private static final Logger LOGGER = Logger.getLogger(PublicApiController.class);
+
    @Resource
    private INewsService newsService;
 
@@ -39,18 +42,21 @@ public class PublicApiController
    @RequestMapping(value = PublicApiMappings.GET_CATEGORIES, method = RequestMethod.GET)
    public List<CourseCategory> getCategories()
    {
+      LOGGER.info("getCategories()");
       return categoryService.findAll();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_CLASSES, method = RequestMethod.GET)
    public List<Course> getClasses()
    {
+      LOGGER.info("getClasses()");
       return danceClassService.findScheduleClasses();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_FUTURE_CLASSES, method = RequestMethod.GET)
    public List<Course> getFutureClasses()
    {
+      LOGGER.info("getFutureClasses()");
       return danceClassService.findFutureClasses();
    }
 
@@ -59,6 +65,7 @@ public class PublicApiController
                           @RequestParam(ApiKeys.EMAIL) String from,
                           @RequestParam(ApiKeys.CONTENT) String content) throws MessagingException
    {
+      LOGGER.info("sendMail()");
       String[] recipiens = new String[]{
               "p4welo@gmail.com"
               /*,
@@ -74,12 +81,14 @@ public class PublicApiController
    @RequestMapping(value = PublicApiMappings.GET_INSTRUCTORS, method = RequestMethod.GET)
    public List<Instructor> getInstructors()
    {
+      LOGGER.info("getInstructors()");
       return instructorService.findAll();
    }
 
    @RequestMapping(value = PublicApiMappings.GET_INSTRUCTOR_DESCRIPTION, method = RequestMethod.GET)
    public InstructorDescription getDescription(@PathVariable String sid)
    {
+      LOGGER.info("getDescription()");
       Instructor instructor = instructorService.getBySid(sid);
       if (instructor != null)
       {
@@ -92,6 +101,7 @@ public class PublicApiController
    @ResponseStatus(value = HttpStatus.OK)
    public List<News> getNewsList()
    {
+      LOGGER.info("getNewsList()");
       return newsService.findNewsList();
    }
 
@@ -99,6 +109,7 @@ public class PublicApiController
    @ResponseStatus(value = HttpStatus.OK)
    public News getNews(@PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("getNews()");
       return newsService.getBySid(sid);
    }
 }

@@ -1,5 +1,6 @@
 package pl.ap.rest.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -18,6 +19,8 @@ import java.util.List;
 @RestController
 public class NewsController
 {
+   private static final Logger LOGGER = Logger.getLogger(NewsController.class);
+
    @Resource
    private INewsService newsService;
 
@@ -25,6 +28,7 @@ public class NewsController
    @ResponseStatus(value = HttpStatus.OK)
    public List<News> getNewsList()
    {
+      LOGGER.info("getNewsList()");
       return newsService.findNewsList();
    }
 
@@ -33,6 +37,7 @@ public class NewsController
    public News updateNews(@RequestBody News news,
                           @PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("updateNews()");
       News oldNews = newsService.getBySid(sid);
       Assert.notNull(oldNews);
       oldNews.setContent(news.getContent());
@@ -44,6 +49,7 @@ public class NewsController
    @ResponseStatus(value = HttpStatus.OK)
    public News createNews(@RequestBody News news)
    {
+      LOGGER.info("createNews()");
       return newsService.save(news);
    }
 

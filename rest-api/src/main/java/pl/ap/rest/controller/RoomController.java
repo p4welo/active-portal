@@ -10,7 +10,6 @@ import pl.ap.rest.api.CompanyApiMappings;
 import pl.ap.service.IRoomService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -26,9 +25,9 @@ public class RoomController
 
    @RequestMapping(value = CompanyApiMappings.GET_ROOM_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<Room> getRoomList(HttpServletRequest request)
+   public List<Room> getRoomList()
    {
-      LOGGER.error("getRoomList" + request.getRemoteAddr());
+      LOGGER.info("getRoomList()");
       return roomService.findAll();
    }
 
@@ -36,6 +35,7 @@ public class RoomController
    @ResponseStatus(value = HttpStatus.OK)
    public Room createRoom(@RequestBody Room room)
    {
+      LOGGER.info("createRoom()");
       return roomService.save(room);
    }
 
@@ -43,6 +43,7 @@ public class RoomController
    @ResponseStatus(value = HttpStatus.OK)
    public Room updateRoom(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("updateRoom()");
       Room oldRoom = roomService.getBySid(sid);
       Assert.notNull(oldRoom);
       Assert.notNull(room);

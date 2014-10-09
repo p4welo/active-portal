@@ -1,5 +1,6 @@
 package pl.ap.rest.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import java.util.List;
 @RestController
 public class DanceClassController
 {
+   private static final Logger LOGGER = Logger.getLogger(DanceClassController.class);
+
    @Resource
    private ICourseService danceClassService;
 
@@ -24,6 +27,7 @@ public class DanceClassController
    @ResponseStatus(value = HttpStatus.OK)
    public List<Course> getDanceClassList()
    {
+      LOGGER.info("getDanceClassList()");
       return danceClassService.findAll();
    }
 
@@ -31,6 +35,7 @@ public class DanceClassController
    @ResponseStatus(value = HttpStatus.OK)
    public Course createDanceClass(@RequestBody Course course)
    {
+      LOGGER.info("createDanceClass()");
       Assert.notNull(course.getStyle());
       Assert.notNull(course.getRoom());
       return danceClassService.save(course);
@@ -40,6 +45,7 @@ public class DanceClassController
    @ResponseStatus(value = HttpStatus.OK)
    public Course updateDanceClass(@RequestBody Course course, @PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("updateDanceClass()");
       Course oldCourse = danceClassService.getBySid(sid);
       Assert.notNull(oldCourse);
       Assert.notNull(course);

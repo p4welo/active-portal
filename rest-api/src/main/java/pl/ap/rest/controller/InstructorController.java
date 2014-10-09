@@ -1,5 +1,6 @@
 package pl.ap.rest.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -18,6 +19,8 @@ import java.util.List;
 @RestController
 public class InstructorController
 {
+   private static final Logger LOGGER = Logger.getLogger(InstructorController.class);
+
    @Resource
    private IInstructorService instructorService;
 
@@ -25,6 +28,7 @@ public class InstructorController
    @ResponseStatus(value = HttpStatus.OK)
    public List<Instructor> getInstructorList()
    {
+      LOGGER.info("getInstructorList()");
       return instructorService.findAll();
    }
 
@@ -32,6 +36,7 @@ public class InstructorController
    @ResponseStatus(value = HttpStatus.OK)
    public Instructor createInstructor(@RequestBody Instructor instructor)
    {
+      LOGGER.info("createInstructor()");
       return instructorService.save(instructor);
    }
 
@@ -39,6 +44,7 @@ public class InstructorController
    @ResponseStatus(value = HttpStatus.OK)
    public Instructor updateInstructor(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("updateInstructor()");
       Instructor oldInstructor = instructorService.getBySid(sid);
       Assert.notNull(oldInstructor);
       Assert.notNull(instructor);

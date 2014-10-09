@@ -1,5 +1,6 @@
 package pl.ap.rest.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import java.util.List;
 @RestController
 public class CategoryController
 {
+   private static final Logger LOGGER = Logger.getLogger(CategoryController.class);
+
    @Resource
    private ICourseCategoryService categoryService;
 
@@ -24,6 +27,7 @@ public class CategoryController
    @ResponseStatus(value = HttpStatus.OK)
    public List<CourseCategory> getCategoryList()
    {
+      LOGGER.info("getCategoryList()");
       return categoryService.findAll();
    }
 
@@ -32,6 +36,7 @@ public class CategoryController
    @ResponseBody
    public CourseCategory createCategory(@RequestBody CourseCategory courseCategory)
    {
+      LOGGER.info("createCategory()");
       return categoryService.save(courseCategory);
    }
 
@@ -39,6 +44,7 @@ public class CategoryController
    @ResponseStatus(value = HttpStatus.OK)
    public CourseCategory updateCategory(@RequestBody CourseCategory courseCategory, @PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("updateCategory()");
       CourseCategory oldCourseCategory = categoryService.getBySid(sid);
       Assert.notNull(oldCourseCategory);
       Assert.notNull(courseCategory);

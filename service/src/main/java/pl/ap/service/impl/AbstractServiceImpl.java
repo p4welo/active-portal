@@ -74,7 +74,7 @@ public abstract class AbstractServiceImpl<T extends IdentifiableEntity> implemen
       getDao().delete(obj);
    }
 
-   @Transactional(readOnly = true)
+//   @Transactional(readOnly = true)
    public List<T> findAll()
    {
       return getDao().findAll();
