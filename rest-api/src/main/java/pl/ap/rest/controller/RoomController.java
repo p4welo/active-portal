@@ -1,7 +1,7 @@
 package pl.ap.rest.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Room;
@@ -10,6 +10,7 @@ import pl.ap.rest.api.CompanyApiMappings;
 import pl.ap.service.IRoomService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -18,13 +19,16 @@ import java.util.List;
 @RestController
 public class RoomController
 {
+   private static final Logger LOGGER = Logger.getLogger(RoomController.class);
+
    @Resource
    private IRoomService roomService;
 
    @RequestMapping(value = CompanyApiMappings.GET_ROOM_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<Room> getRoomList()
+   public List<Room> getRoomList(HttpServletRequest request)
    {
+      LOGGER.error("getRoomList" + request.getRemoteAddr());
       return roomService.findAll();
    }
 
