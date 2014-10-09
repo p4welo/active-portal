@@ -73,7 +73,7 @@
 
             <div class="col-sm-9">
                 <select size="1" class="form-control" id="newType" ng-model="new.type">
-                    <option ng-repeat="type in types" value="{{type.code}}">{{type.name}}</option>
+                    <option ng-repeat="type in types" value="{{type}}">{{type | translate}}</option>
                 </select>
             </div>
         </div>

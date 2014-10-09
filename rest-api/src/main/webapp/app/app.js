@@ -30,25 +30,29 @@ define([
         $urlRouterProvider.otherwise("/users");
     })
         .config(function ($translateProvider) {
-        $translateProvider.translations('pl', {
+            $translateProvider.translations('pl', {
 
-            PN: 'Poniedziałek',
-            WT: 'Wtorek',
-            SR: 'Środa',
-            CZ: 'Czwartek',
-            PT: 'Piątek',
-            SB: 'Sobota',
-            ND: 'Niedziela',
+                PN: 'Poniedziałek',
+                WT: 'Wtorek',
+                SR: 'Środa',
+                CZ: 'Czwartek',
+                PT: 'Piątek',
+                SB: 'Sobota',
+                ND: 'Niedziela',
 
-            BEGINNER: "Początkujący",
-            INTERMEDIATE: "Średniozaawansowany",
-            ADVANCED: "Zaawansowany",
-            OPEN: "Otwarty",
+                BEGINNER: "Początkujący",
+                INTERMEDIATE: "Średniozaawansowany",
+                ADVANCED: "Zaawansowany",
+                OPEN: "Otwarty",
 
-            m: "Mała",
-            d: "Duża"
+                m: "Mała",
+                d: "Duża",
 
+                TYPE_REGISTRATION: "Grupa na zapisy",
+                TYPE_OPEN: "Można dołączyć",
+                TYPE_CLOSED: "Nie można dołączyć"
+
+            });
+            $translateProvider.preferredLanguage('pl');
         });
-        $translateProvider.preferredLanguage('pl');
-    });
 });

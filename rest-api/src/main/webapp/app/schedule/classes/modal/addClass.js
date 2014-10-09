@@ -19,18 +19,7 @@ define([
             "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
         ];
         $scope.types = [
-            {
-                code: "registration",
-                name: "Grupa na zapisy"
-            },
-            {
-                code: "open",
-                name: "Można dołączyć"
-            },
-            {
-                code: "closed",
-                name: "Nie można dołączyć"
-            }
+            "TYPE_REGISTRATION", "TYPE_OPEN", "TYPE_CLOSED"
         ];
 
         $scope.cancel = function () {
