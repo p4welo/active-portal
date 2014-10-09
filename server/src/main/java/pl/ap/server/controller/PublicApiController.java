@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by parado on 13.04.14.
  */
-@Controller
+@RestController
 public class PublicApiController
 {
    private static final Logger LOGGER = Logger.getLogger(PublicApiController.class);
@@ -41,7 +41,6 @@ public class PublicApiController
    private IDanceClassService danceClassService;
 
    @RequestMapping(value = PublicApiMappings.GET_CATEGORIES, method = RequestMethod.GET)
-   @ResponseBody
    public List<Category> getCategories()
    {
       LOGGER.info("getCategories()");
@@ -49,7 +48,6 @@ public class PublicApiController
    }
 
    @RequestMapping(value = PublicApiMappings.GET_CLASSES, method = RequestMethod.GET)
-   @ResponseBody
    public List<DanceClass> getClasses()
    {
       LOGGER.info("getClasses()");
@@ -57,7 +55,6 @@ public class PublicApiController
    }
 
    @RequestMapping(value = PublicApiMappings.GET_FUTURE_CLASSES, method = RequestMethod.GET)
-   @ResponseBody
    public List<DanceClass> getFutureClasses()
    {
       LOGGER.info("getFutureClasses()");
@@ -65,7 +62,6 @@ public class PublicApiController
    }
 
    @RequestMapping(value = PublicApiMappings.SEND_EMAIL, method = RequestMethod.POST)
-   @ResponseBody
    public Object sendMail(@RequestParam(ApiKeys.PHONE) String phone,
                           @RequestParam(ApiKeys.EMAIL) String from,
                           @RequestParam(ApiKeys.CONTENT) String content) throws MessagingException
@@ -84,7 +80,6 @@ public class PublicApiController
    }
 
    @RequestMapping(value = PublicApiMappings.GET_INSTRUCTORS, method = RequestMethod.GET)
-   @ResponseBody
    public List<Instructor> getInstructors()
    {
       LOGGER.info("getInstructors()");
@@ -92,7 +87,6 @@ public class PublicApiController
    }
 
    @RequestMapping(value = PublicApiMappings.GET_INSTRUCTOR_DESCRIPTION, method = RequestMethod.GET)
-   @ResponseBody
    public InstructorDescription getDescription(@PathVariable String sid)
    {
       LOGGER.info("getInstructorDescription()");
@@ -106,7 +100,6 @@ public class PublicApiController
 
    @RequestMapping(value = PublicApiMappings.GET_NEWS_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   @ResponseBody
    public List<News> getNewsList()
    {
       LOGGER.info("getNewsList()");
@@ -115,7 +108,6 @@ public class PublicApiController
 
    @RequestMapping(value = PublicApiMappings.GET_NEWS, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   @ResponseBody
    public News getNews(@PathVariable(ApiKeys.SID) String sid)
    {
       LOGGER.info("getNews()");

@@ -24,4 +24,18 @@ public interface PublicApiMappings
    public static final String GET_INSTRUCTORS = PUBLIC_PREFIX + "/instructors";
 
    public static final String GET_INSTRUCTOR_DESCRIPTION = PUBLIC_PREFIX + "/instructor/{" + ApiKeys.SID + "}/description";
+
+   //   ACTION LOG
+   public static final String ACTION_NEWS_PAGE = PUBLIC_PREFIX + "/action/news";
+
+   public static final String ACTION_INSTRUCTORS_PAGE = PUBLIC_PREFIX + "/action/instructors";
+
+   public static final String ACTION_SCHEDULE_PAGE = PUBLIC_PREFIX + "/action/schedule";
+
+   public static final String ACTION_PRICELIST_PAGE = PUBLIC_PREFIX + "/action/priceList";
+
+   public static final String ACTION_SHOWS_PAGE = PUBLIC_PREFIX + "/action/shows";
+
+   public static final String ACTION_CONTACT_PAGE = PUBLIC_PREFIX + "/action/contact";
+
 }
