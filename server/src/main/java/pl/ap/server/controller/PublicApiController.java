@@ -1,5 +1,6 @@
 package pl.ap.server.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import java.util.List;
 @Controller
 public class PublicApiController
 {
+   private static final Logger LOGGER = Logger.getLogger(PublicApiController.class);
+
    @Resource
    private INewsService newsService;
 
@@ -41,6 +44,7 @@ public class PublicApiController
    @ResponseBody
    public List<Category> getCategories()
    {
+      LOGGER.info("getCategories()");
       return categoryService.findAll();
    }
 
@@ -48,6 +52,7 @@ public class PublicApiController
    @ResponseBody
    public List<DanceClass> getClasses()
    {
+      LOGGER.info("getClasses()");
       return danceClassService.findScheduleClasses();
    }
 
@@ -55,6 +60,7 @@ public class PublicApiController
    @ResponseBody
    public List<DanceClass> getFutureClasses()
    {
+      LOGGER.info("getFutureClasses()");
       return danceClassService.findFutureClasses();
    }
 
@@ -64,6 +70,7 @@ public class PublicApiController
                           @RequestParam(ApiKeys.EMAIL) String from,
                           @RequestParam(ApiKeys.CONTENT) String content) throws MessagingException
    {
+      LOGGER.info("sendMail()");
       String[] recipiens = new String[]{
               "p4welo@gmail.com"
               /*,
@@ -80,6 +87,7 @@ public class PublicApiController
    @ResponseBody
    public List<Instructor> getInstructors()
    {
+      LOGGER.info("getInstructors()");
       return instructorService.findAll();
    }
 
@@ -87,6 +95,7 @@ public class PublicApiController
    @ResponseBody
    public InstructorDescription getDescription(@PathVariable String sid)
    {
+      LOGGER.info("getInstructorDescription()");
       Instructor instructor = instructorService.getBySid(sid);
       if (instructor != null)
       {
@@ -100,6 +109,7 @@ public class PublicApiController
    @ResponseBody
    public List<News> getNewsList()
    {
+      LOGGER.info("getNewsList()");
       return newsService.findNewsList();
    }
 
@@ -108,6 +118,7 @@ public class PublicApiController
    @ResponseBody
    public News getNews(@PathVariable(ApiKeys.SID) String sid)
    {
+      LOGGER.info("getNews()");
       return newsService.getBySid(sid);
    }
 }
