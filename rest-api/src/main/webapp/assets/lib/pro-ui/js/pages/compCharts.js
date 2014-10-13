@@ -82,7 +82,7 @@ var CompCharts = function() {
             }
 
             /*
-             * Flot 0.8.2 Jquery plugin is used for charts
+             * Flot Jquery plugin is used for charts
              *
              * For more examples or getting extra plugins you can check http://www.flotcharts.org/
              * Plugins included in this template: pie, resize, stack, time

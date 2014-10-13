@@ -21,22 +21,22 @@ var WidgetsStats = function() {
                 tooltipSuffix: ' Sales',
                 tooltipFormat: '{{prefix}}{{value}}{{suffix}}'
             };
-            $('#mini-chart-bar1').sparkline('html', miniChartBarOptions);
+            $('#widget-mini-chart-bar1').sparkline('html', miniChartBarOptions);
 
             miniChartBarOptions['barColor'] = '#1bbae1';
             miniChartBarOptions['tooltipPrefix'] = '';
             miniChartBarOptions['tooltipSuffix'] = ' Projects';
-            $('#mini-chart-bar2').sparkline('html', miniChartBarOptions);
+            $('#widget-mini-chart-bar2').sparkline('html', miniChartBarOptions);
 
             miniChartBarOptions['barColor'] = '#e74c3c';
             miniChartBarOptions['tooltipPrefix'] = '+ ';
             miniChartBarOptions['tooltipSuffix'] = ' Photos';
-            $('#mini-chart-bar3').sparkline('html', miniChartBarOptions);
+            $('#widget-mini-chart-bar3').sparkline('html', miniChartBarOptions);
 
             miniChartBarOptions['barColor'] = '#9b59b6';
             miniChartBarOptions['tooltipPrefix'] = '';
             miniChartBarOptions['tooltipSuffix'] = ' Tickets';
-            $('#mini-chart-bar4').sparkline('html', miniChartBarOptions);
+            $('#widget-mini-chart-bar4').sparkline('html', miniChartBarOptions);
 
             var miniChartLineOptions = {
                 type: 'line',
@@ -57,22 +57,22 @@ var WidgetsStats = function() {
                 tooltipSuffix: '',
                 tooltipFormat: '{{prefix}}{{y}}{{suffix}}'
             };
-            $('#mini-chart-line1').sparkline('html', miniChartLineOptions);
+            $('#widget-mini-chart-line1').sparkline('html', miniChartLineOptions);
 
             miniChartLineOptions['lineColor'] = '#333333';
             miniChartLineOptions['fillColor'] = '#777777';
             miniChartLineOptions['tooltipPrefix'] = '+ ';
             miniChartLineOptions['tooltipSuffix'] = ' Sales';
-            $('#mini-chart-line2').sparkline('html', miniChartLineOptions);
+            $('#widget-mini-chart-line2').sparkline('html', miniChartLineOptions);
 
             miniChartLineOptions['lineColor'] = '#4a2e2b';
             miniChartLineOptions['fillColor'] = '#b33c2e';
             miniChartLineOptions['tooltipPrefix'] = '';
             miniChartLineOptions['tooltipSuffix'] = ' Downloads';
-            $('#mini-chart-line3').sparkline('html', miniChartLineOptions);
+            $('#widget-mini-chart-line3').sparkline('html', miniChartLineOptions);
 
             /*
-             * Flot 0.8.2 Jquery plugin is used for charts
+             * Flot Jquery plugin is used for charts
              *
              * For more examples or getting extra plugins you can check http://www.flotcharts.org/
              * Plugins included in this template: pie, resize, stack, time

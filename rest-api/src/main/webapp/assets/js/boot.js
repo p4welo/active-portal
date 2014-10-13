@@ -5,9 +5,7 @@
         { jquery: "./assets/lib/jquery/dist/jquery.js" },
         { angular: "./assets/lib/angular/angular.js" },
         { ngLocale: "./assets/lib/angular-locale/angular-locale_pl-pl.js" },
-        { bootstrap: "./assets/lib/bootstrap/dist/js/bootstrap.js" },
-        { proUiPlugins: "./assets/lib/pro-ui/js/plugins.js"},
-        { proUiApp: "./assets/lib/pro-ui/js/app.js"}
+        { bootstrap: "./assets/lib/bootstrap/dist/js/bootstrap.js" }
     )
         .ready("ALL", function () {
 
@@ -22,15 +20,32 @@
                     'ngAnimate': "../assets/lib/angular-animate/angular-animate",
                     'ngTouch': "../assets/lib/angular-touch/angular-touch",
                     'loadingBar': "../assets/lib/angular-loading-bar/build/loading-bar",
-                    'pnotify': "../assets/lib/pnotify/pnotify.core"
+                    'pnotify': "../assets/lib/pnotify/pnotify.core",
+                    'proUiPlugins': "../assets/lib/pro-ui/js/plugins",
+                    'proUiApp': "../assets/lib/pro-ui/js/app"
                 },
                 shim: {
-                    'ngAnimate': {'exports': 'ngAnimate'},
-                    'loadingBar': ['ngAnimate']
+                    'ngAnimate': {
+                        'exports': 'ngAnimate'
+                    },
+                    'loadingBar': {
+                        'exports': 'loadingBar',
+                        'deps': ['ngAnimate']
+                    },
+                    'proUiPlugins': {
+                        'exports': 'proUiPlugins'
+                    },
+                    'proUiApp': {
+                        'exports': 'proUiApp',
+                        'deps': ['proUiPlugins']
+                    }
                 }
             });
 
-            require(["main"],
+            require([
+                    "proUiApp",
+                    "main"
+                ],
 
                 function (bootstrap) {
                 });

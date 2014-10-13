@@ -24,17 +24,18 @@
 */
 
 /* Include Open Sans font from Google Web Fonts */
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic&subset=latin,latin-ext');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic');
+
 /* Preloader */
-body.page-loading {
+#page-wrapper.page-loading {
     overflow: hidden;
 }
 
-body.page-loading .preloader {
+#page-wrapper.page-loading .preloader {
     display: block;
 }
 
-body.page-loading #page-container {
+#page-wrapper.page-loading #page-container {
     opacity: 0;
 }
 
@@ -631,7 +632,7 @@ a.sidebar-title:focus {
 
 .chat-talk-info {
     line-height: 22px;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .chat-talk-info img {
@@ -965,6 +966,11 @@ a.sidebar-title:focus {
 
 .block.full .block-content-full {
     margin: -20px -15px;
+}
+
+.block .tab-content .block-content-full,
+.block.full .tab-content .block-content-full {
+    margin-top: -19px !important;
 }
 
 .block-title {
@@ -1507,6 +1513,39 @@ a[data-toggle="lightbox-image"]:hover img {
     margin-bottom: 0;
     padding-top: 7px;
     padding-bottom: 7px;
+}
+
+/* Media Items */
+.media-items {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 2px solid #f1f1f1;
+    -webkit-transition: all .15s ease-out;
+    transition: all .15s ease-out;
+}
+
+.media-items:hover {
+    border-color: #cccccc;
+}
+
+.media-items:hover .media-items-options {
+    display: block;
+}
+
+.media-items .media-items-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 10px;
+    display: none;
+}
+
+.media-items .media-items-content {
+    padding: 40px 0 20px;
 }
 
 /* Charts */
@@ -2267,6 +2306,8 @@ textarea.form-control {
     margin: 1px 0;
     position: relative;
     cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .switch input {
@@ -2526,6 +2567,16 @@ a.list-group-item.active > .badge {
     color: #ffffff;
 }
 
+.nav-pills.nav-icons > li > a i {
+    margin-right: 10px;
+}
+
+.nav-pills.nav-icons > li.active > a i,
+.nav-pills.nav-icons > li.active > a:hover i,
+.nav-pills.nav-icons > li.active > a:focus i {
+    color: #ffffff;
+}
+
 .dropdown-menu {
     padding: 0;
     font-size: 13px;
@@ -2612,6 +2663,11 @@ li.dropdown-header {
     margin: 0 0 0 15px;
     left: auto;
     top: auto;
+}
+
+.navbar-fixed-top .dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .pagination > li > a,
@@ -3598,6 +3654,11 @@ p, .table, .alert, .carousel {
 
     .draggable-placeholder {
         margin-bottom: 20px;
+    }
+
+    .navbar-fixed-top .dropdown-menu {
+        max-height: none;
+        overflow-y: visible;
     }
 
     /* Forms */
