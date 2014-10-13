@@ -19,6 +19,7 @@
         "moment": "2.8.3",
         "angular-translate": "2.2.0",
         "headjs-notify": "latest",
-        "requirejs": "latest"
+        "requirejs": "latest",
+        "animate.css": "latest"
     }
 }

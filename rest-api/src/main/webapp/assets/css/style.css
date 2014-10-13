@@ -28,3 +28,12 @@
 .customer-base .customer-record {
     cursor: pointer;
 }
+
+.attendance span {
+    font-size: 56px;
+    color: black;
+}
+
+.attendance img {
+    height: 58px;
+}

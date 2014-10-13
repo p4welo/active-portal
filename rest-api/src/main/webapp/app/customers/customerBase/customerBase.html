@@ -1,152 +1,156 @@
-<div class="content-header">
-    <div class="header-section">
-        <h1>
-            <i class="gi gi-parents"></i>Baza klientów<br>
-        </h1>
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-parents"></i>Baza klientów<br>
+            </h1>
+        </div>
     </div>
-</div>
 
 
-<div class="row customer-base">
-    <div class="col-lg-8">
-        <div class="block">
-            <div class="block-title">
-                <div class="block-options">
-                    <div class="col-sm-8 pull-left">
-                        <a title="" class="btn btn-alt btn-sm btn-default" ng-click="add()">
-                            <i class="fa fa-plus"></i>
-                            Dodaj
-                        </a>
-                    </div>
-                    <div class="col-sm-3 pull-right">
-                        <div class="input-group" style="margin-top: 3px">
-                            <input type="text" ng-model="filterName" placeholder="Szukaj..."
-                                   class="form-control ng-valid">
+    <div class="row customer-base">
+        <div class="col-lg-8">
+            <div class="block">
+                <div class="block-title">
+                    <div class="block-options">
+                        <div class="col-sm-8 pull-left">
+                            <a title="" class="btn btn-alt btn-sm btn-default" ng-click="add()">
+                                <i class="fa fa-plus"></i>
+                                Dodaj
+                            </a>
+                        </div>
+                        <div class="col-sm-3 pull-right">
+                            <div class="input-group" style="margin-top: 3px">
+                                <input type="text" ng-model="filterName" placeholder="Szukaj..."
+                                       class="form-control ng-valid">
                              <span class="input-group-addon">
                                 <i class="fa fa-search"></i>
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row style-alt">
-                <div class="col-sm-6 col-lg-4"
-                     ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
-                    <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
-                        <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
-                            <div class="widget-icon pull-left themed-background-spring animation-fadeIn"
-                                 ng-if="customer.gender == 'male'">
-                                <i class="gi gi-user"></i>
+                <div class="row style-alt">
+                    <div class="col-sm-6 col-lg-4"
+                         ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
+                        <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
+                            <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
+                                <div class="widget-icon pull-left themed-background-spring animation-fadeIn"
+                                     ng-if="customer.gender == 'male'">
+                                    <i class="gi gi-user"></i>
+                                </div>
+                                <div class="widget-icon pull-left themed-background-autumn animation-fadeIn"
+                                     ng-if="customer.gender == 'female'">
+                                    <i class="gi gi-girl"></i>
+                                </div>
+                                <h4 class="widget-content text-right"
+                                    ng-class="{'widget-content-light': customer == selected}">
+                                    <span ng-bind="customer.firstName"></span>
+                                    <br/>
+                                    <strong ng-bind="customer.lastName"></strong>
+                                    <small ng-bind="customer.mobile"></small>
+                                </h4>
                             </div>
-                            <div class="widget-icon pull-left themed-background-autumn animation-fadeIn"
-                                 ng-if="customer.gender == 'female'">
-                                <i class="gi gi-girl"></i>
-                            </div>
-                            <h4 class="widget-content text-right"
-                                ng-class="{'widget-content-light': customer == selected}">
-                                <span ng-bind="customer.firstName"></span>
-                                <br/>
-                                <strong ng-bind="customer.lastName"></strong>
-                                <small ng-bind="customer.mobile"></small>
-                            </h4>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-4" ng-if="selected != null">
-        <div class="block animation-fadeInLeft">
-            <div class="block-title">
-                <div class="block-options pull-right">
-                    <a ng-click="selected.edit = !selected.edit" class="btn btn-sm btn-alt btn-warning enable-tooltip"
-                       ng-class="{'active': selected.edit}">
+        <div class="col-lg-4" ng-if="selected != null">
+            <div class="block">
+                <div class="block-title">
+                    <div class="block-options pull-right">
+                        <a ng-click="selected.edit = !selected.edit"
+                           class="btn btn-sm btn-alt btn-warning enable-tooltip"
+                           ng-class="{'active': selected.edit}">
+                            <i class="fa fa-pencil"></i>
+                            Edytuj
+                        </a>
+                    </div>
+                    <h2>
                         <i class="fa fa-pencil"></i>
-                        Edytuj
-                    </a>
+                        <span ng-bind="selected.firstName"></span>
+                        <span ng-bind="selected.lastName"></span>
+                    </h2>
                 </div>
-                <h2>
-                    <i class="fa fa-pencil"></i>
-                    {{selected.firstName + ' ' + selected.lastName}}
-                </h2>
+                <div class="block-title">
+                    <div class="block-options text-center">
+                        <a class="btn btn-sm btn-alt btn-success" ng-click="subscribe(selected)">
+                            <i class="fa fa-times"></i>
+                            Zapisz na zajęcia
+                        </a>
+                        <a class="btn btn-sm btn-alt btn-info" ng-click="join(selected)">
+                            <i class="fa fa-times"></i>
+                            Dopisz do grupy
+                        </a>
+                    </div>
+                </div>
+
+                <form class="form-horizontal form-bordered" method="post">
+                    <div class="form-group">
+                        <label for="firstName" class="col-xs-3 control-label">Imię</label>
+
+                        <div class="col-xs-9" ng-if="selected.edit">
+                            <input type="text" placeholder="Imię" class="form-control" id="firstName"
+                                   ng-model="selected.firstName"/>
+                        </div>
+                        <div class="col-xs-9" ng-if="!selected.edit">
+                            <p class="form-control-static" ng-bind="selected.firstName"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
+
+                        <div class="col-xs-9" ng-if="selected.edit">
+                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
+                                   ng-model="selected.lastName"/>
+                        </div>
+                        <div class="col-xs-9" ng-if="!selected.edit">
+                            <p class="form-control-static" ng-bind="selected.lastName"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile" class="col-xs-3 control-label">Telefon</label>
+
+                        <div class="col-xs-9" ng-if="selected.edit">
+                            <input type="text" placeholder="Telefon" class="form-control" id="mobile"
+                                   ng-model="selected.mobile"/>
+                        </div>
+                        <div class="col-xs-9" ng-if="!selected.edit">
+                            <p class="form-control-static" ng-bind="selected.mobile"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-actions" ng-if="selected.edit">
+                        <div class="col-xs-9 col-xs-offset-3">
+                            <button class="btn btn-sm btn-primary">
+                                <i class="fa fa-check"></i>
+                                Zapisz
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+                    <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Kurs</th>
+                        <th>Obecność</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="presence in customerPresence | orderBy: '-date'">
+                        <td ng-bind="presence.date | date:'dd.MM.yyyy hh:mm'"></td>
+                        <td ng-bind="presence.course"></td>
+                        <td>
+                            <span class="label label-success" ng-if="presence.present">TAK</span>
+                            <span class="label label-danger" ng-if="!presence.present">NIE</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="block-title">
-                <div class="block-options text-center">
-                    <a class="btn btn-sm btn-alt btn-success" ng-click="subscribe(selected)">
-                        <i class="fa fa-times"></i>
-                        Zapisz na zajęcia
-                    </a>
-                    <a class="btn btn-sm btn-alt btn-info" ng-click="join(selected)">
-                        <i class="fa fa-times"></i>
-                        Dopisz do grupy
-                    </a>
-                </div>
-            </div>
-
-            <form class="form-horizontal form-bordered" method="post">
-                <div class="form-group">
-                    <label for="firstName" class="col-xs-3 control-label">Imię</label>
-
-                    <div class="col-xs-9" ng-if="selected.edit">
-                        <input type="text" placeholder="Imię" class="form-control" id="firstName"
-                               ng-model="selected.firstName"/>
-                    </div>
-                    <div class="col-xs-9" ng-if="!selected.edit">
-                        <p class="form-control-static" ng-bind="selected.firstName"></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
-
-                    <div class="col-xs-9" ng-if="selected.edit">
-                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
-                               ng-model="selected.lastName"/>
-                    </div>
-                    <div class="col-xs-9" ng-if="!selected.edit">
-                        <p class="form-control-static" ng-bind="selected.lastName"></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="mobile" class="col-xs-3 control-label">Telefon</label>
-
-                    <div class="col-xs-9" ng-if="selected.edit">
-                        <input type="text" placeholder="Telefon" class="form-control" id="mobile"
-                               ng-model="selected.mobile"/>
-                    </div>
-                    <div class="col-xs-9" ng-if="!selected.edit">
-                        <p class="form-control-static" ng-bind="selected.mobile"></p>
-                    </div>
-                </div>
-
-                <div class="form-group form-actions" ng-if="selected.edit">
-                    <div class="col-xs-9 col-xs-offset-3">
-                        <button class="btn btn-sm btn-primary">
-                            <i class="fa fa-check"></i>
-                            Zapisz
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <table class="table table-vcenter table-bordered table-condensed" id="general-table">
-                <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Kurs</th>
-                    <th>Obecność</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="presence in customerPresence | orderBy: '-date'">
-                    <td ng-bind="presence.date | date:'dd.MM.yyyy hh:mm'"></td>
-                    <td ng-bind="presence.course"></td>
-                    <td>
-                        <span class="label label-success" ng-if="presence.present">TAK</span>
-                        <span class="label label-danger" ng-if="!presence.present">NIE</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

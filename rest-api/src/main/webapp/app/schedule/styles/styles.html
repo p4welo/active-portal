@@ -1,40 +1,42 @@
-<div class="content-header">
-    <div class="header-section">
-        <h1>
-            <i class="gi gi-eyedropper"></i>Style taneczne<br>
-        </h1>
-    </div>
-</div>
-
-<div class="block">
-    <div class="table-options clearfix">
-        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
-            <button class="btn btn-success" ng-click="add()">
-                <i class="fa fa-plus-circle"></i>
-                Dodaj styl
-            </button>
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-eyedropper"></i>Style taneczne<br>
+            </h1>
         </div>
-        <div class="col-sm-3 pull-right">
-            <div class="input-group">
-                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control ng-valid">
+    </div>
+
+    <div class="block">
+        <div class="table-options clearfix">
+            <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+                <button class="btn btn-success" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    Dodaj styl
+                </button>
+            </div>
+            <div class="col-sm-3 pull-right">
+                <div class="input-group">
+                    <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control ng-valid">
                              <span class="input-group-addon">
                                 <i class="fa fa-search"></i>
                             </span>
+                </div>
             </div>
         </div>
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="edit(style)">
+                <td ng-bind="style.name"></td>
+                <td ng-bind="style.category.name"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-        <thead>
-        <tr>
-            <th>Nazwa</th>
-            <th>Kategoria</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="edit(style)">
-            <td ng-bind="style.name"></td>
-            <td ng-bind="style.category.name"></td>
-        </tr>
-        </tbody>
-    </table>
 </div>

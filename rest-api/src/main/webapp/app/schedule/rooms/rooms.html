@@ -1,34 +1,36 @@
-<div class="content-header">
-    <div class="header-section">
-        <h1>
-            <i class="fa fa-bank"></i>Sale taneczne<br>
-        </h1>
-    </div>
-</div>
-
-<div class="block">
-    <div class="table-options clearfix">
-        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
-            <button class="btn btn-success" ng-click="add()">
-                <i class="fa fa-plus-circle"></i>
-                Dodaj salę
-            </button>
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-bank"></i>Sale taneczne<br>
+            </h1>
         </div>
     </div>
-    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-        <thead>
-        <tr>
-            <th class="text-center" style="width: 50px">Id</th>
-            <th>Kod</th>
-            <th>Nazwa</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="room in rooms" ng-click="edit(room)">
-            <td ng-bind="room.id"></td>
-            <td ng-bind="room.code"></td>
-            <td ng-bind="room.name"></td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div class="block">
+        <div class="table-options clearfix">
+            <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+                <button class="btn btn-success" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    Dodaj salę
+                </button>
+            </div>
+        </div>
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 50px">Id</th>
+                <th>Kod</th>
+                <th>Nazwa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="room in rooms" ng-click="edit(room)">
+                <td ng-bind="room.id"></td>
+                <td ng-bind="room.code"></td>
+                <td ng-bind="room.name"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

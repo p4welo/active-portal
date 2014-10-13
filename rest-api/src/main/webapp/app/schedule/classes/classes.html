@@ -1,76 +1,78 @@
-<div class="content-header">
-    <div class="header-section">
-        <h1>
-            <i class="gi gi-table"></i>Grafik zajęć<br>
-        </h1>
-    </div>
-</div>
-
-<div class="block">
-    <div class="table-options clearfix">
-        <div class="btn-group btn-group-sm col-md-4" data-toggle="buttons">
-            <button class="btn btn-success" ng-click="add()">
-                <i class="fa fa-plus-circle"></i>
-                Dodaj zajęcia
-            </button>
-        </div>
-
-        <div class="col-md-8">
-            <ul class="nav nav-pills day-select">
-                <li ng-class="{'active' : day==''}">
-                    <a ng-click="day=''">
-                        <strong>ALL</strong>
-                    </a>
-                </li>
-                <li ng-class="{'active' : day=='PN'}">
-                    <a ng-click="day='PN'">Poniedziałek</a>
-                </li>
-                <li ng-class="{'active' : day=='WT'}">
-                    <a ng-click="day='WT'">Wtorek</a>
-                </li>
-                <li ng-class="{'active' : day=='SR'}">
-                    <a ng-click="day='SR'">Środa</a>
-                </li>
-                <li ng-class="{'active' : day=='CZ'}">
-                    <a ng-click="day='CZ'">Czwartek</a>
-                </li>
-                <li ng-class="{'active' : day=='PT'}">
-                    <a ng-click="day='PT'">Piątek</a>
-                </li>
-                <li ng-class="{'active' : day=='SB'}">
-                    <a ng-click="day='SB'">Sobota</a>
-                </li>
-                <li ng-class="{'active' : day=='ND'}">
-                    <a ng-click="day='ND'">Niedziela</a>
-                </li>
-            </ul>
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-table"></i>Grafik zajęć<br>
+            </h1>
         </div>
     </div>
 
-    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-        <thead>
-        <tr>
-            <th>Dzień</th>
-            <th>Godziny</th>
-            <th>Nazwa</th>
-            <th>Sala</th>
-            <th>Instruktor</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="class in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="edit(class)">
-            <td>{{class.day | translate}}</td>
-            <td>{{class.startTime}} - {{class.endTime}}</td>
-            <td ng-bind="class.style.name"></td>
-            <td>{{class.room.name | translate}}</td>
-            <td>{{class.instructor.firstName}} {{class.instructor.lastName}}</td>
-            <td>
-                <span ng-if="!class.inProgress && class.canRegister">Zapisy</span>
-                <span ng-if="class.inProgress && !class.canJoin">Brak miejsc</span>
-                <span ng-if="class.inProgress && class.canJoin">Można dołączyć</span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="block">
+        <div class="table-options clearfix">
+            <div class="btn-group btn-group-sm col-md-4" data-toggle="buttons">
+                <button class="btn btn-success" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    Dodaj zajęcia
+                </button>
+            </div>
+
+            <div class="col-md-8">
+                <ul class="nav nav-pills day-select">
+                    <li ng-class="{'active' : day==''}">
+                        <a ng-click="day=''">
+                            <strong>ALL</strong>
+                        </a>
+                    </li>
+                    <li ng-class="{'active' : day=='PN'}">
+                        <a ng-click="day='PN'">Poniedziałek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='WT'}">
+                        <a ng-click="day='WT'">Wtorek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SR'}">
+                        <a ng-click="day='SR'">Środa</a>
+                    </li>
+                    <li ng-class="{'active' : day=='CZ'}">
+                        <a ng-click="day='CZ'">Czwartek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='PT'}">
+                        <a ng-click="day='PT'">Piątek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SB'}">
+                        <a ng-click="day='SB'">Sobota</a>
+                    </li>
+                    <li ng-class="{'active' : day=='ND'}">
+                        <a ng-click="day='ND'">Niedziela</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>Dzień</th>
+                <th>Godziny</th>
+                <th>Nazwa</th>
+                <th>Sala</th>
+                <th>Instruktor</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="class in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="edit(class)">
+                <td>{{class.day | translate}}</td>
+                <td>{{class.startTime}} - {{class.endTime}}</td>
+                <td ng-bind="class.style.name"></td>
+                <td>{{class.room.name | translate}}</td>
+                <td>{{class.instructor.firstName}} {{class.instructor.lastName}}</td>
+                <td>
+                    <span ng-if="!class.inProgress && class.canRegister">Zapisy</span>
+                    <span ng-if="class.inProgress && !class.canJoin">Brak miejsc</span>
+                    <span ng-if="class.inProgress && class.canJoin">Można dołączyć</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

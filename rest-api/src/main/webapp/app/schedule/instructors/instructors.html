@@ -1,36 +1,38 @@
-<div class="content-header">
-    <div class="header-section">
-        <h1>
-            <i class="gi gi-certificate"></i>Instruktorzy<br>
-        </h1>
-    </div>
-</div>
-
-<div class="block">
-    <div class="table-options clearfix">
-        <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
-            <button class="btn btn-success" ng-click="add()">
-                <i class="fa fa-plus-circle"></i>
-                Dodaj instruktora
-            </button>
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-certificate"></i>Instruktorzy<br>
+            </h1>
         </div>
     </div>
-    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-        <thead>
-        <tr>
-            <th class="text-center" style="width: 50px">Id</th>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Pseudonim</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="instructor in instructors" ng-click="edit(instructor)">
-            <td ng-bind="instructor.id"></td>
-            <td ng-bind="instructor.firstName"></td>
-            <td ng-bind="instructor.lastName"></td>
-            <td ng-bind="instructor.nick"></td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div class="block">
+        <div class="table-options clearfix">
+            <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+                <button class="btn btn-success" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    Dodaj instruktora
+                </button>
+            </div>
+        </div>
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 50px">Id</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Pseudonim</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="instructor in instructors" ng-click="edit(instructor)">
+                <td ng-bind="instructor.id"></td>
+                <td ng-bind="instructor.firstName"></td>
+                <td ng-bind="instructor.lastName"></td>
+                <td ng-bind="instructor.nick"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
