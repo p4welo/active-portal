@@ -9,59 +9,12 @@
 
 
     <div class="row customer-base">
-        <div class="col-lg-8">
-            <div class="block">
-                <div class="block-title">
-                    <div class="block-options">
-                        <div class="col-sm-8 pull-left">
-                            <a title="" class="btn btn-alt btn-sm btn-default" ng-click="add()">
-                                <i class="fa fa-plus"></i>
-                                Dodaj
-                            </a>
-                        </div>
-                        <div class="col-sm-3 pull-right">
-                            <div class="input-group" style="margin-top: 3px">
-                                <input type="text" ng-model="filterName" placeholder="Szukaj..."
-                                       class="form-control ng-valid">
-                             <span class="input-group-addon">
-                                <i class="fa fa-search"></i>
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row style-alt">
-                    <div class="col-sm-6 col-lg-4"
-                         ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
-                        <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
-                            <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
-                                <div class="widget-icon pull-left themed-background-spring animation-fadeIn"
-                                     ng-if="customer.gender == 'male'">
-                                    <i class="gi gi-user"></i>
-                                </div>
-                                <div class="widget-icon pull-left themed-background-autumn animation-fadeIn"
-                                     ng-if="customer.gender == 'female'">
-                                    <i class="gi gi-girl"></i>
-                                </div>
-                                <h4 class="widget-content text-right"
-                                    ng-class="{'widget-content-light': customer == selected}">
-                                    <span ng-bind="customer.firstName"></span>
-                                    <br/>
-                                    <strong ng-bind="customer.lastName"></strong>
-                                    <small ng-bind="customer.mobile"></small>
-                                </h4>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4" ng-if="selected != null">
+        <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
             <div class="block">
                 <div class="block-title">
                     <div class="block-options pull-right">
                         <a ng-click="selected.edit = !selected.edit"
-                           class="btn btn-sm btn-alt btn-warning enable-tooltip"
+                           class="btn btn-alt btn-warning enable-tooltip"
                            ng-class="{'active': selected.edit}">
                             <i class="fa fa-pencil"></i>
                             Edytuj
@@ -75,11 +28,11 @@
                 </div>
                 <div class="block-title">
                     <div class="block-options text-center">
-                        <a class="btn btn-sm btn-alt btn-success" ng-click="subscribe(selected)">
+                        <a class="btn btn-alt btn-success" ng-click="subscribe(selected)">
                             <i class="fa fa-times"></i>
                             Zapisz na zajęcia
                         </a>
-                        <a class="btn btn-sm btn-alt btn-info" ng-click="join(selected)">
+                        <a class="btn btn-alt btn-info" ng-click="join(selected)">
                             <i class="fa fa-times"></i>
                             Dopisz do grupy
                         </a>
@@ -91,8 +44,7 @@
                         <label for="firstName" class="col-xs-3 control-label">Imię</label>
 
                         <div class="col-xs-9" ng-if="selected.edit">
-                            <input type="text" placeholder="Imię" class="form-control" id="firstName"
-                                   ng-model="selected.firstName"/>
+                            <input type="text" placeholder="Imię" class="form-control" id="firstName" ng-model="selected.firstName"/>
                         </div>
                         <div class="col-xs-9" ng-if="!selected.edit">
                             <p class="form-control-static" ng-bind="selected.firstName"></p>
@@ -102,8 +54,7 @@
                         <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
 
                         <div class="col-xs-9" ng-if="selected.edit">
-                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
-                                   ng-model="selected.lastName"/>
+                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName" ng-model="selected.lastName"/>
                         </div>
                         <div class="col-xs-9" ng-if="!selected.edit">
                             <p class="form-control-static" ng-bind="selected.lastName"></p>
@@ -113,8 +64,7 @@
                         <label for="mobile" class="col-xs-3 control-label">Telefon</label>
 
                         <div class="col-xs-9" ng-if="selected.edit">
-                            <input type="text" placeholder="Telefon" class="form-control" id="mobile"
-                                   ng-model="selected.mobile"/>
+                            <input type="text" placeholder="Telefon" class="form-control" id="mobile" ng-model="selected.mobile"/>
                         </div>
                         <div class="col-xs-9" ng-if="!selected.edit">
                             <p class="form-control-static" ng-bind="selected.mobile"></p>
@@ -150,6 +100,49 @@
                     </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-8 pull-left">
+            <div class="block">
+                <div class="block-title">
+                    <div class="block-options">
+                        <div class="col-xs-4 pull-left">
+                            <a title="" class="btn btn-alt btn-default" ng-click="add()">
+                                <i class="fa fa-plus"></i>
+                                Dodaj
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-4 pull-right">
+                            <div class="input-group" style="margin-top: 3px">
+                                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control ng-valid">
+                             <span class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row style-alt">
+                    <div class="col-sm-6 col-lg-4" ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
+                        <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
+                            <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
+                                <div class="widget-icon pull-left themed-background-spring animation-fadeIn" ng-if="customer.gender == 'male'">
+                                    <i class="gi gi-user"></i>
+                                </div>
+                                <div class="widget-icon pull-left themed-background-autumn animation-fadeIn" ng-if="customer.gender == 'female'">
+                                    <i class="gi gi-girl"></i>
+                                </div>
+                                <h4 class="widget-content text-right" ng-class="{'widget-content-light': customer == selected}">
+                                    <span ng-bind="customer.firstName"></span>
+                                    <br/>
+                                    <strong ng-bind="customer.lastName"></strong>
+                                    <small ng-bind="customer.mobile"></small>
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

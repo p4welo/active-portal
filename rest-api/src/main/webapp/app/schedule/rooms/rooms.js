@@ -23,9 +23,14 @@ define([
             });
         }
 
-        $scope.edit = function (room) {
-            $scope.selected = {};
-        };
+        $scope.select = function (room) {
+            if ($scope.selected == room) {
+                $scope.selected = null;
+                return;
+            }
+            $scope.selected = room;
+            $scope.selected.edit = false;
+        }
 
     });
 });

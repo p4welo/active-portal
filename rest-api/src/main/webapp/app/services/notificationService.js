@@ -8,8 +8,7 @@ define([
             new PNotify({
                 text: content,
                 title: 'Sukces!',
-                type: 'success',
-                addclass: 'stack-bottomright'
+                type: 'success'
             });
         };
 

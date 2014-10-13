@@ -2,6 +2,25 @@
     display: none !important;
 }
 
+.ui-pnotify h4 {
+    color: inherit !important;
+    font-weight: bold;
+}
+
+.ui-pnotify.stack-bottomright {
+    bottom: 25px !important;
+    top: auto !important;
+}
+
+.ui-pnotify-container {
+    z-index: 1055;
+}
+
+.ui-pnotify-container.alert .icon-exclamation-sign {
+    font-size: 15px;
+    margin-top: 2px;
+}
+
 .table-editable tbody {
     cursor: pointer;
 }
@@ -36,4 +55,9 @@
 
 .attendance img {
     height: 58px;
+}
+
+.selected > td {
+    background-color: #d9416c !important;
+    color: white;
 }

@@ -7,13 +7,71 @@
         </div>
     </div>
 
-    <div class="block">
+    <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip" ng-class="{'active': selected.edit}">
+                        <i class="fa fa-pencil"></i>
+                        Edytuj
+                    </a>
+                </div>
+                <h2>
+                    <i class="fa fa-pencil"></i>
+                    <span ng-bind="selected.name"></span>
+                </h2>
+            </div>
+
+            <form class="form-horizontal form-bordered" method="post">
+
+                <div class="form-group">
+                    <label for="code" class="col-xs-3 control-label">Kod</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Kod" class="form-control" id="code" ng-model="selected.code"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.code"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-xs-3 control-label">Nazwa</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Nazwa" class="form-control" id="name" ng-model="selected.name"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.name"></p>
+                    </div>
+                </div>
+
+                <div class="form-group form-actions" ng-if="selected.edit">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-primary">
+                            <i class="fa fa-check"></i>
+                            Zapisz
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="block col-xs-12 col-lg-8 pull-left">
         <div class="table-options clearfix">
-            <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+            <div class="col-xs-4 pull-left">
                 <button class="btn btn-success" ng-click="add()">
                     <i class="fa fa-plus-circle"></i>
                     Dodaj salę
                 </button>
+            </div>
+            <div class="col-xs-6 col-sm-4 pull-right">
+                <div class="input-group">
+                    <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control">
+                             <span class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </span>
+                </div>
             </div>
         </div>
         <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
@@ -22,15 +80,20 @@
                 <th class="text-center" style="width: 50px">Id</th>
                 <th>Kod</th>
                 <th>Nazwa</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="room in rooms" ng-click="edit(room)">
+            <tr ng-repeat="room in rooms | filter: filterName" ng-click="select(room)" ng-class="{'selected': selected == room}">
                 <td ng-bind="room.id"></td>
                 <td ng-bind="room.code"></td>
                 <td ng-bind="room.name"></td>
+                <td>
+                    {{room.objectState }}
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
+
 </div>
