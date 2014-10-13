@@ -30,37 +30,38 @@
     <link rel="stylesheet" href="assets/lib/pro-ui/css/main.css">
     <link rel="stylesheet" href="assets/lib/pro-ui/css/themes/fancy.css">
     <link href="assets/css/login.css" rel="stylesheet" media="screen"/>
-    <!--<script src="assets/lib/pro-ui/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>-->
 </head>
 <body class="page-loading" onload='document.loginForm.login.focus();'>
 <div class="login-background">
     <div id="login-container" style="z-index:9999;">
         <div class="login-title text-center">
             <h1>
-                <i class="gi gi-flash"></i>
-                <strong>ActivePortal</strong>
+                <i class="gi gi-baseball"></i>
+                <strong>Active</strong>Portal
                 <br>
                 <small>Zaloguj się</small>
             </h1>
         </div>
 
         <div class="block remove-margin">
-            <form name='loginForm' action='auth' method='POST' class="form-horizontal form-bordered form-control-borderless">
+            <form name='loginForm' action='auth' method='POST' class="form-horizontal">
                 <div class="form-group">
                     <div class="col-xs-12">
                         <div class="input-group">
-                            <span class="input-group-addon">
+                            <label for="login" class="input-group-addon btn">
                                 <i class="fa fa-user"></i>
-                            </span>
-                            <input type="text" id="login" name='login' class="form-control input-lg" placeholder="Login">
+                            </label>
+                            <input type="text" id="login" name='login' class="form-control" placeholder="Login">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                            <input type="password" id="login-password" name="pass" class="form-control input-lg" placeholder="Hasło">
+                            <label for="password" class="input-group-addon btn">
+                                <i class="gi gi-keys"></i>
+                            </label>
+                            <input type="password" id="password" name="pass" class="form-control" placeholder="Hasło">
                         </div>
                     </div>
                 </div>

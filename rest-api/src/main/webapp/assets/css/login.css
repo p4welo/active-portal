@@ -1,5 +1,5 @@
 #login-container {
-    top: 100px;
+    top: 50px;
 }
 
 .login-background {
@@ -11,4 +11,9 @@
     background-size: cover;
     background-image: url('../img/back.jpg');
     position: fixed;
+}
+
+#login-container, #login-alt-container {
+    margin-left: -190px;
+    width: 380px;
 }
