@@ -23,11 +23,29 @@ public class DanceClassController
    @Resource
    private ICourseService danceClassService;
 
-   @RequestMapping(value = CompanyApiMappings.GET_DANCE_CLASS_LIST, method = RequestMethod.GET)
+   @RequestMapping(value = CompanyApiMappings.GET_ALL_DANCE_CLASS_LIST, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
    public List<Course> getDanceClassList()
    {
       LOGGER.info("getDanceClassList()");
+      return danceClassService.findAll();
+   }
+
+   @RequestMapping(value = CompanyApiMappings.GET_DANCE_CLASS_IN_PROGRESS_LIST, method = RequestMethod.GET)
+   @ResponseStatus(value = HttpStatus.OK)
+   public List<Course> getDanceClassInProgressList()
+   {
+      LOGGER.info("getDanceClassInProgressList()");
+//      TODO: prepare service call
+      return danceClassService.findAll();
+   }
+
+   @RequestMapping(value = CompanyApiMappings.GET_DANCE_CLASS_TO_REGISTER_LIST, method = RequestMethod.GET)
+   @ResponseStatus(value = HttpStatus.OK)
+   public List<Course> getDanceClassToRegisterList()
+   {
+      LOGGER.info("getDanceClassToRegisterList()");
+//      TODO: prepare service call
       return danceClassService.findAll();
    }
 

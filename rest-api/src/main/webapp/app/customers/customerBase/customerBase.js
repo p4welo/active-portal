@@ -2,6 +2,7 @@ define([
     'customers/module',
     'customers/customerBase/modal/subscribeClass',
     'customers/customerBase/modal/joinClass',
+    'customers/customerBase/modal/addCustomer',
     'services/customerService'
 ], function (module) {
 
@@ -45,6 +46,18 @@ define([
 
             });
         };
+
+        $scope.add = function () {
+            var modalInstance = $modal.open(
+                {
+                    templateUrl: 'app/customers/customerBase/modal/addCustomer.html',
+                    controller: "addCustomerController"
+                });
+
+            modalInstance.result.then(function () {
+
+            });
+        }
 
         $scope.customers = customerFactory.findCustomers();
     });

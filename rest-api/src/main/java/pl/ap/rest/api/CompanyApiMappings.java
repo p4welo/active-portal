@@ -55,7 +55,11 @@ public interface CompanyApiMappings
 
 //   DANCE CLASS
 
-   public static final String GET_DANCE_CLASS_LIST = REST_PREFIX + "/danceClass/list";
+   public static final String GET_ALL_DANCE_CLASS_LIST = REST_PREFIX + "/danceClass/all/list";
+
+   public static final String GET_DANCE_CLASS_IN_PROGRESS_LIST = REST_PREFIX + "/danceClass/inProgress/list";
+
+   public static final String GET_DANCE_CLASS_TO_REGISTER_LIST = REST_PREFIX + "/danceClass/registration/list";
 
    public static final String CREATE_DANCE_CLASS = REST_PREFIX + "/danceClass";
 

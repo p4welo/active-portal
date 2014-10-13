@@ -55,6 +55,7 @@
             <th>Nazwa</th>
             <th>Sala</th>
             <th>Instruktor</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -64,6 +65,11 @@
             <td ng-bind="class.style.name"></td>
             <td>{{class.room.name | translate}}</td>
             <td>{{class.instructor.firstName}} {{class.instructor.lastName}}</td>
+            <td>
+                <span ng-if="!class.inProgress && class.canRegister">Zapisy</span>
+                <span ng-if="class.inProgress && !class.canJoin">Brak miejsc</span>
+                <span ng-if="class.inProgress && class.canJoin">Można dołączyć</span>
+            </td>
         </tr>
         </tbody>
     </table>
