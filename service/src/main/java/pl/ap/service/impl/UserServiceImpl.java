@@ -6,7 +6,7 @@ import pl.ap.domain.User;
 import pl.ap.domain.enums.UserTypeEnum;
 import pl.ap.service.IUserService;
 import pl.ap.service.util.SidUtils;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
