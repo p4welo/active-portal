@@ -6,9 +6,21 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/**" access="ROLE_USER"/>
-        <logout logout-url="/logout" invalidate-session="true" delete-cookies="true" logout-success-url="/spring_security_login" />
+    <http use-expressions="true" disable-url-rewriting="true">
+        <intercept-url pattern="/login.html" access="permitAll"/>
+        <intercept-url pattern="/assets/css/**" access="permitAll"/>
+        <intercept-url pattern="/assets/img/**" access="permitAll"/>
+        <intercept-url pattern="/assets/lib/**" access="permitAll"/>
+        <intercept-url pattern="/rest/public/**" access="permitAll"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+
+        <form-login login-page="/login.html"
+                    authentication-failure-url="/login.html"
+                    login-processing-url="/auth"
+                    username-parameter="login"
+                    password-parameter="pass" />
+        <http-basic/>
+        <logout logout-success-url="/login.html" logout-url="/logout" invalidate-session="true"/>
     </http>
 
     <authentication-manager>

@@ -2,6 +2,8 @@ package pl.ap.rest.controller;
 
 import org.springframework.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Room;
@@ -16,6 +18,7 @@ import java.util.List;
  * Created by parado on 2014-08-24.
  */
 @RestController
+//@Secured("hasRole('ROLE_USER')")
 public class RoomController
 {
    private static final Logger LOGGER = Logger.getLogger(RoomController.class);
@@ -24,7 +27,6 @@ public class RoomController
    private IRoomService roomService;
 
    @RequestMapping(value = CompanyApiMappings.GET_ROOM_LIST, method = RequestMethod.GET)
-   @ResponseStatus(value = HttpStatus.OK)
    public List<Room> getRoomList()
    {
       LOGGER.info("getRoomList()");
