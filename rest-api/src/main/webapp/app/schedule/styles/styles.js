@@ -22,5 +22,13 @@ define([
             });
         };
 
+        $scope.select = function (style) {
+            if ($scope.selected == style) {
+                $scope.selected = null;
+                return;
+            }
+            $scope.selected = style;
+            $scope.selected.edit = false;
+        }
     });
 });

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Room;
