@@ -20,5 +20,14 @@ define([
                 notificationService.success("Pomyślnie zapisano");
             });
         };
+
+        $scope.select = function (category) {
+            if ($scope.selected == category) {
+                $scope.selected = null;
+                return;
+            }
+            $scope.selected = category;
+            $scope.selected.edit = false;
+        }
     });
 });

@@ -31,6 +31,5 @@ define([
             $scope.selected = room;
             $scope.selected.edit = false;
         }
-
     });
 });
