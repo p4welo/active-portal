@@ -1,8 +1,10 @@
 define([
-
+    'ngSanitize'
 ], function () {
 
-    return angular.module('activePortal.news', [], function ($stateProvider) {
+    return angular.module('activePortal.news', [
+        'ngSanitize'
+    ], function ($stateProvider) {
         $stateProvider
             .state('newsletter', {
                 url: "/newsletter",

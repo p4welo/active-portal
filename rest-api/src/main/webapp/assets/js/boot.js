@@ -18,6 +18,7 @@
                     'uiUtils': "../assets/lib/angular-ui-utils/ui-utils",
                     'ngTranslate': "../assets/lib/angular-translate/angular-translate",
                     'ngAnimate': "../assets/lib/angular-animate/angular-animate",
+                    'ngSanitize': "../assets/lib/angular-sanitize/angular-sanitize",
                     'ngTouch': "../assets/lib/angular-touch/angular-touch",
                     'loadingBar': "../assets/lib/angular-loading-bar/build/loading-bar",
                     'pnotify': "../assets/lib/pnotify/pnotify.core",
