@@ -12,16 +12,14 @@ import javax.annotation.Resource;
  * Created by parado on 2014-08-24.
  */
 @Service(RoomServiceImpl.BEAN_NAME)
-public class RoomServiceImpl extends AbstractServiceImpl<Room> implements IRoomService
-{
-   public static final String BEAN_NAME = "roomService";
+public class RoomServiceImpl extends AbstractServiceImpl<Room> implements IRoomService {
+    public static final String BEAN_NAME = "roomService";
 
-   @Resource
-   private IRoomDao roomDao;
+    @Resource
+    private IRoomDao roomDao;
 
-   @Override
-   protected IAbstractDao<Room> getDao()
-   {
-      return roomDao;
-   }
+    @Override
+    protected IAbstractDao<Room> getDao() {
+        return roomDao;
+    }
 }

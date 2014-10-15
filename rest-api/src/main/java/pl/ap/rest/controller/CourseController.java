@@ -2,6 +2,7 @@ package pl.ap.rest.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Course;
@@ -104,6 +105,7 @@ public class CourseController {
 
     @RequestMapping(value = CourseApiMappings.DELETE, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
+    @Secured("hasRole('ROLE_ADMIN')")
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
 

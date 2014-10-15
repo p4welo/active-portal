@@ -53,7 +53,7 @@ public class PublicApiController {
     @RequestMapping(value = PublicApiMappings.GET_FUTURE_CLASSES, method = RequestMethod.GET)
     public List<Course> getFutureClasses() {
         LOGGER.info("getFutureClasses()");
-        return danceClassService.findFutureClasses();
+        return danceClassService.findRegistration();
     }
 
     @RequestMapping(value = PublicApiMappings.SEND_EMAIL, method = RequestMethod.POST)
@@ -93,7 +93,7 @@ public class PublicApiController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<News> getNewsList() {
         LOGGER.info("getNewsList()");
-        return newsService.findNewsList();
+        return newsService.findPublic();
     }
 
     @RequestMapping(value = PublicApiMappings.GET_NEWS, method = RequestMethod.GET)

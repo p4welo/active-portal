@@ -8,7 +8,6 @@ import java.io.OutputStream;
 /**
  * Created by parado on 15.04.14.
  */
-public interface IBarcodeService
-{
-   void createPdf(OutputStream os) throws IOException, DocumentException;
+public interface IBarcodeService {
+    void createPdf(OutputStream os) throws IOException, DocumentException;
 }

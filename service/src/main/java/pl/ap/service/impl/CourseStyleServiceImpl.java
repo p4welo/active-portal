@@ -15,28 +15,25 @@ import javax.annotation.Resource;
  * Created by parado on 19.03.14.
  */
 @Service(CourseStyleServiceImpl.BEAN_NAME)
-public class CourseStyleServiceImpl extends AbstractServiceImpl<CourseStyle> implements ICourseStyleService
-{
-   public static final String BEAN_NAME = "courseStyleService";
+public class CourseStyleServiceImpl extends AbstractServiceImpl<CourseStyle> implements ICourseStyleService {
+    public static final String BEAN_NAME = "courseStyleService";
 
-   @Resource
-   private ICourseStyleDao styleDao;
+    @Resource
+    private ICourseStyleDao styleDao;
 
-   @Resource
-   private ICourseCategoryService categoryService;
+    @Resource
+    private ICourseCategoryService categoryService;
 
-   @Override
-   protected IAbstractDao<CourseStyle> getDao()
-   {
-      return styleDao;
-   }
+    @Override
+    protected IAbstractDao<CourseStyle> getDao() {
+        return styleDao;
+    }
 
-   @Override
-   @Transactional(readOnly = false)
-   public CourseStyle save(CourseStyle courseStyle)
-   {
-      CourseCategory courseCategory = categoryService.getBySid(courseStyle.getCategory().getSid());
-      courseStyle.setCategory(courseCategory);
-      return super.save(courseStyle);
-   }
+    @Override
+    @Transactional(readOnly = false)
+    public CourseStyle save(CourseStyle courseStyle) {
+        CourseCategory courseCategory = categoryService.getBySid(courseStyle.getCategory().getSid());
+        courseStyle.setCategory(courseCategory);
+        return super.save(courseStyle);
+    }
 }

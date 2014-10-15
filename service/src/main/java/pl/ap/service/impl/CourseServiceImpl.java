@@ -109,18 +109,15 @@ public class CourseServiceImpl extends AbstractServiceImpl<Course> implements IC
     public Course setState(Course course, CourseStateEnum state) {
         if (state == null) {
             return course;
-        }
-        else if (state == CourseStateEnum.REGISTRATION) {
+        } else if (state == CourseStateEnum.REGISTRATION) {
             course.setCanRegister(true);
             course.setInProgress(false);
             course.setCanJoin(false);
-        }
-        else if (state == CourseStateEnum.CAN_JOIN) {
+        } else if (state == CourseStateEnum.CAN_JOIN) {
             course.setCanRegister(false);
             course.setInProgress(true);
             course.setCanJoin(true);
-        }
-        else if (state == CourseStateEnum.NO_PLACE) {
+        } else if (state == CourseStateEnum.NO_PLACE) {
             course.setCanRegister(false);
             course.setInProgress(true);
             course.setCanJoin(false);
