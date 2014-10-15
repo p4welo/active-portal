@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Instructor;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CompanyApiMappings;
+import pl.ap.rest.api.InstructorApiMappings;
 import pl.ap.service.IInstructorService;
 
 import javax.annotation.Resource;
@@ -24,27 +25,27 @@ public class InstructorController
    @Resource
    private IInstructorService instructorService;
 
-   @RequestMapping(value = CompanyApiMappings.GET_INSTRUCTOR_LIST, method = RequestMethod.GET)
+   @RequestMapping(value = InstructorApiMappings.FIND_ALL, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<Instructor> getInstructorList()
+   public List<Instructor> findAll()
    {
-      LOGGER.info("getInstructorList()");
+      LOGGER.info("findAll()");
       return instructorService.findAll();
    }
 
-   @RequestMapping(value = CompanyApiMappings.CREATE_INSTRUCTOR, method = RequestMethod.POST)
+   @RequestMapping(value = InstructorApiMappings.CREATE, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
-   public Instructor createInstructor(@RequestBody Instructor instructor)
+   public Instructor create(@RequestBody Instructor instructor)
    {
-      LOGGER.info("createInstructor()");
+      LOGGER.info("create()");
       return instructorService.save(instructor);
    }
 
-   @RequestMapping(value = CompanyApiMappings.GET_INSTRUCTOR, method = RequestMethod.PUT)
+   @RequestMapping(value = InstructorApiMappings.UPDATE, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
-   public Instructor updateInstructor(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid)
+   public Instructor update(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid)
    {
-      LOGGER.info("updateInstructor()");
+      LOGGER.info("update()");
       Instructor oldInstructor = instructorService.getBySid(sid);
       Assert.notNull(oldInstructor);
       Assert.notNull(instructor);

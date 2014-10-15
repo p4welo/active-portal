@@ -2,12 +2,11 @@ package pl.ap.rest.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.News;
 import pl.ap.rest.api.ApiKeys;
-import pl.ap.rest.api.CompanyApiMappings;
+import pl.ap.rest.api.NewsApiMappings;
 import pl.ap.service.INewsService;
 
 import javax.annotation.Resource;
@@ -24,20 +23,19 @@ public class NewsController
    @Resource
    private INewsService newsService;
 
-   @RequestMapping(value = CompanyApiMappings.GET_NEWS_LIST, method = RequestMethod.GET)
+   @RequestMapping(value = NewsApiMappings.FIND_ALL, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<News> getNewsList()
+   public List<News> findAll()
    {
-      LOGGER.info("getNewsList()");
+      LOGGER.info("findAll()");
       return newsService.findNewsList();
    }
 
-   @RequestMapping(value = CompanyApiMappings.GET_NEWS, method = RequestMethod.PUT)
+   @RequestMapping(value = NewsApiMappings.UPDATE, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
-   public News updateNews(@RequestBody News news,
-                          @PathVariable(ApiKeys.SID) String sid)
+   public News update(@RequestBody News news, @PathVariable(ApiKeys.SID) String sid)
    {
-      LOGGER.info("updateNews()");
+      LOGGER.info("update()");
       News oldNews = newsService.getBySid(sid);
       Assert.notNull(oldNews);
       oldNews.setContent(news.getContent());
@@ -45,11 +43,11 @@ public class NewsController
       return newsService.update(oldNews);
    }
 
-   @RequestMapping(value = CompanyApiMappings.CREATE_NEWS, method = RequestMethod.POST)
+   @RequestMapping(value = NewsApiMappings.CREATE, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
-   public News createNews(@RequestBody News news)
+   public News create(@RequestBody News news)
    {
-      LOGGER.info("createNews()");
+      LOGGER.info("create()");
       return newsService.save(news);
    }
 

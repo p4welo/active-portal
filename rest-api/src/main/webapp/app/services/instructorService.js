@@ -16,7 +16,7 @@ define([
                 method: 'POST'
             },
             get: {
-                url: "test/instructor/:sid",
+                url: "rest/instructor/:sid",
                 method: 'GET'
             },
             activate: {

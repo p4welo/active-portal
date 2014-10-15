@@ -16,7 +16,7 @@ define([
                 method: 'POST'
             },
             get: {
-                url: "test/category/:sid",
+                url: "rest/category/:sid",
                 method: 'GET'
             },
             activate: {

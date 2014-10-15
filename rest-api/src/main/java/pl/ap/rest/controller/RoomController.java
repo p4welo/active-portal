@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Room;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CompanyApiMappings;
+import pl.ap.rest.api.RoomApiMappings;
 import pl.ap.service.IRoomService;
 
 import javax.annotation.Resource;
@@ -19,7 +20,6 @@ import java.util.List;
  * Created by parado on 2014-08-24.
  */
 @RestController
-//@Secured("hasRole('ROLE_USER')")
 public class RoomController
 {
    private static final Logger LOGGER = Logger.getLogger(RoomController.class);
@@ -27,26 +27,27 @@ public class RoomController
    @Resource
    private IRoomService roomService;
 
-   @RequestMapping(value = CompanyApiMappings.GET_ROOM_LIST, method = RequestMethod.GET)
-   public List<Room> getRoomList()
+   @RequestMapping(value = RoomApiMappings.FIND_ALL, method = RequestMethod.GET)
+   @ResponseStatus(value = HttpStatus.OK)
+   public List<Room> findAll()
    {
-      LOGGER.info("getRoomList()");
+      LOGGER.info("findAll()");
       return roomService.findAll();
    }
 
-   @RequestMapping(value = CompanyApiMappings.CREATE_ROOM, method = RequestMethod.POST)
+   @RequestMapping(value = RoomApiMappings.CREATE, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
-   public Room createRoom(@RequestBody Room room)
+   public Room create(@RequestBody Room room)
    {
-      LOGGER.info("createRoom()");
+      LOGGER.info("create()");
       return roomService.save(room);
    }
 
-   @RequestMapping(value = CompanyApiMappings.GET_ROOM, method = RequestMethod.PUT)
+   @RequestMapping(value = RoomApiMappings.UPDATE, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
-   public Room updateRoom(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid)
+   public Room update(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid)
    {
-      LOGGER.info("updateRoom()");
+      LOGGER.info("update()");
       Room oldRoom = roomService.getBySid(sid);
       Assert.notNull(oldRoom);
       Assert.notNull(room);

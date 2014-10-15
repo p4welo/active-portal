@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.CourseCategory;
 import pl.ap.rest.api.ApiKeys;
+import pl.ap.rest.api.CategoryApiMappings;
 import pl.ap.rest.api.CompanyApiMappings;
 import pl.ap.service.ICourseCategoryService;
 
@@ -23,28 +24,27 @@ public class CategoryController
    @Resource
    private ICourseCategoryService categoryService;
 
-   @RequestMapping(value = CompanyApiMappings.GET_CATEGORY_LIST, method = RequestMethod.GET)
+   @RequestMapping(value = CategoryApiMappings.FIND_ALL, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<CourseCategory> getCategoryList()
+   public List<CourseCategory> findAll()
    {
-      LOGGER.info("getCategoryList()");
+      LOGGER.info("findAll()");
       return categoryService.findAll();
    }
 
-   @RequestMapping(value = CompanyApiMappings.CREATE_CATEGORY, method = RequestMethod.POST)
+   @RequestMapping(value = CategoryApiMappings.CREATE, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
-   @ResponseBody
-   public CourseCategory createCategory(@RequestBody CourseCategory courseCategory)
+   public CourseCategory create(@RequestBody CourseCategory courseCategory)
    {
-      LOGGER.info("createCategory()");
+      LOGGER.info("create()");
       return categoryService.save(courseCategory);
    }
 
-   @RequestMapping(value = CompanyApiMappings.GET_CATEGORY, method = RequestMethod.PUT)
+   @RequestMapping(value = CategoryApiMappings.UPDATE, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
-   public CourseCategory updateCategory(@RequestBody CourseCategory courseCategory, @PathVariable(ApiKeys.SID) String sid)
+   public CourseCategory update(@RequestBody CourseCategory courseCategory, @PathVariable(ApiKeys.SID) String sid)
    {
-      LOGGER.info("updateCategory()");
+      LOGGER.info("update()");
       CourseCategory oldCourseCategory = categoryService.getBySid(sid);
       Assert.notNull(oldCourseCategory);
       Assert.notNull(courseCategory);

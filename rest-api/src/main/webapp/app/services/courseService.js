@@ -26,7 +26,7 @@ define([
                 method: 'POST'
             },
             get: {
-                url: "test/course/:sid",
+                url: "rest/course/:sid",
                 method: 'GET'
             },
             publish: {

@@ -6,7 +6,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.CourseStyle;
 import pl.ap.rest.api.ApiKeys;
-import pl.ap.rest.api.CompanyApiMappings;
+import pl.ap.rest.api.StyleApiMappings;
 import pl.ap.service.ICourseStyleService;
 
 import javax.annotation.Resource;
@@ -23,28 +23,28 @@ public class StyleController
    @Resource
    private ICourseStyleService styleService;
 
-   @RequestMapping(value = CompanyApiMappings.GET_STYLE_LIST, method = RequestMethod.GET)
+   @RequestMapping(value = StyleApiMappings.FIND_ALL, method = RequestMethod.GET)
    @ResponseStatus(value = HttpStatus.OK)
-   public List<CourseStyle> getStyleList()
+   public List<CourseStyle> findAll()
    {
-      LOGGER.info("getStyleList()");
+      LOGGER.info("findAll()");
       return styleService.findAll();
    }
 
-   @RequestMapping(value = CompanyApiMappings.CREATE_STYLE, method = RequestMethod.POST)
+   @RequestMapping(value = StyleApiMappings.CREATE, method = RequestMethod.POST)
    @ResponseStatus(value = HttpStatus.OK)
-   public CourseStyle createStyle(@RequestBody CourseStyle courseStyle)
+   public CourseStyle create(@RequestBody CourseStyle courseStyle)
    {
-      LOGGER.info("createStyle()");
+      LOGGER.info("create()");
       Assert.notNull(courseStyle.getCategory());
       return styleService.save(courseStyle);
    }
 
-   @RequestMapping(value = CompanyApiMappings.GET_STYLE, method = RequestMethod.PUT)
+   @RequestMapping(value = StyleApiMappings.UPDATE, method = RequestMethod.PUT)
    @ResponseStatus(value = HttpStatus.OK)
-   public CourseStyle updateStyle(@RequestBody CourseStyle courseStyle, @PathVariable(ApiKeys.SID) String sid)
+   public CourseStyle update(@RequestBody CourseStyle courseStyle, @PathVariable(ApiKeys.SID) String sid)
    {
-      LOGGER.info("updateStyle()");
+      LOGGER.info("update()");
       CourseStyle oldCourseStyle = styleService.getBySid(sid);
       Assert.notNull(oldCourseStyle);
       Assert.notNull(courseStyle);
