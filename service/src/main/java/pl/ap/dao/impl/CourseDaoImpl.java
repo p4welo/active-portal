@@ -14,7 +14,7 @@ import java.util.List;
  * Created by parado on 19.03.14.
  */
 @Repository(CourseDaoImpl.BEAN_NAME)
-public class CourseDaoImpl extends AbstractDaoImpl<Course> implements ICourseDao {
+public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICourseDao {
     public static final String BEAN_NAME = "courseDao";
 
     @Override

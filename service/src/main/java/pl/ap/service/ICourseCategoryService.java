@@ -5,7 +5,7 @@ import pl.ap.domain.CourseCategory;
 /**
  * Created by parado on 19.03.14.
  */
-public interface ICourseCategoryService extends IAbstractService<CourseCategory> {
+public interface ICourseCategoryService extends IIdentifiableService<CourseCategory> {
     CourseCategory activate(CourseCategory category);
 
     CourseCategory deactivate(CourseCategory category);

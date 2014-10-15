@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseDao;
+import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.Course;
 import pl.ap.domain.CourseStyle;
 import pl.ap.domain.Instructor;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by parado on 19.03.14.
  */
 @Service(CourseServiceImpl.BEAN_NAME)
-public class CourseServiceImpl extends AbstractServiceImpl<Course> implements ICourseService {
+public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implements ICourseService {
     public static final String BEAN_NAME = "courseService";
 
     @Resource
@@ -37,7 +38,7 @@ public class CourseServiceImpl extends AbstractServiceImpl<Course> implements IC
     private IRoomService roomService;
 
     @Override
-    protected IAbstractDao<Course> getDao() {
+    protected IIdentifiableDao<Course> getDao() {
         return courseDao;
     }
 

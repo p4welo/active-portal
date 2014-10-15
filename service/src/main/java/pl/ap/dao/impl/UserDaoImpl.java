@@ -10,7 +10,7 @@ import pl.ap.domain.User;
  * Created by parado on 08.04.14.
  */
 @Repository(UserDaoImpl.BEAN_NAME)
-public class UserDaoImpl extends AbstractDaoImpl<User> implements IUserDao {
+public class UserDaoImpl extends IdentifiableDaoImpl<User> implements IUserDao {
     public static final String BEAN_NAME = "userDao";
 
     @Override

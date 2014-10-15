@@ -2,6 +2,7 @@ package pl.ap.dao;
 
 
 import pl.ap.domain.common.DataEntity;
+import pl.ap.domain.common.IdentifiableEntity;
 
 import java.util.List;
 
@@ -30,8 +31,6 @@ public interface IAbstractDao<T extends DataEntity> {
     List<T> find(int first, int count, String property, boolean ascending);
 
     long getCount();
-
-    T getBySid(String sid);
 
     List<T> saveAll(List<T> entities);
 

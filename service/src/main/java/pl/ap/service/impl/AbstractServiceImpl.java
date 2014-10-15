@@ -3,6 +3,7 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
+import pl.ap.domain.common.DataEntity;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.service.IAbstractService;
 import pl.ap.service.util.SidUtils;
@@ -15,14 +16,12 @@ import java.util.List;
  * Time: 00:24
  */
 @Service
-public abstract class AbstractServiceImpl<T extends IdentifiableEntity> implements IAbstractService<T> {
+public abstract class AbstractServiceImpl<T extends DataEntity> implements IAbstractService<T> {
+
     protected abstract IAbstractDao<T> getDao();
 
     @Transactional(readOnly = false)
     public T save(T obj) {
-        if (obj.getSid() == null) {
-            obj.setSid(SidUtils.generate());
-        }
         return getDao().save(obj);
     }
 
@@ -67,11 +66,6 @@ public abstract class AbstractServiceImpl<T extends IdentifiableEntity> implemen
     @Transactional(readOnly = true)
     public List<T> findAll() {
         return getDao().findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public T getBySid(String sid) {
-        return getDao().getBySid(sid);
     }
 
     @Override

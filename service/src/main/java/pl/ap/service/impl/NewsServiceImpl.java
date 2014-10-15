@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
+import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.INewsDao;
 import pl.ap.domain.News;
 import pl.ap.service.INewsService;
@@ -17,14 +18,14 @@ import java.util.List;
  * Created by parado on 25.03.14.
  */
 @Service(NewsServiceImpl.BEAN_NAME)
-public class NewsServiceImpl extends AbstractServiceImpl<News> implements INewsService {
+public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements INewsService {
     public static final String BEAN_NAME = "newsService";
 
     @Resource
     private INewsDao newsDao;
 
     @Override
-    protected IAbstractDao<News> getDao() {
+    protected IIdentifiableDao<News> getDao() {
         return newsDao;
     }
 

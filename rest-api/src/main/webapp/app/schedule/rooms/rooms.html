@@ -11,7 +11,8 @@
         <div class="block">
             <div class="block-title">
                 <div class="block-options pull-right">
-                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip" ng-class="{'active': selected.edit}">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
+                       ng-class="{'active': selected.edit}">
                         <i class="fa fa-pencil"></i>
                         Edytuj
                     </a>
@@ -84,12 +85,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="room in rooms | filter: filterName" ng-click="select(room)" ng-class="{'selected': selected == room}">
+            <tr ng-repeat="room in rooms | filter: filterName" ng-click="select(room)"
+                ng-class="{'selected': selected == room}">
                 <td ng-bind="room.id"></td>
                 <td ng-bind="room.code"></td>
                 <td ng-bind="room.name"></td>
                 <td>
-                    {{room.objectState }}
+                    <span class="label" ng-class="resolveStatusCss(room)">
+                        {{room.objectState | translate}}
+                    </span>
                 </td>
             </tr>
             </tbody>

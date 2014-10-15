@@ -12,7 +12,7 @@ import java.util.List;
  * Created by parado on 25.03.14.
  */
 @Repository(NewsDaoImpl.BEAN_NAME)
-public class NewsDaoImpl extends AbstractDaoImpl<News> implements INewsDao {
+public class NewsDaoImpl extends IdentifiableDaoImpl<News> implements INewsDao {
     public static final String BEAN_NAME = "newsDao";
 
     @Override

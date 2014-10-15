@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by parado on 19.03.14.
  */
-public interface ICourseDao extends IAbstractDao<Course> {
+public interface ICourseDao extends IIdentifiableDao<Course> {
     List<Course> findScheduleClasses();
 
     List<Course> findFutureClasses();

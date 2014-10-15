@@ -50,8 +50,11 @@ define([
 
                 TYPE_REGISTRATION: "Grupa na zapisy",
                 TYPE_OPEN: "Można dołączyć",
-                TYPE_CLOSED: "Nie można dołączyć"
+                TYPE_CLOSED: "Nie można dołączyć",
 
+                ACTIVE: "Aktywny",
+                INACTIVE: "Nieaktywny",
+                DELETED: "Usunięty"
             });
             $translateProvider.preferredLanguage('pl');
         });

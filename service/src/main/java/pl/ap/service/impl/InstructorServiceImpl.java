@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseDao;
+import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IInstructorDao;
 import pl.ap.domain.Course;
 import pl.ap.domain.Instructor;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by parado on 19.03.14.
  */
 @Service(InstructorServiceImpl.BEAN_NAME)
-public class InstructorServiceImpl extends AbstractServiceImpl<Instructor> implements IInstructorService {
+public class InstructorServiceImpl extends IdentifiableServiceImpl<Instructor> implements IInstructorService {
     public static final String BEAN_NAME = "instructorService";
 
     @Resource
@@ -26,7 +27,7 @@ public class InstructorServiceImpl extends AbstractServiceImpl<Instructor> imple
     private ICourseDao courseDao;
 
     @Override
-    protected IAbstractDao<Instructor> getDao() {
+    protected IIdentifiableDao<Instructor> getDao() {
         return instructorDao;
     }
 

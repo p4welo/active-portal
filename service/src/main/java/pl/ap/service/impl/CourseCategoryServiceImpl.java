@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseCategoryDao;
+import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.CourseCategory;
 import pl.ap.service.ICourseCategoryService;
 
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
  * Created by parado on 19.03.14.
  */
 @Service(CourseCategoryServiceImpl.BEAN_NAME)
-public class CourseCategoryServiceImpl extends AbstractServiceImpl<CourseCategory> implements ICourseCategoryService {
+public class CourseCategoryServiceImpl extends IdentifiableServiceImpl<CourseCategory> implements ICourseCategoryService {
 
     public static final String BEAN_NAME = "courseCategoryService";
 
@@ -21,7 +22,7 @@ public class CourseCategoryServiceImpl extends AbstractServiceImpl<CourseCategor
     private ICourseCategoryDao courseCategoryDao;
 
     @Override
-    protected IAbstractDao<CourseCategory> getDao() {
+    protected IIdentifiableDao<CourseCategory> getDao() {
         return courseCategoryDao;
     }
 

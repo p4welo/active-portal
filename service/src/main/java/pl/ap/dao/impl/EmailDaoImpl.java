@@ -8,6 +8,6 @@ import pl.ap.domain.Email;
  * Created by parado on 24.03.14.
  */
 @Repository(EmailDaoImpl.BEAN_NAME)
-public class EmailDaoImpl extends AbstractDaoImpl<Email> implements IEmailDao {
+public class EmailDaoImpl extends IdentifiableDaoImpl<Email> implements IEmailDao {
     public static final String BEAN_NAME = "emailDao";
 }

@@ -3,6 +3,7 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
+import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IUserDao;
 import pl.ap.domain.User;
 import pl.ap.domain.enums.UserTypeEnum;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
  * Created by parado on 08.04.14.
  */
 @Service(UserServiceImpl.BEAN_NAME)
-public class UserServiceImpl extends AbstractServiceImpl<User> implements IUserService {
+public class UserServiceImpl extends IdentifiableServiceImpl<User> implements IUserService {
     public static final String BEAN_NAME = "userService";
 
 //   @Resource
@@ -27,7 +28,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements IUserS
     private IUserDao userDao;
 
     @Override
-    protected IAbstractDao<User> getDao() {
+    protected IIdentifiableDao<User> getDao() {
         return userDao;
     }
 

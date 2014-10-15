@@ -3,6 +3,7 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
+import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IInstructorDescriptionDao;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.InstructorDescription;
@@ -14,7 +15,7 @@ import javax.annotation.Resource;
  * Created by parado on 19.03.14.
  */
 @Service(InstructorDescriptionServiceImpl.BEAN_NAME)
-public class InstructorDescriptionServiceImpl extends AbstractServiceImpl<InstructorDescription> implements
+public class InstructorDescriptionServiceImpl extends IdentifiableServiceImpl<InstructorDescription> implements
         IInstructorDescriptionService {
     public static final String BEAN_NAME = "instructorDescriptionService";
 
@@ -22,7 +23,7 @@ public class InstructorDescriptionServiceImpl extends AbstractServiceImpl<Instru
     private IInstructorDescriptionDao instructorDescriptionDao;
 
     @Override
-    protected IAbstractDao<InstructorDescription> getDao() {
+    protected IIdentifiableDao<InstructorDescription> getDao() {
         return instructorDescriptionDao;
     }
 

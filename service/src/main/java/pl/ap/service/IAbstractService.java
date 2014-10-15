@@ -1,6 +1,7 @@
 package pl.ap.service;
 
 
+import pl.ap.domain.common.DataEntity;
 import pl.ap.domain.common.IdentifiableEntity;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Date: 01.12.12
  * Time: 00:22
  */
-public interface IAbstractService<T extends IdentifiableEntity> {
+public interface IAbstractService<T extends DataEntity> {
     T save(T obj);
 
     T update(T obj);
@@ -28,8 +29,6 @@ public interface IAbstractService<T extends IdentifiableEntity> {
     List<T> find(int first, int count, String property, boolean ascending);
 
     long getCount();
-
-    T getBySid(String sid);
 
     List<T> saveAll(List<T> entities);
 

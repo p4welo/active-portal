@@ -31,5 +31,9 @@ define([
             $scope.selected = room;
             $scope.selected.edit = false;
         }
+
+        $scope.resolveStatusCss = function (room) {
+            return {'label-success': room.objectState == 'ACTIVE', 'label-danger': room.objectState == 'INACTIVE'}
+        }
     });
 });

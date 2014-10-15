@@ -67,13 +67,6 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
         return criteria.list().size();
     }
 
-    public T getBySid(String sid) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(IdentifiableEntity.FIELD_SID, sid));
-        criteria.setMaxResults(1);
-        return (T) criteria.uniqueResult();
-    }
-
     public T save(T entity) {
         getSessionFactory().getCurrentSession().persist(entity);
         return entity;

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by parado on 25.03.14.
  */
-public interface INewsService extends IAbstractService<News> {
+public interface INewsService extends IIdentifiableService<News> {
     List<News> findNewsList();
 
     List<News> findPublic();
