@@ -3,43 +3,59 @@ define([
 ], function (module) {
 
     module.factory('courseFactory', function ($resource) {
-        var CLASS_LIST_KEY = "rest/danceClass/all/list";
-        var CLASS_IN_PROGRESS_LIST_KEY = "rest/danceClass/inProgress/list";
-        var CLASS_REGISTRATION_LIST_KEY = "rest/danceClass/registration/list";
-        var CREATE_CLASS_KEY = "rest/danceClass";
-        var GET_CLASS_KEY = "rest/danceClass/:sid";
 
         return $resource(null, null, {
+
             findAll: {
-                url: CLASS_LIST_KEY,
+                url: "rest/course/list",
                 method: 'GET',
                 isArray: true
             },
             findInProgress: {
-                url: CLASS_IN_PROGRESS_LIST_KEY,
+                url: "rest/course/inProgress/list",
                 method: 'GET',
                 isArray: true
             },
             findRegistration: {
-                url: CLASS_REGISTRATION_LIST_KEY,
+                url: "rest/course/registration/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: CREATE_CLASS_KEY,
+                url: "rest/course/create",
                 method: 'POST'
             },
             get: {
-                url: GET_CLASS_KEY,
+                url: "test/course/:sid",
                 method: 'GET'
             },
+            publish: {
+                url: "rest/course/:sid/publish",
+                method: 'PUT'
+            },
+            deactivate: {
+                url: "rest/course/:sid/deactivate",
+                method: 'PUT'
+            },
             update: {
-                url: GET_CLASS_KEY,
+                url: "rest/course/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: GET_CLASS_KEY,
+                url: "rest/course/:sid",
                 method: 'DELETE'
+            },
+            setState: {
+                url: "rest/course/:sid/state",
+                method: "PUT"
+            },
+            setInstructor: {
+                url: "rest/course/:sid/instructor",
+                method: "PUT"
+            },
+            setRoom: {
+                url: "rest/course/:sid/room",
+                method: "PUT"
             }
         })
     })

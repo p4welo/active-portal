@@ -3,32 +3,41 @@ define([
 ], function (module) {
 
     module.factory('styleFactory', function ($resource) {
-        var STYLE_LIST_KEY = "rest/style/list";
-        var CREATE_STYLE_KEY = "rest/style";
-        var GET_STYLE_KEY = "test/style/:sid";
 
         return $resource(null, null, {
 
             findAll: {
-                url: STYLE_LIST_KEY,
+                url: "rest/style/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: CREATE_STYLE_KEY,
+                url: "rest/style/create",
                 method: 'POST'
             },
             get: {
-                url: GET_STYLE_KEY,
+                url: "test/style/:sid",
                 method: 'GET'
             },
+            activate: {
+                url: "rest/style/:sid/activate",
+                method: 'PUT'
+            },
+            deactivate: {
+                url: "rest/style/:sid/deactivate",
+                method: 'PUT'
+            },
             update: {
-                url: GET_STYLE_KEY,
+                url: "rest/style/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: GET_STYLE_KEY,
+                url: "rest/style/:sid",
                 method: 'DELETE'
+            },
+            setCategory: {
+                url: "rest/style/:sid/category",
+                method: "PUT"
             }
         })
     })
