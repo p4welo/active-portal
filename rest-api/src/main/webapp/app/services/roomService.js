@@ -5,6 +5,7 @@ define([
     module.factory('roomFactory', function ($resource) {
 
         return $resource(null, null, {
+
             findAll: {
                 url: "rest/room/list",
                 method: 'GET',

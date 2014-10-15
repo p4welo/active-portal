@@ -10,10 +10,10 @@ define([
                 templateUrl: "app/schedule/categories/categories.html",
                 controller: "categoriesController"
             })
-            .state('classes', {
-                url: "/classes",
-                templateUrl: "app/schedule/classes/classes.html",
-                controller: "classesController"
+            .state('courses', {
+                url: "/courses",
+                templateUrl: "app/schedule/courses/courses.html",
+                controller: "coursesController"
             })
             .state('instructors', {
                 url: "/instructors",

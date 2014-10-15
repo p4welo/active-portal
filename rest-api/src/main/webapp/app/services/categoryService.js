@@ -3,30 +3,36 @@ define([
 ], function (module) {
 
     module.factory('categoryFactory', function ($resource) {
-        var CATEGORY_LIST_KEY = "rest/category/list";
-        var CREATE_CATEGORY_KEY = "rest/category";
-        var GET_CATEGORY_KEY = "rest/category/:sid";
 
         return $resource(null, null, {
+
             findAll: {
-                url: CATEGORY_LIST_KEY,
+                url: "rest/category/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: CREATE_CATEGORY_KEY,
+                url: "rest/category/create",
                 method: 'POST'
             },
             get: {
-                url: GET_CATEGORY_KEY,
+                url: "test/category/:sid",
                 method: 'GET'
             },
+            activate: {
+                url: "rest/category/:sid/activate",
+                method: 'PUT'
+            },
+            deactivate: {
+                url: "rest/category/:sid/deactivate",
+                method: 'PUT'
+            },
             update: {
-                url: GET_CATEGORY_KEY,
+                url: "rest/category/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: GET_CATEGORY_KEY,
+                url: "rest/category/:sid",
                 method: 'DELETE'
             }
         })

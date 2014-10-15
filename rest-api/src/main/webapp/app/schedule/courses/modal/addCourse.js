@@ -6,7 +6,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller('addClassController', function ($scope, $modalInstance, categoryFactory, styleFactory, instructorFactory, roomFactory) {
+    module.controller('addCourseController', function ($scope, $modalInstance, categoryFactory, styleFactory, instructorFactory, roomFactory) {
         $scope.style = {};
 
         $scope.styles = styleFactory.find();

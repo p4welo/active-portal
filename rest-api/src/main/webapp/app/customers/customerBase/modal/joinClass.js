@@ -1,11 +1,11 @@
 define([
     'schedule/module',
-    'services/classService'
+    'services/courseService'
 ], function (module) {
 
-    module.controller('joinClassController', function ($scope, classFactory) {
+    module.controller('joinClassController', function ($scope, courseFactory) {
         $scope.day = 'PN';
-        $scope.classes = classFactory.find();
+        $scope.classes = courseFactory.find();
     });
 
 });

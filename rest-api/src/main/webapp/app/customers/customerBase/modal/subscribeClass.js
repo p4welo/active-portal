@@ -1,10 +1,10 @@
 define([
     'schedule/module',
-    'services/classService'
+    'services/courseService'
 ], function (module) {
 
-    module.controller('subscribeClassController', function ($scope, classFactory) {
-        $scope.classes = classFactory.find();
+    module.controller('subscribeClassController', function ($scope, courseFactory) {
+        $scope.classes = courseFactory.find();
     });
 
 });

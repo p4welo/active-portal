@@ -1,13 +1,13 @@
 define([
     'schedule/module',
-    'schedule/classes/modal/addClass',
+    'schedule/courses/modal/addCourse',
     'services/notificationService',
-    'services/classService'
+    'services/courseService'
 ], function (module) {
 
-    module.controller("classesController", function ($scope, classFactory, notificationService, $modal) {
+    module.controller("coursesController", function ($scope, courseFactory, notificationService, $modal) {
         $scope.day = '';
-        $scope.classes = classFactory.findAll();
+        $scope.classes = courseFactory.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
         ];
@@ -15,12 +15,12 @@ define([
         $scope.add = function () {
             var modalInstance = $modal.open(
                 {
-                    templateUrl: 'app/schedule/classes/modal/addClass.html',
-                    controller: "addClassController"
+                    templateUrl: 'app/schedule/classes/modal/addCourse.html',
+                    controller: "addCourseController"
                 });
 
             modalInstance.result.then(function () {
-                $scope.classes = classFactory.find();
+                $scope.classes = courseFactory.find();
                 notificationService.success("Pomyślnie zapisano");
             });
 

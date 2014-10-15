@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('classFactory', function ($resource) {
+    module.factory('courseFactory', function ($resource) {
         var CLASS_LIST_KEY = "rest/danceClass/all/list";
         var CLASS_IN_PROGRESS_LIST_KEY = "rest/danceClass/inProgress/list";
         var CLASS_REGISTRATION_LIST_KEY = "rest/danceClass/registration/list";
