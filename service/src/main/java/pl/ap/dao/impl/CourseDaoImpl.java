@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import pl.ap.dao.ICourseDao;
 import pl.ap.domain.Course;
+import pl.ap.domain.Instructor;
 
 import java.util.List;
 
@@ -44,6 +45,15 @@ public class CourseDaoImpl extends AbstractDaoImpl<Course> implements ICourseDao
     public List<Course> findRegistration() {
         Criteria criteria = createCriteria();
         criteria.add(Restrictions.eq(Course.FIELD_CAN_REGISTER, true));
+        criteria.addOrder(Order.asc(Course.FIELD_DAY));
+        criteria.addOrder(Order.asc(Course.FIELD_START_TIME));
+        return criteria.list();
+    }
+
+    @Override
+    public List<Course> findByInstructor(Instructor instructor) {
+        Criteria criteria = createCriteria();
+        criteria.add(Restrictions.eq(Course.FIELD_INSTRUCTOR, instructor));
         criteria.addOrder(Order.asc(Course.FIELD_DAY));
         criteria.addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();

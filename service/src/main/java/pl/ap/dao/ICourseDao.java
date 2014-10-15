@@ -1,6 +1,7 @@
 package pl.ap.dao;
 
 import pl.ap.domain.Course;
+import pl.ap.domain.Instructor;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface ICourseDao extends IAbstractDao<Course> {
     List<Course> findInProgress();
 
     List<Course> findRegistration();
+
+    List<Course> findByInstructor(Instructor instructor);
 }

@@ -16,39 +16,35 @@ import java.util.List;
  * Created by parado on 26.03.14.
  */
 @RestController
-public class NewsController
-{
-   private static final Logger LOGGER = Logger.getLogger(NewsController.class);
+public class NewsController {
+    private static final Logger LOGGER = Logger.getLogger(NewsController.class);
 
-   @Resource
-   private INewsService newsService;
+    @Resource
+    private INewsService newsService;
 
-   @RequestMapping(value = NewsApiMappings.FIND_ALL, method = RequestMethod.GET)
-   @ResponseStatus(value = HttpStatus.OK)
-   public List<News> findAll()
-   {
-      LOGGER.info("findAll()");
-      return newsService.findNewsList();
-   }
+    @RequestMapping(value = NewsApiMappings.FIND_ALL, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<News> findAll() {
+        LOGGER.info("findAll()");
+        return newsService.findNewsList();
+    }
 
-   @RequestMapping(value = NewsApiMappings.UPDATE, method = RequestMethod.PUT)
-   @ResponseStatus(value = HttpStatus.OK)
-   public News update(@RequestBody News news, @PathVariable(ApiKeys.SID) String sid)
-   {
-      LOGGER.info("update()");
-      News oldNews = newsService.getBySid(sid);
-      Assert.notNull(oldNews);
-      oldNews.setContent(news.getContent());
-      oldNews.setTitle(news.getTitle());
-      return newsService.update(oldNews);
-   }
+    @RequestMapping(value = NewsApiMappings.UPDATE, method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public News update(@RequestBody News news, @PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("update()");
+        News oldNews = newsService.getBySid(sid);
+        Assert.notNull(oldNews);
+        oldNews.setContent(news.getContent());
+        oldNews.setTitle(news.getTitle());
+        return newsService.update(oldNews);
+    }
 
-   @RequestMapping(value = NewsApiMappings.CREATE, method = RequestMethod.POST)
-   @ResponseStatus(value = HttpStatus.OK)
-   public News create(@RequestBody News news)
-   {
-      LOGGER.info("create()");
-      return newsService.save(news);
-   }
+    @RequestMapping(value = NewsApiMappings.CREATE, method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public News create(@RequestBody News news) {
+        LOGGER.info("create()");
+        return newsService.save(news);
+    }
 
 }
