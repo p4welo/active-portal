@@ -54,8 +54,10 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course create(@RequestBody Course course) {
         LOGGER.info("create()");
+
         Assert.notNull(course.getStyle());
         Assert.notNull(course.getRoom());
+
         return courseService.save(course);
     }
 
@@ -70,8 +72,10 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course publish(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("publish()");
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
+
         return courseService.publish(course);
     }
 
@@ -79,8 +83,10 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
+
         return courseService.deactivate(course);
     }
 
@@ -88,6 +94,7 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course update(@RequestBody Course course, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
+
         Assert.notNull(courseService.getBySid(sid));
         Assert.notNull(course);
         Assert.isTrue(sid.equals(course.getSid()));
@@ -99,8 +106,10 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
+
         courseService.delete(course);
     }
 
@@ -108,9 +117,11 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course setState(@RequestBody CourseStateDto stateDto, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("setState()");
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
         Assert.notNull(stateDto);
+
         return courseService.setState(course, stateDto.getState());
     }
 
@@ -118,9 +129,11 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course setInstructor(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("setInstructor()");
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
         Assert.notNull(instructor);
+
         return courseService.setInstructor(course, instructor);
     }
 
@@ -128,9 +141,11 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course setRoom(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("setRoom()");
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
         Assert.notNull(room);
+
         return courseService.setRoom(course, room);
     }
 }

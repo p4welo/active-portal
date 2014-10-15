@@ -34,7 +34,9 @@ public class CategoryController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseCategory create(@RequestBody CourseCategory category) {
         LOGGER.info("create()");
+
         Assert.notNull(category);
+
         return categoryService.save(category);
     }
 
@@ -49,8 +51,10 @@ public class CategoryController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseCategory activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
+
         CourseCategory category = categoryService.getBySid(sid);
         Assert.notNull(category);
+
         return categoryService.activate(category);
     }
 
@@ -58,8 +62,10 @@ public class CategoryController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseCategory deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
+
         CourseCategory category = categoryService.getBySid(sid);
         Assert.notNull(category);
+
         return categoryService.deactivate(category);
     }
 
@@ -67,6 +73,7 @@ public class CategoryController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseCategory update(@RequestBody CourseCategory category, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
+
         Assert.notNull(categoryService.getBySid(sid));
         Assert.notNull(category);
         Assert.isTrue(sid.equals(category.getSid()));
@@ -78,8 +85,10 @@ public class CategoryController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
+
         CourseCategory category = categoryService.getBySid(sid);
         Assert.notNull(category);
+
         categoryService.delete(category);
     }
 }
