@@ -56,6 +56,10 @@ public class NewsServiceImpl extends AbstractServiceImpl<News> implements INewsS
     @Override
     @Transactional(readOnly = false)
     public News save(News news) {
+//        TODO: ustawianie OS na INACTIVE domyślnie:
+//        if (news.getObjectState == null) {
+//
+//        }
         if (StringUtils.isBlank(news.getCreatedAt())) {
             DateTime dateTime = new DateTime();
             news.setCreatedAt(dateTime.toString(DateTimeUtils.DATE_TIME_FORMAT));

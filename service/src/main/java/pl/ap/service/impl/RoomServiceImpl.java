@@ -22,4 +22,24 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements IRoomS
     protected IAbstractDao<Room> getDao() {
         return roomDao;
     }
+
+    @Override
+    public Room activate(Room room) {
+//      TODO: change room status
+        return roomDao.update(room);
+    }
+
+    @Override
+    public Room deactivate(Room room) {
+        //      TODO: change room status
+        return roomDao.update(room);
+    }
+
+    @Override
+    public Room update(Room r) {
+        Room room = getBySid(r.getSid());
+        room.setCode(r.getCode());
+        room.setName(r.getName());
+        return super.update(room);
+    }
 }

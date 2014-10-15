@@ -33,18 +33,61 @@ public class RoomController {
     @ResponseStatus(value = HttpStatus.OK)
     public Room create(@RequestBody Room room) {
         LOGGER.info("create()");
+
+        Assert.notNull(room);
+
         return roomService.save(room);
+    }
+
+    @RequestMapping(value = RoomApiMappings.GET, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Room get(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("get()");
+        return roomService.getBySid(sid);
+    }
+
+    @RequestMapping(value = RoomApiMappings.ACTIVATE, method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Room activate(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("activate()");
+
+        Room room = roomService.getBySid(sid);
+        Assert.notNull(room);
+
+        return roomService.activate(room);
+    }
+
+    @RequestMapping(value = RoomApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Room deactivate(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("deactivate()");
+
+        Room room = roomService.getBySid(sid);
+        Assert.notNull(room);
+
+        return roomService.deactivate(room);
     }
 
     @RequestMapping(value = RoomApiMappings.UPDATE, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
     public Room update(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-        Room oldRoom = roomService.getBySid(sid);
-        Assert.notNull(oldRoom);
+
+        Assert.notNull(roomService.getBySid(sid));
         Assert.notNull(room);
         Assert.isTrue(sid.equals(room.getSid()));
 
         return roomService.update(room);
+    }
+
+    @RequestMapping(value = RoomApiMappings.DELETE, method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void delete(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("delete()");
+
+        Room room = roomService.getBySid(sid);
+        Assert.notNull(room);
+
+        roomService.delete(room);
     }
 }
