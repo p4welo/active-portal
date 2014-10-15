@@ -7,7 +7,7 @@ define([
 
     module.controller("stylesController", function ($scope, $modal, styleFactory, notificationService) {
 
-        $scope.styles = styleFactory.find();
+        $scope.styles = styleFactory.findAll();
 
         $scope.add = function () {
             var modalInstance = $modal.open(
@@ -17,7 +17,7 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.styles = styleFactory.find();
+                $scope.styles = styleFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         };

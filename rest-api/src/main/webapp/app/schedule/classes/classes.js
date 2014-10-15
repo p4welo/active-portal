@@ -7,7 +7,7 @@ define([
 
     module.controller("classesController", function ($scope, classFactory, notificationService, $modal) {
         $scope.day = '';
-        $scope.classes = classFactory.find();
+        $scope.classes = classFactory.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
         ];

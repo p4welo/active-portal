@@ -7,7 +7,7 @@ define([
 
     module.controller("roomsController", function ($scope, roomFactory, $modal, notificationService) {
 
-        $scope.rooms = roomFactory.find();
+        $scope.rooms = roomFactory.findAll();
 
         $scope.add = function () {
 
@@ -18,7 +18,7 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.rooms = roomFactory.find();
+                $scope.rooms = roomFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         }

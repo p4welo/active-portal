@@ -43,6 +43,6 @@ define([
                 });
         }
 
-        $scope.customers = customerFactory.findCustomers();
+        $scope.customers = customerFactory.findAll();
     });
 });

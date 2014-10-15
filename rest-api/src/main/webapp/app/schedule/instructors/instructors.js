@@ -6,7 +6,7 @@ define([
 ], function (module) {
 
     module.controller("instructorsController", function ($scope, $modal, instructorFactory, notificationService) {
-        $scope.instructors = instructorFactory.find();
+        $scope.instructors = instructorFactory.findAll();
 
         $scope.add = function () {
 
@@ -17,7 +17,7 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.rooms = instructorFactory.find();
+                $scope.rooms = instructorFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         }

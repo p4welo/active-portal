@@ -6,7 +6,7 @@ define([
 ], function (module) {
 
     module.controller("categoriesController", function ($scope, $modal, categoryFactory, notificationService) {
-        $scope.categories = categoryFactory.find();
+        $scope.categories = categoryFactory.findAll();
 
         $scope.add = function() {
             var modalInstance = $modal.open(
@@ -16,7 +16,7 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.categories = categoryFactory.find();
+                $scope.categories = categoryFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         };

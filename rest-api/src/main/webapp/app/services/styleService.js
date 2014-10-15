@@ -8,7 +8,8 @@ define([
         var GET_STYLE_KEY = "test/style/:sid";
 
         return $resource(null, null, {
-            find: {
+
+            findAll: {
                 url: STYLE_LIST_KEY,
                 method: 'GET',
                 isArray: true

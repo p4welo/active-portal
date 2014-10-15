@@ -4,7 +4,7 @@ define([
 ], function (module) {
 
     module.controller("newsListController", function ($scope, newsFactory) {
-        $scope.newsList = newsFactory.find();
+        $scope.newsList = newsFactory.findAll();
 
         $scope.add = function () {
 

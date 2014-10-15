@@ -8,7 +8,7 @@ define([
         var GET_CATEGORY_KEY = "rest/category/:sid";
 
         return $resource(null, null, {
-            find: {
+            findAll: {
                 url: CATEGORY_LIST_KEY,
                 method: 'GET',
                 isArray: true

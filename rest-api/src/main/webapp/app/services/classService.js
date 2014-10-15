@@ -10,7 +10,7 @@ define([
         var GET_CLASS_KEY = "rest/danceClass/:sid";
 
         return $resource(null, null, {
-            find: {
+            findAll: {
                 url: CLASS_LIST_KEY,
                 method: 'GET',
                 isArray: true

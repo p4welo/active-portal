@@ -4,33 +4,42 @@ define([
 
     module.factory('newsFactory', function ($resource) {
 
-        var NEWS_LIST_KEY = "rest/news/list";
-        var CREATE_NEWS_KEY = "rest/news";
-        var GET_NEWS_KEY = "rest/news/:sid";
-
         return $resource(null, null, {
-            find: {
-                url: NEWS_LIST_KEY,
+
+            findAll: {
+                url: "rest/news/list",
+                method: 'GET',
+                isArray: true
+            },
+            findPublic: {
+                url: "rest/news/public/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: CREATE_NEWS_KEY,
+                url: "rest/news/create",
                 method: 'POST'
             },
             get: {
-                url: GET_NEWS_KEY,
+                url: "rest/news/:sid",
                 method: 'GET'
             },
             update: {
-                url: GET_NEWS_KEY,
+                url: "rest/news/:sid",
+                method: 'PUT'
+            },
+            publish: {
+                url: "rest/news/:sid/publish",
+                method: 'PUT'
+            },
+            deactivate: {
+                url: "rest/news/:sid/deactivate",
                 method: 'PUT'
             },
             delete: {
-                url: GET_NEWS_KEY,
+                url: "rest/news/:sid",
                 method: 'DELETE'
             }
         })
     })
-
 });

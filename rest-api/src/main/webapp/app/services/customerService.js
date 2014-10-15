@@ -18,7 +18,7 @@ define([
                     }
                 ];
             },
-            findCustomers: function () {
+            findAll: function () {
                 return [
                     {
                         "id": 0,

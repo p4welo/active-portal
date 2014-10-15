@@ -8,26 +8,38 @@ define([
         var GET_INSTRUCTOR_KEY = "test/instructor/:sid";
 
         return $resource(null, null, {
-            find: {
-                url: INSTRUCTOR_LIST_KEY,
+            findAll: {
+                url: "rest/instructor/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: CREATE_INSTRUCTOR_KEY,
+                url: "rest/instructor/create",
                 method: 'POST'
             },
             get: {
-                url: GET_INSTRUCTOR_KEY,
+                url: "test/instructor/:sid",
                 method: 'GET'
             },
+            activate: {
+                url: "rest/instructor/:sid/activate",
+                method: 'PUT'
+            },
+            deactivate: {
+                url: "rest/instructor/:sid/deactivate",
+                method: 'PUT'
+            },
             update: {
-                url: GET_INSTRUCTOR_KEY,
+                url: "rest/instructor/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: GET_INSTRUCTOR_KEY,
+                url: "rest/instructor/:sid",
                 method: 'DELETE'
+            },
+            courses: {
+                url: "rest/instructor/:sid/courses",
+                method: "GET"
             }
         })
     })
