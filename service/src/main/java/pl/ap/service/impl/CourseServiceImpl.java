@@ -80,6 +80,15 @@ public class CourseServiceImpl extends AbstractServiceImpl<Course> implements IC
     }
 
     @Override
+    public Course update(Course c) {
+        Course course = getBySid(c.getSid());
+        course.setDay(c.getDay());
+        course.setStartTime(c.getStartTime());
+        course.setEndTime(c.getEndTime());
+        return super.update(course);
+    }
+
+    @Override
     @Transactional(readOnly = false)
     public Course setInstructor(Course course, Instructor instructor) {
         instructor = instructorService.getBySid(instructor.getSid());

@@ -38,4 +38,12 @@ public class CourseCategoryServiceImpl extends AbstractServiceImpl<CourseCategor
         //      TODO: change category status
         return courseCategoryDao.update(category);
     }
+
+    @Override
+    public CourseCategory update(CourseCategory c) {
+        CourseCategory category = getBySid(c.getSid());
+        category.setCode(c.getCode());
+        category.setName(c.getName());
+        return super.update(category);
+    }
 }
