@@ -7,4 +7,7 @@ import pl.ap.domain.CourseCategory;
  */
 public interface ICourseCategoryService extends IAbstractService<CourseCategory>
 {
+   CourseCategory activate(CourseCategory category);
+
+   CourseCategory deactivate(CourseCategory category);
 }

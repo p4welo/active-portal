@@ -1,10 +1,11 @@
 package pl.ap.service.impl;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseCategoryDao;
 import pl.ap.domain.CourseCategory;
 import pl.ap.service.ICourseCategoryService;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -12,16 +13,29 @@ import javax.annotation.Resource;
  * Created by parado on 19.03.14.
  */
 @Service(CourseCategoryServiceImpl.BEAN_NAME)
-public class CourseCategoryServiceImpl extends AbstractServiceImpl<CourseCategory> implements ICourseCategoryService
-{
-   public static final String BEAN_NAME = "courseCategoryService";
+public class CourseCategoryServiceImpl extends AbstractServiceImpl<CourseCategory> implements ICourseCategoryService {
 
-   @Resource
-   private ICourseCategoryDao courseCategoryDao;
+    public static final String BEAN_NAME = "courseCategoryService";
 
-   @Override
-   protected IAbstractDao<CourseCategory> getDao()
-   {
-      return courseCategoryDao;
-   }
+    @Resource
+    private ICourseCategoryDao courseCategoryDao;
+
+    @Override
+    protected IAbstractDao<CourseCategory> getDao() {
+        return courseCategoryDao;
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public CourseCategory activate(CourseCategory category) {
+//      TODO: change category status
+        return courseCategoryDao.update(category);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public CourseCategory deactivate(CourseCategory category) {
+        //      TODO: change category status
+        return courseCategoryDao.update(category);
+    }
 }

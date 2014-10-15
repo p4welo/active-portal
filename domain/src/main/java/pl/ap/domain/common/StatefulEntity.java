@@ -16,22 +16,19 @@ import javax.validation.constraints.NotNull;
  * To change this template use File | Settings | File Templates.
  */
 @MappedSuperclass
-public abstract class StatefulEntity extends DataEntity
-{
-   public static final String FIELD_OBJECT_STATE = "objectState";
+public abstract class StatefulEntity extends DataEntity {
+    public static final String FIELD_OBJECT_STATE = "objectState";
 
-   @Column(name = "object_state", nullable = false)
-   @Enumerated(value = EnumType.STRING)
-   @NotNull
-   protected ObjectStateEnum objectState;
+    @Column(name = "object_state", nullable = false)
+    @Enumerated(value = EnumType.ORDINAL)
+    @NotNull
+    protected ObjectStateEnum objectState;
 
-   public ObjectStateEnum getObjectState()
-   {
-      return objectState;
-   }
+    public ObjectStateEnum getObjectState() {
+        return objectState;
+    }
 
-   public void setObjectState(ObjectStateEnum objectState)
-   {
-      this.objectState = objectState;
-   }
+    public void setObjectState(ObjectStateEnum objectState) {
+        this.objectState = objectState;
+    }
 }
