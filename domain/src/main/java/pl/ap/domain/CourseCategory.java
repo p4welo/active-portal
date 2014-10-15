@@ -11,58 +11,51 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "category")
-public class CourseCategory extends IdentifiableEntity
-{
-   public static final String FIELD_NAME = "name";
+public class CourseCategory extends IdentifiableEntity {
+    public static final String FIELD_NAME = "name";
 
-   public static final String FIELD_CODE = "code";
+    public static final String FIELD_CODE = "code";
 
-   public static final int MAX_LENGTH_NAME = 128;
+    public static final int MAX_LENGTH_NAME = 128;
 
-   public static final int MAX_LENGTH_CODE = 32;
+    public static final int MAX_LENGTH_CODE = 32;
 
-   @Id
-   @GeneratedValue
-   @Column
-   private Long id;
+    @Id
+    @GeneratedValue
+    @Column
+    private Long id;
 
-   @NotBlank
-   @Column(length = MAX_LENGTH_NAME)
-   @Length(max = MAX_LENGTH_NAME)
-   private String name;
+    @NotBlank
+    @Column(length = MAX_LENGTH_NAME)
+    @Length(max = MAX_LENGTH_NAME)
+    private String name;
 
-   @NotBlank
-   @Column(length = MAX_LENGTH_CODE)
-   @Length(max = MAX_LENGTH_CODE)
-   private String code;
+    @NotBlank
+    @Column(length = MAX_LENGTH_CODE)
+    @Length(max = MAX_LENGTH_CODE)
+    private String code;
 
-   public String getName()
-   {
-      return name;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public void setName(String name)
-   {
-      this.name = name;
-   }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   public String getCode()
-   {
-      return code;
-   }
+    public String getCode() {
+        return code;
+    }
 
-   public void setCode(String code)
-   {
-      this.code = code;
-   }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-   public Long getId()
-   {
-      return id;
-   }
+    public Long getId() {
+        return id;
+    }
 
-   public void setId(Long id)
-   {
-      this.id = id;
-   }
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

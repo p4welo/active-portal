@@ -7,9 +7,8 @@ package pl.ap.domain.enums;
  * Time: 21:08
  * To change this template use File | Settings | File Templates.
  */
-public enum UserTypeEnum
-{
-   ROLE_ADMIN,
-   ROLE_COMPANY,
-   ROLE_CUSTOMER
+public enum UserTypeEnum {
+    ROLE_ADMIN,
+    ROLE_COMPANY,
+    ROLE_CUSTOMER
 }
