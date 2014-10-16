@@ -92,4 +92,26 @@ public class TestDomainObjectFactory {
         description.setDescription("Bardzo fajny instruktor");
         return description;
     }
+
+    public static News getNews() {
+        News news = new News();
+        news.setSid(generate());
+        news.setObjectState(ObjectStateEnum.ACTIVE);
+        news.setTitle("Jakiś tytuł");
+        news.setContent("Treść bardzo ważnego ogłoszenia");
+        news.setCreatedAt("2014-08-21 16:06");
+        news.setImageSrc("assets/img/image.jpg");
+        news.setImageAlt("Opis obrazka");
+        return news;
+
+    }
+
+    public static Room getRoom() {
+        Room room = new Room();
+        room.setSid(generate());
+        room.setObjectState(ObjectStateEnum.ACTIVE);
+        room.setCode("m");
+        room.setName("Mała sala");
+        return room;
+    }
 }
