@@ -1,6 +1,7 @@
 package pl.ap.domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.DataEntity;
 
 import javax.persistence.*;
@@ -11,7 +12,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "password")
+@Unique(fields = Password.FIELD_USER, message = Password.NON_UNIQUE_USER_MESSAGE, insensitive = false)
 public class Password extends DataEntity {
+
+    public static final String NON_UNIQUE_USER_MESSAGE = "user.not.unique";
 
     public static final String FIELD_USER = "user";
 

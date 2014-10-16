@@ -2,6 +2,7 @@ package pl.ap.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "category")
+@Unique(fields = CourseCategory.FIELD_SID, message = CourseCategory.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class CourseCategory extends IdentifiableEntity {
     public static final String FIELD_NAME = "name";
 

@@ -2,6 +2,7 @@ package pl.ap.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "news")
+@Unique(fields = News.FIELD_SID, message = News.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class News extends IdentifiableEntity {
     public static final String FIELD_TITLE = "title";
 

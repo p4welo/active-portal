@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.UserTypeEnum;
 
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "user")
+@Unique(fields = User.FIELD_SID, message = User.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class User extends IdentifiableEntity {
     public static final String FIELD_FIRST_NAME = "firstName";
 

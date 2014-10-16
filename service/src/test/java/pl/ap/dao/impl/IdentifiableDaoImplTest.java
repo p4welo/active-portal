@@ -65,7 +65,7 @@ public abstract class IdentifiableDaoImplTest<T extends IdentifiableEntity> exte
         assertNull(result);
     }
 
-    //   @Test
+    @Test
     public void testSaveNonUniqueSid() {
         String sameSid = SidUtils.generate();
         T object1 = getEntity();

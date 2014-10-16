@@ -2,6 +2,7 @@ package pl.ap.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.DataEntity;
 
 import javax.persistence.*;
@@ -11,7 +12,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "role")
+@Unique(fields = Role.FIELD_NAME, message = Role.NON_UNIQUE_NAME_MESSAGE, insensitive = false)
 public class Role extends DataEntity {
+
+    public static final String NON_UNIQUE_NAME_MESSAGE = "name.not.unique";
 
     public static final String FIELD_NAME = "name";
 

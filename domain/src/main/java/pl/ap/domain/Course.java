@@ -1,5 +1,6 @@
 package pl.ap.domain;
 
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.CourseLevelEnum;
 import pl.ap.domain.enums.DayEnum;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "dance_class")
+@Unique(fields = Course.FIELD_SID, message = Course.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class Course extends IdentifiableEntity {
     public static final String FIELD_STYLE = "style";
 

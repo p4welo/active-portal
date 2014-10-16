@@ -2,6 +2,7 @@ package pl.ap.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.GenderEnum;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "customer")
+@Unique(fields = Customer.FIELD_SID, message = Customer.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class Customer extends IdentifiableEntity {
 
     @Id

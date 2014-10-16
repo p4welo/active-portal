@@ -1,6 +1,7 @@
 package pl.ap.domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "email")
+@Unique(fields = Email.FIELD_SID, message = Email.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class Email extends IdentifiableEntity {
     public static final String FIELD_SENDER = "sender";
 

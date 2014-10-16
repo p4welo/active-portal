@@ -18,6 +18,14 @@
 
     <bean id="validator" factory-bean="validatorFactory" factory-method="getValidator"/>
 
+    <bean class="pl.ap.domain.validation.UniqueConstraintValidator">
+        <property name="sessionProvider" ref="sessionProvider"/>
+    </bean>
+
+    <bean id="sessionProvider" class="pl.ap.domain.validation.impl.SessionProviderImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <bean id="namingStrategy" class="org.hibernate.cfg.DefaultComponentSafeNamingStrategy"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

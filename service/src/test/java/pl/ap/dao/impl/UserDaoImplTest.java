@@ -1,5 +1,6 @@
 package pl.ap.dao.impl;
 
+import org.junit.Before;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IUserDao;
 import pl.ap.dao.TestDomainObjectFactory;
@@ -20,15 +21,22 @@ public class UserDaoImplTest extends IdentifiableDaoImplTest<User> {
     @Resource
     private IUserDao userDao;
 
+    private Role role;
+
     @Override
     protected IIdentifiableDao<User> getDao() {
         return userDao;
     }
 
+    @Before
+    public void setup() {
+        role = TestDomainObjectFactory.getRole();
+        persist(role);
+    }
+
     @Override
     protected User getEntity() {
-        Role role = TestDomainObjectFactory.getRole();
-        persist(role);
+
         return TestDomainObjectFactory.getUser(role);
     }
 }
