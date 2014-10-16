@@ -316,3 +316,12 @@ ALTER TABLE user DROP COLUMN type;
 --changeset pawel:20
 DELETE FROM role;
 INSERT INTO role (name) VALUES ("Administrator"), ("Sekretariat"), ("Klient");
+
+--changeset pawel:21
+CREATE TABLE course_unit (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  course_id INT(11) NOT NULL,
+  date_time TIMESTAMP NOT NULL,
+  FOREIGN KEY course_fk (course_id) REFERENCES dance_class(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE course_unit ADD INDEX course_unit_course_idx (course_id);
