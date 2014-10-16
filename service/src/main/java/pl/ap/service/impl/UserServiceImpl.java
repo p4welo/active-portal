@@ -47,7 +47,6 @@ public class UserServiceImpl extends IdentifiableServiceImpl<User> implements IU
         user.setLastName("Testowy");
         user.setLogin("test");
         user.setPassword("test");
-        user.setType(UserTypeEnum.ROLE_COMPANY);
         user.setEmail("test@mail.com");
         save(user);
     }
