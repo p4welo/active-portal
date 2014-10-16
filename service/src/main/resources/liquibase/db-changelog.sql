@@ -301,3 +301,18 @@ CREATE TABLE authority_role_relation (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE authority_role_relation ADD INDEX authority_role_relation_authority_idx (authority_id);
 ALTER TABLE authority_role_relation ADD INDEX authority_role_relation_role_idx (role_id);
+
+--changeset pawel:17
+INSERT INTO role (name) VALUES ("ROLE_ADMIN"), ("ROLE_SECRETARY"), ("ROLE_CUSTOMER");
+
+--changeset pawel:18
+DELETE FROM user;
+ALTER TABLE user ADD COLUMN role_id INT(11) NOT NULL;
+ALTER TABLE user ADD CONSTRAINT role_fk FOREIGN KEY (role_id) references role(id);
+
+--changeset pawel:19
+ALTER TABLE user DROP COLUMN type;
+
+--changeset pawel:20
+DELETE FROM role;
+INSERT INTO role (name) VALUES ("Administrator"), ("Sekretariat"), ("Klient");

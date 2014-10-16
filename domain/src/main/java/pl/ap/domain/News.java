@@ -23,20 +23,14 @@ public class News extends IdentifiableEntity {
 
     public static final String FIELD_IMAGE_ALT = "imageAlt";
 
-    public static final int MAX_LENGTH_TITLE = 128;
-
-    public static final int MAX_LENGTH_IMAGE_SRC = 1024;
-
-    public static final int MAX_LENGTH_IMAGE_ALT = 256;
-
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
-    @Column(nullable = false, length = MAX_LENGTH_TITLE)
+    @Column(nullable = false, length = 128)
     @NotBlank
-    @Length(max = MAX_LENGTH_TITLE)
+    @Length(max = 128)
     private String title;
 
     @Column(name = "created_at", nullable = false)
@@ -47,10 +41,12 @@ public class News extends IdentifiableEntity {
     @NotBlank
     private String content;
 
-    @Column(name = "image_src", nullable = true)
+    @Column(name = "image_src", nullable = true, length = 1024)
+    @Length(max = 1024)
     private String imageSrc;
 
-    @Column(name = "image_alt", nullable = true)
+    @Column(name = "image_alt", nullable = true, length = 256)
+    @Length(max = 256)
     private String imageAlt;
 
     public String getTitle() {

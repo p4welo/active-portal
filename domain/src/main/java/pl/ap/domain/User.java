@@ -1,5 +1,8 @@
 package pl.ap.domain;
 
+import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import pl.ap.domain.common.IdentifiableEntity;
@@ -28,29 +31,25 @@ public class User extends IdentifiableEntity {
 
     public static final String FIELD_TYPE = "type";
 
-    public static final int MAX_LENGTH_FIRST_NAME = 25;
-
-    public static final int MAX_LENGTH_LAST_NAME = 35;
-
-    public static final int MAX_LENGTH_LOGIN = 15;
+    public static final String FIELD_ROLE = "role";
 
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
-    @Column(name = "first_name", nullable = false, length = MAX_LENGTH_FIRST_NAME)
-    @Length(max = MAX_LENGTH_FIRST_NAME)
+    @Column(name = "first_name", nullable = false, length = 25)
+    @Length(max = 25)
     @NotBlank
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = MAX_LENGTH_LAST_NAME)
-    @Length(max = MAX_LENGTH_LAST_NAME)
+    @Column(name = "last_name", nullable = false, length = 35)
+    @Length(max = 35)
     @NotBlank
     private String lastName;
 
-    @Column(nullable = false, length = MAX_LENGTH_LOGIN)
-    @Length(max = MAX_LENGTH_LOGIN)
+    @Column(nullable = false, length = 15)
+    @Length(max = 15)
     @NotBlank
     private String login;
 
@@ -61,10 +60,12 @@ public class User extends IdentifiableEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.ORDINAL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = false)
+    @ForeignKey(name = "role_fk")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @NotNull
-    private UserTypeEnum type;
+    private Role role;
 
     public Long getId() {
         return id;
@@ -114,11 +115,11 @@ public class User extends IdentifiableEntity {
         this.lastName = lastName;
     }
 
-    public UserTypeEnum getType() {
-        return type;
+    public Role getRole() {
+        return role;
     }
 
-    public void setType(UserTypeEnum type) {
-        this.type = type;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
