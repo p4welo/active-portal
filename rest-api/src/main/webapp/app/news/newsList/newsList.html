@@ -18,7 +18,6 @@
                 </div>
                 <h2>
                     <i class="gi gi-fire"></i>
-                    Szczegóły
                 </h2>
             </div>
 
@@ -77,12 +76,16 @@
             <tr>
                 <th>Data</th>
                 <th>Tytuł</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="n in newsList | filter: filterName | orderBy: '-createdAt'" ng-click="select(n)" ng-class="{'selected': selected == n}">
                 <td ng-bind="n.createdAt"></td>
                 <td ng-bind="n.title"></td>
+                <td>
+                    {{ n.objectState || translate }}
+                </td>
             </tr>
             </tbody>
         </table>

@@ -246,3 +246,58 @@ CREATE TABLE password (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE password ADD INDEX password_sid_idx (sid);
 ALTER TABLE password ADD INDEX password_user_idx (user_id);
+
+--changeset pawel:11
+ALTER TABLE password DROP COLUMN sid;
+ALTER TABLE password DROP COLUMN object_state;
+
+--changeset pawel:12
+DROP TABLE password;
+CREATE TABLE password (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  value VARCHAR(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--changeset pawel:13
+DROP TABLE password;
+CREATE TABLE password (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  value VARCHAR(128) NOT NULL,
+  user_id INT(11) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE password ADD INDEX password_user_idx (user_id);
+
+--changeset pawel:14
+CREATE TABLE authority (
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+value VARCHAR(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--changeset pawel:15
+ALTER TABLE authority ADD INDEX authority_value_idx (value);
+
+--changeset pawel:16
+CREATE TABLE role (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE password;
+CREATE TABLE password (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  value VARCHAR(128) NOT NULL,
+  user_id INT(11) NOT NULL,
+  FOREIGN KEY user_fk (user_id) REFERENCES user(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE password ADD INDEX password_user_idx (user_id);
+
+CREATE TABLE authority_role_relation (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  authority_id INT(11) NOT NULL,
+  role_id INT(11) NOT NULL,
+  FOREIGN KEY authority_fk (authority_id) REFERENCES authority(id) ON DELETE CASCADE,
+  FOREIGN KEY role_fk (role_id) REFERENCES role(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE authority_role_relation ADD INDEX authority_role_relation_authority_idx (authority_id);
+ALTER TABLE authority_role_relation ADD INDEX authority_role_relation_role_idx (role_id);

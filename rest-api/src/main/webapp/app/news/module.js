@@ -1,9 +1,11 @@
 define([
-    'ngSanitize'
+    'ngSanitize',
+    'ngTranslate'
 ], function () {
 
     return angular.module('activePortal.news', [
-        'ngSanitize'
+        'ngSanitize',
+        'pascalprecht.translate'
     ], function ($stateProvider) {
         $stateProvider
             .state('newsletter', {

@@ -18,7 +18,6 @@
                 </div>
                 <h2>
                     <i class="gi gi-certificate"></i>
-                    Szczegóły
                 </h2>
             </div>
 
@@ -32,6 +31,28 @@
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static" ng-bind="selected.firstName"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName" ng-model="selected.lastName"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.lastName"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nick" class="col-xs-3 control-label">Pseudonim</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Pseudonim" class="form-control" id="nick" ng-model="selected.nick"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.nick"></p>
                     </div>
                 </div>
             </form>

@@ -13,6 +13,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "password")
 public class Password extends DataEntity {
 
+    public static final String FIELD_USER = "user";
+
+    public static final String FIELD_VALUE = "value";
+
     @Id
     @GeneratedValue
     @Column

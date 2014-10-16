@@ -10,27 +10,27 @@ import javax.persistence.*;
  * Created by parado on 2014-10-15.
  */
 @Entity
-@Table(name = "authority")
-public class Authority extends DataEntity {
+@Table(name = "role")
+public class Role extends DataEntity {
 
-    public static final String FIELD_KEY = "key";
+    public static final String FIELD_NAME = "name";
 
     @Id
     @GeneratedValue
     @Column
     private Long id;
 
-    @Column(name = "value", length = 128)
+    @Column(name = "name", length = 128)
     @NotBlank
     @Length(max = 128)
-    private String key;
+    private String name;
 
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
