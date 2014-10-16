@@ -9,12 +9,11 @@ import pl.ap.dao.IAbstractDao;
 import pl.ap.domain.common.DataEntity;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by parado on 2014-10-16.
@@ -24,7 +23,7 @@ import static org.junit.Assert.assertNull;
                 "classpath:spring/test-dao-context.xml"
         })
 @Ignore
-public abstract class AbstractDaoImplTest<T extends DataEntity> extends DaoTest {
+public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericDaoTest {
 
     @Resource
     protected SessionFactory sessionFactory;
@@ -80,8 +79,11 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends DaoTest 
 
     protected abstract T getEntity();
 
-    protected abstract List<T> getEntities();
+//    protected abstract List<T> getEntities();
 
+    protected List<T> getEntities() {
+        return Arrays.asList(getEntity());
+    }
 
     protected void persist(DataEntity... entries) {
         Session session = sessionFactory.getCurrentSession();

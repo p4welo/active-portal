@@ -7,8 +7,6 @@ import pl.ap.domain.Role;
 import pl.ap.domain.User;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * ł
@@ -32,10 +30,5 @@ public class UserDaoImplTest extends IdentifiableDaoImplTest<User> {
         Role role = TestDomainObjectFactory.getRole();
         persist(role);
         return TestDomainObjectFactory.getUser(role);
-    }
-
-    @Override
-    protected List<User> getEntities() {
-        return Arrays.asList(getEntity());
     }
 }

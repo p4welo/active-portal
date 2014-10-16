@@ -1,9 +1,10 @@
 package pl.ap.dao;
 
-import pl.ap.domain.Role;
-import pl.ap.domain.User;
+import pl.ap.domain.*;
+import pl.ap.domain.enums.GenderEnum;
 import pl.ap.domain.enums.ObjectStateEnum;
-import pl.ap.service.util.SidUtils;
+
+import static pl.ap.service.util.SidUtils.generate;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +23,7 @@ public class TestDomainObjectFactory {
 
     public static User getUser(Role role) {
         User user = new User();
-        user.setSid(SidUtils.generate());
+        user.setSid(generate());
         user.setObjectState(ObjectStateEnum.ACTIVE);
         user.setFirstName("firstName");
         user.setLastName("lastName");
@@ -31,5 +32,64 @@ public class TestDomainObjectFactory {
         user.setPassword("VeryLongPassword");
         user.setRole(role);
         return user;
+    }
+
+    public static Instructor getInstructor() {
+        Instructor instructor = new Instructor();
+        instructor.setFirstName("Andrzej");
+        instructor.setLastName("Adamski");
+        instructor.setSid(generate());
+        instructor.setObjectState(ObjectStateEnum.ACTIVE);
+        return instructor;
+    }
+
+    public static Authority getAuthority() {
+        Authority authority = new Authority();
+        authority.setKey("SCHEDULE_VIEW");
+        return authority;
+    }
+
+    public static AuthorityRoleRelation getAuthorityRoleRelation(Authority authority, Role role) {
+        AuthorityRoleRelation relation = new AuthorityRoleRelation();
+        relation.setRole(role);
+        relation.setAuthority(authority);
+        return relation;
+    }
+
+    public static CourseCategory getCourseCategory() {
+        CourseCategory category = new CourseCategory();
+        category.setSid(generate());
+        category.setObjectState(ObjectStateEnum.ACTIVE);
+        category.setCode("solo");
+        category.setName("Zajęcia solo");
+        return category;
+    }
+
+    public static CourseStyle getCourseStyle(CourseCategory category) {
+        CourseStyle style = new CourseStyle();
+        style.setSid(generate());
+        style.setObjectState(ObjectStateEnum.ACTIVE);
+        style.setCategory(category);
+        style.setName("Hip-hop");
+        return style;
+    }
+
+    public static Customer getCustomer() {
+        Customer customer = new Customer();
+        customer.setSid(generate());
+        customer.setObjectState(ObjectStateEnum.ACTIVE);
+        customer.setFirstName("Andrzej");
+        customer.setMobile("987654321");
+        customer.setGender(GenderEnum.M);
+        return customer;
+    }
+
+    public static InstructorDescription getInstructorDescription(Instructor instructor) {
+        InstructorDescription description = new InstructorDescription();
+        description.setSid(generate());
+        description.setObjectState(ObjectStateEnum.ACTIVE);
+        description.setInstructor(instructor);
+        description.setDescription("Bardzo fajny instruktor");
+        return description;
     }
 }

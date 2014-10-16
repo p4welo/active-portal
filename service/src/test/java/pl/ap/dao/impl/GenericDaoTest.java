@@ -15,6 +15,5 @@ import org.springframework.transaction.annotation.Transactional;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional()
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class DaoTest
-{
+public abstract class GenericDaoTest {
 }

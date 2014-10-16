@@ -1,18 +1,15 @@
 package pl.ap.dao.impl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.service.util.SidUtils;
 
-import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -104,5 +101,10 @@ public abstract class IdentifiableDaoImplTest<T extends IdentifiableEntity> exte
 
     protected abstract T getEntity();
 
-    protected abstract List<T> getEntities();
+//    protected abstract List<T> getEntities();
+
+    @Override
+    protected List<T> getEntities() {
+        return Arrays.asList(getEntity());
+    }
 }
