@@ -1,17 +1,41 @@
 package pl.ap.domain;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.GenderEnum;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by parado on 2014-09-24.
  */
-public class Customer {
+@Entity
+@Table(name = "customer")
+public class Customer extends IdentifiableEntity {
+
+    @Id
+    @GeneratedValue
+    @Column
+    private Long id;
+
+    @Column(name = "first_name", length = 25, nullable = false)
+    @NotBlank
+    @Length(max = 25)
     private String firstName;
 
+    @Column(name = "last_name", length = 35)
+    @Length(max = 35)
     private String lastName;
 
+    @Column(length = 9)
+    @Length(max = 9)
     private String mobile;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    @NotNull
     private GenderEnum gender;
 
     public String getFirstName() {
@@ -44,5 +68,15 @@ public class Customer {
 
     public void setGender(GenderEnum gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 }
