@@ -1,6 +1,8 @@
 package pl.ap.dao;
 
 import pl.ap.domain.*;
+import pl.ap.domain.enums.CourseLevelEnum;
+import pl.ap.domain.enums.DayEnum;
 import pl.ap.domain.enums.GenderEnum;
 import pl.ap.domain.enums.ObjectStateEnum;
 
@@ -113,5 +115,23 @@ public class TestDomainObjectFactory {
         room.setCode("m");
         room.setName("Mała sala");
         return room;
+    }
+
+    public static Course getCourse(CourseStyle style, Instructor instructor, Room room) {
+        Course course = new Course();
+        course.setSid(generate());
+        course.setObjectState(ObjectStateEnum.ACTIVE);
+        course.setStyle(style);
+        course.setInstructor(instructor);
+        course.setRoom(room);
+        course.setStartTime("15:30");
+        course.setEndTime("16:30");
+        course.setCanJoin(true);
+        course.setCanRegister(false);
+        course.setInProgress(true);
+        course.setComment("Start 15.09");
+        course.setLevel(CourseLevelEnum.BEGINNER);
+        course.setDay(DayEnum.CZ);
+        return course;
     }
 }
