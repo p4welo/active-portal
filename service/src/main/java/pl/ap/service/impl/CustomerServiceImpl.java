@@ -1,6 +1,7 @@
 package pl.ap.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.ICustomerDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.Customer;
@@ -21,5 +22,19 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
     @Override
     protected IIdentifiableDao<Customer> getDao() {
         return customerDao;
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Customer activate(Customer customer) {
+//      TODO: change customer status
+        return customerDao.update(customer);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Customer deactivate(Customer customer) {
+        //      TODO: change customer status
+        return customerDao.update(customer);
     }
 }
