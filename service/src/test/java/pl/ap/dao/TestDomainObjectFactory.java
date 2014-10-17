@@ -82,7 +82,7 @@ public class TestDomainObjectFactory {
         customer.setObjectState(ObjectStateEnum.ACTIVE);
         customer.setFirstName("Andrzej");
         customer.setMobile("987654321");
-        customer.setGender(GenderEnum.M);
+        customer.setGender(GenderEnum.MALE);
         return customer;
     }
 

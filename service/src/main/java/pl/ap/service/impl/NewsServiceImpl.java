@@ -8,6 +8,7 @@ import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.INewsDao;
 import pl.ap.domain.News;
+import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.INewsService;
 import pl.ap.service.util.DateTimeUtils;
 
@@ -44,14 +45,14 @@ public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements IN
     @Override
     @Transactional(readOnly = false)
     public News publish(News news) {
-//        TODO: change course state
-        return newsDao.update(news);
+        news.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(news);
     }
 
     @Override
     public News deactivate(News news) {
-//        TODO: change course state
-        return newsDao.update(news);
+        news.setObjectState(ObjectStateEnum.INACTIVE);
+        return super.update(news);
     }
 
     @Override
@@ -69,6 +70,7 @@ public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements IN
     }
 
     @Override
+    @Transactional(readOnly = false)
     public News update(News n) {
         News news = getBySid(n.getSid());
         news.setTitle(n.getTitle());
@@ -76,5 +78,17 @@ public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements IN
         news.setImageAlt(n.getImageAlt());
         news.setImageSrc(n.getImageSrc());
         return super.update(news);
+    }
+
+    @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                News.FIELD_OBJECT_STATE,
+                News.FIELD_TITLE,
+                News.FIELD_CREATED_AT,
+                News.FIELD_CONTENT,
+                News.FIELD_IMAGE_SRC,
+                News.FIELD_IMAGE_ALT
+        };
     }
 }

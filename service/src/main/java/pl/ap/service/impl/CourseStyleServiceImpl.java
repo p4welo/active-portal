@@ -37,4 +37,13 @@ public class CourseStyleServiceImpl extends IdentifiableServiceImpl<CourseStyle>
         courseStyle.setCategory(courseCategory);
         return super.save(courseStyle);
     }
+
+    @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                CourseStyle.FIELD_OBJECT_STATE,
+                CourseStyle.FIELD_NAME,
+                CourseStyle.FIELD_CATEGORY
+        };
+    }
 }

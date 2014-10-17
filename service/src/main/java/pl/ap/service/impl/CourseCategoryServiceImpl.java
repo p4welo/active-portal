@@ -6,6 +6,7 @@ import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseCategoryDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.CourseCategory;
+import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.ICourseCategoryService;
 
 import javax.annotation.Resource;
@@ -29,22 +30,32 @@ public class CourseCategoryServiceImpl extends IdentifiableServiceImpl<CourseCat
     @Override
     @Transactional(readOnly = false)
     public CourseCategory activate(CourseCategory category) {
-//      TODO: change category status
-        return courseCategoryDao.update(category);
+        category.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(category);
     }
 
     @Override
     @Transactional(readOnly = false)
     public CourseCategory deactivate(CourseCategory category) {
-        //      TODO: change category status
-        return courseCategoryDao.update(category);
+        category.setObjectState(ObjectStateEnum.INACTIVE);
+        return super.update(category);
     }
 
     @Override
+    @Transactional(readOnly = false)
     public CourseCategory update(CourseCategory c) {
         CourseCategory category = getBySid(c.getSid());
         category.setCode(c.getCode());
         category.setName(c.getName());
         return super.update(category);
+    }
+
+    @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                CourseCategory.FIELD_OBJECT_STATE,
+                CourseCategory.FIELD_CODE,
+                CourseCategory.FIELD_NAME
+        };
     }
 }

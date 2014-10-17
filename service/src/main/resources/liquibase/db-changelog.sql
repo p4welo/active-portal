@@ -328,12 +328,15 @@ ALTER TABLE course_unit ADD INDEX course_unit_course_idx (course_id);
 
 --changeset pawel:22
 CREATE TABLE customer (
-  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  sid VARCHAR(32) NOT NULL,
-  first_name VARCHAR(25) NOT NULL,
-  last_name VARCHAR(35),
-  mobile VARCHAR(9),
-  gender INT(4) NOT NULL,
-  UNIQUE (sid)
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+sid VARCHAR(32) NOT NULL,
+first_name VARCHAR(25) NOT NULL,
+last_name VARCHAR(35),
+mobile VARCHAR(9),
+gender INT(4) NOT NULL,
+UNIQUE (sid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE customer ADD INDEX customer_sid_idx (sid);
+
+--changeset pawel:23
+ALTER TABLE customer ADD COLUMN object_state INT(4) NOT NULL;

@@ -54,7 +54,10 @@ define([
 
                 ACTIVE: "Aktywny",
                 INACTIVE: "Nieaktywny",
-                DELETED: "Usunięty"
+                DELETED: "Usunięty",
+
+                MALE: "Mężczyzna",
+                FEMALE: "Kobieta"
             });
             $translateProvider.preferredLanguage('pl');
         });

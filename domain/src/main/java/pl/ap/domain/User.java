@@ -31,8 +31,6 @@ public class User extends IdentifiableEntity {
 
     public static final String FIELD_EMAIL = "email";
 
-    public static final String FIELD_TYPE = "type";
-
     public static final String FIELD_ROLE = "role";
 
     @Id

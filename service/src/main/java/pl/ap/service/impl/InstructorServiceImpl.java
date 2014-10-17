@@ -8,6 +8,7 @@ import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IInstructorDao;
 import pl.ap.domain.Course;
 import pl.ap.domain.Instructor;
+import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.IInstructorService;
 
 import javax.annotation.Resource;
@@ -32,17 +33,27 @@ public class InstructorServiceImpl extends IdentifiableServiceImpl<Instructor> i
     }
 
     @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                Instructor.FIELD_OBJECT_STATE,
+                Instructor.FIELD_FIRST_NAME,
+                Instructor.FIELD_LAST_NAME,
+                Instructor.FIELD_NICK
+        };
+    }
+
+    @Override
     @Transactional(readOnly = false)
     public Instructor activate(Instructor instructor) {
-//      TODO: change category status
-        return instructorDao.update(instructor);
+        instructor.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(instructor);
     }
 
     @Override
     @Transactional(readOnly = false)
     public Instructor deactivate(Instructor instructor) {
-//      TODO: change category status
-        return instructorDao.update(instructor);
+        instructor.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(instructor);
     }
 
     @Override

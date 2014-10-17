@@ -28,6 +28,14 @@ public class InstructorDescriptionServiceImpl extends IdentifiableServiceImpl<In
     }
 
     @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                InstructorDescription.FIELD_OBJECT_STATE,
+                InstructorDescription.FIELD_DESCRIPTION
+        };
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public InstructorDescription getDescriptionByInstructor(Instructor instructor) {
         return instructorDescriptionDao.getBy(InstructorDescription.FIELD_INSTRUCTOR, instructor);

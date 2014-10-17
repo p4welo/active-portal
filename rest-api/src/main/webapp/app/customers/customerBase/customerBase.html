@@ -42,7 +42,8 @@
                         <label for="firstName" class="col-xs-3 control-label">Imię</label>
 
                         <div class="col-xs-9" ng-if="selected.edit">
-                            <input type="text" placeholder="Imię" class="form-control" id="firstName" ng-model="selected.firstName"/>
+                            <input type="text" placeholder="Imię" class="form-control" id="firstName"
+                                   ng-model="selected.firstName"/>
                         </div>
                         <div class="col-xs-9" ng-if="!selected.edit">
                             <p class="form-control-static" ng-bind="selected.firstName"></p>
@@ -52,17 +53,34 @@
                         <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
 
                         <div class="col-xs-9" ng-if="selected.edit">
-                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName" ng-model="selected.lastName"/>
+                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
+                                   ng-model="selected.lastName"/>
                         </div>
                         <div class="col-xs-9" ng-if="!selected.edit">
                             <p class="form-control-static" ng-bind="selected.lastName"></p>
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="mobile" class="col-xs-3 control-label">Płeć</label>
+
+                        <div class="col-xs-9" ng-if="selected.edit">
+                            <select ng-model="selected.gender" class="form-control">
+                                <option value="MALE">{{ 'MALE' | translate }}</option>
+                                <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-9" ng-if="!selected.edit">
+                            <p class="form-control-static">
+                                {{ selected.gender | translate }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="mobile" class="col-xs-3 control-label">Telefon</label>
 
                         <div class="col-xs-9" ng-if="selected.edit">
-                            <input type="text" placeholder="Telefon" class="form-control" id="mobile" ng-model="selected.mobile"/>
+                            <input type="text" placeholder="Telefon" class="form-control" id="mobile"
+                                   ng-model="selected.mobile"/>
                         </div>
                         <div class="col-xs-9" ng-if="!selected.edit">
                             <p class="form-control-static" ng-bind="selected.mobile"></p>
@@ -71,7 +89,7 @@
 
                     <div class="form-group form-actions" ng-if="selected.edit">
                         <div class="col-xs-9 col-xs-offset-3">
-                            <button class="btn btn-sm btn-primary">
+                            <button class="btn btn-sm btn-primary" ng-click="update(selected)">
                                 <i class="fa fa-check"></i>
                                 Zapisz
                             </button>
@@ -113,7 +131,8 @@
                         </div>
                         <div class="col-xs-6 col-sm-4 pull-right">
                             <div class="input-group" style="margin-top: 3px">
-                                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control ng-valid">
+                                <input type="text" ng-model="filterName" placeholder="Szukaj..."
+                                       class="form-control ng-valid">
                              <span class="input-group-addon">
                                 <i class="fa fa-search"></i>
                             </span>
@@ -122,16 +141,22 @@
                     </div>
                 </div>
                 <div class="row style-alt">
-                    <div class="col-sm-6 col-lg-4" ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
+                    <div class="col-sm-6 col-lg-4"
+                         ng-repeat="customer in customers | orderBy: 'lastName' | filter: filterName | limitTo: 15">
                         <a class="widget widget-hover-effect1 customer-record" ng-click="select(customer)">
-                            <div class="widget-simple" ng-class="{'themed-background-flatie': customer == selected}">
-                                <div class="widget-icon pull-left themed-background-spring animation-fadeIn" ng-if="customer.gender == 'male'">
-                                    <i class="gi gi-user"></i>
+                            <div class="widget-simple" ng-class="{'themed-background-flatie': selected != null && customer.sid == selected.sid}">
+                                <div ng-if="customer.gender == 'MALE'">
+                                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                                        <i class="gi gi-user"></i>
+                                    </div>
                                 </div>
-                                <div class="widget-icon pull-left themed-background-autumn animation-fadeIn" ng-if="customer.gender == 'female'">
-                                    <i class="gi gi-girl"></i>
+                                <div ng-if="customer.gender == 'FEMALE'">
+                                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                                        <i class="gi gi-girl"></i>
+                                    </div>
                                 </div>
-                                <h4 class="widget-content text-right" ng-class="{'widget-content-light': customer == selected}">
+                                <h4 class="widget-content text-right"
+                                    ng-class="{'widget-content-light': selected != null && customer.sid == selected.sid}">
                                     <span ng-bind="customer.firstName"></span>
                                     <br/>
                                     <strong ng-bind="customer.lastName"></strong>

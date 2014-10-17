@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.ICustomerDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.Customer;
+import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.ICustomerService;
 
 import javax.annotation.Resource;
@@ -25,16 +26,27 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
     }
 
     @Override
+    protected String[] getUpdateFields() {
+        return  new String[] {
+                Customer.FIELD_OBJECT_STATE,
+                Customer.FIELD_FIRST_NAME,
+                Customer.FIELD_LAST_NAME,
+                Customer.FIELD_MOBILE,
+                Customer.FIELD_GENDER
+        };
+    }
+
+    @Override
     @Transactional(readOnly = false)
     public Customer activate(Customer customer) {
-//      TODO: change customer status
-        return customerDao.update(customer);
+        customer.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(customer);
     }
 
     @Override
     @Transactional(readOnly = false)
     public Customer deactivate(Customer customer) {
-        //      TODO: change customer status
-        return customerDao.update(customer);
+        customer.setObjectState(ObjectStateEnum.INACTIVE);
+        return super.update(customer);
     }
 }

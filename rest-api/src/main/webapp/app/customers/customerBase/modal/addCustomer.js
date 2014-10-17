@@ -1,9 +1,14 @@
 define([
-    'schedule/module'
+    'schedule/module',
+    'services/customerService'
 ], function (module) {
 
-    module.controller('addCustomerController', function ($scope) {
-
+    module.controller('addCustomerController', function ($scope, customerFactory, $modalInstance) {
+        $scope.create = function (customer) {
+            customerFactory.create(customer).$promise.then(
+                function () {
+                    $modalInstance.close();
+                });
+        }
     });
-
 });

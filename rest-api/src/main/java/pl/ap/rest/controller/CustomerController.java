@@ -31,12 +31,12 @@ public class CustomerController {
 
     @RequestMapping(value = CustomerApiMappings.CREATE, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public Customer create(@RequestBody Customer category) {
+    public Customer create(@RequestBody Customer customer) {
         LOGGER.info("create()");
 
-        Assert.notNull(category);
+        Assert.notNull(customer);
 
-        return customerService.save(category);
+        return customerService.save(customer);
     }
 
     @RequestMapping(value = CustomerApiMappings.GET, method = RequestMethod.GET)
@@ -70,14 +70,14 @@ public class CustomerController {
 
     @RequestMapping(value = CustomerApiMappings.UPDATE, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public Customer update(@RequestBody Customer category, @PathVariable(ApiKeys.SID) String sid) {
+    public Customer update(@RequestBody Customer customer, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
 
         Assert.notNull(customerService.getBySid(sid));
-        Assert.notNull(category);
-        Assert.isTrue(sid.equals(category.getSid()));
+        Assert.notNull(customer);
+        Assert.isTrue(sid.equals(customer.getSid()));
 
-        return customerService.update(category);
+        return customerService.update(customer);
     }
 
     @RequestMapping(value = CustomerApiMappings.DELETE, method = RequestMethod.DELETE)

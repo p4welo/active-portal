@@ -1,10 +1,11 @@
 package pl.ap.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.ap.dao.IAbstractDao;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IRoomDao;
 import pl.ap.domain.Room;
+import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.IRoomService;
 
 import javax.annotation.Resource;
@@ -26,21 +27,31 @@ public class RoomServiceImpl extends IdentifiableServiceImpl<Room> implements IR
 
     @Override
     public Room activate(Room room) {
-//      TODO: change room status
-        return roomDao.update(room);
+        room.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(room);
     }
 
     @Override
     public Room deactivate(Room room) {
-        //      TODO: change room status
-        return roomDao.update(room);
+        room.setObjectState(ObjectStateEnum.INACTIVE);
+        return super.update(room);
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Room update(Room r) {
         Room room = getBySid(r.getSid());
         room.setCode(r.getCode());
         room.setName(r.getName());
         return super.update(room);
+    }
+
+    @Override
+    protected String[] getUpdateFields() {
+        return new String[]{
+                Room.FIELD_OBJECT_STATE,
+                Room.FIELD_NAME,
+                Room.FIELD_CODE
+        };
     }
 }

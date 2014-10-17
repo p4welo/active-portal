@@ -17,6 +17,14 @@ import javax.validation.constraints.NotNull;
 @Unique(fields = Customer.FIELD_SID, message = Customer.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class Customer extends IdentifiableEntity {
 
+    public static final String FIELD_FIRST_NAME = "firstName";
+
+    public static final String FIELD_LAST_NAME = "lastName";
+
+    public static final String FIELD_MOBILE = "mobile";
+
+    public static final String FIELD_GENDER = "gender";
+
     @Id
     @GeneratedValue
     @Column

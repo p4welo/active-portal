@@ -23,4 +23,14 @@ public class EmailServiceImpl extends IdentifiableServiceImpl<Email> implements 
     protected IIdentifiableDao<Email> getDao() {
         return emailDao;
     }
+
+    @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                Email.FIELD_OBJECT_STATE,
+                Email.FIELD_SENDER,
+                Email.FIELD_SUBJECT,
+                Email.FIELD_CONTENT
+        };
+    }
 }

@@ -10,6 +10,7 @@ import pl.ap.domain.CourseStyle;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.Room;
 import pl.ap.domain.enums.CourseStateEnum;
+import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.ICourseService;
 import pl.ap.service.ICourseStyleService;
 import pl.ap.service.IInstructorService;
@@ -69,18 +70,19 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
     @Override
     @Transactional(readOnly = false)
     public Course publish(Course course) {
-//        TODO: change course state
-        return courseDao.update(course);
+        course.setObjectState(ObjectStateEnum.ACTIVE);
+        return super.update(course);
     }
 
     @Override
     @Transactional(readOnly = false)
     public Course deactivate(Course course) {
-//        TODO: change course state
-        return courseDao.update(course);
+        course.setObjectState(ObjectStateEnum.INACTIVE);
+        return super.update(course);
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Course update(Course c) {
         Course course = getBySid(c.getSid());
         course.setDay(c.getDay());
@@ -90,11 +92,29 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
     }
 
     @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                Course.FIELD_OBJECT_STATE,
+                Course.FIELD_STYLE,
+                Course.FIELD_INSTRUCTOR,
+                Course.FIELD_DAY,
+                Course.FIELD_START_TIME,
+                Course.FIELD_END_TIME,
+                Course.FIELD_CAN_JOIN,
+                Course.FIELD_CAN_REGISTER,
+                Course.FIELD_IN_PROGRESS,
+                Course.FIELD_LEVEL,
+                Course.FIELD_ROOM,
+                Course.FIELD_COMMENT
+        };
+    }
+
+    @Override
     @Transactional(readOnly = false)
     public Course setInstructor(Course course, Instructor instructor) {
         instructor = instructorService.getBySid(instructor.getSid());
         course.setInstructor(instructor);
-        return courseDao.update(course);
+        return super.update(course);
     }
 
     @Override
@@ -102,7 +122,7 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
     public Course setRoom(Course course, Room room) {
         room = roomService.getBySid(room.getSid());
         course.setRoom(room);
-        return courseDao.update(course);
+        return super.update(course);
     }
 
     @Override
@@ -123,7 +143,7 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
             course.setInProgress(true);
             course.setCanJoin(false);
         }
-        return courseDao.update(course);
+        return super.update(course);
     }
 
     @Override

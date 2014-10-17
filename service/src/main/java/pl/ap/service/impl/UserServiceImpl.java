@@ -33,6 +33,17 @@ public class UserServiceImpl extends IdentifiableServiceImpl<User> implements IU
     }
 
     @Override
+    protected String[] getUpdateFields() {
+        return new String[] {
+                User.FIELD_OBJECT_STATE,
+                User.FIELD_FIRST_NAME,
+                User.FIELD_LAST_NAME,
+                User.FIELD_EMAIL,
+                User.FIELD_ROLE
+        };
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public User getByLogin(String login) {
         return userDao.getByLogin(login);
