@@ -55,7 +55,7 @@ public class NewsController {
         return newsService.getBySid(sid);
     }
 
-    @RequestMapping(value = NewsApiMappings.PUBLISH, method = RequestMethod.PUT)
+    @RequestMapping(value = NewsApiMappings.PUBLISH, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public News publish(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("publish()");
@@ -66,7 +66,7 @@ public class NewsController {
         return newsService.publish(news);
     }
 
-    @RequestMapping(value = NewsApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = NewsApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public News deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

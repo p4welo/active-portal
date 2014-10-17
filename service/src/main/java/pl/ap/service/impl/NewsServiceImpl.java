@@ -50,6 +50,7 @@ public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements IN
     }
 
     @Override
+    @Transactional(readOnly = false)
     public News deactivate(News news) {
         news.setObjectState(ObjectStateEnum.INACTIVE);
         return super.update(news);
@@ -58,10 +59,9 @@ public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements IN
     @Override
     @Transactional(readOnly = false)
     public News save(News news) {
-//        TODO: ustawianie OS na INACTIVE domyślnie:
-//        if (news.getObjectState == null) {
-//
-//        }
+        if (news.getObjectState() == null) {
+            news.setObjectState(ObjectStateEnum.INACTIVE);
+        }
         if (StringUtils.isBlank(news.getCreatedAt())) {
             DateTime dateTime = new DateTime();
             news.setCreatedAt(dateTime.toString(DateTimeUtils.DATE_TIME_FORMAT));

@@ -30,16 +30,33 @@ define([
             },
             publish: {
                 url: "rest/news/:sid/publish",
-                method: 'PUT'
+                method: 'GET'
             },
             deactivate: {
                 url: "rest/news/:sid/deactivate",
-                method: 'PUT'
+                method: 'GET'
             },
             delete: {
                 url: "rest/news/:sid",
                 method: 'DELETE'
             }
         })
+    });
+
+    module.service("newsService", function () {
+        this.copyProperties = function (news) {
+            if (news == null) {
+                return;
+            }
+            return {
+                sid: news.sid,
+                objectState: news.objectState,
+                title: news.title,
+                createdAt: news.createdAt,
+                content: news.content,
+                imageSrc: news.imageSrc,
+                imageAlt: news.imageAlt
+            }
+        }
     })
 });
