@@ -30,5 +30,9 @@ define([
             $scope.selected = styleService.copyProperties(style);
             $scope.selected.edit = false;
         }
+
+        $scope.resolveStatusCss = function (style) {
+            return {'label-success': style.objectState == 'ACTIVE', 'label-danger': style.objectState == 'INACTIVE'}
+        }
     });
 });

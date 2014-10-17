@@ -28,5 +28,9 @@ define([
             $scope.selected = instructorService.copyProperties(instructor);
             $scope.selected.edit = false;
         }
+
+        $scope.resolveStatusCss = function (instructor) {
+            return {'label-success': instructor.objectState == 'ACTIVE', 'label-danger': instructor.objectState == 'INACTIVE'}
+        }
     });
 });

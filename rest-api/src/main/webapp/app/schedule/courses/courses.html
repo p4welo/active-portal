@@ -56,6 +56,7 @@
                 <th>Nazwa</th>
                 <th>Sala</th>
                 <th>Instruktor</th>
+                <th>Dostępność</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -70,6 +71,11 @@
                     <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
                     <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
                     <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+                </td>
+                <td>
+                    <span class="label" ng-class="resolveStatusCss(course)">
+                        {{ course.objectState || translate }}
+                    </span>
                 </td>
             </tr>
             </tbody>

@@ -29,5 +29,9 @@ define([
             $scope.selected = categoryService.copyProperties(category);
             $scope.selected.edit = false;
         }
+
+        $scope.resolveStatusCss = function (category) {
+            return {'label-success': category.objectState == 'ACTIVE', 'label-danger': category.objectState == 'INACTIVE'}
+        }
     });
 });

@@ -70,6 +70,7 @@
                 <th class="text-center" style="width: 50px">Id</th>
                 <th>Symbol</th>
                 <th>Nazwa</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
@@ -78,6 +79,11 @@
                 <td ng-bind="category.id"></td>
                 <td ng-bind="category.code"></td>
                 <td ng-bind="category.name"></td>
+                <td>
+                    <span class="label" ng-class="resolveStatusCss(category)">
+                        {{ category.objectState || translate }}
+                    </span>
+                </td>
             </tr>
             </tbody>
         </table>

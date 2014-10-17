@@ -33,5 +33,9 @@ define([
             $scope.selected = courseService.copyProperties(course);
             $scope.selected.edit = false;
         }
+
+        $scope.resolveStatusCss = function (course) {
+            return {'label-success': course.objectState == 'ACTIVE', 'label-danger': course.objectState == 'INACTIVE'}
+        }
     });
 });

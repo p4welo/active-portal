@@ -59,12 +59,18 @@
             <tr>
                 <th>Nazwa</th>
                 <th>Kategoria</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="select(style)" ng-class="{'selected': selected != null && style.sid == selected.sid}">
                 <td ng-bind="style.name"></td>
                 <td ng-bind="style.category.name"></td>
+                <td>
+                    <span class="label" ng-class="resolveStatusCss(style)">
+                        {{ style.objectState || translate }}
+                    </span>
+                </td>
             </tr>
             </tbody>
         </table>
