@@ -340,3 +340,15 @@ ALTER TABLE customer ADD INDEX customer_sid_idx (sid);
 
 --changeset pawel:23
 ALTER TABLE customer ADD COLUMN object_state INT(4) NOT NULL;
+
+--changeset pawel:24
+CREATE TABLE customer_presence (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT(11) NOT NULL,
+  lesson_id INT(11) NOT NULL,
+  present BOOLEAN NOT NULL,
+  FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+  FOREIGN KEY lesson_fk (lesson_id) REFERENCES course_unit(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE customer_presence ADD INDEX customer_presence_customer_idx (customer_id);
+ALTER TABLE customer_presence ADD INDEX customer_presence_lesson_idx (lesson_id);

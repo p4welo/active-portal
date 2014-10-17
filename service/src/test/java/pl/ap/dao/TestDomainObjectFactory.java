@@ -1,5 +1,6 @@
 package pl.ap.dao;
 
+import org.joda.time.DateTime;
 import pl.ap.domain.*;
 import pl.ap.domain.enums.CourseLevelEnum;
 import pl.ap.domain.enums.DayEnum;
@@ -133,5 +134,20 @@ public class TestDomainObjectFactory {
         course.setLevel(CourseLevelEnum.BEGINNER);
         course.setDay(DayEnum.CZ);
         return course;
+    }
+
+    public static CourseUnit getCourseUnit(Course course) {
+        CourseUnit unit = new CourseUnit();
+        unit.setCourse(course);
+        unit.setDateTime(new DateTime());
+        return unit;
+    }
+
+    public static CustomerPresence getCustomerPresence(Customer customer, CourseUnit unit) {
+        CustomerPresence presence = new CustomerPresence();
+        presence.setCustomer(customer);
+        presence.setLesson(unit);
+        presence.setPresent(true);
+        return presence;
     }
 }
