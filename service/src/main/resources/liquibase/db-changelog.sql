@@ -352,3 +352,14 @@ CREATE TABLE customer_presence (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE customer_presence ADD INDEX customer_presence_customer_idx (customer_id);
 ALTER TABLE customer_presence ADD INDEX customer_presence_lesson_idx (lesson_id);
+
+--changeset pawel:25
+CREATE TABLE customer_subscription (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT(11) NOT NULL,
+  course_id INT(11) NOT NULL,
+  FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+  FOREIGN KEY course_fk (course_id) REFERENCES dance_class(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE customer_subscription ADD INDEX customer_subscription_customer_idx (customer_id);
+ALTER TABLE customer_subscription ADD INDEX customer_subscription_course_idx (course_id);

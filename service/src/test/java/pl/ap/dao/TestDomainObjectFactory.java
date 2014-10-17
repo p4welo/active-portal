@@ -150,4 +150,11 @@ public class TestDomainObjectFactory {
         presence.setPresent(true);
         return presence;
     }
+
+    public static CustomerSubscription getCustomerSubscription(Customer customer, Course course) {
+        CustomerSubscription subscription = new CustomerSubscription();
+        subscription.setCustomer(customer);
+        subscription.setCourse(course);
+        return subscription;
+    }
 }
