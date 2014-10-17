@@ -96,15 +96,17 @@
                         </div>
                     </div>
                 </form>
+                <h5>Kursy</h5>
 
+                <h5>Obecności</h5>
                 <table class="table table-vcenter table-bordered table-condensed" id="general-table">
-                    <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Kurs</th>
-                        <th>Obecność</th>
-                    </tr>
-                    </thead>
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>Data</th>-->
+                        <!--<th>Kurs</th>-->
+                        <!--<th>Obecność</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
                     <tbody>
                     <tr ng-repeat="presence in customerPresence | orderBy: '-date'">
                         <td ng-bind="presence.date | date:'dd.MM.yyyy hh:mm'"></td>
