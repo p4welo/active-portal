@@ -5,7 +5,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller("roomsController", function ($scope, roomFactory, $modal, notificationService) {
+    module.controller("roomsController", function ($scope, roomFactory, roomService, $modal, notificationService) {
 
         $scope.rooms = roomFactory.findAll();
 
@@ -24,11 +24,11 @@ define([
         }
 
         $scope.select = function (room) {
-            if ($scope.selected == room) {
+            if ($scope.selected != null && $scope.selected.sid == room.sid) {
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = room;
+            $scope.selected = roomService.copyProperties(room);
             $scope.selected.edit = false;
         }
 

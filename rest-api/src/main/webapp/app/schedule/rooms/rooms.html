@@ -83,7 +83,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="room in rooms | filter: filterName" ng-click="select(room)" ng-class="{'selected': selected != null && room.sid == selected.sid}}">
+            <tr ng-repeat="room in rooms | filter: filterName" ng-click="select(room)" ng-class="{'selected': selected != null && room.sid == selected.sid}">
                 <td ng-bind="room.id"></td>
                 <td ng-bind="room.code"></td>
                 <td ng-bind="room.name"></td>

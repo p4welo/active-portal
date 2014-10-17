@@ -36,6 +36,19 @@ define([
                 method: 'DELETE'
             }
         })
-    })
+    });
 
+    module.service("roomService", function () {
+        this.copyProperties = function (room) {
+            if (room == null) {
+                return;
+            }
+            return {
+                sid: room.sid,
+                objectState: room.objectState,
+                name: room.name,
+                code: room.code
+            }
+        }
+    })
 });

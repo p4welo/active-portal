@@ -5,7 +5,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("stylesController", function ($scope, $modal, styleFactory, notificationService) {
+    module.controller("stylesController", function ($scope, $modal, styleFactory, styleService, notificationService) {
 
         $scope.styles = styleFactory.findAll();
 
@@ -23,11 +23,11 @@ define([
         };
 
         $scope.select = function (style) {
-            if ($scope.selected == style) {
+            if ($scope.selected != null && $scope.selected.sid == style.sid) {
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = style;
+            $scope.selected = styleService.copyProperties(style);
             $scope.selected.edit = false;
         }
     });

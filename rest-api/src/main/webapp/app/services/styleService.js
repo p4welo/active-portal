@@ -40,6 +40,19 @@ define([
                 method: "PUT"
             }
         })
-    })
+    });
 
+    module.service("styleService", function () {
+        this.copyProperties = function (style) {
+            if (style == null) {
+                return;
+            }
+            return {
+                sid: style.sid,
+                objectState: style.objectState,
+                name: style.name,
+                category: style.category
+            }
+        }
+    })
 });
