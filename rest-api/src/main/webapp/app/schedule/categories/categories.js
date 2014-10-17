@@ -5,7 +5,7 @@ define([
     'services/categoryService'
 ], function (module) {
 
-    module.controller("categoriesController", function ($scope, $modal, categoryFactory, notificationService) {
+    module.controller("categoriesController", function ($scope, $modal, categoryFactory, categoryService, notificationService) {
         $scope.categories = categoryFactory.findAll();
 
         $scope.add = function() {
@@ -22,11 +22,11 @@ define([
         };
 
         $scope.select = function (category) {
-            if ($scope.selected == category) {
+            if ($scope.selected != null && $scope.selected.sid == category.sid) {
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = category;
+            $scope.selected = categoryService.copyProperties(category);
             $scope.selected.edit = false;
         }
     });

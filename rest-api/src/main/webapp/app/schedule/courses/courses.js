@@ -5,7 +5,7 @@ define([
     'services/courseService'
 ], function (module) {
 
-    module.controller("coursesController", function ($scope, courseFactory, notificationService, $modal) {
+    module.controller("coursesController", function ($scope, courseFactory, courseService, notificationService, $modal) {
         $scope.day = '';
         $scope.classes = courseFactory.findAll();
         $scope.days = [
@@ -23,7 +23,15 @@ define([
                 $scope.classes = courseFactory.find();
                 notificationService.success("Pomyślnie zapisano");
             });
-
         };
+
+        $scope.select = function (course) {
+            if ($scope.selected != null && $scope.selected.sid == course.sid) {
+                $scope.selected = null;
+                return;
+            }
+            $scope.selected = courseService.copyProperties(course);
+            $scope.selected.edit = false;
+        }
     });
 });

@@ -62,7 +62,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="select(style)" ng-class="{'selected': selected == style}">
+            <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="select(style)" ng-class="{'selected': selected != null && style.sid == selected.sid}">
                 <td ng-bind="style.name"></td>
                 <td ng-bind="style.category.name"></td>
             </tr>

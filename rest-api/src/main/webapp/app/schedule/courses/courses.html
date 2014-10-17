@@ -60,16 +60,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="class in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="edit(class)">
-                <td>{{class.day | translate}}</td>
-                <td>{{class.startTime}} - {{class.endTime}}</td>
-                <td ng-bind="class.style.name"></td>
-                <td>{{class.room.name | translate}}</td>
-                <td>{{class.instructor.firstName}} {{class.instructor.lastName}}</td>
+            <tr ng-repeat="course in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="select(course)" ng-class="{'selected': selected != null && course.sid == selected.sid}">
+                <td>{{course.day | translate}}</td>
+                <td>{{course.startTime}} - {{course.endTime}}</td>
+                <td ng-bind="course.style.name"></td>
+                <td>{{course.room.name | translate}}</td>
+                <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
                 <td>
-                    <span ng-if="!class.inProgress && class.canRegister">Zapisy</span>
-                    <span ng-if="class.inProgress && !class.canJoin">Brak miejsc</span>
-                    <span ng-if="class.inProgress && class.canJoin">Można dołączyć</span>
+                    <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
+                    <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                    <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
                 </td>
             </tr>
             </tbody>

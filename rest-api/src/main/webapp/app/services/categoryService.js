@@ -36,5 +36,19 @@ define([
                 method: 'DELETE'
             }
         })
+    });
+
+    module.service("categoryService", function () {
+        this.copyProperties = function (category) {
+            if (category == null) {
+                return;
+            }
+            return {
+                sid: category.sid,
+                objectState: category.objectState,
+                name: category.name,
+                code: category.code
+            }
+        }
     })
 });

@@ -11,7 +11,8 @@
         <div class="block">
             <div class="block-title">
                 <div class="block-options pull-right">
-                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip" ng-class="{'active': selected.edit}">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
+                       ng-class="{'active': selected.edit}">
                         <i class="fa fa-pencil"></i>
                         Edytuj
                     </a>
@@ -72,7 +73,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="category in categories | filter: filterName" ng-click="select(category)" ng-class="{'selected': selected == category}">
+            <tr ng-repeat="category in categories | filter: filterName" ng-click="select(category)"
+                ng-class="{'selected':selected != null && category.sid == selected.sid}">
                 <td ng-bind="category.id"></td>
                 <td ng-bind="category.code"></td>
                 <td ng-bind="category.name"></td>
