@@ -30,6 +30,15 @@ define([
             $scope.selected.edit = false;
         }
 
+        $scope.update = function (category) {
+            delete category['edit'];
+            categoryFactory.update({ sid: category.sid }, category).$promise.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    $scope.categories = categoryFactory.findAll();
+                });
+        }
+
         $scope.resolveStatusCss = function (category) {
             return {'label-success': category.objectState == 'ACTIVE', 'label-danger': category.objectState == 'INACTIVE'}
         }
