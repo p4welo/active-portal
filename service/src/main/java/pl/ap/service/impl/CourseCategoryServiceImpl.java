@@ -29,20 +29,6 @@ public class CourseCategoryServiceImpl extends IdentifiableServiceImpl<CourseCat
 
     @Override
     @Transactional(readOnly = false)
-    public CourseCategory activate(CourseCategory category) {
-        category.setObjectState(ObjectStateEnum.ACTIVE);
-        return super.update(category);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public CourseCategory deactivate(CourseCategory category) {
-        category.setObjectState(ObjectStateEnum.INACTIVE);
-        return super.update(category);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
     public CourseCategory update(CourseCategory c) {
         CourseCategory category = getBySid(c.getSid());
         category.setCode(c.getCode());

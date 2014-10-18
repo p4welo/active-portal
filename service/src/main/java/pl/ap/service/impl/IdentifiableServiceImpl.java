@@ -35,6 +35,18 @@ public abstract class IdentifiableServiceImpl<T extends IdentifiableEntity> exte
         return getDao().getBySid(sid);
     }
 
+    @Transactional(readOnly = false)
+    public T activate(T obj) {
+        obj.setObjectState(ObjectStateEnum.ACTIVE);
+        return update(obj);
+    }
+
+    @Transactional(readOnly = false)
+    public T deactivate(T obj) {
+        obj.setObjectState(ObjectStateEnum.INACTIVE);
+        return update(obj);
+    }
+
     @Override
     @Transactional
     public T update(T entity) {

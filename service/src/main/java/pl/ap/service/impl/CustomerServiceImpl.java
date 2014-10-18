@@ -35,18 +35,4 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
                 Customer.FIELD_GENDER
         };
     }
-
-    @Override
-    @Transactional(readOnly = false)
-    public Customer activate(Customer customer) {
-        customer.setObjectState(ObjectStateEnum.ACTIVE);
-        return super.update(customer);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public Customer deactivate(Customer customer) {
-        customer.setObjectState(ObjectStateEnum.INACTIVE);
-        return super.update(customer);
-    }
 }

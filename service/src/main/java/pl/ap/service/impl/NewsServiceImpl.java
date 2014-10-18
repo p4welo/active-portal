@@ -51,13 +51,6 @@ public class NewsServiceImpl extends IdentifiableServiceImpl<News> implements IN
 
     @Override
     @Transactional(readOnly = false)
-    public News deactivate(News news) {
-        news.setObjectState(ObjectStateEnum.INACTIVE);
-        return super.update(news);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
     public News save(News news) {
         if (news.getObjectState() == null) {
             news.setObjectState(ObjectStateEnum.INACTIVE);

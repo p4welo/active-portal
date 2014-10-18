@@ -26,18 +26,6 @@ public class RoomServiceImpl extends IdentifiableServiceImpl<Room> implements IR
     }
 
     @Override
-    public Room activate(Room room) {
-        room.setObjectState(ObjectStateEnum.ACTIVE);
-        return super.update(room);
-    }
-
-    @Override
-    public Room deactivate(Room room) {
-        room.setObjectState(ObjectStateEnum.INACTIVE);
-        return super.update(room);
-    }
-
-    @Override
     @Transactional(readOnly = false)
     public Room update(Room r) {
         Room room = getBySid(r.getSid());

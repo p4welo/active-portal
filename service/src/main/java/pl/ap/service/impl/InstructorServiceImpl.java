@@ -43,20 +43,6 @@ public class InstructorServiceImpl extends IdentifiableServiceImpl<Instructor> i
     }
 
     @Override
-    @Transactional(readOnly = false)
-    public Instructor activate(Instructor instructor) {
-        instructor.setObjectState(ObjectStateEnum.ACTIVE);
-        return super.update(instructor);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public Instructor deactivate(Instructor instructor) {
-        instructor.setObjectState(ObjectStateEnum.ACTIVE);
-        return super.update(instructor);
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public List<Course> findCourses(Instructor instructor) {
         return courseDao.findByInstructor(instructor);
