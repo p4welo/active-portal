@@ -18,8 +18,8 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.rooms = roomFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
+                $scope.rooms = roomFactory.findAll();
             });
         }
 
@@ -30,6 +30,15 @@ define([
             }
             $scope.selected = roomService.copyProperties(room);
             $scope.selected.edit = false;
+        }
+
+        $scope.update = function (room) {
+            delete room['edit'];
+            roomFactory.update({ sid: room.sid }, room).$promise.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    $scope.rooms = roomFactory.findAll();
+                });
         }
 
         $scope.resolveStatusCss = function (room) {

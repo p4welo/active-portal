@@ -37,7 +37,8 @@ define([
             },
             courses: {
                 url: "rest/instructor/:sid/courses",
-                method: "GET"
+                method: "GET",
+                isArray: true
             }
         })
     });

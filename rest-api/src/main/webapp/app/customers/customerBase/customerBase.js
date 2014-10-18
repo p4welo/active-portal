@@ -43,8 +43,8 @@ define([
             });
 
             modalInstance.result.then(function () {
-                $scope.customers = customerFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
+                $scope.customers = customerFactory.findAll();
             });
         }
 

@@ -11,7 +11,8 @@
         <div class="block">
             <div class="block-title">
                 <div class="block-options pull-right">
-                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip" ng-class="{'active': selected.edit}">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
+                       ng-class="{'active': selected.edit}">
                         <i class="fa fa-pencil"></i>
                         Edytuj
                     </a>
@@ -27,7 +28,8 @@
                     <label for="firstName" class="col-xs-3 control-label">Imię</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <input type="text" placeholder="Imię" class="form-control" id="firstName" ng-model="selected.firstName"/>
+                        <input type="text" placeholder="Imię" class="form-control" id="firstName"
+                               ng-model="selected.firstName"/>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static" ng-bind="selected.firstName"></p>
@@ -38,7 +40,8 @@
                     <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName" ng-model="selected.lastName"/>
+                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
+                               ng-model="selected.lastName"/>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static" ng-bind="selected.lastName"></p>
@@ -49,7 +52,8 @@
                     <label for="nick" class="col-xs-3 control-label">Pseudonim</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <input type="text" placeholder="Pseudonim" class="form-control" id="nick" ng-model="selected.nick"/>
+                        <input type="text" placeholder="Pseudonim" class="form-control" id="nick"
+                               ng-model="selected.nick"/>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static" ng-bind="selected.nick"></p>
@@ -60,22 +64,19 @@
             <table class="table table-vcenter table-bordered table-condensed" id="general-table">
                 <!--<thead>-->
                 <!--<tr>-->
-                    <!--<th>Dzień</th>-->
-                    <!--<th>Godzina</th>-->
-                    <!--<th>Kurs</th>-->
+                <!--<th>Dzień</th>-->
+                <!--<th>Godzina</th>-->
+                <!--<th>Kurs</th>-->
                 <!--</tr>-->
                 <!--</thead>-->
                 <tbody>
-                    <tr>
-                        <td>Poniedziałek</td>
-                        <td>18:00</td>
-                        <td>Salsa solo</td>
-                    </tr>
-                    <tr>
-                        <td>Wtorek</td>
-                        <td>18:30</td>
-                        <td>Bachata</td>
-                    </tr>
+                <tr ng-repeat="c in selectedCourses">
+                    <td>
+                        {{c.day | translate}}
+                    </td>
+                    <td ng-bind="c.startTime"></td>
+                    <td ng-bind="c.style.name"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -109,7 +110,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="instructor in instructors | filter: filterName" ng-click="select(instructor)" ng-class="{'selected': selected != null && instructor.sid == selected.sid}">
+            <tr ng-repeat="instructor in instructors | filter: filterName" ng-click="select(instructor)"
+                ng-class="{'selected': selected != null && instructor.sid == selected.sid}">
                 <td ng-bind="instructor.id"></td>
                 <td ng-bind="instructor.firstName"></td>
                 <td ng-bind="instructor.lastName"></td>

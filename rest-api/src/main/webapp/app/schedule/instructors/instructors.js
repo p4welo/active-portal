@@ -7,6 +7,7 @@ define([
 
     module.controller("instructorsController", function ($scope, $modal, instructorFactory, instructorService, notificationService) {
         $scope.instructors = instructorFactory.findAll();
+        $scope.selectedCourses = [];
 
         $scope.add = function () {
             var modalInstance = $modal.open({
@@ -25,7 +26,12 @@ define([
                 $scope.selected = null;
                 return;
             }
+            $scope.selectedCourses = [];
             $scope.selected = instructorService.copyProperties(instructor);
+            instructorFactory.courses({sid: instructor.sid}).$promise.then(
+                function (value) {
+                    $scope.selectedCourses = value;
+                });
             $scope.selected.edit = false;
         }
 

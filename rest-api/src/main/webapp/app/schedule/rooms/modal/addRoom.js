@@ -11,8 +11,10 @@ define([
         };
 
         $scope.save = function (room) {
-            roomFactory.create(room);
-            $modalInstance.close();
+            roomFactory.create(room).$promise.then(
+                function () {
+                    $modalInstance.close();
+                });
         }
     });
 
