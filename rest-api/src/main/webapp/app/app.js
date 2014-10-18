@@ -60,5 +60,28 @@ define([
                 FEMALE: "Kobieta"
             });
             $translateProvider.preferredLanguage('pl');
-        });
+        })
+
+        .config(function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
+
+            $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
+                    return {
+                        'responseError': function (rejection) {
+
+                            var status = rejection.status;
+                            if (status == 401) {
+                                window.location.replace("/login.html");
+                            }
+                            else if (status == 403) {
+                                $location.path("/403");
+                            }
+                            else if (status == 500) {
+//                                notificationService.error('Internal server error');
+                            }
+                            return $q.reject(rejection);
+                        }
+                    };
+                }
+            );
+        })
 });

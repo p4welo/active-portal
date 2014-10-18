@@ -21,11 +21,11 @@ define([
             },
             activate: {
                 url: "rest/style/:sid/activate",
-                method: 'PUT'
+                method: 'GET'
             },
             deactivate: {
                 url: "rest/style/:sid/deactivate",
-                method: 'PUT'
+                method: 'GET'
             },
             update: {
                 url: "rest/style/:sid",

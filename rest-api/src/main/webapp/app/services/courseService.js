@@ -31,11 +31,11 @@ define([
             },
             publish: {
                 url: "rest/course/:sid/publish",
-                method: 'PUT'
+                method: 'GET'
             },
             deactivate: {
                 url: "rest/course/:sid/deactivate",
-                method: 'PUT'
+                method: 'GET'
             },
             update: {
                 url: "rest/course/:sid",

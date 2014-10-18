@@ -17,11 +17,11 @@ define([
             },
             activate: {
                 url: "rest/room/:sid/activate",
-                method: 'PUT'
+                method: 'GET'
             },
             deactivate: {
                 url: "rest/room/:sid/deactivate",
-                method: 'PUT'
+                method: 'GET'
             },
             get: {
                 url: "rest/room/:sid",
