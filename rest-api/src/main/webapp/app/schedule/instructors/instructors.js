@@ -35,6 +35,15 @@ define([
             $scope.selected.edit = false;
         }
 
+        $scope.update = function (instructor) {
+            delete instructor['edit'];
+            instructorFactory.update({ sid: instructor.sid }, instructor).$promise.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    $scope.instructors = instructorFactory.findAll();
+                });
+        }
+
         $scope.resolveStatusCss = function (instructor) {
             return {'label-success': instructor.objectState == 'ACTIVE', 'label-danger': instructor.objectState == 'INACTIVE'}
         }

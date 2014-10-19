@@ -59,16 +59,19 @@
                         <p class="form-control-static" ng-bind="selected.nick"></p>
                     </div>
                 </div>
+
+                <div class="form-group form-actions" ng-if="selected.edit">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-primary" ng-click="update(selected)">
+                            <i class="fa fa-check"></i>
+                            Zapisz
+                        </button>
+                    </div>
+                </div>
             </form>
 
+            <h5>Kursy</h5>
             <table class="table table-vcenter table-bordered table-condensed" id="general-table">
-                <!--<thead>-->
-                <!--<tr>-->
-                <!--<th>Dzień</th>-->
-                <!--<th>Godzina</th>-->
-                <!--<th>Kurs</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
                 <tbody>
                 <tr ng-repeat="c in selectedCourses">
                     <td>

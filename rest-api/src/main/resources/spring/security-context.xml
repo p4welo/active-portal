@@ -18,7 +18,10 @@
                     authentication-failure-url="/login.html"
                     login-processing-url="/auth"
                     username-parameter="login"
-                    password-parameter="pass" />
+                    password-parameter="pass"
+                    default-target-url="/index.html"
+                    always-use-default-target="true"
+                />
         <http-basic/>
         <logout logout-success-url="/login.html" logout-url="/logout" invalidate-session="true"/>
     </http>
@@ -30,5 +33,4 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
-
 </beans:beans>
