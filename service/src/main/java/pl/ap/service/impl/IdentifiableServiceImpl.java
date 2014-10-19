@@ -38,13 +38,13 @@ public abstract class IdentifiableServiceImpl<T extends IdentifiableEntity> exte
     @Transactional(readOnly = false)
     public T activate(T obj) {
         obj.setObjectState(ObjectStateEnum.ACTIVE);
-        return update(obj);
+        return getDao().update(obj);
     }
 
     @Transactional(readOnly = false)
     public T deactivate(T obj) {
         obj.setObjectState(ObjectStateEnum.INACTIVE);
-        return update(obj);
+        return getDao().update(obj);
     }
 
     @Override
