@@ -15,7 +15,7 @@ define([
         $scope.add = function () {
             var modalInstance = $modal.open(
                 {
-                    templateUrl: 'app/schedule/classes/modal/addCourse.html',
+                    templateUrl: 'app/schedule/courses/modal/addCourse.html',
                     controller: "addCourseController"
                 });
 

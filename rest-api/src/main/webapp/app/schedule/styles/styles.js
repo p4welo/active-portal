@@ -2,12 +2,14 @@ define([
     'schedule/module',
     'schedule/styles/modal/addStyle',
     'services/styleService',
+    'services/categoryService',
     'services/notificationService'
 ], function (module) {
 
-    module.controller("stylesController", function ($scope, $modal, styleFactory, styleService, notificationService) {
+    module.controller("stylesController", function ($scope, $modal, styleFactory, styleService, categoryFactory, notificationService) {
 
         $scope.styles = styleFactory.findAll();
+        $scope.categories = categoryFactory.findAll();
 
         $scope.add = function () {
             var modalInstance = $modal.open(
@@ -29,6 +31,21 @@ define([
             }
             $scope.selected = styleService.copyProperties(style);
             $scope.selected.edit = false;
+            $scope.selected.editcategory = false;
+        }
+
+        $scope.editCategory = function (style) {
+            style.editcategory = true;
+            $scope.category = style.category;
+        }
+
+        $scope.setCategory = function (style) {
+            styleFactory.setCategory({sid: style.sid}, style.category).$promise.then(
+                function () {
+                    style.editcategory = false;
+                    $scope.styles = styleFactory.findAll();
+                    notificationService.success("Pomyślnie zapisano");
+                });
         }
 
         $scope.resolveStatusCss = function (style) {

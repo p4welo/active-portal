@@ -7,7 +7,36 @@
         </div>
     </div>
 
-    <div class="block">
+    <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
+                       ng-class="{'active': selected.edit}">
+                        <i class="fa fa-pencil"></i>
+                        Edytuj
+                    </a>
+                </div>
+                <h2>
+                    <i class="gi gi-table"></i>
+                </h2>
+            </div>
+
+            <form class="form-horizontal form-bordered" method="post">
+
+                <div class="form-group form-actions" ng-if="selected.edit">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-primary" ng-click="update(selected)">
+                            <i class="fa fa-check"></i>
+                            Zapisz
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="block col-xs-12 col-lg-8 pull-left">
         <div class="table-options clearfix">
             <div class="btn-group btn-group-sm col-md-4" data-toggle="buttons">
                 <button class="btn btn-success" ng-click="add()">

@@ -46,4 +46,12 @@ public class CourseStyleServiceImpl extends IdentifiableServiceImpl<CourseStyle>
                 CourseStyle.FIELD_CATEGORY
         };
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public CourseStyle setCategory(CourseStyle style, CourseCategory category) {
+        category = categoryService.getBySid(category.getSid());
+        style.setCategory(category);
+        return super.update(style);
+    }
 }

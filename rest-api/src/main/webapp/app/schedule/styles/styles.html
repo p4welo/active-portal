@@ -24,6 +24,20 @@
             <form class="form-horizontal form-bordered" method="post">
 
                 <div class="form-group">
+                    <label for="category" class="col-xs-3 control-label">Kategoria</label>
+
+                    <div class="col-xs-9" ng-if="!selected.editcategory">
+                        <p class="form-control-static">
+                            {{ selected.category.name }}
+                            <a class="btn-link pull-right" ng-click="editCategory(selected)">Zmień</a>
+                        </p>
+                    </div>
+                    <div class="col-xs-9" ng-if="selected.editcategory">
+                        <select id="category" ng-model="selected.category" ng-options="c.name for c in categories track by c.sid" class="form-control" ng-change="setCategory(selected)"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="name" class="col-xs-3 control-label">Nazwa</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
