@@ -48,6 +48,16 @@ define([
                 });
         }
 
+        $scope.update = function (style) {
+            delete style['edit'];
+            delete style['editcategory'];
+            styleFactory.update({ sid: style.sid }, style).$promise.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    $scope.styles = styleFactory.findAll();
+                });
+        }
+
         $scope.resolveStatusCss = function (style) {
             return {'label-success': style.objectState == 'ACTIVE', 'label-danger': style.objectState == 'INACTIVE'}
         }
