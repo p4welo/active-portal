@@ -66,6 +66,18 @@ public abstract class IdentifiableDaoImplTest<T extends IdentifiableEntity> exte
     }
 
     @Test
+    public void testGetCount() {
+        List<T> entities = getEntities();
+        long size = entities.size();
+
+        persist(entities);
+        long count = getDao().getCount();
+
+        Assert.assertNotNull(count);
+        Assert.assertTrue(count == size);
+    }
+
+    @Test
     public void testSaveNonUniqueSid() {
         String sameSid = SidUtils.generate();
         T object1 = getEntity();
@@ -106,7 +118,7 @@ public abstract class IdentifiableDaoImplTest<T extends IdentifiableEntity> exte
     @Override
     protected List<T> getEntities() {
         List<T> entities = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
             entities.add(getEntity());
         }
         return entities;

@@ -59,6 +59,22 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     }
 
     @Test
+    public void testFind() {
+        persist(getEntities());
+
+        List<T> result = getDao().find(5, 10, "id", false);
+
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.size() == 10);
+        Assert.assertTrue(result.get(0).getId() > result.get(1).getId());
+
+        result = getDao().find(5, 10, "id", true);
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.size() == 10);
+        Assert.assertTrue(result.get(0).getId() < result.get(1).getId());
+    }
+
+    @Test
     public void testSave() {
         T expected = getDao().save(getEntity());
 
@@ -100,7 +116,7 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
 
     protected List<T> getEntities() {
         List<T> entities = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
             entities.add(getEntity());
         }
         return entities;
