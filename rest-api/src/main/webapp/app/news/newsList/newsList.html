@@ -114,7 +114,7 @@
                 <td ng-bind="n.title"></td>
                 <td>
                     <span class="label" ng-class="resolveStatusCss(n)">
-                        {{ n.objectState || translate }}
+                        {{ n.objectState | translate }}
                     </span>
                 </td>
             </tr>

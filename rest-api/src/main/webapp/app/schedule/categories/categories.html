@@ -98,7 +98,7 @@
                 <td ng-bind="category.name"></td>
                 <td>
                     <span class="label" ng-class="resolveStatusCss(category)">
-                        {{ category.objectState || translate }}
+                        {{ category.objectState | translate }}
                     </span>
                 </td>
             </tr>

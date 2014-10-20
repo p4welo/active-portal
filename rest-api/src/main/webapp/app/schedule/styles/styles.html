@@ -94,13 +94,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="select(style)"
-                ng-class="{'selected': selected != null && style.sid == selected.sid}">
+            <tr ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}" ng-click="select(style)" ng-class="{'selected': selected != null && style.sid == selected.sid}">
                 <td ng-bind="style.name"></td>
                 <td ng-bind="style.category.name"></td>
                 <td>
-                    <span class="label" ng-class="resolveStatusCss(style)">
-                        {{ style.objectState || translate }}
+                    <span class="label" ng-class="resolveObjectStateCss(style)">
+                        {{ style.objectState | translate }}
                     </span>
                 </td>
             </tr>
