@@ -4,7 +4,7 @@ define([
 ], function (module) {
 
     module.controller('joinClassController', function ($scope, courseFactory, courseService) {
-        $scope.day = 'PN';
+        $scope.day = '';
         $scope.classes = courseFactory.findInProgress();
 
         $scope.select = function (course) {

@@ -4,7 +4,7 @@ define([
 ], function (module) {
 
     module.controller('subscribeClassController', function ($scope, courseFactory, courseService) {
-        $scope.day = 'PN';
+        $scope.day = '';
         $scope.classes = courseFactory.findRegistration();
 
         $scope.select = function (course) {
