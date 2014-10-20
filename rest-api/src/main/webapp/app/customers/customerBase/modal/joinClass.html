@@ -1,10 +1,15 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
             class="sr-only">Close</span></button>
-    <h4 class="modal-title" id="add-modal-label">Dołącz do grupy</h4>
+    <h4 class="modal-title" id="add-modal-label">Dopisz do grupy</h4>
 </div>
 <div class="modal-body">
     <ul class="nav nav-pills day-select">
+        <li ng-class="{'active' : day==''}">
+            <a ng-click="day=''">
+                <strong>WSZYSTKIE</strong>
+            </a>
+        </li>
         <li ng-class="{'active' : day=='PN'}">
             <a ng-click="day='PN'">Poniedziałek</a>
         </li>
@@ -27,11 +32,22 @@
             <a ng-click="day='ND'">Niedziela</a>
         </li>
     </ul>
-    <ul>
-        <li ng-repeat="c in classes | filter: { day : day}">
-            {{c.style.name}}
-        </li>
-    </ul>
+    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+        <tbody>
+        <tr ng-repeat="course in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="select(course)" ng-class="{'selected': selected != null && course.sid == selected.sid}">
+            <td>{{course.day | translate}}</td>
+            <td>{{course.startTime}} - {{course.endTime}}</td>
+            <td ng-bind="course.style.name"></td>
+            <td>{{course.room.name | translate}}</td>
+            <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
+            <td>
+                <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
+                <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <div class="modal-footer">
 

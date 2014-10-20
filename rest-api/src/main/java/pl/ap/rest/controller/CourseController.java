@@ -27,9 +27,6 @@ public class CourseController {
     @Resource
     private ICourseService courseService;
 
-    @Resource
-    private IInstructorService instructorService;
-
     @RequestMapping(value = CourseApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> findAll() {
