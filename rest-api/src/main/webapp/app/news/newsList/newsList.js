@@ -5,6 +5,9 @@ define([
 ], function (module) {
 
     module.controller("newsListController", function ($scope, newsFactory, newsService, notificationService) {
+
+        var EDIT_NEWS_KEY = 'edit';
+
         $scope.newsList = newsFactory.findAll();
 
         $scope.add = function () {
@@ -12,7 +15,7 @@ define([
         }
 
         $scope.update = function (news) {
-            delete news['edit'];
+            delete news[EDIT_NEWS_KEY];
             newsFactory.update({ sid: news.sid }, news).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
@@ -44,7 +47,7 @@ define([
                 return;
             }
             $scope.selected = newsService.copyProperties(news);;
-            $scope.selected.edit = false;
+            $scope.selected[EDIT_NEWS_KEY] = false;
         }
 
         $scope.resolveStatusCss = function (news) {

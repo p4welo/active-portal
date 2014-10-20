@@ -3,9 +3,8 @@ define([
     'schedule/styles/modal/addStyle',
     'services/styleService',
     'services/categoryService',
-    'services/notificationService',
-    'utils'
-], function (module, utils) {
+    'services/notificationService'
+], function (module) {
 
     module.controller("stylesController", function ($scope, $modal, styleFactory, styleService, categoryFactory, notificationService) {
 
