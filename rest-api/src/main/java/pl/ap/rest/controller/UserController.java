@@ -46,7 +46,7 @@ public class UserController {
         return userService.getBySid(sid);
     }
 
-    @RequestMapping(value = UserApiMappings.ACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = UserApiMappings.ACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public User activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
@@ -57,7 +57,7 @@ public class UserController {
         return userService.activate(user);
     }
 
-    @RequestMapping(value = UserApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = UserApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public User deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

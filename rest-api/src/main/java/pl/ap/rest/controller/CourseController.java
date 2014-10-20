@@ -69,7 +69,7 @@ public class CourseController {
         return courseService.getBySid(sid);
     }
 
-    @RequestMapping(value = CourseApiMappings.PUBLISH, method = RequestMethod.PUT)
+    @RequestMapping(value = CourseApiMappings.PUBLISH, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Course publish(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("publish()");
@@ -80,7 +80,7 @@ public class CourseController {
         return courseService.publish(course);
     }
 
-    @RequestMapping(value = CourseApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = CourseApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Course deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

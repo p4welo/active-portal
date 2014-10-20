@@ -25,6 +25,24 @@ define([
             });
         };
 
+        $scope.publish = function (course) {
+            courseFactory.publish({ sid: course.sid }).$promise.then(
+                function (value) {
+                    course.objectState = value.objectState;
+                    $scope.classes = courseFactory.findAll();
+                    notificationService.success("Pomyślnie zapisano");
+                });
+        }
+
+        $scope.deactivate = function (course) {
+            courseFactory.deactivate({ sid: course.sid }).$promise.then(
+                function (value) {
+                    course.objectState = value.objectState;
+                    $scope.classes = courseFactory.findAll();
+                    notificationService.success("Pomyślnie zapisano");
+                });
+        }
+
         $scope.select = function (course) {
             if ($scope.selected != null && $scope.selected.sid == course.sid) {
                 $scope.selected = null;

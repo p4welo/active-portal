@@ -46,7 +46,7 @@ public class RoomController {
         return roomService.getBySid(sid);
     }
 
-    @RequestMapping(value = RoomApiMappings.ACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = RoomApiMappings.ACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Room activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
@@ -57,7 +57,7 @@ public class RoomController {
         return roomService.activate(room);
     }
 
-    @RequestMapping(value = RoomApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = RoomApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Room deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

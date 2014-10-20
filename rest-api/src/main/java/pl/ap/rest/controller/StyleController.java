@@ -47,7 +47,7 @@ public class StyleController {
         return styleService.getBySid(sid);
     }
 
-    @RequestMapping(value = StyleApiMappings.ACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = StyleApiMappings.ACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
@@ -58,7 +58,7 @@ public class StyleController {
         return styleService.activate(style);
     }
 
-    @RequestMapping(value = StyleApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = StyleApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

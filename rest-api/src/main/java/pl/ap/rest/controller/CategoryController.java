@@ -47,7 +47,7 @@ public class CategoryController {
         return categoryService.getBySid(sid);
     }
 
-    @RequestMapping(value = CategoryApiMappings.ACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = CategoryApiMappings.ACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public CourseCategory activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
@@ -58,7 +58,7 @@ public class CategoryController {
         return categoryService.activate(category);
     }
 
-    @RequestMapping(value = CategoryApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = CategoryApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public CourseCategory deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

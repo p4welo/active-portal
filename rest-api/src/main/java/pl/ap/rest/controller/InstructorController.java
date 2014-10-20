@@ -44,7 +44,7 @@ public class InstructorController {
         return instructorService.getBySid(sid);
     }
 
-    @RequestMapping(value = InstructorApiMappings.ACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = InstructorApiMappings.ACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Instructor activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
@@ -55,7 +55,7 @@ public class InstructorController {
         return instructorService.activate(instructor);
     }
 
-    @RequestMapping(value = InstructorApiMappings.DEACTIVATE, method = RequestMethod.PUT)
+    @RequestMapping(value = InstructorApiMappings.DEACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Instructor deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");

@@ -46,28 +46,6 @@ public class CustomerController {
         return customerService.getBySid(sid);
     }
 
-//    @RequestMapping(value = CustomerApiMappings.ACTIVATE, method = RequestMethod.PUT)
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public Customer activate(@PathVariable(ApiKeys.SID) String sid) {
-//        LOGGER.info("activate()");
-//
-//        Customer customer = customerService.getBySid(sid);
-//        Assert.notNull(customer);
-//
-//        return customerService.activate(customer);
-//    }
-//
-//    @RequestMapping(value = CustomerApiMappings.DEACTIVATE, method = RequestMethod.PUT)
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public Customer deactivate(@PathVariable(ApiKeys.SID) String sid) {
-//        LOGGER.info("deactivate()");
-//
-//        Customer customer = customerService.getBySid(sid);
-//        Assert.notNull(customer);
-//
-//        return customerService.deactivate(customer);
-//    }
-
     @RequestMapping(value = CustomerApiMappings.UPDATE, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
     public Customer update(@RequestBody Customer customer, @PathVariable(ApiKeys.SID) String sid) {
