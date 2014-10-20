@@ -4,7 +4,9 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
+import pl.ap.domain.CustomerPresence;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CustomerApiMappings;
 import pl.ap.service.ICustomerService;
@@ -67,5 +69,27 @@ public class CustomerController {
         Assert.notNull(customer);
 
         customerService.delete(customer);
+    }
+
+    @RequestMapping(value = CustomerApiMappings.PRESENCE, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<CustomerPresence> presence(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("presence()");
+
+        Customer customer = customerService.getBySid(sid);
+        Assert.notNull(customer);
+
+        return customerService.findPresence(customer);
+    }
+
+    @RequestMapping(value = CustomerApiMappings.COURSES, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Course> courses(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("courses()");
+
+        Customer customer = customerService.getBySid(sid);
+        Assert.notNull(customer);
+
+        return customerService.findCourses(customer);
     }
 }

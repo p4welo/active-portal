@@ -13,11 +13,11 @@ public interface CustomerApiMappings
 
     public static final String GET = CUSTOMER_PREFIX + CommonApiMappings.GET_SUFFIX;
 
-//    public static final String ACTIVATE = CUSTOMER_PREFIX + CommonApiMappings.ACTIVATE_SUFFIX;
-//
-//    public static final String DEACTIVATE = CUSTOMER_PREFIX + CommonApiMappings.DEACTIVATE_SUFFIX;
-
     public static final String UPDATE = CUSTOMER_PREFIX + CommonApiMappings.UPDATE_SUFFIX;
 
     public static final String DELETE = CUSTOMER_PREFIX + CommonApiMappings.DELETE_SUFFIX;
+
+    public static final String PRESENCE = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/presence";
+
+    public static final String COURSES = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/courses";
 }

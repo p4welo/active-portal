@@ -6,6 +6,7 @@ import pl.ap.domain.enums.CourseLevelEnum;
 import pl.ap.domain.enums.DayEnum;
 import pl.ap.domain.enums.GenderEnum;
 import pl.ap.domain.enums.ObjectStateEnum;
+import pl.ap.service.util.SidUtils;
 
 import static pl.ap.service.util.SidUtils.generate;
 
@@ -16,11 +17,11 @@ import static pl.ap.service.util.SidUtils.generate;
  * Time: 23:22
  * To change this template use File | Settings | File Templates.
  */
-public class TestDomainObjectFactory {
+public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
 
     public static Role getRole() {
         Role role = new Role();
-        role.setName("Administrator");
+        role.setName(buildLongString(16));
         return role;
     }
 
@@ -28,19 +29,19 @@ public class TestDomainObjectFactory {
         User user = new User();
         user.setSid(generate());
         user.setObjectState(ObjectStateEnum.ACTIVE);
-        user.setFirstName("firstName");
-        user.setLastName("lastName");
-        user.setEmail("contact@makfilm.com");
-        user.setLogin("login");
-        user.setPassword("VeryLongPassword");
+        user.setFirstName(buildLongString(20));
+        user.setLastName(buildLongString(30));
+        user.setEmail("test@mail.com");
+        user.setLogin(buildLongString(8));
+        user.setPassword(buildLongString(16));
         user.setRole(role);
         return user;
     }
 
     public static Instructor getInstructor() {
         Instructor instructor = new Instructor();
-        instructor.setFirstName("Andrzej");
-        instructor.setLastName("Adamski");
+        instructor.setFirstName(buildLongString(14));
+        instructor.setLastName(buildLongString(20));
         instructor.setSid(generate());
         instructor.setObjectState(ObjectStateEnum.ACTIVE);
         return instructor;
@@ -48,7 +49,7 @@ public class TestDomainObjectFactory {
 
     public static Authority getAuthority() {
         Authority authority = new Authority();
-        authority.setKey("SCHEDULE_VIEW");
+        authority.setKey(buildLongString(64));
         return authority;
     }
 
@@ -63,8 +64,8 @@ public class TestDomainObjectFactory {
         CourseCategory category = new CourseCategory();
         category.setSid(generate());
         category.setObjectState(ObjectStateEnum.ACTIVE);
-        category.setCode("solo");
-        category.setName("Zajęcia solo");
+        category.setCode(buildLongString(6));
+        category.setName(buildLongString(16));
         return category;
     }
 
@@ -73,7 +74,7 @@ public class TestDomainObjectFactory {
         style.setSid(generate());
         style.setObjectState(ObjectStateEnum.ACTIVE);
         style.setCategory(category);
-        style.setName("Hip-hop");
+        style.setName(buildLongString(12));
         return style;
     }
 
@@ -81,8 +82,8 @@ public class TestDomainObjectFactory {
         Customer customer = new Customer();
         customer.setSid(generate());
         customer.setObjectState(ObjectStateEnum.ACTIVE);
-        customer.setFirstName("Andrzej");
-        customer.setMobile("987654321");
+        customer.setFirstName(buildLongString(14));
+        customer.setMobile(buildLongString(9));
         customer.setGender(GenderEnum.MALE);
         return customer;
     }
@@ -92,7 +93,7 @@ public class TestDomainObjectFactory {
         description.setSid(generate());
         description.setObjectState(ObjectStateEnum.ACTIVE);
         description.setInstructor(instructor);
-        description.setDescription("Bardzo fajny instruktor");
+        description.setDescription(buildLongString(50));
         return description;
     }
 
@@ -100,11 +101,11 @@ public class TestDomainObjectFactory {
         News news = new News();
         news.setSid(generate());
         news.setObjectState(ObjectStateEnum.ACTIVE);
-        news.setTitle("Jakiś tytuł");
-        news.setContent("Treść bardzo ważnego ogłoszenia");
-        news.setCreatedAt("2014-08-21 16:06");
-        news.setImageSrc("assets/img/image.jpg");
-        news.setImageAlt("Opis obrazka");
+        news.setTitle(buildLongString(16));
+        news.setContent(buildLongString(200));
+        news.setCreatedAt(buildLongString(16));
+        news.setImageSrc(buildLongString(20));
+        news.setImageAlt(buildLongString(11));
         return news;
 
     }
@@ -113,8 +114,8 @@ public class TestDomainObjectFactory {
         Room room = new Room();
         room.setSid(generate());
         room.setObjectState(ObjectStateEnum.ACTIVE);
-        room.setCode("m");
-        room.setName("Mała sala");
+        room.setCode(buildLongString(2));
+        room.setName(buildLongString(16));
         return room;
     }
 
@@ -125,12 +126,12 @@ public class TestDomainObjectFactory {
         course.setStyle(style);
         course.setInstructor(instructor);
         course.setRoom(room);
-        course.setStartTime("15:30");
-        course.setEndTime("16:30");
+        course.setStartTime(buildLongString(5));
+        course.setEndTime(buildLongString(5));
         course.setCanJoin(true);
         course.setCanRegister(false);
         course.setInProgress(true);
-        course.setComment("Start 15.09");
+        course.setComment(buildLongString(16));
         course.setLevel(CourseLevelEnum.BEGINNER);
         course.setDay(DayEnum.CZ);
         return course;

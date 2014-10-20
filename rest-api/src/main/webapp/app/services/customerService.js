@@ -26,6 +26,16 @@ define([
             delete: {
                 url: "rest/customer/:sid",
                 method: 'DELETE'
+            },
+            presence: {
+                url: "rest/customer/:sid/presence",
+                method: 'GET',
+                isArray: true
+            },
+            courses: {
+                url: "rest/customer/:sid/courses",
+                method: 'GET',
+                isArray: true
             }
         })
     });

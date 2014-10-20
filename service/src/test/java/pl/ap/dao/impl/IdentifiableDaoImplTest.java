@@ -9,7 +9,7 @@ import pl.ap.service.util.SidUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -105,6 +105,10 @@ public abstract class IdentifiableDaoImplTest<T extends IdentifiableEntity> exte
 
     @Override
     protected List<T> getEntities() {
-        return Arrays.asList(getEntity());
+        List<T> entities = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            entities.add(getEntity());
+        }
+        return entities;
     }
 }

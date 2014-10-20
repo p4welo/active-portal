@@ -3,12 +3,17 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.ICustomerDao;
+import pl.ap.dao.ICustomerPresenceDao;
+import pl.ap.dao.ICustomerSubscriptionDao;
 import pl.ap.dao.IIdentifiableDao;
+import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
+import pl.ap.domain.CustomerPresence;
 import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.ICustomerService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by parado on 2014-10-16.
@@ -19,6 +24,12 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
 
     @Resource
     private ICustomerDao customerDao;
+
+    @Resource
+    private ICustomerPresenceDao customerPresenceDao;
+
+    @Resource
+    private ICustomerSubscriptionDao customerSubscriptionDao;
 
     @Override
     protected IIdentifiableDao<Customer> getDao() {
@@ -34,5 +45,16 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
                 Customer.FIELD_MOBILE,
                 Customer.FIELD_GENDER
         };
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerPresence> findPresence(Customer customer) {
+        return customerPresenceDao.findByCustomer(customer);
+    }
+
+    @Override
+    public List<Course> findCourses(Customer customer) {
+        return customerSubscriptionDao.findCoursesByCustomer(customer);
     }
 }

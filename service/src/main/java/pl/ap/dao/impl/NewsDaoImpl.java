@@ -2,9 +2,11 @@ package pl.ap.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import pl.ap.dao.INewsDao;
 import pl.ap.domain.News;
+import pl.ap.domain.enums.ObjectStateEnum;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class NewsDaoImpl extends IdentifiableDaoImpl<News> implements INewsDao {
     public List<News> findPublic() {
         Criteria criteria = createCriteria();
         criteria.addOrder(Order.desc(News.FIELD_CREATED_AT));
-//        TODO: add status restriction
+        criteria.add(Restrictions.eq(News.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE));
         return criteria.list();
     }
 }

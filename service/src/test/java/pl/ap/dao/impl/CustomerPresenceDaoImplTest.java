@@ -1,11 +1,15 @@
 package pl.ap.dao.impl;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICustomerPresenceDao;
 import pl.ap.dao.TestDomainObjectFactory;
 import pl.ap.domain.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by parado on 2014-10-17.
@@ -14,13 +18,16 @@ public class CustomerPresenceDaoImplTest extends AbstractDaoImplTest<CustomerPre
     @Resource
     private ICustomerPresenceDao customerPresenceDao;
 
+    private Customer customer;
+    private CourseUnit unit;
+
     @Override
     protected IAbstractDao<CustomerPresence> getDao() {
         return customerPresenceDao;
     }
 
-    @Override
-    protected CustomerPresence getEntity() {
+    @Before
+    public void setup() {
         CourseCategory category = TestDomainObjectFactory.getCourseCategory();
         persist(category);
         CourseStyle style = TestDomainObjectFactory.getCourseStyle(category);
@@ -31,12 +38,25 @@ public class CustomerPresenceDaoImplTest extends AbstractDaoImplTest<CustomerPre
         persist(room);
         Course course = TestDomainObjectFactory.getCourse(style, instructor, room);
         persist(course);
-        CourseUnit unit = TestDomainObjectFactory.getCourseUnit(course);
+        unit = TestDomainObjectFactory.getCourseUnit(course);
         persist(unit);
 
-        Customer customer = TestDomainObjectFactory.getCustomer();
+        customer = TestDomainObjectFactory.getCustomer();
         persist(customer);
+    }
 
+    @Override
+    protected CustomerPresence getEntity() {
         return TestDomainObjectFactory.getCustomerPresence(customer, unit);
+    }
+
+    @Test
+    public void testFindByCustomer() {
+        persist(TestDomainObjectFactory.getCustomerPresence(customer, unit));
+
+        List<CustomerPresence> result = customerPresenceDao.findByCustomer(customer);
+
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.size() == 1);
     }
 }

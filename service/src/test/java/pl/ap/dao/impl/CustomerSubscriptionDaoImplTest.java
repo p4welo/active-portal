@@ -1,11 +1,15 @@
 package pl.ap.dao.impl;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICustomerSubscriptionDao;
 import pl.ap.dao.TestDomainObjectFactory;
 import pl.ap.domain.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by parado on 2014-10-17.
@@ -14,14 +18,17 @@ public class CustomerSubscriptionDaoImplTest extends AbstractDaoImplTest<Custome
     @Resource
     private ICustomerSubscriptionDao customerSubscriptionDao;
 
+    private Customer customer;
+    private Course course;
+
     @Override
     protected IAbstractDao<CustomerSubscription> getDao() {
         return customerSubscriptionDao;
     }
 
-    @Override
-    protected CustomerSubscription getEntity() {
-        Customer customer = TestDomainObjectFactory.getCustomer();
+    @Before
+    public void setup() {
+        customer = TestDomainObjectFactory.getCustomer();
         persist(customer);
         CourseCategory category = TestDomainObjectFactory.getCourseCategory();
         persist(category);
@@ -31,9 +38,22 @@ public class CustomerSubscriptionDaoImplTest extends AbstractDaoImplTest<Custome
         persist(instructor);
         Room room = TestDomainObjectFactory.getRoom();
         persist(room);
-        Course course = TestDomainObjectFactory.getCourse(style, instructor, room);
+        course = TestDomainObjectFactory.getCourse(style, instructor, room);
         persist(course);
+    }
 
+    @Override
+    protected CustomerSubscription getEntity() {
         return TestDomainObjectFactory.getCustomerSubscription(customer, course);
+    }
+
+    @Test
+    public void testFindCoursesByCustomer() {
+        persist(TestDomainObjectFactory.getCustomerSubscription(customer, course));
+
+        List<Course> result = customerSubscriptionDao.findCoursesByCustomer(customer);
+
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.size() == 1);
     }
 }

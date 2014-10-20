@@ -2,6 +2,7 @@ package pl.ap.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
@@ -9,7 +10,7 @@ import pl.ap.dao.IAbstractDao;
 import pl.ap.domain.common.DataEntity;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -39,6 +40,22 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
 
         assertNotNull(result);
         assertEquals(entity, result);
+    }
+
+    @Test
+    public void testGetRandom() {
+        persist(getEntities());
+
+        T entity = getDao().getRandom();
+        Assert.assertNotNull(entity);
+
+        boolean notAllTheSame = false;
+        for (int i = 0; i < 100; i++) {
+            if (!entity.equals(getDao().getRandom())) {
+                notAllTheSame = true;
+            }
+        }
+        Assert.assertTrue(notAllTheSame);
     }
 
     @Test
@@ -82,7 +99,11 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
 //    protected abstract List<T> getEntities();
 
     protected List<T> getEntities() {
-        return Arrays.asList(getEntity());
+        List<T> entities = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            entities.add(getEntity());
+        }
+        return entities;
     }
 
     protected void persist(DataEntity... entries) {
