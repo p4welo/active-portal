@@ -5,6 +5,7 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.ICustomerSubscriptionDao;
 import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
@@ -20,6 +21,7 @@ public class CustomerSubscriptionDaoImpl extends AbstractDaoImpl<CustomerSubscri
     public static final String BEAN_NAME = "customerSubscriptionDao";
 
     @Override
+    @Transactional(readOnly = true)
     public List<Course> findCoursesByCustomer(Customer customer) {
         Criteria criteria = createCriteria();
         criteria.add(Restrictions.eq(CustomerSubscription.FIELD_CUSTOMER, customer));

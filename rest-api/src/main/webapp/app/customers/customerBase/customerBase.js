@@ -16,8 +16,9 @@ define([
                 return;
             }
             $scope.selected = customerService.copyProperties(customer);
+            $scope.customerPresence = customerFactory.presence(customer);
+            $scope.customerCourses = customerFactory.courses(customer);
             $scope.selected.edit = false;
-            $scope.customerPresence = [];//customerFactory.findCustomerPresence(customer);
         }
 
         $scope.subscribe = function (customer) {

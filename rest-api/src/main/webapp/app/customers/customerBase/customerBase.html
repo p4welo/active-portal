@@ -96,24 +96,27 @@
                         </div>
                     </div>
                 </form>
+
                 <h5>Kursy</h5>
+                <table class="table table-vcenter table-bordered table-condensed">
+                    <tbody>
+                    <tr ng-repeat="c in customerCourses">
+                        <td>{{ c.day | translate }}</td>
+                        <td ng-bind="c.startTime"></td>
+                        <td ng-bind="c.style.name"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
                 <h5>Obecności</h5>
-                <table class="table table-vcenter table-bordered table-condensed" id="general-table">
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Data</th>-->
-                        <!--<th>Kurs</th>-->
-                        <!--<th>Obecność</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
+                <table class="table table-vcenter table-bordered table-condensed">
                     <tbody>
-                    <tr ng-repeat="presence in customerPresence | orderBy: '-date'">
-                        <td ng-bind="presence.date | date:'dd.MM.yyyy hh:mm'"></td>
-                        <td ng-bind="presence.course"></td>
+                    <tr ng-repeat="p in customerPresence | orderBy: '-date'">
+                        <td ng-bind="p.date | date:'dd.MM.yyyy hh:mm'"></td>
+                        <td ng-bind="p.lesson.course.style.name"></td>
                         <td>
-                            <span class="label label-success" ng-if="presence.present">TAK</span>
-                            <span class="label label-danger" ng-if="!presence.present">NIE</span>
+                            <span class="label label-success" ng-if="p.present">TAK</span>
+                            <span class="label label-danger" ng-if="!p.present">NIE</span>
                         </td>
                     </tr>
                     </tbody>

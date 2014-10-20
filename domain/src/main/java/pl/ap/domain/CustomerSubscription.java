@@ -31,7 +31,7 @@ public class CustomerSubscription extends DataEntity {
     @NotNull
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id", nullable = false)
     @ForeignKey(name = "course_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)
