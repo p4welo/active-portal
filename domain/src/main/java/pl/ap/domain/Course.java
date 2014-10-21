@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * Created by parado on 18.03.14.
  */
 @Entity
-@Table(name = "dance_class")
+@Table(name = "course")
 @Unique(fields = Course.FIELD_SID, message = Course.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class Course extends IdentifiableEntity {
     public static final String FIELD_STYLE = "style";
