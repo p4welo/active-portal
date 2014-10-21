@@ -1,0 +1,19 @@
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-keys"></i>Uprawnienia<br>
+            </h1>
+        </div>
+    </div>
+
+    <div class="block col-xs-12 col-lg-5 pull-left">
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <tbody>
+            <tr ng-repeat="role in roles" ng-click="select(role)" ng-class="{'selected':selected != null && role.name == selected.name}">
+                <td ng-bind="role.name"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

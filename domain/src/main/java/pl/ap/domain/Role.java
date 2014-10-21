@@ -24,7 +24,7 @@ public class Role extends DataEntity {
     @Column
     private Long id;
 
-    @Column(name = "name", length = 128)
+    @Column(length = 128)
     @NotBlank
     @Length(max = 128)
     private String name;

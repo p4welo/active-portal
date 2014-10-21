@@ -8,10 +8,10 @@ define([
                 url: "/users",
                 templateUrl: "app/system/users/users.html",
                 controller: "userController"
-            }).state('roles', {
-                url: "/roles",
-                templateUrl: "app/system/roles/roles.html",
-                controller: "roleController"
+            }).state('authorities', {
+                url: "/authorities",
+                templateUrl: "app/system/authorities/authorities.html",
+                controller: "authorityController"
             });
     });
 });

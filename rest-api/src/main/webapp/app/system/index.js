@@ -1,4 +1,4 @@
 define([
     "system/users/users",
-    "system/roles/roles"
+    "system/authorities/authorities"
 ], function () {});
