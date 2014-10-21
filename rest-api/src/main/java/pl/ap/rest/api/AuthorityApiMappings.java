@@ -6,5 +6,7 @@ package pl.ap.rest.api;
 public interface AuthorityApiMappings {
     public static final String AUTHORITY_PREFIX = "/authority";
 
-    public static final String ROLES = AUTHORITY_PREFIX + "/role/list";
+    public static final String FIND_ALL = AUTHORITY_PREFIX + CommonApiMappings.FIND_ALL_SUFFIX;
+
+    public static final String ROLES = AUTHORITY_PREFIX + "/role" + CommonApiMappings.FIND_ALL_SUFFIX;;
 }

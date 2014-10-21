@@ -9,6 +9,11 @@ define([
                 url: "rest/authority/role/list",
                 method: 'GET',
                 isArray: true
+            },
+            findAll: {
+                url: "rest/authority/list",
+                method: 'GET',
+                isArray: true
             }
         })
     });
