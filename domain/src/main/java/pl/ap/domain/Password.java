@@ -26,7 +26,7 @@ public class Password extends DataEntity {
     @Column
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     private User user;

@@ -53,6 +53,7 @@ public class CourseController {
     public Course create(@RequestBody Course course) {
         LOGGER.info("create()");
 
+        Assert.notNull(course);
         Assert.notNull(course.getStyle());
         Assert.notNull(course.getRoom());
 
