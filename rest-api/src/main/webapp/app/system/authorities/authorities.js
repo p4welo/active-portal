@@ -3,8 +3,8 @@ define([
     'services/authorityService'
 ], function (module) {
 
-    module.controller("authorityController", function ($scope, authorityFactory, roleService) {
-        $scope.roles = authorityFactory.findRoles();
+    module.controller("authorityController", function ($scope, authorityHttpClient, roleService) {
+        $scope.roles = authorityHttpClient.findRoles();
 
         $scope.select = function (role) {
             if ($scope.selected != null && $scope.selected.name == role.name) {

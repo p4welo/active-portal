@@ -4,11 +4,11 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("newsListController", function ($scope, newsFactory, newsService, notificationService) {
+    module.controller("newsListController", function ($scope, newsHttpClient, newsService, notificationService) {
 
         var EDIT_NEWS_KEY = 'edit';
 
-        $scope.newsList = newsFactory.findAll();
+        $scope.newsList = newsHttpClient.findAll();
 
         $scope.add = function () {
 
@@ -16,27 +16,27 @@ define([
 
         $scope.update = function (news) {
             delete news[EDIT_NEWS_KEY];
-            newsFactory.update({ sid: news.sid }, news).$promise.then(
+            newsHttpClient.update({ sid: news.sid }, news).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.newsList = newsFactory.findAll();
+                    $scope.newsList = newsHttpClient.findAll();
                 });
         }
 
         $scope.publish = function (news) {
-            newsFactory.publish({ sid: news.sid }).$promise.then(
+            newsHttpClient.publish({ sid: news.sid }).$promise.then(
                 function (value) {
                     news.objectState = value.objectState;
-                    $scope.newsList = newsFactory.findAll();
+                    $scope.newsList = newsHttpClient.findAll();
                     notificationService.success("Pomyślnie zapisano");
                 });
         }
 
         $scope.deactivate = function (news) {
-            newsFactory.deactivate({ sid: news.sid }).$promise.then(
+            newsHttpClient.deactivate({ sid: news.sid }).$promise.then(
                 function (value) {
                     news.objectState = value.objectState;
-                    $scope.newsList = newsFactory.findAll();
+                    $scope.newsList = newsHttpClient.findAll();
                     notificationService.success("Pomyślnie zapisano");
                 });
         }

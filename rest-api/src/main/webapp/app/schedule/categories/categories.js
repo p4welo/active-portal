@@ -5,8 +5,8 @@ define([
     'services/categoryService'
 ], function (module) {
 
-    module.controller("categoriesController", function ($scope, $modal, categoryFactory, categoryService, notificationService) {
-        $scope.categories = categoryFactory.findAll();
+    module.controller("categoriesController", function ($scope, $modal, categoryHttpClient, categoryService, notificationService) {
+        $scope.categories = categoryHttpClient.findAll();
 
         $scope.add = function() {
             var modalInstance = $modal.open(
@@ -16,7 +16,7 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.categories = categoryFactory.findAll();
+                $scope.categories = categoryHttpClient.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         };
@@ -32,10 +32,10 @@ define([
 
         $scope.update = function (category) {
             delete category['edit'];
-            categoryFactory.update({ sid: category.sid }, category).$promise.then(
+            categoryHttpClient.update({ sid: category.sid }, category).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.categories = categoryFactory.findAll();
+                    $scope.categories = categoryHttpClient.findAll();
                 });
         }
 

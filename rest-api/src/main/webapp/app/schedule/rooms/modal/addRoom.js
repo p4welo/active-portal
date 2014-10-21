@@ -3,7 +3,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller('addRoomController', function ($scope, $modalInstance, roomFactory) {
+    module.controller('addRoomController', function ($scope, $modalInstance, roomHttpClient) {
         $scope.room = {};
 
         $scope.cancel = function () {
@@ -11,7 +11,7 @@ define([
         };
 
         $scope.save = function (room) {
-            roomFactory.create(room).$promise.then(
+            roomHttpClient.create(room).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

@@ -6,12 +6,12 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller('addCourseController', function ($scope, $modalInstance, categoryFactory, styleFactory, instructorFactory, roomFactory) {
+    module.controller('addCourseController', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient) {
         $scope.course = {};
 
-        $scope.styles = styleFactory.findAll();
-        $scope.instructors = instructorFactory.findAll();
-        $scope.rooms = roomFactory.findAll();
+        $scope.styles = styleHttpClient.findAll();
+        $scope.instructors = instructorHttpClient.findAll();
+        $scope.rooms = roomHttpClient.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
         ];
@@ -27,7 +27,7 @@ define([
         };
 
         $scope.save = function (course) {
-            categoryFactory.create(course).$promise.then(
+            categoryHttpClient.create(course).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

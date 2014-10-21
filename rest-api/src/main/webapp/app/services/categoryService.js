@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('categoryFactory', function ($resource) {
+    module.factory('categoryHttpClient', function ($resource) {
 
         return $resource(null, null, {
 

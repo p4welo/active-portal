@@ -5,9 +5,9 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller("roomsController", function ($scope, roomFactory, roomService, $modal, notificationService) {
+    module.controller("roomsController", function ($scope, roomHttpClient, roomService, $modal, notificationService) {
 
-        $scope.rooms = roomFactory.findAll();
+        $scope.rooms = roomHttpClient.findAll();
 
         $scope.add = function () {
 
@@ -18,7 +18,7 @@ define([
 
             modalInstance.result.then(function () {
                 notificationService.success("Pomyślnie zapisano");
-                $scope.rooms = roomFactory.findAll();
+                $scope.rooms = roomHttpClient.findAll();
             });
         }
 
@@ -33,10 +33,10 @@ define([
 
         $scope.update = function (room) {
             delete room['edit'];
-            roomFactory.update({ sid: room.sid }, room).$promise.then(
+            roomHttpClient.update({ sid: room.sid }, room).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.rooms = roomFactory.findAll();
+                    $scope.rooms = roomHttpClient.findAll();
                 });
         }
 

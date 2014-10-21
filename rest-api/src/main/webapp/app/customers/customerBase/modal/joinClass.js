@@ -4,10 +4,10 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller('joinClassController', function ($scope, customer, customerFactory, $modalInstance) {
+    module.controller('joinClassController', function ($scope, customer, customerHttpClient, $modalInstance) {
         $scope.day = '';
         $scope.customer = customer;
-        $scope.classes = customerFactory.coursesToJoin({ sid: customer.sid });
+        $scope.classes = customerHttpClient.coursesToJoin({ sid: customer.sid });
 
         $scope.select = function (course) {
             if ($scope.selected == course) {
@@ -18,7 +18,7 @@ define([
         }
 
         $scope.join = function (course) {
-            customerFactory.join({ sid: $scope.customer.sid }, course).$promise.then(
+            customerHttpClient.join({ sid: $scope.customer.sid }, course).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

@@ -3,7 +3,7 @@ define([
     'services/userService'
 ], function (module) {
 
-    module.controller("userController", function ($scope, userFactory) {
-        $scope.users = userFactory.findAll();
+    module.controller("userController", function ($scope, userHttpClient) {
+        $scope.users = userHttpClient.findAll();
     });
 });

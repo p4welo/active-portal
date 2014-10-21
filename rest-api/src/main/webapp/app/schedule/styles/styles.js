@@ -6,14 +6,14 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("stylesController", function ($scope, $modal, styleFactory, styleService, categoryFactory, notificationService) {
+    module.controller("stylesController", function ($scope, $modal, styleHttpClient, styleService, categoryHttpClient, notificationService) {
 
         var EDIT_STYLE_KEY = 'edit';
         var EDIT_CATEGORY_KEY = 'editcategory';
 
 
-        $scope.styles = styleFactory.findAll();
-        $scope.categories = categoryFactory.findAll();
+        $scope.styles = styleHttpClient.findAll();
+        $scope.categories = categoryHttpClient.findAll();
 
         $scope.add = function () {
             var modalInstance = $modal.open({
@@ -22,7 +22,7 @@ define([
             });
 
             modalInstance.result.then(function () {
-                $scope.styles = styleFactory.findAll();
+                $scope.styles = styleHttpClient.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         };
@@ -43,10 +43,10 @@ define([
         }
 
         $scope.setCategory = function (style) {
-            styleFactory.setCategory({sid: style.sid}, style.category).$promise.then(
+            styleHttpClient.setCategory({sid: style.sid}, style.category).$promise.then(
                 function () {
                     style[EDIT_CATEGORY_KEY] = false;
-                    $scope.styles = styleFactory.findAll();
+                    $scope.styles = styleHttpClient.findAll();
                     notificationService.success("Pomyślnie zapisano");
                 });
         }
@@ -55,10 +55,10 @@ define([
             delete style[EDIT_STYLE_KEY];
             delete style[EDIT_CATEGORY_KEY];
 
-            styleFactory.update({ sid: style.sid }, style).$promise.then(
+            styleHttpClient.update({ sid: style.sid }, style).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.styles = styleFactory.findAll();
+                    $scope.styles = styleHttpClient.findAll();
                 });
         }
 

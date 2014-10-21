@@ -3,7 +3,7 @@ define([
     'services/instructorService'
 ], function (module) {
 
-    module.controller('addInstructorController', function ($scope, $modalInstance, instructorFactory) {
+    module.controller('addInstructorController', function ($scope, $modalInstance, instructorHttpClient) {
         $scope.instructor = {};
 
         $scope.cancel = function () {
@@ -11,7 +11,7 @@ define([
         };
 
         $scope.save = function (instructor) {
-            instructorFactory.create(instructor).$promise.then(
+            instructorHttpClient.create(instructor).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

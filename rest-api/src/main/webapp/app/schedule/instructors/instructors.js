@@ -5,8 +5,8 @@ define([
     'services/instructorService'
 ], function (module) {
 
-    module.controller("instructorsController", function ($scope, $modal, instructorFactory, instructorService, notificationService) {
-        $scope.instructors = instructorFactory.findAll();
+    module.controller("instructorsController", function ($scope, $modal, instructorHttpClient, instructorService, notificationService) {
+        $scope.instructors = instructorHttpClient.findAll();
         $scope.selectedCourses = [];
 
         $scope.add = function () {
@@ -16,7 +16,7 @@ define([
             });
 
             modalInstance.result.then(function () {
-                $scope.rooms = instructorFactory.findAll();
+                $scope.rooms = instructorHttpClient.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         }
@@ -28,7 +28,7 @@ define([
             }
             $scope.selectedCourses = [];
             $scope.selected = instructorService.copyProperties(instructor);
-            instructorFactory.courses({sid: instructor.sid}).$promise.then(
+            instructorHttpClient.courses({sid: instructor.sid}).$promise.then(
                 function (value) {
                     $scope.selectedCourses = value;
                 });
@@ -37,10 +37,10 @@ define([
 
         $scope.update = function (instructor) {
             delete instructor['edit'];
-            instructorFactory.update({ sid: instructor.sid }, instructor).$promise.then(
+            instructorHttpClient.update({ sid: instructor.sid }, instructor).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.instructors = instructorFactory.findAll();
+                    $scope.instructors = instructorHttpClient.findAll();
                 });
         }
 

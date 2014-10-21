@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('authorityFactory', function ($resource) {
+    module.factory('authorityHttpClient', function ($resource) {
 
         return $resource(null, null, {
             findRoles: {

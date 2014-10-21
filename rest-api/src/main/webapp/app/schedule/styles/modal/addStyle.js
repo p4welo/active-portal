@@ -4,16 +4,16 @@ define([
     'services/styleService'
 ], function (module) {
 
-    module.controller('addStyleController', function ($scope, $modalInstance, categoryFactory, styleFactory) {
+    module.controller('addStyleController', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient) {
         $scope.style = {};
-        $scope.categories = categoryFactory.find();
+        $scope.categories = categoryHttpClient.find();
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
 
         $scope.save = function (style) {
-            styleFactory.create(style).$promise.then(
+            styleHttpClient.create(style).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

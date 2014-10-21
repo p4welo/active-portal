@@ -4,10 +4,10 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller('subscribeClassController', function ($scope, customer, customerFactory, $modalInstance) {
+    module.controller('subscribeClassController', function ($scope, customer, customerHttpClient, $modalInstance) {
         $scope.day = '';
         $scope.customer = customer;
-        $scope.classes = customerFactory.coursesToRegister({ sid: customer.sid });
+        $scope.classes = customerHttpClient.coursesToRegister({ sid: customer.sid });
 
         $scope.select = function (course) {
             if ($scope.selected == course) {
@@ -18,7 +18,7 @@ define([
         }
 
         $scope.subscribe = function (course) {
-            customerFactory.subscribe({ sid: $scope.customer.sid }, course).$promise.then(
+            customerHttpClient.subscribe({ sid: $scope.customer.sid }, course).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

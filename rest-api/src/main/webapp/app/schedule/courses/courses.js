@@ -5,9 +5,9 @@ define([
     'services/courseService'
 ], function (module) {
 
-    module.controller("coursesController", function ($scope, courseFactory, courseService, notificationService, $modal) {
+    module.controller("coursesController", function ($scope, courseHttpClient, courseService, notificationService, $modal) {
         $scope.day = '';
-        $scope.classes = courseFactory.findAll();
+        $scope.classes = courseHttpClient.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
         ];
@@ -20,25 +20,25 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.classes = courseFactory.findAll();
+                $scope.classes = courseHttpClient.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         };
 
         $scope.publish = function (course) {
-            courseFactory.publish({ sid: course.sid }).$promise.then(
+            courseHttpClient.publish({ sid: course.sid }).$promise.then(
                 function (value) {
                     course.objectState = value.objectState;
-                    $scope.classes = courseFactory.findAll();
+                    $scope.classes = courseHttpClient.findAll();
                     notificationService.success("Pomyślnie zapisano");
                 });
         }
 
         $scope.deactivate = function (course) {
-            courseFactory.deactivate({ sid: course.sid }).$promise.then(
+            courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
                 function (value) {
                     course.objectState = value.objectState;
-                    $scope.classes = courseFactory.findAll();
+                    $scope.classes = courseHttpClient.findAll();
                     notificationService.success("Pomyślnie zapisano");
                 });
         }

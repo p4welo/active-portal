@@ -3,7 +3,7 @@ define([
     'services/categoryService'
 ], function (module) {
 
-    module.controller('addCategoryController', function ($scope, $modalInstance, categoryFactory) {
+    module.controller('addCategoryController', function ($scope, $modalInstance, categoryHttpClient) {
         $scope.category = {};
 
         $scope.cancel = function () {
@@ -11,7 +11,7 @@ define([
         };
 
         $scope.save = function (category) {
-            categoryFactory.create(category).$promise.then(
+            categoryHttpClient.create(category).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
