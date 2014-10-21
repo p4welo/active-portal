@@ -24,12 +24,12 @@ public class CustomerSubscriptionDaoImpl extends AbstractDaoImpl<CustomerSubscri
     @Override
     @Transactional(readOnly = true)
     public List<Course> findCoursesByCustomer(Customer customer) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(CustomerSubscription.FIELD_CUSTOMER, customer));
-        criteria.createAlias(CustomerSubscription.FIELD_COURSE, CustomerSubscription.FIELD_COURSE);
-        criteria.addOrder(Order.asc(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_DAY));
-        criteria.addOrder(Order.asc(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_START_TIME));
-        criteria.setProjection(Projections.property(CustomerSubscription.FIELD_COURSE));
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(CustomerSubscription.FIELD_CUSTOMER, customer))
+                .createAlias(CustomerSubscription.FIELD_COURSE, CustomerSubscription.FIELD_COURSE)
+                .addOrder(Order.asc(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_DAY))
+                .addOrder(Order.asc(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_START_TIME))
+                .setProjection(Projections.property(CustomerSubscription.FIELD_COURSE));
         return criteria.list();
     }
 }

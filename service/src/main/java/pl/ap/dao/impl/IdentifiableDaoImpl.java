@@ -11,9 +11,9 @@ import pl.ap.domain.common.IdentifiableEntity;
 public abstract class IdentifiableDaoImpl<T extends IdentifiableEntity> extends AbstractDaoImpl<T> implements IIdentifiableDao<T> {
 
     public T getBySid(String sid) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(IdentifiableEntity.FIELD_SID, sid));
-        criteria.setMaxResults(1);
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(IdentifiableEntity.FIELD_SID, sid))
+                .setMaxResults(1);
         return (T) criteria.uniqueResult();
     }
 }

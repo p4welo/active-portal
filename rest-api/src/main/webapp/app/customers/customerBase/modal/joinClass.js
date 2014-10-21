@@ -4,10 +4,10 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller('joinClassController', function ($scope, customer, courseFactory, customerFactory, $modalInstance) {
+    module.controller('joinClassController', function ($scope, customer, customerFactory, $modalInstance) {
         $scope.day = '';
         $scope.customer = customer;
-        $scope.classes = courseFactory.findInProgress();
+        $scope.classes = customerFactory.coursesToJoin({ sid: customer.sid });
 
         $scope.select = function (course) {
             if ($scope.selected == course) {

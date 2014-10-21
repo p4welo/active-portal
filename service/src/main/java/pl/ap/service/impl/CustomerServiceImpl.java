@@ -55,6 +55,7 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Course> findCourses(Customer customer) {
         return customerSubscriptionDao.findCoursesByCustomer(customer);
     }
@@ -68,5 +69,17 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
         subscription.setCustomer(customer);
 
         customerSubscriptionDao.save(subscription);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Course> findCoursesToJoin(Customer customer) {
+        return courseDao.findJoinableForCustomer(customer);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Course> findCoursesToRegister(Customer customer) {
+        return courseDao.findRegisterableForCustomer(customer);
     }
 }

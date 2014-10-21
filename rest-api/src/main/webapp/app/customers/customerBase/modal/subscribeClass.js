@@ -4,10 +4,10 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller('subscribeClassController', function ($scope, customer, courseFactory, courseService, customerFactory, $modalInstance) {
+    module.controller('subscribeClassController', function ($scope, customer, customerFactory, $modalInstance) {
         $scope.day = '';
         $scope.customer = customer;
-        $scope.classes = courseFactory.findRegistration();
+        $scope.classes = customerFactory.coursesToRegister({ sid: customer.sid });
 
         $scope.select = function (course) {
             if ($scope.selected == course) {

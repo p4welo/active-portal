@@ -37,16 +37,16 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
     }
 
     public T getRandom() {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
-        criteria.setMaxResults(1);
+        Criteria criteria = createCriteria()
+                .add(Restrictions.sqlRestriction("1=1 order by rand()"))
+                .setMaxResults(1);
         return (T) criteria.uniqueResult();
     }
 
     public T getById(Long id) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(DataEntity.FIELD_ID, id));
-        criteria.setMaxResults(1);
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(DataEntity.FIELD_ID, id))
+                .setMaxResults(1);
         return (T) criteria.uniqueResult();
     }
 
@@ -107,14 +107,14 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
     }
 
     public T getBy(String propertyName, Object value) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(propertyName, value));
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(propertyName, value));
         return (T) criteria.uniqueResult();
     }
 
     public List<T> findBy(String propertyName, Object value) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(propertyName, value));
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(propertyName, value));
         return criteria.list();
     }
 

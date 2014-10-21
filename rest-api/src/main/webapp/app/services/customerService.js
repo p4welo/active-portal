@@ -37,6 +37,16 @@ define([
                 method: 'GET',
                 isArray: true
             },
+            coursesToJoin: {
+                url: "rest/customer/:sid/courses/canJoin",
+                method: 'GET',
+                isArray: true
+            },
+            coursesToRegister: {
+                url: "rest/customer/:sid/courses/canRegister",
+                method: 'GET',
+                isArray: true
+            },
             join: {
                 url: "rest/customer/:sid/join",
                 method: 'PUT'

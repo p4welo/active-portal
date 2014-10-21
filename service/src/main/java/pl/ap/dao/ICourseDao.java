@@ -1,6 +1,7 @@
 package pl.ap.dao;
 
 import pl.ap.domain.Course;
+import pl.ap.domain.Customer;
 import pl.ap.domain.Instructor;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface ICourseDao extends IIdentifiableDao<Course> {
     List<Course> findRegistration();
 
     List<Course> findByInstructor(Instructor instructor);
+
+    List<Course> findJoinableForCustomer(Customer customer);
+
+    List<Course> findRegisterableForCustomer(Customer customer);
 }

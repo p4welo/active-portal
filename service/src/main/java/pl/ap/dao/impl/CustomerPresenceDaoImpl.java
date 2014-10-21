@@ -18,8 +18,8 @@ public class CustomerPresenceDaoImpl extends AbstractDaoImpl<CustomerPresence> i
 
     @Override
     public List<CustomerPresence> findByCustomer(Customer customer) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(CustomerPresence.FIELD_CUSTOMER, customer));
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(CustomerPresence.FIELD_CUSTOMER, customer));
         return criteria.list();
     }
 }

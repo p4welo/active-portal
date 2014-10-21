@@ -93,6 +93,28 @@ public class CustomerController {
         return customerService.findCourses(customer);
     }
 
+    @RequestMapping(value = CustomerApiMappings.COURSES_TO_JOIN, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Course> coursesToJoin(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("coursesToJoin()");
+
+        Customer customer = customerService.getBySid(sid);
+        Assert.notNull(customer);
+
+        return customerService.findCoursesToJoin(customer);
+    }
+
+    @RequestMapping(value = CustomerApiMappings.COURSES_TO_REGISTER, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Course> coursesToRegister(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("coursesToRegister()");
+
+        Customer customer = customerService.getBySid(sid);
+        Assert.notNull(customer);
+
+        return customerService.findCoursesToRegister(customer);
+    }
+
     @RequestMapping(value = CustomerApiMappings.JOIN, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
     public void joinCourse(@PathVariable(ApiKeys.SID) String sid, @RequestBody Course course) {

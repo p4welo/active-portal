@@ -19,16 +19,16 @@ public class NewsDaoImpl extends IdentifiableDaoImpl<News> implements INewsDao {
 
     @Override
     public List<News> findNewsList() {
-        Criteria criteria = createCriteria();
-        criteria.addOrder(Order.desc(News.FIELD_CREATED_AT));
+        Criteria criteria = createCriteria()
+                .addOrder(Order.desc(News.FIELD_CREATED_AT));
         return criteria.list();
     }
 
     @Override
     public List<News> findPublic() {
-        Criteria criteria = createCriteria();
-        criteria.addOrder(Order.desc(News.FIELD_CREATED_AT));
-        criteria.add(Restrictions.eq(News.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE));
+        Criteria criteria = createCriteria()
+                .addOrder(Order.desc(News.FIELD_CREATED_AT))
+                .add(Restrictions.eq(News.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE));
         return criteria.list();
     }
 }

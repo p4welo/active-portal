@@ -20,6 +20,10 @@ public interface CustomerApiMappings {
 
     public static final String COURSES = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/courses";
 
+    public static final String COURSES_TO_JOIN = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/courses/canJoin";
+
+    public static final String COURSES_TO_REGISTER = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/courses/canRegister";
+
     public static final String JOIN = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/join";
 
     public static final String SUBSCRIBE = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/subscribe";

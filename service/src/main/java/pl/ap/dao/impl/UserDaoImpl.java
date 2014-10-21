@@ -15,9 +15,9 @@ public class UserDaoImpl extends IdentifiableDaoImpl<User> implements IUserDao {
 
     @Override
     public User getByLogin(String login) {
-        Criteria criteria = createCriteria();
-        criteria.add(Restrictions.eq(User.FIELD_LOGIN, login));
-        criteria.setMaxResults(1);
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(User.FIELD_LOGIN, login))
+                .setMaxResults(1);
         return (User) criteria.uniqueResult();
     }
 }
