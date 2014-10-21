@@ -2,13 +2,11 @@ package pl.ap.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ap.dao.ICustomerDao;
-import pl.ap.dao.ICustomerPresenceDao;
-import pl.ap.dao.ICustomerSubscriptionDao;
-import pl.ap.dao.IIdentifiableDao;
+import pl.ap.dao.*;
 import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
+import pl.ap.domain.CustomerSubscription;
 import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.ICustomerService;
 
@@ -27,6 +25,9 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
 
     @Resource
     private ICustomerPresenceDao customerPresenceDao;
+
+    @Resource
+    private ICourseDao courseDao;
 
     @Resource
     private ICustomerSubscriptionDao customerSubscriptionDao;
@@ -56,5 +57,16 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
     @Override
     public List<Course> findCourses(Customer customer) {
         return customerSubscriptionDao.findCoursesByCustomer(customer);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void joinCourse(Customer customer, Course course) {
+        course = courseDao.getBySid(course.getSid());
+        CustomerSubscription subscription = new CustomerSubscription();
+        subscription.setCourse(course);
+        subscription.setCustomer(customer);
+
+        customerSubscriptionDao.save(subscription);
     }
 }

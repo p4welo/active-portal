@@ -20,7 +20,7 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.classes = courseFactory.find();
+                $scope.classes = courseFactory.findAll();
                 notificationService.success("Pomyślnie zapisano");
             });
         };

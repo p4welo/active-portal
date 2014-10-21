@@ -22,18 +22,38 @@ define([
         }
 
         $scope.subscribe = function (customer) {
-            $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/customers/customerBase/modal/subscribeClass.html',
                 controller: "subscribeClassController",
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                    customer: function () {
+                        return customer;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                notificationService.success("Pomyślnie zapisano");
+                $scope.customerCourses = customerFactory.courses(customer);
             });
         };
 
         $scope.join = function (customer) {
-            $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/customers/customerBase/modal/joinClass.html',
                 controller: "joinClassController",
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                    customer: function () {
+                        return customer;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                notificationService.success("Pomyślnie zapisano");
+                $scope.customerCourses = customerFactory.courses(customer);
             });
         };
 

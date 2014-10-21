@@ -17,4 +17,6 @@ public interface ICustomerService extends IIdentifiableService<Customer> {
     List<CustomerPresence> findPresence(Customer customer);
 
     List<Course> findCourses(Customer customer);
+
+    void joinCourse(Customer customer, Course course);
 }

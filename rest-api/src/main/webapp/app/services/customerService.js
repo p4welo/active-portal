@@ -36,6 +36,14 @@ define([
                 url: "rest/customer/:sid/courses",
                 method: 'GET',
                 isArray: true
+            },
+            join: {
+                url: "rest/customer/:sid/join",
+                method: 'PUT'
+            },
+            subscribe: {
+                url: "rest/customer/:sid/subscribe",
+                method: 'PUT'
             }
         })
     });

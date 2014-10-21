@@ -1,6 +1,7 @@
 package pl.ap.dao.impl;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -25,6 +26,9 @@ public class CustomerSubscriptionDaoImpl extends AbstractDaoImpl<CustomerSubscri
     public List<Course> findCoursesByCustomer(Customer customer) {
         Criteria criteria = createCriteria();
         criteria.add(Restrictions.eq(CustomerSubscription.FIELD_CUSTOMER, customer));
+        criteria.createAlias(CustomerSubscription.FIELD_COURSE, CustomerSubscription.FIELD_COURSE);
+        criteria.addOrder(Order.asc(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_DAY));
+        criteria.addOrder(Order.asc(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_START_TIME));
         criteria.setProjection(Projections.property(CustomerSubscription.FIELD_COURSE));
         return criteria.list();
     }

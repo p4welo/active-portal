@@ -7,11 +7,11 @@ define([
 ], function (module) {
 
     module.controller('addCourseController', function ($scope, $modalInstance, categoryFactory, styleFactory, instructorFactory, roomFactory) {
-        $scope.style = {};
+        $scope.course = {};
 
-        $scope.styles = styleFactory.find();
-        $scope.instructors = instructorFactory.find();
-        $scope.rooms = roomFactory.find();
+        $scope.styles = styleFactory.findAll();
+        $scope.instructors = instructorFactory.findAll();
+        $scope.rooms = roomFactory.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
         ];
@@ -26,9 +26,11 @@ define([
             $modalInstance.dismiss('cancel');
         };
 
-        $scope.save = function (style) {
-            styleFactory.create(style);
-            $modalInstance.close();
+        $scope.save = function (course) {
+            categoryFactory.create(course).$promise.then(
+                function () {
+                    $modalInstance.close();
+                });
         }
     });
 

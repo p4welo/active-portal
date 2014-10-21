@@ -11,11 +11,10 @@ define([
 
         $scope.add = function () {
 
-            var modalInstance = $modal.open(
-                {
-                    templateUrl: 'app/schedule/rooms/modal/addRoom.html',
-                    controller: "addRoomController"
-                });
+            var modalInstance = $modal.open({
+                templateUrl: 'app/schedule/rooms/modal/addRoom.html',
+                controller: "addRoomController"
+            });
 
             modalInstance.result.then(function () {
                 notificationService.success("Pomyślnie zapisano");
