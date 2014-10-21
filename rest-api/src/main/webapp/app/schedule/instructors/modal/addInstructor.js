@@ -11,8 +11,10 @@ define([
         };
 
         $scope.save = function (instructor) {
-            instructorFactory.create(instructor);
-            $modalInstance.close();
+            instructorFactory.create(instructor).$promise.then(
+                function () {
+                    $modalInstance.close();
+                });
         }
     });
 

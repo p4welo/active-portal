@@ -13,8 +13,10 @@ define([
         };
 
         $scope.save = function (style) {
-            styleFactory.create(style);
-            $modalInstance.close();
+            styleFactory.create(style).$promise.then(
+                function () {
+                    $modalInstance.close();
+                });
         }
     });
 

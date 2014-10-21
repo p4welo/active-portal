@@ -11,8 +11,10 @@ define([
         };
 
         $scope.save = function (category) {
-            categoryFactory.create(category);
-            $modalInstance.close();
+            categoryFactory.create(category).$promise.then(
+                function () {
+                    $modalInstance.close();
+                });
         }
     });
 

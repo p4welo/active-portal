@@ -28,5 +28,4 @@ define([
             $modalInstance.dismiss();
         }
     });
-
 });
