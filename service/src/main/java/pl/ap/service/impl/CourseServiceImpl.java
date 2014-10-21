@@ -2,7 +2,6 @@ package pl.ap.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.Course;
@@ -45,14 +44,8 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
 
     @Override
     @Transactional(readOnly = true)
-    public List<Course> findScheduleClasses() {
-        return courseDao.findScheduleClasses();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Course> findFutureClasses() {
-        return courseDao.findFutureClasses();
+    public List<Course> findForSchedule() {
+        return courseDao.findForSchedule();
     }
 
     @Override

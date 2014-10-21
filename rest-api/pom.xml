@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>pl.ap</groupId>
-    <artifactId>rest</artifactId>
+    <artifactId>rest-api</artifactId>
     <packaging>war</packaging>
     <name>Rest API Server Module</name>
 
@@ -69,5 +69,4 @@
             <artifactId>jstl</artifactId>
         </dependency>
     </dependencies>
-    
 </project>

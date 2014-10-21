@@ -20,16 +20,9 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     public static final String BEAN_NAME = "courseDao";
 
     @Override
-    public List<Course> findScheduleClasses() {
+    public List<Course> findForSchedule() {
         Criteria criteria = createCriteria()
-                .addOrder(Order.asc(Course.FIELD_START_TIME));
-        return criteria.list();
-    }
-
-    @Override
-    public List<Course> findFutureClasses() {
-        Criteria criteria = createCriteria()
-                .add(Restrictions.eq(Course.FIELD_IN_PROGRESS, false))
+                .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))
                 .addOrder(Order.asc(Course.FIELD_DAY))
                 .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
@@ -39,6 +32,7 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     public List<Course> findInProgress() {
         Criteria criteria = createCriteria()
                 .add(Restrictions.eq(Course.FIELD_IN_PROGRESS, true))
+                .addOrder(Order.asc(Course.FIELD_DAY))
                 .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
     }

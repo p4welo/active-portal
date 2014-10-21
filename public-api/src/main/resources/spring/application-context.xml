@@ -5,7 +5,6 @@
 
     <import resource="classpath:spring/dao-context.xml"/>
     <import resource="classpath:spring/service-context.xml"/>
-    <import resource="classpath:spring/security-context.xml"/>
 
-    <bean id="jsonpCallbackFilter" class="pl.ap.rest.filter.JsonpCallbackFilter" />
+    <bean id="jsonpCallbackFilter" class="pl.ap.publ.filter.JsonpCallbackFilter" />
 </beans>

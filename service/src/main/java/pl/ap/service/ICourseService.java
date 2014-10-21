@@ -11,9 +11,7 @@ import java.util.List;
  * Created by parado on 19.03.14.
  */
 public interface ICourseService extends IIdentifiableService<Course> {
-    List<Course> findScheduleClasses();
-
-    List<Course> findFutureClasses();
+    List<Course> findForSchedule();
 
     List<Course> findInProgress();
 
