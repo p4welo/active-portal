@@ -14,7 +14,11 @@ define([
                 return;
             }
             $scope.selected = roleService.copyProperties(role);
-            $scope.authorities = authorityHttpClient.findByRole({ sid: role.sid });
+            authorityHttpClient.findByRole({ sid: role.sid }).$promise.then(
+                function (result) {
+                    $scope.authorities = result;
+                }
+            );
             $scope.selected.edit = false;
         }
 
@@ -22,17 +26,17 @@ define([
             var role = $scope.selected;
             var checkbox = $event.target;
             if (checkbox.checked) {
-                authorityHttpClient.check({ sid : role.sid }, relation.authority).$promise.then(
-                    function(value) {
-                        relation.checked = value.checked;
+                authorityHttpClient.check({ sid: role.sid }, relation.authority).$promise.then(
+                    function (result) {
+                        relation.checked = result.checked;
                         notificationService.success("Pomyślnie zapisano");
                     }
                 )
             }
             else {
-                authorityHttpClient.uncheck({ sid : role.sid }, relation.authority).$promise.then(
-                    function(value) {
-                        relation.checked = value.checked;
+                authorityHttpClient.uncheck({ sid: role.sid }, relation.authority).$promise.then(
+                    function (result) {
+                        relation.checked = result.checked;
                         notificationService.success("Pomyślnie zapisano");
                     }
                 )

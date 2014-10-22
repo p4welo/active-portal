@@ -9,36 +9,38 @@ define([
         var EDIT_NEWS_KEY = 'edit';
 
         $scope.newsList = newsHttpClient.findAll();
-
         $scope.add = function () {
 
         }
 
         $scope.update = function (news) {
             delete news[EDIT_NEWS_KEY];
-            newsHttpClient.update({ sid: news.sid }, news).$promise.then(
-                function () {
-                    notificationService.success("Pomyślnie zapisano");
-                    $scope.newsList = newsHttpClient.findAll();
+            newsHttpClient.update({ sid: news.sid }, news).$promise.then(function () {
+                notificationService.success("Pomyślnie zapisano");
+                newsHttpClient.findAll().$promise.then(function (result) {
+                    $scope.newsList = result;
                 });
+            });
         }
 
         $scope.publish = function (news) {
-            newsHttpClient.publish({ sid: news.sid }).$promise.then(
-                function (value) {
-                    news.objectState = value.objectState;
-                    $scope.newsList = newsHttpClient.findAll();
-                    notificationService.success("Pomyślnie zapisano");
+            newsHttpClient.publish({ sid: news.sid }).$promise.then(function (value) {
+                news.objectState = value.objectState;
+                newsHttpClient.findAll().$promise.then(function (result) {
+                    $scope.newsList = result;
                 });
+                notificationService.success("Pomyślnie zapisano");
+            });
         }
 
         $scope.deactivate = function (news) {
-            newsHttpClient.deactivate({ sid: news.sid }).$promise.then(
-                function (value) {
-                    news.objectState = value.objectState;
-                    $scope.newsList = newsHttpClient.findAll();
-                    notificationService.success("Pomyślnie zapisano");
+            newsHttpClient.deactivate({ sid: news.sid }).$promise.then(function (value) {
+                news.objectState = value.objectState;
+                newsHttpClient.findAll().$promise.then(function (result) {
+                    $scope.newsList = result;
                 });
+                notificationService.success("Pomyślnie zapisano");
+            });
         }
 
         $scope.select = function (news) {
@@ -46,7 +48,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = newsService.copyProperties(news);;
+            $scope.selected = newsService.copyProperties(news);
             $scope.selected[EDIT_NEWS_KEY] = false;
         }
 

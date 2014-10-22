@@ -16,7 +16,10 @@ define([
             });
 
             modalInstance.result.then(function () {
-                $scope.rooms = instructorHttpClient.findAll();
+                instructorHttpClient.findAll().$promise.then(
+                    function (result) {
+                        $scope.instructors = result;
+                    });
                 notificationService.success("Pomyślnie zapisano");
             });
         }
@@ -40,7 +43,10 @@ define([
             instructorHttpClient.update({ sid: instructor.sid }, instructor).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.instructors = instructorHttpClient.findAll();
+                    instructorHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.instructors = result;
+                        });
                 });
         }
 

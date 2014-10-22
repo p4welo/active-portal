@@ -4,6 +4,10 @@ define([
 ], function (module) {
 
     module.controller("userController", function ($scope, userHttpClient) {
-        $scope.users = userHttpClient.findAll();
+        userHttpClient.findAll().$promise.then(
+            function (result) {
+                $scope.users = result;
+            }
+        );
     });
 });

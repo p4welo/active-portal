@@ -11,7 +11,6 @@ define([
         var EDIT_STYLE_KEY = 'edit';
         var EDIT_CATEGORY_KEY = 'editcategory';
 
-
         $scope.styles = styleHttpClient.findAll();
         $scope.categories = categoryHttpClient.findAll();
 
@@ -22,7 +21,10 @@ define([
             });
 
             modalInstance.result.then(function () {
-                $scope.styles = styleHttpClient.findAll();
+                styleHttpClient.findAll().$promise.then(
+                    function (result) {
+                        $scope.styles = result;
+                    });
                 notificationService.success("Pomyślnie zapisano");
             });
         };
@@ -46,7 +48,10 @@ define([
             styleHttpClient.setCategory({sid: style.sid}, style.category).$promise.then(
                 function () {
                     style[EDIT_CATEGORY_KEY] = false;
-                    $scope.styles = styleHttpClient.findAll();
+                    styleHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.styles = result;
+                        });
                     notificationService.success("Pomyślnie zapisano");
                 });
         }
@@ -58,7 +63,10 @@ define([
             styleHttpClient.update({ sid: style.sid }, style).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.styles = styleHttpClient.findAll();
+                    styleHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.styles = result;
+                        });
                 });
         }
 

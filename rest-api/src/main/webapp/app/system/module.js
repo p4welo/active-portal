@@ -1,8 +1,10 @@
 define([
-
+    'ngTranslate'
 ], function () {
 
-    return angular.module('activePortal.system', [], function ($stateProvider) {
+    return angular.module('activePortal.system', [
+        'pascalprecht.translate'
+    ], function ($stateProvider) {
         $stateProvider
             .state('users', {
                 url: "/users",

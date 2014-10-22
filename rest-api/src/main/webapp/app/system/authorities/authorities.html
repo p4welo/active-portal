@@ -28,7 +28,9 @@
                     <td class="text-center">
                         <input type="checkbox" ng-checked="a.checked" ng-click="change($event, a)">
                     </td>
-                    <td ng-bind="a.authority.key"></td>
+                    <td>
+                        {{ a.authority.key | translate }}
+                    </td>
                 </tr>
                 </tbody>
             </table>

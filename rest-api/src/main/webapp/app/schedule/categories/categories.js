@@ -8,7 +8,7 @@ define([
     module.controller("categoriesController", function ($scope, $modal, categoryHttpClient, categoryService, notificationService) {
         $scope.categories = categoryHttpClient.findAll();
 
-        $scope.add = function() {
+        $scope.add = function () {
             var modalInstance = $modal.open(
                 {
                     templateUrl: 'app/schedule/categories/modal/addCategory.html',
@@ -16,7 +16,9 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.categories = categoryHttpClient.findAll();
+                categoryHttpClient.findAll().$promise.then(function (result) {
+                    $scope.categories = result;
+                });
                 notificationService.success("Pomyślnie zapisano");
             });
         };
@@ -32,11 +34,12 @@ define([
 
         $scope.update = function (category) {
             delete category['edit'];
-            categoryHttpClient.update({ sid: category.sid }, category).$promise.then(
-                function () {
-                    notificationService.success("Pomyślnie zapisano");
-                    $scope.categories = categoryHttpClient.findAll();
+            categoryHttpClient.update({ sid: category.sid }, category).$promise.then(function () {
+                notificationService.success("Pomyślnie zapisano");
+                categoryHttpClient.findAll().$promise.then(function (result) {
+                    $scope.categories = result;
                 });
+            });
         }
 
         $scope.resolveStatusCss = function (category) {

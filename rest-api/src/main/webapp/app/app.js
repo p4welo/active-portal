@@ -58,7 +58,19 @@ define([
                 DELETED: "Usunięty",
 
                 MALE: "Mężczyzna",
-                FEMALE: "Kobieta"
+                FEMALE: "Kobieta",
+
+                AUTH_SYSTEM_USERS: "SYSTEM: Użytkownicy",
+                AUTH_SYSTEM_AUTHORITIES: "SYSTEM: Uprawnienia",
+                AUTH_NEWS_NEWS_LIST: "AKTUALNOŚCI: Lista",
+                AUTH_NEWS_NEWSLETTER: "AKTUALNOŚCI: Newsletter",
+                AUTH_SCHEDULE_ROOMS: "GRAFIK: Pomieszczenia",
+                AUTH_SCHEDULE_INSTRUCTORS: "GRAFIK: Instruktorzy",
+                AUTH_SCHEDULE_CATEGORIES: "GRAFIK: Kategorie zajęć",
+                AUTH_SCHEDULE_STYLES: "GRAFIK: Style taneczne",
+                AUTH_SCHEDULE_SCHEDULE: "GRAFIK: Grafik zajęć",
+                AUTH_CUSTOMERS_CUSTOMER_BASE: "KLIENCI: Baza klientów",
+                AUTH_CUSTOMERS_CUSTOMER_PRESENCE: "KLIENCI: Obecności"
             });
             $translateProvider.preferredLanguage('pl');
         })

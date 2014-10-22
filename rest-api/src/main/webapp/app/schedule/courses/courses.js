@@ -20,7 +20,10 @@ define([
                 });
 
             modalInstance.result.then(function () {
-                $scope.classes = courseHttpClient.findAll();
+                courseHttpClient.findAll().$promise.then(
+                    function (result) {
+                        $scope.classes = result;
+                    });
                 notificationService.success("Pomyślnie zapisano");
             });
         };
@@ -29,7 +32,10 @@ define([
             courseHttpClient.publish({ sid: course.sid }).$promise.then(
                 function (value) {
                     course.objectState = value.objectState;
-                    $scope.classes = courseHttpClient.findAll();
+                    courseHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.classes = result;
+                        });
                     notificationService.success("Pomyślnie zapisano");
                 });
         }
@@ -38,7 +44,10 @@ define([
             courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
                 function (value) {
                     course.objectState = value.objectState;
-                    $scope.classes = courseHttpClient.findAll();
+                    courseHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.classes = result;
+                        });
                     notificationService.success("Pomyślnie zapisano");
                 });
         }
