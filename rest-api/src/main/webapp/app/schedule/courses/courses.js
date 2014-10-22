@@ -30,8 +30,8 @@ define([
 
         $scope.publish = function (course) {
             courseHttpClient.publish({ sid: course.sid }).$promise.then(
-                function (value) {
-                    course.objectState = value.objectState;
+                function (result) {
+                    course.objectState = result.objectState;
                     courseHttpClient.findAll().$promise.then(
                         function (result) {
                             $scope.classes = result;
@@ -42,8 +42,8 @@ define([
 
         $scope.deactivate = function (course) {
             courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
-                function (value) {
-                    course.objectState = value.objectState;
+                function (result) {
+                    course.objectState = result.objectState;
                     courseHttpClient.findAll().$promise.then(
                         function (result) {
                             $scope.classes = result;

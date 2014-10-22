@@ -35,7 +35,11 @@ define([
 
             modalInstance.result.then(function () {
                 notificationService.success("Pomyślnie zapisano");
-                $scope.customerCourses = customerHttpClient.courses(customer);
+                customerHttpClient.courses(customer).$promise.then(
+                    function (result) {
+                        $scope.customerCourses = result;
+                    }
+                );
             });
         };
 
@@ -53,7 +57,11 @@ define([
 
             modalInstance.result.then(function () {
                 notificationService.success("Pomyślnie zapisano");
-                $scope.customerCourses = customerHttpClient.courses(customer);
+                customerHttpClient.courses(customer).$promise.then(
+                    function (result) {
+                        $scope.customerCourses = result;
+                    }
+                );
             });
         };
 
