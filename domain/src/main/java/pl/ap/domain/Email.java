@@ -1,6 +1,8 @@
 package pl.ap.domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
+import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
 
@@ -13,115 +15,99 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "email")
-public class Email extends IdentifiableEntity
-{
-   public static final String FIELD_SENDER = "sender";
+@Unique(fields = Email.FIELD_SID, message = Email.NON_UNIQUE_SID_MESSAGE, insensitive = false)
+public class Email extends IdentifiableEntity {
+    public static final String FIELD_SENDER = "sender";
 
-   public static final String FIELD_SUBJECT = "subject";
+    public static final String FIELD_SUBJECT = "subject";
 
-   public static final String FIELD_CONTENT = "content";
+    public static final String FIELD_CONTENT = "content";
 
-   @Id
-   @GeneratedValue
-   @Column
-   private Long id;
+    @Id
+    @GeneratedValue
+    @Column
+    private Long id;
 
-   @Column
-   private String sender;
+    @Column
+    private String sender;
 
-   private String to[];
+    private String to[];
 
-   private String[] cc = new String[]{};
+    private String[] cc = new String[]{};
 
-   private String replyTo = new String();
+    private String replyTo = new String();
 
-   @Column
-   @NotBlank
-   private String subject;
+    @Column
+    @NotBlank
+    private String subject;
 
-   @Column
-   @NotBlank
-   private String content;
+    @Column
+    @NotBlank
+    private String content;
 
-   public Email()
-   {
-   }
+    public Email() {
+    }
 
-   public Email(String sender, String[] to, String subject, String content)
-   {
-      this.sender = sender;
-      this.to = to;
-      this.subject = subject;
-      this.content = content;
-   }
+    public Email(String sender, String[] to, String subject, String content) {
+        this.sender = sender;
+        this.to = to;
+        this.subject = subject;
+        this.content = content;
+    }
 
-   public Long getId()
-   {
-      return id;
-   }
+    public Long getId() {
+        return id;
+    }
 
-   public void setId(Long id)
-   {
-      this.id = id;
-   }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-   public String getSender()
-   {
-      return sender;
-   }
+    public String getSender() {
+        return sender;
+    }
 
-   public void setSender(String sender)
-   {
-      this.sender = sender;
-   }
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 
-   public String[] getTo()
-   {
-      return to;
-   }
+    public String[] getTo() {
+        return to;
+    }
 
-   public void setTo(String[] to)
-   {
-      this.to = to;
-   }
+    public void setTo(String[] to) {
+        this.to = to;
+    }
 
-   public String[] getCc()
-   {
-      return cc;
-   }
+    public String[] getCc() {
+        return cc;
+    }
 
-   public void setCc(String[] cc)
-   {
-      this.cc = cc;
-   }
+    public void setCc(String[] cc) {
+        this.cc = cc;
+    }
 
-   public String getReplyTo()
-   {
-      return replyTo;
-   }
+    public String getReplyTo() {
+        return replyTo;
+    }
 
-   public void setReplyTo(String replyTo)
-   {
-      this.replyTo = replyTo;
-   }
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
 
-   public String getSubject()
-   {
-      return subject;
-   }
+    public String getSubject() {
+        return subject;
+    }
 
-   public void setSubject(String subject)
-   {
-      this.subject = subject;
-   }
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
-   public String getContent()
-   {
-      return content;
-   }
+    public String getContent() {
+        return content;
+    }
 
-   public void setContent(String content)
-   {
-      this.content = content;
-   }
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

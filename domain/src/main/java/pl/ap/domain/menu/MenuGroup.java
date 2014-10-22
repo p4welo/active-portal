@@ -6,34 +6,28 @@ import java.util.List;
 /**
  * Created by parado on 2014-05-14.
  */
-public class MenuGroup implements Serializable
-{
-   private String header;
+public class MenuGroup implements Serializable {
+    private String header;
 
-   private List<MenuItem> items;
+    private List<MenuItem> items;
 
-   public MenuGroup(String header)
-   {
-      this.header = header;
-   }
+    public MenuGroup(String header) {
+        this.header = header;
+    }
 
-   public String getHeader()
-   {
-      return header;
-   }
+    public String getHeader() {
+        return header;
+    }
 
-   public void setHeader(String header)
-   {
-      this.header = header;
-   }
+    public void setHeader(String header) {
+        this.header = header;
+    }
 
-   public List<MenuItem> getItems()
-   {
-      return items;
-   }
+    public List<MenuItem> getItems() {
+        return items;
+    }
 
-   public void setItems(List<MenuItem> items)
-   {
-      this.items = items;
-   }
+    public void setItems(List<MenuItem> items) {
+        this.items = items;
+    }
 }

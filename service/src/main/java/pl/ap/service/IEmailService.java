@@ -5,6 +5,5 @@ import pl.ap.domain.Email;
 /**
  * Created by parado on 24.03.14.
  */
-public interface IEmailService extends IAbstractService<Email>
-{
+public interface IEmailService extends IIdentifiableService<Email> {
 }

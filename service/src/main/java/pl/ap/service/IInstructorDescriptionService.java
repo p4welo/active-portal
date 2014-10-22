@@ -6,7 +6,6 @@ import pl.ap.domain.InstructorDescription;
 /**
  * Created by parado on 19.03.14.
  */
-public interface IInstructorDescriptionService extends IAbstractService<InstructorDescription>
-{
-   InstructorDescription getDescriptionByInstructor(Instructor instructor);
+public interface IInstructorDescriptionService extends IIdentifiableService<InstructorDescription> {
+    InstructorDescription getDescriptionByInstructor(Instructor instructor);
 }

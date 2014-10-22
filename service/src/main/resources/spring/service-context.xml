@@ -13,4 +13,15 @@
     <bean id="templateMailService" class="pl.ap.service.impl.TemplateMailServiceImpl">
         <property name="sender" value="${mail.sender}"/>
     </bean>
+
+    <bean id="applicationProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:configuration/mail.properties</value>
+                <value>classpath:configuration/dao.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
 </beans>

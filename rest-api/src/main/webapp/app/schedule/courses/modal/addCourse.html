@@ -1,0 +1,85 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title" id="add-modal-label">Dodaj zajęcia</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="newName" class="col-sm-3 control-label">Nazwa</label>
+
+            <div class="col-sm-9">
+                <select size="1" class="form-control" id="newName" ng-model="course.style.sid">
+                    <option ng-repeat="style in styles" value="{{style.sid}}">{{style.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newLevel" class="col-sm-3 control-label">Poziom</label>
+
+            <div class="col-sm-9">
+                <select size="1" class="form-control" id="newLevel" ng-model="course.level">
+                    <option ng-repeat="level in levels" value="{{level}}">{{level | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newDay" class="col-sm-3 control-label">Dzień</label>
+
+            <div class="col-sm-9">
+                <select size="1" class="form-control" id="newDay" ng-model="course.day">
+                    <option ng-repeat="day in days" value="{{day}}">{{day | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newStart" class="col-sm-3 control-label">Start</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="newStart" placeholder="00:00" ng-model="course.startTime">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newEnd" class="col-sm-3 control-label">Koniec</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="newEnd" placeholder="00:00" ng-model="course.endTime">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newInstructor" class="col-sm-3 control-label">Instruktor</label>
+
+            <div class="col-sm-9">
+                <select size="1" class="form-control" id="newInstructor" ng-model="course.instructor.sid">
+                    <option ng-repeat="instructor in instructors" value="{{instructor.sid}}">
+                        {{instructor.firstName + " " + instructor.lastName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newRoom" class="col-sm-3 control-label">Sala</label>
+
+            <div class="col-sm-9">
+                <select size="1" class="form-control" id="newRoom" ng-model="course.room.sid">
+                    <option ng-repeat="room in rooms" value="{{room.sid}}">{{room.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newType" class="col-sm-3 control-label">Typ</label>
+
+            <div class="col-sm-9">
+                <select size="1" class="form-control" id="newType" ng-model="course.type">
+                    <option ng-repeat="type in types" value="{{type}}">{{type | translate}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save(course)" class="btn btn-success">Zapisz</button>
+</div>

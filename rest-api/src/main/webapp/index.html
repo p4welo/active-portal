@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="pl"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="pl"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>ActivePortal - platforma społeczności aktywnej</title>
+
+    <meta name="description" content="ActivePortal - platforma społeczności aktywnej">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+    <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+
+    <link rel="shortcut icon" href="assets/lib/pro-ui/img/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon152.png" sizes="152x152">
+
+    <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <!--<link rel="stylesheet" href="assets/lib/pro-ui/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="assets/lib/pro-ui/css/plugins.css">
+    <link rel="stylesheet" href="assets/lib/pro-ui/css/main.css">
+    <link rel="stylesheet" href="assets/lib/pro-ui/css/themes/fancy.css">
+    <link rel="stylesheet" href="assets/lib/pro-ui/css/themes.css">
+
+    <link href="assets/lib/pnotify/pnotify.core.css" rel="stylesheet" media="screen"/>
+    <link href="assets/lib/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" media="screen"/>
+    <link href="assets/lib/animate.css/animate.min.css" rel="stylesheet" media="screen" />
+
+    <link href="assets/css/style.css" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div id="page-container" class="sidebar-partial sidebar-visible-lg animated fadeIn" ng-cloak>
+    <div id="sidebar">
+        <div class="sidebar-scroll">
+            <div class="sidebar-content">
+                <a href="index.html" class="sidebar-brand">
+                    <i class="gi gi-baseball"></i><strong>Active</strong>Portal
+                </a>
+
+                <div class="sidebar-section sidebar-user clearfix">
+                    <div class="sidebar-user-avatar">
+                        <a href="page_ready_user_profile.html">
+                            <img src="assets/lib/pro-ui/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+                        </a>
+                    </div>
+                    <div class="sidebar-user-name">
+                        <span ng-bind="user.firstName"></span>
+                        <span ng-bind="user.lastName"></span>
+                    </div>
+                    <div class="sidebar-user-links"></div>
+                </div>
+
+                <ul class="sidebar-nav" ng-controller="menuController">
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-title">SYSTEM</span>
+                    </li>
+                    <li ng-if="usersAuth()">
+                        <a ui-sref="users" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-user sidebar-nav-icon"></i>
+                            Użytkownicy
+                        </a>
+                    </li>
+                    <li ng-if="authoritiesAuth()">
+                        <a ui-sref="authorities" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-keys sidebar-nav-icon"></i>
+                            Uprawnienia
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-title">AKTUALNOŚCI</span>
+                    </li>
+                    <li ng-if="newsListAuth()">
+                        <a ui-sref="newsList" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-fire sidebar-nav-icon"></i>
+                            Lista
+                        </a>
+                    </li>
+                    <li ng-if="newsletterAuth()">
+                        <a ui-sref="newsletter" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="fa fa-rss sidebar-nav-icon"></i>
+                            Newsletter
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-title">GRAFIK</span>
+                    </li>
+                    <li ng-if="roomsAuth()">
+                        <a ui-sref="rooms" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="fa fa-bank sidebar-nav-icon"></i>
+                            Pomieszczenia
+                        </a>
+                    </li>
+                    <li ng-if="instructorsAuth()">
+                        <a ui-sref="instructors" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-certificate sidebar-nav-icon"></i>
+                            Instruktorzy
+                        </a>
+                    </li>
+                    <li ng-if="categoriesAuth()">
+                        <a ui-sref="categories" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-folder_open sidebar-nav-icon"></i>
+                            Kategorie zajęć
+                        </a>
+                    </li>
+                    <li ng-if="stylesAuth()">
+                        <a ui-sref="styles" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-eyedropper sidebar-nav-icon"></i>
+                            Style taneczne
+                        </a>
+                    </li>
+                    <li ng-if="coursesAuth()">
+                        <a ui-sref="courses" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-table sidebar-nav-icon"></i>
+                            Grafik zajęć
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-title">KLIENCI</span>
+                    </li>
+                    <li ng-if="customerBaseAuth()">
+                        <a ui-sref="customerBase" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-parents sidebar-nav-icon"></i>
+                            Baza klientów
+                        </a>
+                    </li>
+                    <li ng-if="attendanceAuth()">
+                        <a ui-sref="attendance" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="gi gi-check sidebar-nav-icon"></i>
+                            Obecności
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-title">SOCIAL MEDIA</span>
+                    </li>
+                    <li>
+                        <a class="sidebar-nav-menu">
+                            <i class="si si-facebook sidebar-nav-icon"></i>
+                            Facebook
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-nav-menu">
+                            <i class="si si-twitter sidebar-nav-icon"></i>
+                            Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-nav-menu">
+                            <i class="si si-google_plus sidebar-nav-icon"></i>
+                            Google+
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <header class="navbar navbar-default">
+            <ul class="nav navbar-nav-custom">
+                <li>
+                    <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
+                        <i class="fa fa-bars fa-fw"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav-custom pull-right">
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Profil">
+                        <i class="gi gi-user"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Wiadomości">
+                        <i class="gi gi-envelope"></i>
+                        <span class="label label-primary label-indicator">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Ustawienia">
+                        <i class="gi gi-cogwheel"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout" data-toggle="tooltip" data-placement="bottom" title="Wyloguj">
+                        <i class="gi gi-gi gi-exit"></i>
+                    </a>
+                </li>
+            </ul>
+        </header>
+
+        <div id="page-content">
+            <div class="angular-view" ui-view></div>
+        </div>
+
+        <footer class="clearfix">
+            <div class="pull-right">
+                Crafted with <i class="fa fa-heart text-danger"></i> by <a href="http://goo.gl/vNS3I" target="_blank">pixelcave</a>
+            </div>
+            <div class="pull-left">
+                <span id="year-copy"></span> &copy; <a href="http://goo.gl/TDOSuC" target="_blank">Active-Portal 1.2</a>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<script src="./assets/lib/headjs-notify/dist/head.load.min.js" type="text/javascript"></script>
+<script src="./assets/js/boot.js" type="text/javascript"></script>
+</body>
+</html>

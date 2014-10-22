@@ -13,20 +13,35 @@
     <modules>
         <module>domain</module>
         <module>service</module>
-        <module>server</module>
+        <module>rest-api</module>
+        <module>public-api</module>
     </modules>
 
     <properties>
-        <spring.version>4.0.3.RELEASE</spring.version>
+        <spring.version>4.1.0.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
+        <junit.version>4.9</junit.version>
         <slf4j.version>1.7.5</slf4j.version>
-        <aspectj.version>1.8.0</aspectj.version>
         <javax.mail.version>1.4.3</javax.mail.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <javax.servlet.version>2.5</javax.servlet.version>
         <joda-time.version>2.1</joda-time.version>
         <joda-time-hibernate.version>1.3</joda-time-hibernate.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencyManagement>
         <dependencies>
@@ -45,6 +60,16 @@
                 <artifactId>server</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>pl.ap</groupId>
+                <artifactId>rest-api</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>pl.ap</groupId>-->
+                <!--<artifactId>public-api</artifactId>-->
+                <!--<version>${project.parent.version}</version>-->
+            <!--</dependency>-->
 
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -93,9 +118,17 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
+                <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
+                <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-web</artifactId>
@@ -111,21 +144,7 @@
                 <artifactId>spring-security-config</artifactId>
                 <version>${spring.security.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjrt</artifactId>
-                <version>${aspectj.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -224,11 +243,6 @@
                 <version>1.4</version>
             </dependency>
             <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>1.7.1</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
                 <version>${javax.mail.version}</version>
@@ -243,7 +257,16 @@
                 <artifactId>jstl</artifactId>
                 <version>1.2</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>2.2.8</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

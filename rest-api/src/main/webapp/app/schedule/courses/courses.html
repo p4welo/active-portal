@@ -1,0 +1,158 @@
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-table"></i>Grafik zajęć<br>
+            </h1>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
+                       ng-class="{'active': selected.edit}">
+                        <span ng-if="!selected.edit">
+                            <i class="fa fa-pencil"></i>
+                            Edytuj
+                        </span>
+                        <span ng-if="selected.edit">
+                            <i class="fa fa-close"></i>
+                            Anuluj
+                        </span>
+                    </a>
+                </div>
+                <h2>
+                    <i class="gi gi-table"></i>
+                </h2>
+            </div>
+
+            <form class="form-horizontal form-bordered" method="post">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div ng-if="selected.objectState == 'INACTIVE'">
+                            <button class="btn btn-sm btn-success" ng-click="publish(selected)">
+                                <i class="fa fa-unlock"></i>
+                                Publikuj
+                            </button>
+                        </div>
+                        <div ng-if="selected.objectState == 'ACTIVE'">
+                            <button class="btn btn-sm btn-danger" ng-click="deactivate(selected)">
+                                <i class="fa fa-lock"></i>
+                                Dezaktywuj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Nazwa</label>
+
+                    <div class="col-xs-9">
+                        <p class="form-control-static">
+                            {{ selected.style.name }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="day" class="col-xs-3 control-label">Dzień</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <select id="day" ng-model="selected.day" ng-options="day | translate for day in days" class="form-control"></select>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static">
+                            {{ selected.day | translate }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group form-actions" ng-if="selected.edit">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-primary" ng-click="update(selected)">
+                            <i class="fa fa-check"></i>
+                            Zapisz
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="block col-xs-12 col-lg-8 pull-left">
+        <div class="table-options clearfix">
+            <div class="btn-group btn-group-sm col-md-4" data-toggle="buttons">
+                <button class="btn btn-success" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    Dodaj zajęcia
+                </button>
+            </div>
+
+            <div class="col-md-8">
+                <ul class="nav nav-pills day-select">
+                    <li ng-class="{'active' : day==''}">
+                        <a ng-click="day=''">
+                            <strong>WSZYSTKIE</strong>
+                        </a>
+                    </li>
+                    <li ng-class="{'active' : day=='PN'}">
+                        <a ng-click="day='PN'">Poniedziałek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='WT'}">
+                        <a ng-click="day='WT'">Wtorek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SR'}">
+                        <a ng-click="day='SR'">Środa</a>
+                    </li>
+                    <li ng-class="{'active' : day=='CZ'}">
+                        <a ng-click="day='CZ'">Czwartek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='PT'}">
+                        <a ng-click="day='PT'">Piątek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SB'}">
+                        <a ng-click="day='SB'">Sobota</a>
+                    </li>
+                    <li ng-class="{'active' : day=='ND'}">
+                        <a ng-click="day='ND'">Niedziela</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>Dzień</th>
+                <th>Godziny</th>
+                <th>Nazwa</th>
+                <th>Sala</th>
+                <th>Instruktor</th>
+                <th>Dostępność</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="course in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="select(course)" ng-class="{'selected': selected != null && course.sid == selected.sid}">
+                <td>{{course.day | translate}}</td>
+                <td>{{course.startTime}} - {{course.endTime}}</td>
+                <td ng-bind="course.style.name"></td>
+                <td>{{course.room.name | translate}}</td>
+                <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
+                <td>
+                    <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
+                    <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                    <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+                </td>
+                <td>
+                    <span class="label" ng-class="resolveStatusCss(course)">
+                        {{ course.objectState | translate }}
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

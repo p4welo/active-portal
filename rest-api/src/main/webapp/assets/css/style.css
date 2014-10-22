@@ -1,0 +1,68 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.ui-pnotify h4 {
+    color: inherit !important;
+    font-weight: bold;
+}
+
+.ui-pnotify.stack-bottomright {
+    bottom: 25px !important;
+    top: auto !important;
+}
+
+.ui-pnotify-container {
+    z-index: 1055;
+}
+
+.ui-pnotify-container.alert .icon-exclamation-sign {
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+.table-editable tbody {
+    cursor: pointer;
+}
+
+.day-select li {
+    cursor: pointer;
+}
+
+.customer-base .widget .widget-image, .widget .widget-icon {
+    height: 48px;
+    width: 48px;
+}
+
+.customer-base .widget .widget-icon {
+    font-size: 24px;
+    line-height: 48px;
+}
+
+.customer-base .widget-simple .widget-content {
+    font-size: 16px;
+    margin: 0;
+}
+
+.customer-base .customer-record {
+    cursor: pointer;
+}
+
+.attendance span {
+    font-size: 56px;
+    color: black;
+}
+
+.attendance img {
+    height: 58px;
+}
+
+.selected > td {
+    background-color: #d9416c !important;
+    color: white;
+}
+
+.themed-background-spring > td {
+    background-color: #27ae60!important;
+    color: white;
+}

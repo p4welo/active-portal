@@ -2,6 +2,8 @@ package pl.ap.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.ap.domain.annotations.Unique;
+import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,105 +13,89 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "news")
-public class News extends IdentifiableEntity
-{
-   public static final String FIELD_TITLE = "title";
+@Unique(fields = News.FIELD_SID, message = News.NON_UNIQUE_SID_MESSAGE, insensitive = false)
+public class News extends IdentifiableEntity {
+    public static final String FIELD_TITLE = "title";
 
-   public static final String FIELD_CREATED_AT = "createdAt";
+    public static final String FIELD_CREATED_AT = "createdAt";
 
-   public static final String FIELD_CONTENT = "content";
+    public static final String FIELD_CONTENT = "content";
 
-   public static final String FIELD_IMAGE_SRC = "imageSrc";
+    public static final String FIELD_IMAGE_SRC = "imageSrc";
 
-   public static final String FIELD_IMAGE_ALT = "imageAlt";
+    public static final String FIELD_IMAGE_ALT = "imageAlt";
 
-   public static final int MAX_LENGTH_TITLE = 128;
+    @Id
+    @GeneratedValue
+    @Column
+    private Long id;
 
-   public static final int MAX_LENGTH_IMAGE_SRC = 1024;
+    @Column(nullable = false, length = 128)
+    @NotBlank
+    @Length(max = 128)
+    private String title;
 
-   public static final int MAX_LENGTH_IMAGE_ALT = 256;
+    @Column(name = "created_at", nullable = false)
+    @NotNull
+    private String createdAt;
 
-   @Id
-   @GeneratedValue
-   @Column
-   private Long id;
+    @Column(nullable = false)
+    @NotBlank
+    private String content;
 
-   @Column(nullable = false, length = MAX_LENGTH_TITLE)
-   @NotBlank
-   @Length(max = MAX_LENGTH_TITLE)
-   private String title;
+    @Column(name = "image_src", nullable = true, length = 1024)
+    @Length(max = 1024)
+    private String imageSrc;
 
-   @Column(name = "created_at", nullable = false)
-   @NotNull
-   private String createdAt;
+    @Column(name = "image_alt", nullable = true, length = 256)
+    @Length(max = 256)
+    private String imageAlt;
 
-   @Column(nullable = false)
-   @NotBlank
-   private String content;
+    public String getTitle() {
+        return title;
+    }
 
-   @Column(name = "image_src", nullable = true)
-   private String imageSrc;
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-   @Column(name = "image_alt", nullable = true)
-   private String imageAlt;
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-   public String getTitle()
-   {
-      return title;
-   }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-   public void setTitle(String title)
-   {
-      this.title = title;
-   }
+    public String getContent() {
+        return content;
+    }
 
-   public String getCreatedAt()
-   {
-      return createdAt;
-   }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-   public void setCreatedAt(String createdAt)
-   {
-      this.createdAt = createdAt;
-   }
+    public String getImageSrc() {
+        return imageSrc;
+    }
 
-   public String getContent()
-   {
-      return content;
-   }
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
 
-   public void setContent(String content)
-   {
-      this.content = content;
-   }
+    public String getImageAlt() {
+        return imageAlt;
+    }
 
-   public String getImageSrc()
-   {
-      return imageSrc;
-   }
+    public void setImageAlt(String imageAlt) {
+        this.imageAlt = imageAlt;
+    }
 
-   public void setImageSrc(String imageSrc)
-   {
-      this.imageSrc = imageSrc;
-   }
+    public Long getId() {
+        return id;
+    }
 
-   public String getImageAlt()
-   {
-      return imageAlt;
-   }
-
-   public void setImageAlt(String imageAlt)
-   {
-      this.imageAlt = imageAlt;
-   }
-
-   public Long getId()
-   {
-      return id;
-   }
-
-   public void setId(Long id)
-   {
-      this.id = id;
-   }
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

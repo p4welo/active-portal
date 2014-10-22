@@ -1,0 +1,137 @@
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-certificate"></i>Instruktorzy<br>
+            </h1>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
+                       ng-class="{'active': selected.edit}">
+                        <span ng-if="!selected.edit">
+                            <i class="fa fa-pencil"></i>
+                            Edytuj
+                        </span>
+                        <span ng-if="selected.edit">
+                            <i class="fa fa-close"></i>
+                            Anuluj
+                        </span>
+                    </a>
+                </div>
+                <h2>
+                    <i class="gi gi-certificate"></i>
+                </h2>
+            </div>
+
+            <form class="form-horizontal form-bordered" method="post">
+
+                <div class="form-group">
+                    <label for="firstName" class="col-xs-3 control-label">Imię</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Imię" class="form-control" id="firstName"
+                               ng-model="selected.firstName"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.firstName"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="col-xs-3 control-label">Nazwisko</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
+                               ng-model="selected.lastName"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.lastName"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nick" class="col-xs-3 control-label">Pseudonim</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input type="text" placeholder="Pseudonim" class="form-control" id="nick"
+                               ng-model="selected.nick"/>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static" ng-bind="selected.nick"></p>
+                    </div>
+                </div>
+
+                <div class="form-group form-actions" ng-if="selected.edit">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-primary" ng-click="update(selected)">
+                            <i class="fa fa-check"></i>
+                            Zapisz
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <h5>Kursy</h5>
+            <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+                <tbody>
+                <tr ng-repeat="c in selectedCourses">
+                    <td>
+                        {{c.day | translate}}
+                    </td>
+                    <td ng-bind="c.startTime"></td>
+                    <td ng-bind="c.style.name"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="block col-xs-12 col-lg-8 pull-left">
+        <div class="table-options clearfix">
+            <div class="col-xs-4 pull-left">
+                <button class="btn btn-success" ng-click="add()">
+                    <i class="fa fa-plus-circle"></i>
+                    Dodaj instruktora
+                </button>
+            </div>
+            <div class="col-xs-6 col-sm-4 pull-right">
+                <div class="input-group">
+                    <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control"/>
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 50px">Id</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Pseudonim</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="instructor in instructors | filter: filterName" ng-click="select(instructor)"
+                ng-class="{'selected': selected != null && instructor.sid == selected.sid}">
+                <td ng-bind="instructor.id"></td>
+                <td ng-bind="instructor.firstName"></td>
+                <td ng-bind="instructor.lastName"></td>
+                <td ng-bind="instructor.nick"></td>
+                <td>
+                    <span class="label" ng-class="resolveStatusCss(instructor)">
+                        {{ instructor.objectState | translate }}
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
