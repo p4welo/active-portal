@@ -17,4 +17,13 @@ public abstract class DataEntity implements Serializable {
     public abstract Long getId();
 
     public abstract void setId(Long id);
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DataEntity) {
+            return getId() == ((DataEntity) obj).getId();
+        } else {
+            return super.equals(obj);
+        }
+    }
 }

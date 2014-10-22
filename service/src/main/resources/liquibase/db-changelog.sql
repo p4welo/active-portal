@@ -395,3 +395,12 @@ INSERT INTO authority (value) VALUES
   ("AUTH_SCHEDULE_SCHEDULE"),
   ("AUTH_CUSTOMERS_CUSTOMER_BASE"),
   ("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
+
+--changeset pawel:29
+DELETE FROM role;
+ALTER TABLE role ADD COLUMN object_state INT(4) NOT NULL;
+ALTER TABLE role ADD COLUMN sid VARCHAR(32) NOT NULL;
+INSERT INTO role (object_state, sid, name) VALUES
+  (0, "5vm322iriigmfe0889c96b50c1168103", "Administrator"),
+  (0, "5vmlvoojd7434e0889c96b50c1168103", "Sekretariat"),
+  (0, "5vm32299f32253teg9c96b50c1168103", "Klient");

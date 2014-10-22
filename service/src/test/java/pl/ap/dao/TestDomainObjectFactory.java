@@ -21,6 +21,8 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
 
     public static Role getRole() {
         Role role = new Role();
+        role.setObjectState(ObjectStateEnum.ACTIVE);
+        role.setSid(generate());
         role.setName(buildLongString(16));
         return role;
     }

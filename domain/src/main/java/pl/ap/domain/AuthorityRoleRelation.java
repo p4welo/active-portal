@@ -24,14 +24,14 @@ public class AuthorityRoleRelation extends DataEntity {
     @Column
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authority_id", nullable = false)
     @ForeignKey(name = "authority_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Authority authority;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     @ForeignKey(name = "role_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)

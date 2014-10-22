@@ -21,7 +21,10 @@
         <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
             <tbody>
             <tr ng-repeat="a in authorities">
-                <td ng-bind="a.key"></td>
+                <td class="text-center">
+                    <input type="checkbox" ng-checked="a.checked" ng-click="change($event, a)">
+                </td>
+                <td ng-bind="a.authority.key"></td>
             </tr>
             </tbody>
         </table>

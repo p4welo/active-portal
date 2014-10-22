@@ -6,7 +6,7 @@ define([
 
         return $resource(null, null, {
             findRoles: {
-                url: "rest/authority/role/list",
+                url: "rest/role/list",
                 method: 'GET',
                 isArray: true
             },
@@ -14,6 +14,19 @@ define([
                 url: "rest/authority/list",
                 method: 'GET',
                 isArray: true
+            },
+            findByRole: {
+                url: "rest/role/:sid/authority/list",
+                method: 'GET',
+                isArray: true
+            },
+            check: {
+                url: "rest/role/:sid/authority/check",
+                method: 'PUT'
+            },
+            uncheck: {
+                url: "rest/role/:sid/authority/uncheck",
+                method: 'PUT'
             }
         })
     });
@@ -24,6 +37,8 @@ define([
                 return;
             }
             return {
+                sid: role.sid,
+                objectState: role.objectState,
                 name: role.name
             }
         }
