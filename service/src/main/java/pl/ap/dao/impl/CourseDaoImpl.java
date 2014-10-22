@@ -20,6 +20,14 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     public static final String BEAN_NAME = "courseDao";
 
     @Override
+    public List<Course> findAll() {
+        Criteria criteria = createCriteria()
+                .addOrder(Order.asc(Course.FIELD_DAY))
+                .addOrder(Order.asc(Course.FIELD_START_TIME));
+        return criteria.list();
+    }
+
+    @Override
     public List<Course> findForSchedule() {
         Criteria criteria = createCriteria()
                 .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))

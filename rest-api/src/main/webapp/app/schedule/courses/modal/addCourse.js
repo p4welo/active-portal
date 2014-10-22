@@ -1,12 +1,12 @@
 define([
     'schedule/module',
-    'services/categoryService',
+    'services/courseService',
     'services/styleService',
     'services/instructorService',
     'services/roomService'
 ], function (module) {
 
-    module.controller('addCourseController', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient) {
+    module.controller('addCourseController', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient) {
         $scope.course = {};
 
         $scope.styles = styleHttpClient.findAll();
@@ -27,7 +27,24 @@ define([
         };
 
         $scope.save = function (course) {
-            categoryHttpClient.create(course).$promise.then(
+            if (course.type == 'TYPE_REGISTRATION') {
+                course.canRegister = true;
+                course.canJoin = false;
+                course.inProgress = false;
+            }
+            else if (course.type == 'TYPE_OPEN') {
+                course.canRegister = false;
+                course.canJoin = true;
+                course.inProgress = true;
+            }
+            else if (course.type == 'TYPE_CLOSED') {
+                course.canRegister = false;
+                course.canJoin = false;
+                course.inProgress = true;
+            }
+
+            delete course['type'];
+            courseHttpClient.create(course).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
