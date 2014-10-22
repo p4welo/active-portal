@@ -98,7 +98,49 @@ define([
             );
         })
 
-        .run(function($rootScope, authorityHttpClient) {
-            $rootScope.currentAuth = authorityHttpClient.getCurrentAuthorities();
+        .controller("menuController", function ($scope, authorityHttpClient) {
+            authorityHttpClient.getCurrentAuthorities().$promise.then(
+                function (result) {
+                    $scope.currentAuth = result;
+                }
+            );
+
+            var hasAuth = function (key) {
+                return $scope.currentAuth.indexOf(key) > -1;
+            }
+
+            $scope.usersAuth = function () {
+                return hasAuth("AUTH_SYSTEM_USERS");
+            }
+            $scope.authoritiesAuth = function () {
+                return hasAuth("AUTH_SYSTEM_AUTHORITIES");
+            }
+            $scope.newsListAuth = function () {
+                return hasAuth("AUTH_NEWS_NEWS_LIST");
+            }
+            $scope.newsletterAuth = function () {
+                return hasAuth("AUTH_NEWS_NEWSLETTER");
+            }
+            $scope.roomsAuth = function () {
+                return hasAuth("AUTH_SCHEDULE_ROOMS");
+            }
+            $scope.instructorsAuth = function () {
+                return hasAuth("AUTH_SCHEDULE_INSTRUCTORS");
+            }
+            $scope.categoriesAuth = function () {
+                return hasAuth("AUTH_SCHEDULE_CATEGORIES");
+            }
+            $scope.stylesAuth = function () {
+                return hasAuth("AUTH_SCHEDULE_STYLES");
+            }
+            $scope.coursesAuth = function () {
+                return hasAuth("AUTH_SCHEDULE_SCHEDULE");
+            }
+            $scope.customerBaseAuth = function () {
+                return hasAuth("AUTH_CUSTOMERS_CUSTOMER_BASE");
+            }
+            $scope.attendanceAuth = function () {
+                return hasAuth("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
+            }
         })
 });

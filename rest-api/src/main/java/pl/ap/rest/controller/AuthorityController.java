@@ -3,14 +3,11 @@ package pl.ap.rest.controller;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Authority;
-import pl.ap.domain.AuthorityRoleRelation;
 import pl.ap.domain.Role;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.AuthorityApiMappings;
@@ -20,7 +17,6 @@ import pl.ap.service.IRoleService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -74,16 +70,21 @@ public class AuthorityController {
 
     @RequestMapping(value = AuthorityApiMappings.CURRENT_AUTHORITIES, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Authority> getCurrentAuthorities() {
+    public List<String> getCurrentAuthorities() {
         UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().size() > 0) {
             Iterator<GrantedAuthority> it = auth.getAuthorities().iterator();
             List<String> roles = new ArrayList<>();
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                 roles.add(it.next().getAuthority());
             }
 
-            return authorityService.findByRoleNames(roles);
+            List<Authority> authorities = authorityService.findByRoleNames(roles);
+            List<String> result = new ArrayList<>();
+            for (Authority a : authorities) {
+                result.add(a.getKey());
+            }
+            return result;
         }
         return null;
     }
