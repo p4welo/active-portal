@@ -16,8 +16,16 @@ define([
                 return;
             }
             $scope.selected = customerService.copyProperties(customer);
-            $scope.customerPresence = customerHttpClient.presence(customer);
-            $scope.customerCourses = customerHttpClient.courses(customer);
+            customerHttpClient.presence(customer).$promise.then(
+                function (result) {
+                    $scope.customerPresence = result;
+                }
+            );
+            customerHttpClient.courses(customer).$promise.then(
+                function (result) {
+                    $scope.customerCourses = result;
+                }
+            );
             $scope.selected.edit = false;
         }
 
@@ -73,7 +81,11 @@ define([
 
             modalInstance.result.then(function () {
                 notificationService.success("Pomyślnie zapisano");
-                $scope.customers = customerHttpClient.findAll();
+                customerHttpClient.findAll().$promise.then(
+                    function (result) {
+                        $scope.customers = result;
+                    }
+                );
             });
         }
 
@@ -82,7 +94,11 @@ define([
             customerHttpClient.update({ sid: customer.sid }, customer).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $scope.customers = customerHttpClient.findAll();
+                    customerHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.customers = result;
+                        }
+                    );
                 });
         }
     });
