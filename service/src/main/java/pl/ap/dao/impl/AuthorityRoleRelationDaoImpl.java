@@ -33,4 +33,13 @@ public class AuthorityRoleRelationDaoImpl extends AbstractDaoImpl<AuthorityRoleR
                 .add(Restrictions.eq(AuthorityRoleRelation.FIELD_AUTHORITY, authority));
         return (AuthorityRoleRelation) criteria.uniqueResult();
     }
+
+    @Override
+    public List<Authority> findAuthoritiesByRoleNames(List<String> roleNames) {
+        Criteria criteria = createCriteria()
+                .createAlias(AuthorityRoleRelation.FIELD_ROLE, AuthorityRoleRelation.FIELD_ROLE)
+                .add(Restrictions.in(AuthorityRoleRelation.FIELD_ROLE + "." + Role.FIELD_NAME, roleNames))
+                .setProjection(Projections.property(AuthorityRoleRelation.FIELD_AUTHORITY));
+        return criteria.list();
+    }
 }

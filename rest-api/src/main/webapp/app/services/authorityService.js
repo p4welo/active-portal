@@ -27,6 +27,11 @@ define([
             uncheck: {
                 url: "rest/role/:sid/authority/uncheck",
                 method: 'PUT'
+            },
+            getCurrentAuthorities: {
+                url: "rest/authority/current/list",
+                method: 'GET',
+                isArray: true
             }
         })
     });

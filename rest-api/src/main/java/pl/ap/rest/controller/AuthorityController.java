@@ -2,9 +2,15 @@ package pl.ap.rest.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Authority;
+import pl.ap.domain.AuthorityRoleRelation;
 import pl.ap.domain.Role;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.AuthorityApiMappings;
@@ -14,6 +20,8 @@ import pl.ap.service.IRoleService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,9 +72,25 @@ public class AuthorityController {
         return dtos;
     }
 
+    @RequestMapping(value = AuthorityApiMappings.CURRENT_AUTHORITIES, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Authority> getCurrentAuthorities() {
+        UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getAuthorities().size() > 0) {
+            Iterator<GrantedAuthority> it = auth.getAuthorities().iterator();
+            List<String> roles = new ArrayList<>();
+            while(it.hasNext()) {
+                roles.add(it.next().getAuthority());
+            }
+
+            return authorityService.findByRoleNames(roles);
+        }
+        return null;
+    }
+
     @RequestMapping(value = AuthorityApiMappings.CHECK_AUTHORITY, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public void checkAuthority(@RequestBody Authority authority, @PathVariable(ApiKeys.SID) String sid) {
+    public RoleAuthorityDto checkAuthority(@RequestBody Authority authority, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("checkAuthority()");
 
         Role role = roleService.getBySid(sid);
@@ -74,11 +98,16 @@ public class AuthorityController {
         Assert.notNull(authority);
 
         roleService.checkAuthority(role, authority);
+
+        RoleAuthorityDto dto = new RoleAuthorityDto();
+        dto.setAuthority(authority);
+        dto.setChecked(true);
+        return dto;
     }
 
     @RequestMapping(value = AuthorityApiMappings.UNCHECK_AUTHORITY, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public void uncheckAuthority(@RequestBody Authority authority, @PathVariable(ApiKeys.SID) String sid) {
+    public RoleAuthorityDto uncheckAuthority(@RequestBody Authority authority, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("uncheckAuthority()");
 
         Role role = roleService.getBySid(sid);
@@ -86,5 +115,10 @@ public class AuthorityController {
         Assert.notNull(authority);
 
         roleService.uncheckAuthority(role, authority);
+
+        RoleAuthorityDto dto = new RoleAuthorityDto();
+        dto.setAuthority(authority);
+        dto.setChecked(false);
+        return dto;
     }
 }

@@ -7,26 +7,31 @@
         </div>
     </div>
 
-    <div class="block col-xs-12 col-lg-5 pull-left">
-        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-            <tbody>
-            <tr ng-repeat="role in roles" ng-click="select(role)" ng-class="{'selected':selected != null && role.name == selected.name}">
-                <td ng-bind="role.name"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="col-xs-12 col-lg-5 pull-left">
+        <div class="block">
+            <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+                <tbody>
+                <tr ng-repeat="role in roles" ng-click="select(role)"
+                    ng-class="{'selected':selected != null && role.name == selected.name}">
+                    <td ng-bind="role.name"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="block col-xs-12 col-lg-7 pull-right">
-        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-            <tbody>
-            <tr ng-repeat="a in authorities">
-                <td class="text-center">
-                    <input type="checkbox" ng-checked="a.checked" ng-click="change($event, a)">
-                </td>
-                <td ng-bind="a.authority.key"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="col-xs-12 col-lg-7 pull-right" ng-if="selected != null">
+        <div class="block">
+            <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+                <tbody>
+                <tr ng-repeat="a in authorities" ng-class="{ 'selected' : a.checked }">
+                    <td class="text-center">
+                        <input type="checkbox" ng-checked="a.checked" ng-click="change($event, a)">
+                    </td>
+                    <td ng-bind="a.authority.key"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

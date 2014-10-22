@@ -1,9 +1,10 @@
 define([
     'system/module',
-    'services/authorityService'
+    'services/authorityService',
+    'services/notificationService'
 ], function (module) {
 
-    module.controller("authorityController", function ($scope, authorityHttpClient, roleService) {
+    module.controller("authorityController", function ($scope, authorityHttpClient, roleService, notificationService) {
         $scope.roles = authorityHttpClient.findRoles();
         $scope.authorities = [];
 
@@ -18,12 +19,23 @@ define([
         }
 
         $scope.change = function ($event, relation) {
+            var role = $scope.selected;
             var checkbox = $event.target;
             if (checkbox.checked) {
-                authorityHttpClient.check({ sid : $scope.selected.sid }, relation.authority)
+                authorityHttpClient.check({ sid : role.sid }, relation.authority).$promise.then(
+                    function(value) {
+                        relation.checked = value.checked;
+                        notificationService.success("Pomyślnie zapisano");
+                    }
+                )
             }
             else {
-                authorityHttpClient.uncheck({ sid : $scope.selected.sid }, relation.authority)
+                authorityHttpClient.uncheck({ sid : role.sid }, relation.authority).$promise.then(
+                    function(value) {
+                        relation.checked = value.checked;
+                        notificationService.success("Pomyślnie zapisano");
+                    }
+                )
             }
         }
     });

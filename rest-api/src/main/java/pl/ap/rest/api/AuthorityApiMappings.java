@@ -10,6 +10,8 @@ public interface AuthorityApiMappings {
 
     public static final String FIND_ALL = AUTHORITY_PREFIX + CommonApiMappings.FIND_ALL_SUFFIX;
 
+    public static final String CURRENT_AUTHORITIES = AUTHORITY_PREFIX + "/current" + CommonApiMappings.FIND_ALL_SUFFIX;
+
     public static final String ROLES = ROLE_PREFIX + CommonApiMappings.FIND_ALL_SUFFIX;
 
     public static final String FIND_BY_ROLE = ROLE_PREFIX + CommonApiMappings.SID_SUFFIX + AUTHORITY_PREFIX + CommonApiMappings.FIND_ALL_SUFFIX;

@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface IAuthorityService extends IAbstractService<Authority> {
     List<Authority> findByRole(Role role);
+
+    List<Authority> findByRoleNames(List<String> roles);
 }

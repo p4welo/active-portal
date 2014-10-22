@@ -61,3 +61,8 @@
     background-color: #d9416c !important;
     color: white;
 }
+
+.themed-background-spring > td {
+    background-color: #27ae60!important;
+    color: white;
+}

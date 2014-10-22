@@ -6,7 +6,6 @@ import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.IAuthorityDao;
 import pl.ap.dao.IAuthorityRoleRelationDao;
 import pl.ap.domain.Authority;
-import pl.ap.domain.AuthorityRoleRelation;
 import pl.ap.domain.Role;
 import pl.ap.service.IAuthorityService;
 
@@ -35,5 +34,12 @@ public class AuthorityServiceImpl extends AbstractServiceImpl<Authority> impleme
     @Transactional(readOnly = true)
     public List<Authority> findByRole(Role role) {
         return authorityRoleRelationDao.findAuthoritiesByRole(role);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Authority> findByRoleNames(List<String> roleNames) {
+
+        return authorityRoleRelationDao.findAuthoritiesByRoleNames(roleNames);
     }
 }

@@ -13,4 +13,6 @@ public interface IAuthorityRoleRelationDao extends IAbstractDao<AuthorityRoleRel
     List<Authority> findAuthoritiesByRole(Role role);
 
     AuthorityRoleRelation get(Role role, Authority authority);
+
+    List<Authority> findAuthoritiesByRoleNames(List<String> roleNames);
 }

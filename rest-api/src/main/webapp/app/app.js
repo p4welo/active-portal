@@ -5,6 +5,7 @@ define([
     'loadingBar',
 
     'services/module',
+    'services/authorityService',
 
     'customers/index',
     'news/index',
@@ -83,5 +84,9 @@ define([
                     };
                 }
             );
+        })
+
+        .run(function($rootScope, authorityHttpClient) {
+            $rootScope.currentAuth = authorityHttpClient.getCurrentAuthorities();
         })
 });
