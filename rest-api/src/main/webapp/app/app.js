@@ -106,7 +106,9 @@ define([
             );
 
             var hasAuth = function (key) {
-                return $scope.currentAuth.indexOf(key) > -1;
+                if ($scope.currentAuth != null) {
+                    return $scope.currentAuth.indexOf(key) > -1;
+                }
             }
 
             $scope.usersAuth = function () {
