@@ -1,4 +1,4 @@
-package pl.ap.rest.filter;
+package pl.ap.publ.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

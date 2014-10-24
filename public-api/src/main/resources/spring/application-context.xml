@@ -7,4 +7,5 @@
     <import resource="classpath:spring/service-context.xml"/>
 
     <bean id="jsonpCallbackFilter" class="pl.ap.publ.filter.JsonpCallbackFilter" />
+    <bean id="corsFilter" class="pl.ap.publ.filter.CorsFilter" />
 </beans>
