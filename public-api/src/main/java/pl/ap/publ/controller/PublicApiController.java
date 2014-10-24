@@ -78,4 +78,20 @@ public class PublicApiController {
 
         emailService.customerFeedback(feedback);
     }
+
+    @RequestMapping(value = PublicApiMappings.SEND_FEEDBACK_JSONP, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void sendFeedbackJsonp(@PathVariable String rate, @PathVariable String type, @PathVariable String description) throws MessagingException {
+        LOGGER.info("sendFeedback()");
+
+        Assert.notNull(rate);
+        Assert.notNull(type);
+        Assert.notNull(description);
+        CustomerFeedback feedback = new CustomerFeedback();
+        feedback.setRate(Integer.parseInt(rate));
+        feedback.setType(type);
+        feedback.setDescription(description);
+
+        emailService.customerFeedback(feedback);
+    }
 }
