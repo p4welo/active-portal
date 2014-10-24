@@ -10,6 +10,7 @@ import pl.ap.service.*;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -71,26 +72,14 @@ public class PublicApiController {
 
     @RequestMapping(value = PublicApiMappings.SEND_FEEDBACK, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void sendFeedback(@RequestBody CustomerFeedback feedback) throws MessagingException {
+    public void sendFeedback(@RequestBody CustomerFeedback feedback, HttpServletResponse response) throws MessagingException {
         LOGGER.info("sendFeedback()");
 
         Assert.notNull(feedback);
-
-        emailService.customerFeedback(feedback);
-    }
-
-    @RequestMapping(value = PublicApiMappings.SEND_FEEDBACK_JSONP, method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void sendFeedbackJsonp(@PathVariable String rate, @PathVariable String type, @PathVariable String description) throws MessagingException {
-        LOGGER.info("sendFeedback()");
-
-        Assert.notNull(rate);
-        Assert.notNull(type);
-        Assert.notNull(description);
-        CustomerFeedback feedback = new CustomerFeedback();
-        feedback.setRate(Integer.parseInt(rate));
-        feedback.setType(type);
-        feedback.setDescription(description);
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 
         emailService.customerFeedback(feedback);
     }
