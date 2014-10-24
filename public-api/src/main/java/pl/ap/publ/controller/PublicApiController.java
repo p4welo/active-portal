@@ -2,18 +2,14 @@ package pl.ap.publ.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import pl.ap.domain.Course;
-import pl.ap.domain.Instructor;
-import pl.ap.domain.InstructorDescription;
-import pl.ap.domain.News;
+import pl.ap.domain.*;
 import pl.ap.publ.api.PublicApiMappings;
-import pl.ap.service.ICourseService;
-import pl.ap.service.IInstructorDescriptionService;
-import pl.ap.service.IInstructorService;
-import pl.ap.service.INewsService;
+import pl.ap.service.*;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -34,6 +30,9 @@ public class PublicApiController {
 
     @Resource
     private ICourseService courseService;
+
+    @Resource
+    private IEmailService emailService;
 
     @RequestMapping(value = PublicApiMappings.COURSE_LIST, method = RequestMethod.GET)
     public List<Course> courseList() {
@@ -68,5 +67,15 @@ public class PublicApiController {
     public List<News> newsList() {
         LOGGER.info("newsList()");
         return newsService.findPublic();
+    }
+
+    @RequestMapping(value = PublicApiMappings.SEND_FEEDBACK, method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void sendFeedback(@RequestBody CustomerFeedback feedback) throws MessagingException {
+        LOGGER.info("sendFeedback()");
+
+        Assert.notNull(feedback);
+
+        emailService.customerFeedback(feedback);
     }
 }
