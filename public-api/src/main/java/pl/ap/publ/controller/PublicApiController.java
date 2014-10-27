@@ -72,7 +72,7 @@ public class PublicApiController {
 
     @RequestMapping(value = PublicApiMappings.SEND_FEEDBACK, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void sendFeedback(@RequestBody CustomerFeedback feedback, HttpServletResponse response) throws MessagingException {
+    public void sendFeedback(@RequestBody CustomerFeedback feedback) throws MessagingException {
         LOGGER.info("sendFeedback()");
 
         Assert.notNull(feedback);
