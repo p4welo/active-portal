@@ -1,5 +1,27 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
+    display: none;
+}
+
+.splash {
+    display: none;
+}
+
+[ng-cloak].splash {
+    display: block !important;
+    padding-top: 50px;
+}
+
+.splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.splash h2 {
+    text-align: center;
+    color: white;
 }
 
 .ui-pnotify h4 {
