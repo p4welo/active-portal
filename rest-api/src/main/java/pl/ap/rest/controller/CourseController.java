@@ -6,12 +6,15 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Course;
+import pl.ap.domain.CustomerPresence;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.Room;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CourseApiMappings;
 import pl.ap.rest.dto.CourseStateDto;
+import pl.ap.rest.dto.presence.CoursePresenceDto;
 import pl.ap.service.ICourseService;
+import pl.ap.service.ICustomerPresenceService;
 import pl.ap.service.IInstructorService;
 
 import javax.annotation.Resource;
@@ -26,6 +29,9 @@ public class CourseController {
 
     @Resource
     private ICourseService courseService;
+
+    @Resource
+    private ICustomerPresenceService customerPresenceService;
 
     @RequestMapping(value = CourseApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -142,10 +148,27 @@ public class CourseController {
     public Course setRoom(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("setRoom()");
 
+
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
         Assert.notNull(room);
 
         return courseService.setRoom(course, room);
+    }
+
+    @RequestMapping(value = CourseApiMappings.FIND_LAST_PRESENCE, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public CoursePresenceDto findCoursePresence(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("findCoursePresence()");
+
+        Course course = courseService.getBySid(sid);
+        Assert.notNull(course);
+
+        List<CustomerPresence> presences = customerPresenceService.findLastByCourse(course, 10);
+        for (CustomerPresence presence : presences) {
+
+        }
+
+        return null;
     }
 }
