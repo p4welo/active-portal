@@ -1,5 +1,135 @@
 <div class="animated fadeIn attendance">
-    <button class="btn btn-primary">Przyjmij karnet</button>
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-check"></i>Obecności<br>
+            </h1>
+        </div>
+    </div>
 
+    <div class="row customer-presence">
+        <div class="col-sm-4 col-lg-3">
+            <a class="widget widget-hover-effect1 customer-record" href="page_ready_article.html">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                        <i class="gi gi-barcode"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Przyjmij
+                        <strong>karnet</strong><br>
+                        <small>Skanuj lub wpisz numer</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+    </div>
 
+    <div class=" col-xs-12 col-lg-12 pull-left">
+        <div class="block">
+            <div class="table-options clearfix">
+
+                <div class="col-md-8">
+                    <ul class="nav nav-pills day-select">
+                        <li ng-class="{'active' : day=='PN'}">
+                            <a ng-click="day='PN'">Poniedziałek</a>
+                        </li>
+                        <li ng-class="{'active' : day=='WT'}">
+                            <a ng-click="day='WT'">Wtorek</a>
+                        </li>
+                        <li ng-class="{'active' : day=='SR'}">
+                            <a ng-click="day='SR'">Środa</a>
+                        </li>
+                        <li ng-class="{'active' : day=='CZ'}">
+                            <a ng-click="day='CZ'">Czwartek</a>
+                        </li>
+                        <li ng-class="{'active' : day=='PT'}">
+                            <a ng-click="day='PT'">Piątek</a>
+                        </li>
+                        <li ng-class="{'active' : day=='SB'}">
+                            <a ng-click="day='SB'">Sobota</a>
+                        </li>
+                        <li ng-class="{'active' : day=='ND'}">
+                            <a ng-click="day='ND'">Niedziela</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>Dzień</th>
+                    <th>Godziny</th>
+                    <th>Nazwa</th>
+                    <th>Sala</th>
+                    <th>Instruktor</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
+                    ng-class="{'selected': selected != null && course.sid == selected.sid}">
+                    <td>{{course.day | translate}}</td>
+                    <td>{{course.startTime}} - {{course.endTime}}</td>
+                    <td ng-bind="course.style.name"></td>
+                    <td>{{course.room.name | translate}}</td>
+                    <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="block">
+            <table class="table table-condensed table-hover table-bordered table-presence">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center" style="width: 80px;" ng-repeat="lesson in presenceList.lessons">
+                        {{ lesson.date }}
+                    </th>
+                    <th class="text-center" style="width: 80px;">
+                        <a class="btn btn-primary">
+                            Nowy
+                            <br/>
+                            termin
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="presence in presenceList.customerPresence">
+                    <td>
+                        <span ng-bind="presence.customer.firstName"></span>
+                        <span ng-bind="presence.customer.lastName"></span>
+                    </td>
+                    <td ng-repeat="lesson in presenceList.lessons" class="text-center presence-icon">
+                        <span ng-if="lesson.presenceLock">
+                            <span ng-if="presence.presence[lesson.date]">
+                                <i class="fa fa-lg fa-check-circle text-success"></i>
+                            </span>
+                            <span ng-if="!presence.presence[lesson.date]">
+                                <i class="fa fa-lg fa-remove text-danger"></i>
+                            </span>
+                        </span>
+                        <span ng-if="!lesson.presenceLock">
+                            <label class="switch switch-success"><input type="checkbox" checked=""><span></span></label>
+                        </span>
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td ng-repeat="lesson in presenceList.lessons" class="text-center">
+                        <span ng-if="!lesson.presenceLock">
+                            <button class="btn btn-info">
+                                <i class="fa fa-unlock"></i>
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 </div>

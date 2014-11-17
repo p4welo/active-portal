@@ -3,9 +3,9 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller('addCustomerController', function ($scope, customerFactory, $modalInstance) {
+    module.controller('addCustomerController', function ($scope, customerHttpClient, $modalInstance) {
         $scope.create = function (customer) {
-            customerFactory.create(customer).$promise.then(
+            customerHttpClient.create(customer).$promise.then(
                 function () {
                     $modalInstance.close();
                 });

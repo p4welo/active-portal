@@ -15,4 +15,8 @@ public interface PublicApiMappings {
     public static final String INSTRUCTOR_LIST = "/instructor/list";
 
     public static final String INSTRUCTOR_DESCRIPTION = "/instructor/{sid}/description";
+
+    public static final String SEND_FEEDBACK = "/feedback/send";
+
+    public static final String SEND_FEEDBACK_JSONP = "/feedback/{rate}/{type}/{description}/send";
 }

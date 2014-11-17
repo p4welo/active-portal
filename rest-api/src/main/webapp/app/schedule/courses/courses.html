@@ -135,7 +135,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="course in classes | orderBy: 'startTime' | filter: { day : day}" ng-click="select(course)" ng-class="{'selected': selected != null && course.sid == selected.sid}">
+            <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)" ng-class="{'selected': selected != null && course.sid == selected.sid}">
                 <td>{{course.day | translate}}</td>
                 <td>{{course.startTime}} - {{course.endTime}}</td>
                 <td ng-bind="course.style.name"></td>

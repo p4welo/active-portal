@@ -1,5 +1,27 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
+    display: none;
+}
+
+.splash {
+    display: none;
+}
+
+[ng-cloak].splash {
+    display: block !important;
+    padding-top: 50px;
+}
+
+.splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.splash h2 {
+    text-align: center;
+    color: white;
 }
 
 .ui-pnotify h4 {
@@ -29,7 +51,8 @@
     cursor: pointer;
 }
 
-.customer-base .widget .widget-image, .widget .widget-icon {
+.customer-base .widget .widget-image,
+.customer-base .widget .widget-icon {
     height: 48px;
     width: 48px;
 }
@@ -48,13 +71,22 @@
     cursor: pointer;
 }
 
-.attendance span {
-    font-size: 56px;
-    color: black;
-}
+/*.attendance span {*/
+    /*font-size: 56px;*/
+    /*color: black;*/
+/*}*/
 
 .attendance img {
     height: 58px;
+}
+
+.attendance .table-presence th {
+    font-size: 13px;
+}
+
+.row.customer-presence {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .selected > td {
@@ -65,4 +97,12 @@
 .themed-background-spring > td {
     background-color: #27ae60!important;
     color: white;
+}
+
+td.presence-icon {
+    vertical-align: middle !important;
+}
+
+.presence-icon .fa-lg {
+    font-size: 1.7em;
 }

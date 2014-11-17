@@ -12,9 +12,33 @@
         <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
             <div class="block">
                 <div class="block-title">
+                    <div class="block-options pull-left">
+                        <div class="btn-group btn-group-sm">
+                            <a data-toggle="dropdown" class="btn btn-alt btn-default dropdown-toggle enable-tooltip" href="javascript:void(0)">
+                                Zajęcia
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-custom">
+                                <li>
+                                    <a href="javascript:void(0)" ng-click="subscribe(selected)">
+                                        <i class="gi gi-cloud pull-right"></i>
+                                        Zapisz na zajęcia
+                                    </a>
+                                    <a href="javascript:void(0)" ng-click="join(selected)">
+                                        <i class="gi gi-cloud pull-right"></i>
+                                        Dopisz do grupy
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw pull-right"></i>Separated Action</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="block-options pull-right">
                         <a ng-click="selected.edit = !selected.edit"
-                           class="btn btn-alt btn-warning enable-tooltip"
+                           class="btn btn-alt btn-default enable-tooltip"
                            ng-class="{'active': selected.edit}">
                             <i class="fa fa-pencil"></i>
                             Edytuj

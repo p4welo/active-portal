@@ -99,6 +99,7 @@ define([
         })
 
         .controller("menuController", function ($scope, authorityHttpClient) {
+            $scope.currentAuth = {};
             authorityHttpClient.getCurrentAuthorities().$promise.then(
                 function (result) {
                     $scope.currentAuth = result;
@@ -106,7 +107,9 @@ define([
             );
 
             var hasAuth = function (key) {
-                return $scope.currentAuth.indexOf(key) > -1;
+                if ($scope.currentAuth != null) {
+                    return $scope.currentAuth.indexOf(key) > -1;
+                }
             }
 
             $scope.usersAuth = function () {
