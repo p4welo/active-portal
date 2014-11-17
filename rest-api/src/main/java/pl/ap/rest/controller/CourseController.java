@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import pl.ap.domain.Course;
-import pl.ap.domain.CustomerPresence;
-import pl.ap.domain.Instructor;
-import pl.ap.domain.Room;
+import pl.ap.domain.*;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CourseApiMappings;
 import pl.ap.rest.dto.CourseStateDto;
@@ -19,6 +16,7 @@ import pl.ap.service.IInstructorService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by parado on 2014-08-24.
@@ -161,13 +159,10 @@ public class CourseController {
     public CoursePresenceDto findCoursePresence(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("findCoursePresence()");
 
-        Course course = courseService.getBySid(sid);
+        Course course = new Course();//courseService.getBySid(sid);
         Assert.notNull(course);
 
-        List<CustomerPresence> presences = customerPresenceService.findLastByCourse(course, 10);
-        for (CustomerPresence presence : presences) {
-
-        }
+        Map<Customer, List<CustomerPresence>> presences = customerPresenceService.findLastByCourse(course, 10);
 
         return null;
     }

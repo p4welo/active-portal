@@ -7,6 +7,7 @@ define([
         $scope.day = 'PN';
         $scope.classes = courseHttpClient.findInProgress();
 
+        $scope.presence = courseHttpClient.findPresence({sid: "DUPA"})
         $scope.presenceList = {
             lessons: [
                 {

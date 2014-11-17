@@ -56,6 +56,10 @@ define([
             setRoom: {
                 url: "rest/course/:sid/room",
                 method: "PUT"
+            },
+            findPresence: {
+                url: "rest/course/:sid/presence/last",
+                method: 'GET'
             }
         })
     });
