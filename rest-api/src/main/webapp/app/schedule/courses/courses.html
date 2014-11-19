@@ -11,25 +11,24 @@
         <div class="block">
             <div class="block-title">
                 <div class="block-options pull-right">
-                    <a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
-                       ng-class="{'active': selected.edit}">
-                        <span ng-if="!selected.edit">
-                            <i class="fa fa-pencil"></i>
-                            Edytuj
-                        </span>
-                        <span ng-if="selected.edit">
-                            <i class="fa fa-close"></i>
-                            Anuluj
-                        </span>
-                    </a>
+                    <!--<a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"-->
+                       <!--ng-class="{'active': selected.edit}">-->
+                        <!--<span ng-if="!selected.edit">-->
+                            <!--<i class="fa fa-pencil"></i>-->
+                            <!--Edytuj-->
+                        <!--</span>-->
+                        <!--<span ng-if="selected.edit">-->
+                            <!--<i class="fa fa-close"></i>-->
+                            <!--Anuluj-->
+                        <!--</span>-->
+                    <!--</a>-->
                 </div>
                 <h2>
                     <i class="gi gi-table"></i>
                 </h2>
             </div>
 
-            <form class="form-horizontal form-bordered" method="post">
-                <ul class="nav-horizontal">
+                <ul class="nav-horizontal text-right">
                     <li ng-if="selected.objectState == 'INACTIVE'">
                         <a href="javascript:void(0)" class="" ng-click="publish(selected)">
                             <i class="fa fa-unlock"></i> Publikuj
@@ -40,19 +39,32 @@
                             <i class="fa fa-lock"></i> Dezaktywuj
                         </a>
                     </li>
-                    <li class="pull-right">
+                    <li>
                         <a href="javascript:void(0)">
                             <i class="fa fa-pencil-square-o"></i> Zamieść notkę
                         </a>
                     </li>
                 </ul>
-
+            <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Nazwa</label>
 
                     <div class="col-xs-9">
                         <p class="form-control-static">
                             {{ selected.style.name }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="level" class="col-xs-3 control-label">Poziom</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <select id="level" ng-model="selected.level" ng-options="l | translate for l in levels" class="form-control"></select>
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static">
+                            {{ selected.level | translate }}
                         </p>
                     </div>
                 </div>
@@ -66,6 +78,32 @@
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static">
                             {{ selected.day | translate }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="startTime" class="col-xs-3 control-label">Start</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input id="startTime" class="form-control" type="text" ng-model="selected.startTime" />
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static">
+                            {{ selected.startTime }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="endTime" class="col-xs-3 control-label">Koniec</label>
+
+                    <div class="col-xs-9" ng-if="selected.edit">
+                        <input id="endTime" class="form-control" type="text" ng-model="selected.endTime" />
+                    </div>
+                    <div class="col-xs-9" ng-if="!selected.edit">
+                        <p class="form-control-static">
+                            {{ selected.endTime }}
                         </p>
                     </div>
                 </div>
