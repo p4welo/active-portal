@@ -29,6 +29,7 @@
         <authentication-provider>
             <user-service>
                 <user name="test" password="test" authorities="Administrator"/>
+                <user name="basia" password="test" authorities="Sekretariat"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>
