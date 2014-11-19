@@ -11,7 +11,7 @@
 var App = function() {
 
     /* Helper variables - set in uiInit() */
-    var page, pageContent, header, footer, sidebar, sidebarAlt, sScroll;
+    var page, pageContent, header, footer, sidebar, sScroll, sidebarAlt, sScrollAlt;
 
     /* Initialization UI Code */
     var uiInit = function() {
@@ -21,9 +21,12 @@ var App = function() {
         pageContent     = $('#page-content');
         header          = $('header');
         footer          = $('#page-content + footer');
+
         sidebar         = $('#sidebar');
+        sScroll         = $('#sidebar-scroll');
+
         sidebarAlt      = $('#sidebar-alt');
-        sScroll         = $('.sidebar-scroll');
+        sScrollAlt      = $('#sidebar-alt-scroll');
 
         // Initialize sidebars functionality
         handleSidebar('init');
@@ -147,7 +150,16 @@ var App = function() {
         menuLinks.click(function(){
             var link = $(this);
 
-            if (link.parent().hasClass('active') !== true) {
+            if (page.hasClass('sidebar-mini') && page.hasClass('sidebar-visible-lg-mini') && (getWindowWidth() > 991)) {
+                if (link.hasClass('open')) {
+                    link.removeClass('open');
+                }
+                else {
+                    $('.sidebar-nav-menu.open').removeClass('open');
+                    link.addClass('open');
+                }
+            }
+            else if (!link.parent().hasClass('active')) {
                 if (link.hasClass('open')) {
                     link.removeClass('open').next().slideUp(upSpeed, function(){
                         handlePageScroll(link, 200, 300);
@@ -200,7 +212,7 @@ var App = function() {
 
     /* Scrolls the page (static layout) or the sidebar scroll element (fixed header/sidebars layout) to a specific position - Used when a submenu opens */
     var handlePageScroll = function(sElem, sHeightDiff, sSpeed) {
-        if (! page.hasClass('disable-menu-autoscroll')) {
+        if (!page.hasClass('disable-menu-autoscroll')) {
             var elemScrollToHeight;
 
             // If we have a static layout scroll the page
@@ -211,7 +223,7 @@ var App = function() {
 
                 $('html, body').animate({scrollTop: elemScrollToHeight}, sSpeed);
             } else { // If we have a fixed header/sidebars layout scroll the sidebar scroll element
-                var sContainer      = sElem.parents('.sidebar-scroll');
+                var sContainer      = sElem.parents('#sidebar-scroll');
                 var elemOffsetCon   = sElem.offset().top + Math.abs($('div:first', sContainer).offset().top);
 
                 elemScrollToHeight = (((elemOffsetCon - sHeightDiff) > 0) ? (elemOffsetCon - sHeightDiff) : 0);
@@ -223,10 +235,9 @@ var App = function() {
     /* Sidebar Functionality */
     var handleSidebar = function(mode, extra) {
         if (mode === 'init') {
-            // Init sidebars scrolling (if we have a fixed header)
-            if (header.hasClass('navbar-fixed-top') || header.hasClass('navbar-fixed-bottom')) {
-                handleSidebar('sidebar-scroll');
-            }
+            // Init sidebars scrolling functionality
+            handleSidebar('sidebar-scroll');
+            handleSidebar('sidebar-alt-scroll');
 
             // Close the other sidebar if we hover over a partial one
             // In smaller screens (the same applies to resized browsers) two visible sidebars
@@ -241,6 +252,10 @@ var App = function() {
             if (mode === 'toggle-sidebar') {
                 if ( windowW > 991) { // Toggle main sidebar in large screens (> 991px)
                     page.toggleClass('sidebar-visible-lg');
+
+                    if (page.hasClass('sidebar-mini')) {
+                        page.toggleClass('sidebar-visible-lg-mini');
+                    }
 
                     if (page.hasClass('sidebar-visible-lg')) {
                         handleSidebar('close-sidebar-alt');
@@ -259,7 +274,11 @@ var App = function() {
                         handleSidebar('close-sidebar-alt');
                     }
                 }
-            } else if (mode === 'toggle-sidebar-alt') {
+
+                // Handle main sidebar scrolling functionality
+                handleSidebar('sidebar-scroll');
+            }
+            else if (mode === 'toggle-sidebar-alt') {
                 if ( windowW > 991) { // Toggle alternative sidebar in large screens (> 991px)
                     page.toggleClass('sidebar-alt-visible-lg');
 
@@ -283,6 +302,7 @@ var App = function() {
             }
             else if (mode === 'open-sidebar') {
                 if ( windowW > 991) { // Open main sidebar in large screens (> 991px)
+                    if (page.hasClass('sidebar-mini')) { page.removeClass('sidebar-visible-lg-mini'); }
                     page.addClass('sidebar-visible-lg');
                 } else { // Open main sidebar in small screens (< 992px)
                     page.addClass('sidebar-visible-xs');
@@ -304,6 +324,7 @@ var App = function() {
             else if (mode === 'close-sidebar') {
                 if ( windowW > 991) { // Close main sidebar in large screens (> 991px)
                     page.removeClass('sidebar-visible-lg');
+                    if (page.hasClass('sidebar-mini')) { page.addClass('sidebar-visible-lg-mini'); }
                 } else { // Close main sidebar in small screens (< 992px)
                     page.removeClass('sidebar-visible-xs');
                 }
@@ -315,24 +336,80 @@ var App = function() {
                     page.removeClass('sidebar-alt-visible-xs');
                 }
             }
-            else if (mode == 'sidebar-scroll') { // Init sidebars scrolling
-                if (sScroll.length && (!sScroll.parent('.slimScrollDiv').length)) {
-                    // Initialize Slimscroll plugin on both sidebars
-                    sScroll.slimScroll({ height: $(window).height(), color: '#fff', size: '3px', touchScrollStep: 100 });
+            else if (mode == 'sidebar-scroll') { // Handle main sidebar scrolling
+                if (page.hasClass('sidebar-mini') && page.hasClass('sidebar-visible-lg-mini') && (windowW > 991)) { // Destroy main sidebar scrolling when in mini sidebar mode
+                    if (sScroll.length && sScroll.parent('.slimScrollDiv').length) {
+                        sScroll
+                            .slimScroll({destroy: true});
+                        sScroll
+                            .attr('style', '');
+                    }
+                }
+                else if ((page.hasClass('header-fixed-top') || page.hasClass('header-fixed-bottom'))) {
+                    var sHeight = $(window).height();
 
-                    // Resize sidebars scrolling height on window resize or orientation change
-                    $(window).resize(sidebarScrollResize);
-                    $(window).bind('orientationchange', sidebarScrollResizeOrient);
+                    if (sScroll.length && (!sScroll.parent('.slimScrollDiv').length)) { // If scrolling does not exist init it..
+                        sScroll
+                            .slimScroll({
+                                height: sHeight,
+                                color: '#fff',
+                                size: '3px',
+                                touchScrollStep: 100
+                            });
+
+                        // Handle main sidebar's scrolling functionality on resize or orientation change
+                        var sScrollTimeout;
+
+                        $(window).on('resize orientationchange', function(){
+                            clearTimeout(sScrollTimeout);
+
+                            sScrollTimeout = setTimeout(function(){
+                                handleSidebar('sidebar-scroll');
+                            }, 150);
+                        });
+                    }
+                    else { // ..else resize scrolling height
+                        sScroll
+                            .add(sScroll.parent())
+                            .css('height', sHeight);
+                    }
+                }
+            }
+            else if (mode == 'sidebar-alt-scroll') { // Init alternative sidebar scrolling
+                if ((page.hasClass('header-fixed-top') || page.hasClass('header-fixed-bottom'))) {
+                    var sHeightAlt = $(window).height();
+
+                    if (sScrollAlt.length && (!sScrollAlt.parent('.slimScrollDiv').length)) { // If scrolling does not exist init it..
+                        sScrollAlt
+                            .slimScroll({
+                                height: sHeightAlt,
+                                color: '#fff',
+                                size: '3px',
+                                touchScrollStep: 100
+                            });
+
+                        // Resize alternative sidebar scrolling height on window resize or orientation change
+                        var sScrollAltTimeout;
+
+                        $(window).on('resize orientationchange', function(){
+                            clearTimeout(sScrollAltTimeout);
+
+                            sScrollAltTimeout = setTimeout(function(){
+                                handleSidebar('sidebar-alt-scroll');
+                            }, 150);
+                        });
+                    }
+                    else { // ..else resize scrolling height
+                        sScrollAlt
+                            .add(sScrollAlt.parent())
+                            .css('height', sHeightAlt);
+                    }
                 }
             }
         }
 
         return false;
     };
-
-    // Sidebar Scrolling Resize Height on window resize and orientation change
-    var sidebarScrollResize         = function() { sScroll.add(sScroll.parent()).css('height', $(window).height()); };
-    var sidebarScrollResizeOrient   = function() { setTimeout(sScroll.add(sScroll.parent()).css('height', $(window).height()), 500); };
 
     /* Resize #page-content to fill empty space if exists */
     var resizePageContent = function() {
@@ -530,19 +607,11 @@ var App = function() {
         /* Header options */
         var optHeaderDefault    = $('#options-header-default');
         var optHeaderInverse    = $('#options-header-inverse');
-        var optHeaderTop        = $('#options-header-top');
-        var optHeaderBottom     = $('#options-header-bottom');
 
         if (header.hasClass('navbar-default')) {
             optHeaderDefault.addClass('active');
         } else {
             optHeaderInverse.addClass('active');
-        }
-
-        if (header.hasClass('navbar-fixed-top')) {
-            optHeaderTop.addClass('active');
-        } else if (header.hasClass('navbar-fixed-bottom')) {
-            optHeaderBottom.addClass('active');
         }
 
         optHeaderDefault.click(function() {
@@ -555,56 +624,6 @@ var App = function() {
             header.removeClass('navbar-default').addClass('navbar-inverse');
             $(this).addClass('active');
             optHeaderDefault.removeClass('active');
-        });
-
-        optHeaderTop.click(function() {
-            page.removeClass('header-fixed-bottom').addClass('header-fixed-top');
-            header.removeClass('navbar-fixed-bottom').addClass('navbar-fixed-top');
-            $(this).addClass('active');
-            optHeaderBottom.removeClass('active');
-            handleSidebar('sidebar-scroll');
-
-            // Resize #page-content
-            resizePageContent();
-        });
-
-        optHeaderBottom.click(function() {
-            page.removeClass('header-fixed-top').addClass('header-fixed-bottom');
-            header.removeClass('navbar-fixed-top').addClass('navbar-fixed-bottom');
-            $(this).addClass('active');
-            optHeaderTop.removeClass('active');
-            handleSidebar('sidebar-scroll');
-
-            // Resize #page-content
-            resizePageContent();
-        });
-
-        /* Footer */
-        var optFooterStatic = $('#options-footer-static');
-        var optFooterFixed  = $('#options-footer-fixed');
-
-        if (page.hasClass('footer-fixed')) {
-            optFooterFixed.addClass('active');
-        } else {
-            optFooterStatic.addClass('active');
-        }
-
-        optFooterStatic.click(function() {
-            page.removeClass('footer-fixed');
-            $(this).addClass('active');
-            optFooterFixed.removeClass('active');
-
-            // Resize #page-content
-            resizePageContent();
-        });
-
-        optFooterFixed.click(function() {
-            page.addClass('footer-fixed');
-            $(this).addClass('active');
-            optFooterStatic.removeClass('active');
-
-            // Resize #page-content
-            resizePageContent();
         });
     };
 

@@ -24,14 +24,14 @@ public class CustomerSubscription extends DataEntity {
     @Column
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     @ForeignKey(name = "customer_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)
     @ForeignKey(name = "course_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)

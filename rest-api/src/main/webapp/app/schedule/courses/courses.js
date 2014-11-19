@@ -6,7 +6,7 @@ define([
 ], function (module) {
 
     module.controller("coursesController", function ($scope, courseHttpClient, courseService, notificationService, $modal) {
-        $scope.day = '';
+        $scope.day = 'PN';
         $scope.classes = courseHttpClient.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"

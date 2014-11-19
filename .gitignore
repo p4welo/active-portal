@@ -3,7 +3,6 @@
 *.iml
 target/
 bower/
-vendor/
 .settings/
 .project
 node_modules/
