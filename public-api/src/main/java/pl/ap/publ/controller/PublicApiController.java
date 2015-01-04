@@ -1,5 +1,6 @@
 package pl.ap.publ.controller;
 
+import com.itextpdf.text.DocumentException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
@@ -11,6 +12,7 @@ import pl.ap.service.*;
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,10 +37,22 @@ public class PublicApiController {
     @Resource
     private IEmailService emailService;
 
+    @Resource
+    private IBarcodeService barcodeService;
+
     @RequestMapping(value = PublicApiMappings.COURSE_LIST, method = RequestMethod.GET)
     public List<Course> courseList() {
         LOGGER.info("courseList()");
         return courseService.findForSchedule();
+    }
+
+    @RequestMapping(value = PublicApiMappings.PRINT_COURSE_LIST, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void printCourseList(HttpServletResponse res) throws IOException, DocumentException
+    {
+        LOGGER.info("printCourseList()");
+        List<Course> courses = courseService.findForSchedule();
+        barcodeService.createSchedulePdf(courses, res.getOutputStream());
     }
 
     @RequestMapping(value = PublicApiMappings.REGISTRATION_COURSE_LIST, method = RequestMethod.GET)

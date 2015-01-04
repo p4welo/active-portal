@@ -6,10 +6,13 @@ define([
 ], function (module) {
 
     module.controller("coursesController", function ($scope, courseHttpClient, courseService, notificationService, $modal) {
-        $scope.day = '';
+        $scope.day = 'PN';
         $scope.classes = courseHttpClient.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
+        ];
+        $scope.levels = [
+            "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
         ];
 
         $scope.add = function () {
@@ -27,6 +30,18 @@ define([
                 notificationService.success("Pomyślnie zapisano");
             });
         };
+        $scope.update = function (course) {
+            delete course['edit'];
+            courseHttpClient.update({ sid: course.sid }, course).$promise.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    courseHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.classes = result;
+                        }
+                    );
+                });
+        }
 
         $scope.publish = function (course) {
             courseHttpClient.publish({ sid: course.sid }).$promise.then(

@@ -144,6 +144,9 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
     public Course save(Course course) {
         CourseStyle courseStyle = styleService.getBySid(course.getStyle().getSid());
         course.setStyle(courseStyle);
+        if (course.getObjectState() == null) {
+            course.setObjectState(ObjectStateEnum.INACTIVE);
+        }
         Instructor oldInstructor = course.getInstructor();
         if (oldInstructor != null) {
             Instructor instructor = instructorService.getBySid(oldInstructor.getSid());

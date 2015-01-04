@@ -6,40 +6,55 @@
     <h4 class="modal-title" id="add-modal-label">Dodaj zajęcia</h4>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" name="newCourse">
         <div class="form-group">
-            <label for="style" class="col-sm-3 control-label">Nazwa</label>
+            <label for="style" class="col-sm-3 control-label">
+                Nazwa
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <select id="style" ng-model="course.style" ng-options="s.name for s in styles" class="form-control"></select>
+                <select id="style" ng-model="course.style" ng-options="s.name for s in styles" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
-            <label for="level" class="col-sm-3 control-label">Poziom</label>
+            <label for="level" class="col-sm-3 control-label">
+                Poziom
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <select id="level" ng-model="course.level" ng-options="l | translate for l in levels" class="form-control"></select>
+                <select id="level" ng-model="course.level" ng-options="l | translate for l in levels" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
-            <label for="day" class="col-sm-3 control-label">Dzień</label>
+            <label for="day" class="col-sm-3 control-label">
+                Dzień
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <select id="day" ng-model="course.day" ng-options="d | translate for d in days" class="form-control"></select>
+                <select id="day" ng-model="course.day" ng-options="d | translate for d in days" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
-            <label for="startTime" class="col-sm-3 control-label">Start</label>
+            <label for="startTime" class="col-sm-3 control-label">
+                Start
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="startTime" placeholder="00:00" ng-model="course.startTime">
+                <input type="text" class="form-control" id="startTime" placeholder="00:00" ng-model="course.startTime" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="endTime" class="col-sm-3 control-label">Koniec</label>
+            <label for="endTime" class="col-sm-3 control-label">
+                Koniec
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="endTime" placeholder="00:00" ng-model="course.endTime">
+                <input type="text" class="form-control" id="endTime" placeholder="00:00" ng-model="course.endTime" required>
             </div>
         </div>
         <div class="form-group">
@@ -50,22 +65,35 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="room" class="col-sm-3 control-label">Sala</label>
+            <label for="room" class="col-sm-3 control-label">
+                Sala
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms" class="form-control"></select>
+                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
-            <label for="type" class="col-sm-3 control-label">Typ</label>
+            <label for="type" class="col-sm-3 control-label">
+                Typ
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <select id="type" ng-model="course.type" ng-options="t | translate for t in types" class="form-control"></select>
+                <select id="type" ng-model="course.type" ng-options="t | translate for t in types" class="form-control" required></select>
             </div>
+        </div>
+
+        <div class="form-group text-right">
+            <label class="col-sm-offset-3">
+                <span class="text-danger">*</span>
+                <span>- pole wymagane</span>
+            </label>
         </div>
     </form>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="cancel()">Anuluj</button>
-    <button ng-click="save(course)" class="btn btn-success">Zapisz</button>
+    <button ng-click="save(course)" class="btn btn-success" ng-class="{'disabled' : newCourse.$invalid}">Zapisz</button>
 </div>

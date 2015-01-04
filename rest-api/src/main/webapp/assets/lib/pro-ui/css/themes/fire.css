@@ -57,7 +57,8 @@ blockquote:before {
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th,
 ul.wysihtml5-toolbar a.btn.wysihtml5-command-active,
-.slider-track {
+.slider-track,
+.nav-horizontal a {
     background-color: #f2eceb;
 }
 
@@ -141,6 +142,10 @@ li.dropdown-header,
 .dropzone,
 .dataTables_wrapper > div {
     background-color: #fcfafa;
+}
+
+.nav-horizontal i {
+    color: #e8dcda;
 }
 
 .switch-default input:checked + span,
@@ -303,7 +308,9 @@ div.tagsinput span.tag,
 .slider-selection,
 .themed-background,
 .select2-results .select2-highlighted,
-.select2-container-multi .select2-choices .select2-search-choice {
+.select2-container-multi .select2-choices .select2-search-choice,
+.nav-horizontal a:hover,
+.nav-horizontal li.active a {
     background-color: #e74c3c;
 }
 
@@ -457,4 +464,12 @@ fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
     background-color: #e74c3c;
     border-color: #e74c3c;
+}
+
+/* Mini Sidebar */
+@media screen and (min-width: 992px) {
+    .sidebar-mini.sidebar-visible-lg-mini #sidebar .sidebar-nav .sidebar-nav-menu + ul {
+        border-left-color: #e74c3c;
+        background-color: #4a2e2b;
+    }
 }

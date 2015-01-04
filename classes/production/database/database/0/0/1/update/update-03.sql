@@ -1,0 +1,11 @@
+CREATE TABLE news (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sid VARCHAR(32) NOT NULL,
+	title VARCHAR(128) NOT NULL,
+	created_at TIMESTAMP NOT NULL,
+	content TEXT NOT NULL,
+	image_src VARCHAR(1024),
+	image_alt VARCHAR(256),
+	UNIQUE (sid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE news ADD INDEX news_sid_idx (sid);

@@ -8,6 +8,8 @@ package pl.ap.publ.api;
 public interface PublicApiMappings {
     public static final String COURSE_LIST = "/course/list";
 
+    public static final String PRINT_COURSE_LIST = COURSE_LIST + "/print";
+
     public static final String REGISTRATION_COURSE_LIST = "/course/registration";
 
     public static final String NEWS_LIST = "/news/list";

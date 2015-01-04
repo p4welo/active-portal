@@ -1,27 +1,27 @@
 (function (head) {
     "use strict";
     head.js(
-        { require: "./assets/lib/requirejs/require.js" },
-        { jquery: "./assets/lib/jquery/dist/jquery.js" },
-        { angular: "./assets/lib/angular/angular.js" },
-        { ngLocale: "./assets/lib/angular-locale/angular-locale_pl-pl.js" },
-        { bootstrap: "./assets/lib/bootstrap/dist/js/bootstrap.js" }
+        { require: "./vendor/requirejs/require.js" },
+        { jquery: "./vendor/jquery/dist/jquery.min.js" },
+        { angular: "./vendor/angular/angular.min.js" },
+        { ngLocale: "./vendor/angular-locale/angular-locale_pl-pl.js" },
+        { bootstrap: "./vendor/bootstrap/dist/js/bootstrap.min.js" }
     )
         .ready("ALL", function () {
 
             require.config({
                 baseUrl: './app',
                 paths: {
-                    'ngResource': "../assets/lib/angular-resource/angular-resource",
-                    'uiRouter': "../assets/lib/angular-ui-router/release/angular-ui-router",
-                    'uiBootstrap': "../assets/lib/angular-ui-bootstrap/ui-bootstrap-tpls",
-                    'uiUtils': "../assets/lib/angular-ui-utils/ui-utils",
-                    'ngTranslate': "../assets/lib/angular-translate/angular-translate",
-                    'ngAnimate': "../assets/lib/angular-animate/angular-animate",
-                    'ngSanitize': "../assets/lib/angular-sanitize/angular-sanitize",
-                    'ngTouch': "../assets/lib/angular-touch/angular-touch",
-                    'loadingBar': "../assets/lib/angular-loading-bar/build/loading-bar",
-                    'pnotify': "../assets/lib/pnotify/pnotify.core",
+                    'ngResource': "../vendor/angular-resource/angular-resource",
+                    'uiRouter': "../vendor/angular-ui-router/release/angular-ui-router",
+                    'uiBootstrap': "../vendor/angular-ui-bootstrap/ui-bootstrap-tpls",
+                    'uiUtils': "../vendor/angular-ui-utils/ui-utils",
+                    'ngTranslate': "../vendor/angular-translate/angular-translate",
+                    'ngAnimate': "../vendor/angular-animate/angular-animate",
+                    'ngSanitize': "../vendor/angular-sanitize/angular-sanitize",
+                    'ngTouch': "../vendor/angular-touch/angular-touch",
+                    'loadingBar': "../vendor/angular-loading-bar/build/loading-bar",
+                    'pnotify': "../vendor/pnotify/pnotify.core",
                     'proUiPlugins': "../assets/lib/pro-ui/js/plugins",
                     'proUiApp': "../assets/lib/pro-ui/js/app"
                 },
