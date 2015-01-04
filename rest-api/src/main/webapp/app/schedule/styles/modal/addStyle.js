@@ -6,7 +6,7 @@ define([
 
     module.controller('addStyleController', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient) {
         $scope.style = {};
-        $scope.categories = categoryHttpClient.find();
+        $scope.categories = categoryHttpClient.findAll();
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

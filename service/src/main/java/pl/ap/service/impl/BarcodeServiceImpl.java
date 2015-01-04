@@ -1,18 +1,19 @@
 package pl.ap.service.impl;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.Barcode128;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
 import org.springframework.stereotype.Service;
+import pl.ap.domain.Course;
+import pl.ap.domain.enums.DayEnum;
 import pl.ap.service.IBarcodeService;
 import pl.ap.service.util.NumberUtils;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by parado on 15.04.14.
@@ -48,5 +49,42 @@ public class BarcodeServiceImpl implements IBarcodeService {
         document.add(code128.createImageWithBarcode(cb, null, null));
         // step 5
         document.close();
+    }
+
+    @Override
+    public void createSchedulePdf(List<Course> courses, OutputStream outputStream) throws DocumentException, IOException {
+        Document document = new Document(PageSize.A4);
+        PdfWriter writer = PdfWriter.getInstance(document, outputStream);
+        document.open();
+        Map<DayEnum, List<Course>> schedule = prepareMapForSchedule(courses);
+
+        BaseFont courier = BaseFont.createFont(BaseFont.COURIER, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font font = new Font(courier, 12, Font.NORMAL);
+        Chunk chunk = new Chunk("",font);
+        document.add(chunk);
+        for (DayEnum key : DayEnum.values()) {
+            List<Course> cList = schedule.get(key);
+            document.add(new Paragraph(key.toString()));
+            PdfPTable table = new PdfPTable(2);
+            for (Course course : cList) {
+                table.addCell(course.getStartTime() + " - " + course.getEndTime());
+                table.addCell(course.getStyle().getName());
+            }
+            document.add(table);
+        }
+        document.close();
+    }
+
+    private Map<DayEnum, List<Course>> prepareMapForSchedule(List<Course> courses) {
+        Map<DayEnum, List<Course>> result = new HashMap<>();
+        for (DayEnum day : DayEnum.values()) {
+            result.put(day, new ArrayList<Course>());
+        }
+
+        for (Course course : courses) {
+            result.get(course.getDay()).add(course);
+        }
+
+        return result;
     }
 }
