@@ -55,6 +55,12 @@ define([
                 });
         }
 
+        $scope.setDay = function (day) {
+            $scope.selected = null;
+            $scope.day = day;
+
+        }
+
         $scope.deactivate = function (course) {
             courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
                 function (result) {

@@ -2,22 +2,64 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="gi gi-check"></i>Obecności<br>
+                <i class="gi gi-check"></i>Sekretariat<br>
             </h1>
         </div>
     </div>
 
     <div class="row customer-presence">
         <div class="col-sm-4 col-lg-3">
-            <a class="widget widget-hover-effect1 customer-record" href="page_ready_article.html">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
-                        <i class="gi gi-barcode"></i>
+                        <i class="fa fa-barcode"></i>
                     </div>
                     <h3 class="widget-content text-right animation-pullDown">
                         Przyjmij
                         <strong>karnet</strong><br>
                         <small>Skanuj lub wpisz numer</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-flatie animation-fadeIn">
+                        <i class="fa fa-paw"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Wprowadź
+                        <strong>obecność</strong><br>
+                        <small>Klient bez kodu</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                        <i class="fa fa-child"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Odrabianie
+                        <strong>zajęć</strong><br>
+                        <small>Klient z innej grupy</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-night animation-fadeIn">
+                        <i class="fa fa-moon-o"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Zamknięcie
+                        <strong>dnia</strong><br>
+                        <small>Rozliczenia</small>
                     </h3>
                 </div>
             </a>
@@ -55,7 +97,7 @@
                 </div>
             </div>
 
-            <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+            <table class="table table-editable table-striped table-vcenter table-hover">
                 <thead>
                 <tr>
                     <th>Dzień</th>
@@ -78,58 +120,104 @@
             </table>
         </div>
 
-        <div class="block">
-            <table class="table table-condensed table-hover table-bordered table-presence">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th class="text-center" style="width: 80px;" ng-repeat="lesson in presenceList.lessons">
-                        {{ lesson.date }}
-                    </th>
-                    <th class="text-center" style="width: 80px;">
-                        <a class="btn btn-primary">
-                            Nowy
-                            <br/>
-                            termin
-                        </a>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="presence in presenceList.customerPresence">
-                    <td>
-                        <span ng-bind="presence.customer.firstName"></span>
-                        <span ng-bind="presence.customer.lastName"></span>
-                    </td>
-                    <td ng-repeat="lesson in presenceList.lessons" class="text-center presence-icon">
-                        <span ng-if="lesson.presenceLock">
-                            <span ng-if="presence.presence[lesson.date]">
-                                <i class="fa fa-lg fa-check-circle text-success"></i>
-                            </span>
-                            <span ng-if="!presence.presence[lesson.date]">
-                                <i class="fa fa-lg fa-remove text-danger"></i>
-                            </span>
-                        </span>
-                        <span ng-if="!lesson.presenceLock">
-                            <label class="switch switch-success"><input type="checkbox" checked=""><span></span></label>
-                        </span>
-                    </td>
-                    <td></td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td></td>
-                    <td ng-repeat="lesson in presenceList.lessons" class="text-center">
-                        <span ng-if="!lesson.presenceLock">
-                            <button class="btn btn-info">
-                                <i class="fa fa-unlock"></i>
-                            </button>
-                        </span>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
+        <!--<div class="block">-->
+            <!--<table class="table table-condensed table-hover table-bordered table-presence">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th></th>-->
+                    <!--<th class="text-center" style="width: 80px;" ng-repeat="lesson in presenceList.lessons">-->
+                        <!--{{ lesson.date }}-->
+                    <!--</th>-->
+                    <!--<th class="text-center" style="width: 80px;">-->
+                        <!--<a class="btn btn-primary">-->
+                            <!--Nowy-->
+                            <!--<br/>-->
+                            <!--termin-->
+                        <!--</a>-->
+                    <!--</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr ng-repeat="presence in presenceList.customerPresence">-->
+                    <!--<td>-->
+                        <!--<span ng-bind="presence.customer.firstName"></span>-->
+                        <!--<span ng-bind="presence.customer.lastName"></span>-->
+                    <!--</td>-->
+                    <!--<td ng-repeat="lesson in presenceList.lessons" class="text-center presence-icon">-->
+                        <!--<span ng-if="lesson.presenceLock">-->
+                            <!--<span ng-if="presence.presence[lesson.date]">-->
+                                <!--<i class="fa fa-lg fa-check-circle text-success"></i>-->
+                            <!--</span>-->
+                            <!--<span ng-if="!presence.presence[lesson.date]">-->
+                                <!--<i class="fa fa-lg fa-remove text-danger"></i>-->
+                            <!--</span>-->
+                        <!--</span>-->
+                        <!--<span ng-if="!lesson.presenceLock">-->
+                            <!--<label class="switch switch-success"><input type="checkbox" checked=""><span></span></label>-->
+                        <!--</span>-->
+                    <!--</td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+                <!--<tfoot>-->
+                <!--<tr>-->
+                    <!--<td></td>-->
+                    <!--<td ng-repeat="lesson in presenceList.lessons" class="text-center">-->
+                        <!--<span ng-if="!lesson.presenceLock">-->
+                            <!--<button class="btn btn-info">-->
+                                <!--<i class="fa fa-unlock"></i>-->
+                            <!--</button>-->
+                        <!--</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tfoot>-->
+            <!--</table>-->
+        <!--</div>-->
+    </div>
+    <div class="col-sm-4 col-lg-3">
+        <div class="block full">
+            <div class="block-title clearfix">
+                <div class="block-options pull-right">
+                    <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="" data-original-title="Settings"><i class="fa fa-cog"></i></a>
+                </div>
+                <h2>
+                    <i class="fa fa-ticket"></i>
+                    Ostatnie
+                    <strong>terminy</strong>
+                </h2>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active">
+                    <a href="javascript:void(0)">
+                        <span class="badge pull-right">420</span>
+                        <i class="fa fa-ticket fa-fw"></i> <strong>All</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span class="badge pull-right">3</span>
+                        <i class="fa fa-exclamation-triangle fa-fw"></i> <strong>Urgent</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span class="badge pull-right">160</span>
+                        <i class="fa fa-folder-open-o fa-fw"></i> <strong>Open</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span class="badge pull-right">250</span>
+                        <i class="fa fa-folder-o fa-fw"></i> <strong>Closed</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span class="badge pull-right">7</span>
+                        <i class="fa fa-ban fa-fw"></i> <strong>Invalid</strong>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

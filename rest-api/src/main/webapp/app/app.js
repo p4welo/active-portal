@@ -69,8 +69,8 @@ define([
                 AUTH_SCHEDULE_CATEGORIES: "GRAFIK: Kategorie zajęć",
                 AUTH_SCHEDULE_STYLES: "GRAFIK: Style taneczne",
                 AUTH_SCHEDULE_SCHEDULE: "GRAFIK: Grafik zajęć",
-                AUTH_CUSTOMERS_CUSTOMER_BASE: "KLIENCI: Baza klientów",
-                AUTH_CUSTOMERS_CUSTOMER_PRESENCE: "KLIENCI: Obecności"
+                AUTH_CUSTOMERS_CUSTOMER_BASE: "SEKRETARIAT: Baza klientów",
+                AUTH_CUSTOMERS_CUSTOMER_PRESENCE: "SEKRETARIAT: Obecności"
             });
             $translateProvider.preferredLanguage('pl');
         })
@@ -99,14 +99,15 @@ define([
         })
 
         .controller("menuController", function ($scope, authorityHttpClient) {
-            $scope.currentAuth = {};
+            $scope.currentAuth = [];
             authorityHttpClient.getCurrentAuthorities().$promise.then(
                 function (result) {
                     $scope.currentAuth = result;
                 }
             );
 
-            var hasAuth = function (key) {
+            function hasAuth (key) {
+
                 if ($scope.currentAuth != null) {
                     return $scope.currentAuth.indexOf(key) > -1;
                 }

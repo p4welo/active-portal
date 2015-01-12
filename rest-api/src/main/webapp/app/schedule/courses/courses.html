@@ -12,15 +12,15 @@
             <div class="block-title">
                 <div class="block-options pull-right">
                     <!--<a ng-click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"-->
-                       <!--ng-class="{'active': selected.edit}">-->
-                        <!--<span ng-if="!selected.edit">-->
-                            <!--<i class="fa fa-pencil"></i>-->
-                            <!--Edytuj-->
-                        <!--</span>-->
-                        <!--<span ng-if="selected.edit">-->
-                            <!--<i class="fa fa-close"></i>-->
-                            <!--Anuluj-->
-                        <!--</span>-->
+                    <!--ng-class="{'active': selected.edit}">-->
+                    <!--<span ng-if="!selected.edit">-->
+                    <!--<i class="fa fa-pencil"></i>-->
+                    <!--Edytuj-->
+                    <!--</span>-->
+                    <!--<span ng-if="selected.edit">-->
+                    <!--<i class="fa fa-close"></i>-->
+                    <!--Anuluj-->
+                    <!--</span>-->
                     <!--</a>-->
                 </div>
                 <h2>
@@ -28,23 +28,23 @@
                 </h2>
             </div>
 
-                <ul class="nav-horizontal text-right">
-                    <li ng-if="selected.objectState == 'INACTIVE'">
-                        <a href="javascript:void(0)" class="" ng-click="publish(selected)">
-                            <i class="fa fa-unlock"></i> Publikuj
-                        </a>
-                    </li>
-                    <li ng-if="selected.objectState == 'ACTIVE'">
-                        <a href="javascript:void(0)" class="" ng-click="deactivate(selected)">
-                            <i class="fa fa-lock"></i> Dezaktywuj
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-pencil-square-o"></i> Zamieść notkę
-                        </a>
-                    </li>
-                </ul>
+            <ul class="nav-horizontal text-right">
+                <li ng-if="selected.objectState == 'INACTIVE'">
+                    <a href="javascript:void(0)" class="" ng-click="publish(selected)">
+                        <i class="fa fa-unlock"></i> Publikuj
+                    </a>
+                </li>
+                <li ng-if="selected.objectState == 'ACTIVE'">
+                    <a href="javascript:void(0)" class="" ng-click="deactivate(selected)">
+                        <i class="fa fa-lock"></i> Dezaktywuj
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-pencil-square-o"></i> Zamieść notkę
+                    </a>
+                </li>
+            </ul>
             <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Nazwa</label>
@@ -60,7 +60,8 @@
                     <label for="level" class="col-xs-3 control-label">Poziom</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <select id="level" ng-model="selected.level" ng-options="l | translate for l in levels" class="form-control"></select>
+                        <select id="level" ng-model="selected.level" ng-options="l | translate for l in levels"
+                                class="form-control"></select>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static">
@@ -73,7 +74,8 @@
                     <label for="day" class="col-xs-3 control-label">Dzień</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <select id="day" ng-model="selected.day" ng-options="day | translate for day in days" class="form-control"></select>
+                        <select id="day" ng-model="selected.day" ng-options="day | translate for day in days"
+                                class="form-control"></select>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static">
@@ -86,7 +88,7 @@
                     <label for="startTime" class="col-xs-3 control-label">Start</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <input id="startTime" class="form-control" type="text" ng-model="selected.startTime" />
+                        <input id="startTime" class="form-control" type="text" ng-model="selected.startTime"/>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static">
@@ -99,7 +101,7 @@
                     <label for="endTime" class="col-xs-3 control-label">Koniec</label>
 
                     <div class="col-xs-9" ng-if="selected.edit">
-                        <input id="endTime" class="form-control" type="text" ng-model="selected.endTime" />
+                        <input id="endTime" class="form-control" type="text" ng-model="selected.endTime"/>
                     </div>
                     <div class="col-xs-9" ng-if="!selected.edit">
                         <p class="form-control-static">
@@ -121,41 +123,68 @@
     </div>
 
     <div class="block col-xs-12 col-lg-8 pull-left">
-        <div class="table-options clearfix">
-            <ul class="nav-horizontal">
-                <li>
-                    <a href="javascript:void(0)" ng-click="add()">
-                        <i class="fa fa-plus-circle"></i> Dodaj zajęcia
-                    </a>
-                </li>
-            </ul>
-
-            <div class="pull-right">
-                <ul class="nav nav-pills day-select">
-                    <li ng-class="{'active' : day=='PN'}">
-                        <a ng-click="day='PN'">Poniedziałek</a>
-                    </li>
-                    <li ng-class="{'active' : day=='WT'}">
-                        <a ng-click="day='WT'">Wtorek</a>
-                    </li>
-                    <li ng-class="{'active' : day=='SR'}">
-                        <a ng-click="day='SR'">Środa</a>
-                    </li>
-                    <li ng-class="{'active' : day=='CZ'}">
-                        <a ng-click="day='CZ'">Czwartek</a>
-                    </li>
-                    <li ng-class="{'active' : day=='PT'}">
-                        <a ng-click="day='PT'">Piątek</a>
-                    </li>
-                    <li ng-class="{'active' : day=='SB'}">
-                        <a ng-click="day='SB'">Sobota</a>
-                    </li>
-                    <li ng-class="{'active' : day=='ND'}">
-                        <a ng-click="day='ND'">Niedziela</a>
-                    </li>
-                </ul>
+        <div class="block-title">
+            <div class="block-options">
+                <div class="table-options clearfix" style="padding-bottom: 0">
+                    <ul class="nav-horizontal">
+                        <li>
+                            <a href="javascript:void(0)" ng-click="add()">
+                                <i class="fa fa-plus-circle"></i> Dodaj zajęcia
+                            </a>
+                        </li>
+                    </ul>
+                    <ul style="margin-top: -40px" class="nav nav-tabs day-select">
+                        <li class="pull-right" ng-class="{'active' : day=='ND'}">
+                            <a ng-click="setDay('ND')">Niedziela</a>
+                        </li>
+                        <li class="pull-right" ng-class="{'active' : day=='SB'}">
+                            <a ng-click="setDay('SB')">Sobota</a>
+                        </li>
+                        <li class="pull-right" ng-class="{'active' : day=='PT'}">
+                            <a ng-click="setDay('PT')">Piątek</a>
+                        </li>
+                        <li class="pull-right" ng-class="{'active' : day=='CZ'}">
+                            <a ng-click="setDay('CZ')">Czwartek</a>
+                        </li>
+                        <li class="pull-right" ng-class="{'active' : day=='SR'}">
+                            <a ng-click="setDay('SR')">Środa</a>
+                        </li>
+                        <li class="pull-right" ng-class="{'active' : day=='WT'}">
+                            <a ng-click="setDay('WT')">Wtorek</a>
+                        </li>
+                        <li class="pull-right" ng-class="{'active' : day=='PN'}">
+                            <a ng-click="setDay('PN')">Poniedziałek</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <!--<div class="pull-right">-->
+            <!--<ul class="nav nav-pills day-select">-->
+                <!--<li ng-class="{'active' : day=='PN'}">-->
+                    <!--<a ng-click="day='PN'">Poniedziałek</a>-->
+                <!--</li>-->
+                <!--<li ng-class="{'active' : day=='WT'}">-->
+                    <!--<a ng-click="day='WT'">Wtorek</a>-->
+                <!--</li>-->
+                <!--<li ng-class="{'active' : day=='SR'}">-->
+                    <!--<a ng-click="day='SR'">Środa</a>-->
+                <!--</li>-->
+                <!--<li ng-class="{'active' : day=='CZ'}">-->
+                    <!--<a ng-click="day='CZ'">Czwartek</a>-->
+                <!--</li>-->
+                <!--<li ng-class="{'active' : day=='PT'}">-->
+                    <!--<a ng-click="day='PT'">Piątek</a>-->
+                <!--</li>-->
+                <!--<li ng-class="{'active' : day=='SB'}">-->
+                    <!--<a ng-click="day='SB'">Sobota</a>-->
+                <!--</li>-->
+                <!--<li ng-class="{'active' : day=='ND'}">-->
+                    <!--<a ng-click="day='ND'">Niedziela</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--</div>-->
 
         <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
             <thead>
@@ -170,7 +199,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)" ng-class="{'selected': selected != null && course.sid == selected.sid}">
+            <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
+                ng-class="{'selected': selected != null && course.sid == selected.sid}">
                 <td>{{course.day | translate}}</td>
                 <td>{{course.startTime}} - {{course.endTime}}</td>
                 <td ng-bind="course.style.name"></td>

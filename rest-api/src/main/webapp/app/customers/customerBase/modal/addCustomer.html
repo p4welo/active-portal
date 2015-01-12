@@ -6,28 +6,37 @@
     <h4 class="modal-title" id="add-modal-label">Dodaj nowego klienta</h4>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" name="newCustomer">
         <div class="form-group">
-            <label for="newFirstName" class="col-sm-3 control-label">Imię</label>
+            <label for="newFirstName" class="col-sm-3 control-label">
+                Imię
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="newFirstName" placeholder="Imię"
-                       ng-model="customer.firstName">
+                       ng-model="customer.firstName" required/>
             </div>
         </div>
         <div class="form-group">
-            <label for="newLastName" class="col-sm-3 control-label">Nazwisko</label>
+            <label for="newLastName" class="col-sm-3 control-label">
+                Nazwisko
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko"
-                       ng-model="customer.lastName">
+                       ng-model="customer.lastName" required/>
             </div>
         </div>
         <div class="form-group">
-            <label for="newGender" class="col-sm-3 control-label">Płeć</label>
+            <label for="newGender" class="col-sm-3 control-label">
+                Płeć
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
-                <select ng-model="customer.gender" class="form-control" id="newGender">
+                <select ng-model="customer.gender" class="form-control" id="newGender" required>
                     <option value="MALE">{{ 'MALE' | translate }}</option>
                     <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
                 </select>
@@ -40,9 +49,16 @@
                 <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng-model="customer.mobile">
             </div>
         </div>
+
+        <div class="form-group text-right">
+            <label class="col-sm-offset-3">
+                <span class="text-danger">*</span>
+                <span>- pole wymagane</span>
+            </label>
+        </div>
     </form>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="cancel()">Anuluj</button>
-    <button ng-click="create(customer)" class="btn btn-success">Zapisz</button>
+    <button ng-click="create(customer)" class="btn btn-success" ng-class="{'disabled' : newCustomer.$invalid}">Zapisz</button>
 </div>

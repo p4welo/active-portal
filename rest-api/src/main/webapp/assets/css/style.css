@@ -71,6 +71,10 @@
     cursor: pointer;
 }
 
+.customer-base .nav-horizontal a {
+    line-height: 1.42857;
+}
+
 /*.attendance span {*/
     /*font-size: 56px;*/
     /*color: black;*/
