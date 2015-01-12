@@ -45,7 +45,8 @@
     <div class="preloader-spinner hidden-lt-ie9 hidden-lt-ie10"></div>
     <h2>Jeśli ładowanie trwa zbyt długo, spróbuj przeładować stronę (klawisz F5)</h2>
 </div>
-<div id="page-container" class="sidebar-partial sidebar-visible-lg animated fadeIn" ng-cloak>
+<div id="page-container" class="sidebar-partial animated fadeIn" ng-cloak>
+<!--<div id="page-container" class="sidebar-partial sidebar-visible-lg animated fadeIn" ng-cloak>-->
     <div id="sidebar">
         <div class="sidebar-scroll">
             <div class="sidebar-content">
@@ -67,6 +68,13 @@
                 <!--</div>-->
 
                 <ul class="sidebar-nav" ng-controller="menuController">
+                    <li ng-if="usersAuth()">
+                        <a ui-sref="dashboard" class="sidebar-nav-menu" ui-sref-active="active">
+                            <i class="fa fa-tachometer sidebar-nav-icon"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
                     <li class="sidebar-header">
                         <span class="sidebar-header-title">SYSTEM</span>
                     </li>
@@ -83,21 +91,21 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-header">
-                        <span class="sidebar-header-title">AKTUALNOŚCI</span>
-                    </li>
-                    <li ng-if="newsListAuth()">
-                        <a ui-sref="newsList" class="sidebar-nav-menu" ui-sref-active="active">
-                            <i class="gi gi-fire sidebar-nav-icon"></i>
-                            Lista
-                        </a>
-                    </li>
-                    <li ng-if="newsletterAuth()">
-                        <a ui-sref="newsletter" class="sidebar-nav-menu" ui-sref-active="active">
-                            <i class="fa fa-rss sidebar-nav-icon"></i>
-                            Newsletter
-                        </a>
-                    </li>
+                    <!--<li class="sidebar-header">-->
+                        <!--<span class="sidebar-header-title">AKTUALNOŚCI</span>-->
+                    <!--</li>-->
+                    <!--<li ng-if="newsListAuth()">-->
+                        <!--<a ui-sref="newsList" class="sidebar-nav-menu" ui-sref-active="active">-->
+                            <!--<i class="gi gi-fire sidebar-nav-icon"></i>-->
+                            <!--Lista-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li ng-if="newsletterAuth()">-->
+                        <!--<a ui-sref="newsletter" class="sidebar-nav-menu" ui-sref-active="active">-->
+                            <!--<i class="fa fa-rss sidebar-nav-icon"></i>-->
+                            <!--Newsletter-->
+                        <!--</a>-->
+                    <!--</li>-->
 
                     <li class="sidebar-header">
                         <span class="sidebar-header-title">GRAFIK</span>

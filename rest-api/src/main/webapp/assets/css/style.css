@@ -6,6 +6,14 @@
     display: none;
 }
 
+.splash.themed-background {
+    background-color: #352b4e;
+}
+
+a.sidebar-brand {
+    background-color: #d9416c;
+}
+
 [ng-cloak].splash {
     display: block !important;
     padding-top: 50px;

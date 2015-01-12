@@ -7,6 +7,7 @@ define([
     'services/module',
     'services/authorityService',
 
+    'dashboard/dashboard',
     'customers/index',
     'news/index',
     'schedule/index',
@@ -19,6 +20,7 @@ define([
         'ui.router',
         'angular-loading-bar',
 
+        'activePortal.dashboard',
         'activePortal.system',
         'activePortal.schedule',
         'activePortal.news',
@@ -28,7 +30,7 @@ define([
         'activePortal.services'
     ], function ($urlRouterProvider) {
 
-        $urlRouterProvider.otherwise("/users");
+        $urlRouterProvider.otherwise("/dashboard");
     })
         .config(function ($translateProvider) {
             $translateProvider.translations('pl', {

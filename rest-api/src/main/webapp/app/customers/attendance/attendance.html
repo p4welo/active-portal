@@ -50,27 +50,27 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-4 col-lg-3">
-            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-night animation-fadeIn">
-                        <i class="fa fa-moon-o"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        Zamknięcie
-                        <strong>dnia</strong><br>
-                        <small>Rozliczenia</small>
-                    </h3>
-                </div>
-            </a>
-        </div>
+        <!--<div class="col-sm-4 col-lg-3">-->
+            <!--<a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)">-->
+                <!--<div class="widget-simple">-->
+                    <!--<div class="widget-icon pull-left themed-background-night animation-fadeIn">-->
+                        <!--<i class="fa fa-moon-o"></i>-->
+                    <!--</div>-->
+                    <!--<h3 class="widget-content text-right animation-pullDown">-->
+                        <!--Zamknięcie-->
+                        <!--<strong>dnia</strong><br>-->
+                        <!--<small>Rozliczenia</small>-->
+                    <!--</h3>-->
+                <!--</div>-->
+            <!--</a>-->
+        <!--</div>-->
     </div>
 
-    <div class=" col-xs-12 col-lg-12 pull-left">
-        <div class="block">
-            <div class="table-options clearfix">
+    <div class="col-xs-12 col-lg-12">
+        <div class="row">
+            <div class="block">
+                <div class="table-options clearfix">
 
-                <div class="col-md-8">
                     <ul class="nav nav-pills day-select">
                         <li ng-class="{'active' : day=='PN'}">
                             <a ng-click="day='PN'">Poniedziałek</a>
@@ -95,129 +95,76 @@
                         </li>
                     </ul>
                 </div>
+
+                <table class="table table-editable table-striped table-vcenter table-hover">
+                    <thead>
+                    <tr>
+                        <th>Dzień</th>
+                        <th>Godziny</th>
+                        <th>Nazwa</th>
+                        <th>Sala</th>
+                        <th>Instruktor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
+                        ng-class="{'selected': selected != null && course.sid == selected.sid}">
+                        <td>{{course.day | translate}}</td>
+                        <td>{{course.startTime}} - {{course.endTime}}</td>
+                        <td ng-bind="course.style.name"></td>
+                        <td>{{course.room.name | translate}}</td>
+                        <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <table class="table table-editable table-striped table-vcenter table-hover">
-                <thead>
-                <tr>
-                    <th>Dzień</th>
-                    <th>Godziny</th>
-                    <th>Nazwa</th>
-                    <th>Sala</th>
-                    <th>Instruktor</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
-                    ng-class="{'selected': selected != null && course.sid == selected.sid}">
-                    <td>{{course.day | translate}}</td>
-                    <td>{{course.startTime}} - {{course.endTime}}</td>
-                    <td ng-bind="course.style.name"></td>
-                    <td>{{course.room.name | translate}}</td>
-                    <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
-                </tr>
-                </tbody>
-            </table>
         </div>
-
-        <!--<div class="block">-->
-            <!--<table class="table table-condensed table-hover table-bordered table-presence">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th></th>-->
-                    <!--<th class="text-center" style="width: 80px;" ng-repeat="lesson in presenceList.lessons">-->
-                        <!--{{ lesson.date }}-->
-                    <!--</th>-->
-                    <!--<th class="text-center" style="width: 80px;">-->
-                        <!--<a class="btn btn-primary">-->
-                            <!--Nowy-->
-                            <!--<br/>-->
-                            <!--termin-->
-                        <!--</a>-->
-                    <!--</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr ng-repeat="presence in presenceList.customerPresence">-->
-                    <!--<td>-->
-                        <!--<span ng-bind="presence.customer.firstName"></span>-->
-                        <!--<span ng-bind="presence.customer.lastName"></span>-->
-                    <!--</td>-->
-                    <!--<td ng-repeat="lesson in presenceList.lessons" class="text-center presence-icon">-->
-                        <!--<span ng-if="lesson.presenceLock">-->
-                            <!--<span ng-if="presence.presence[lesson.date]">-->
-                                <!--<i class="fa fa-lg fa-check-circle text-success"></i>-->
-                            <!--</span>-->
-                            <!--<span ng-if="!presence.presence[lesson.date]">-->
-                                <!--<i class="fa fa-lg fa-remove text-danger"></i>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                        <!--<span ng-if="!lesson.presenceLock">-->
-                            <!--<label class="switch switch-success"><input type="checkbox" checked=""><span></span></label>-->
-                        <!--</span>-->
-                    <!--</td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-                <!--<tfoot>-->
-                <!--<tr>-->
-                    <!--<td></td>-->
-                    <!--<td ng-repeat="lesson in presenceList.lessons" class="text-center">-->
-                        <!--<span ng-if="!lesson.presenceLock">-->
-                            <!--<button class="btn btn-info">-->
-                                <!--<i class="fa fa-unlock"></i>-->
-                            <!--</button>-->
-                        <!--</span>-->
-                    <!--</td>-->
-                <!--</tr>-->
-                <!--</tfoot>-->
-            <!--</table>-->
-        <!--</div>-->
     </div>
-    <div class="col-sm-4 col-lg-3">
-        <div class="block full">
-            <div class="block-title clearfix">
-                <div class="block-options pull-right">
-                    <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="" data-original-title="Settings"><i class="fa fa-cog"></i></a>
+
+    <div class="row">
+        <div class="col-sm-4 col-lg-3">
+            <div class="block full">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a href="javascript:void(0)">
+                            <span class="badge pull-right">15</span>
+                            <strong>21 listopada 2014</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="badge pull-right">4</span>
+                            <strong>14 listopada 2014</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="badge pull-right">8</span>
+                            <strong>7 listopada 2014</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="badge pull-right">10</span>
+                            <strong>31 października 2014</strong>
+                        </a>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    Wczytaj więcej...
                 </div>
-                <h2>
-                    <i class="fa fa-ticket"></i>
-                    Ostatnie
-                    <strong>terminy</strong>
-                </h2>
             </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active">
-                    <a href="javascript:void(0)">
-                        <span class="badge pull-right">420</span>
-                        <i class="fa fa-ticket fa-fw"></i> <strong>All</strong>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <span class="badge pull-right">3</span>
-                        <i class="fa fa-exclamation-triangle fa-fw"></i> <strong>Urgent</strong>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <span class="badge pull-right">160</span>
-                        <i class="fa fa-folder-open-o fa-fw"></i> <strong>Open</strong>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <span class="badge pull-right">250</span>
-                        <i class="fa fa-folder-o fa-fw"></i> <strong>Closed</strong>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <span class="badge pull-right">7</span>
-                        <i class="fa fa-ban fa-fw"></i> <strong>Invalid</strong>
-                    </a>
-                </li>
-            </ul>
+        </div>
+        <div class="col-sm-8 col-lg-9">
+            <div class="block">
+                <div class="block-title">
+                    <h2>Obecność</h2>
+                </div>
+                <div class="tab-content">
+                    dupsko
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
