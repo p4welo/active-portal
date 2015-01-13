@@ -1,9 +1,10 @@
 define([
     'customers/module',
+    'customers/attendance/modal/sellPass',
     'services/courseService'
 ], function (module) {
 
-    module.controller("attendanceController", function ($scope, courseHttpClient) {
+    module.controller("attendanceController", function ($scope, $modal, courseHttpClient) {
         $scope.day = 'PN';
         $scope.courses = courseHttpClient.findInProgress();
         $scope.selectedCourse = null;
@@ -17,6 +18,23 @@ define([
             $scope.selectedCourse = null;
             $scope.day = day;
         }
+
+        $scope.sellPass = function () {
+            $modal.open({
+                templateUrl: 'app/customers/attendance/modal/sellPass.html',
+                controller: "sellPassController"
+            });
+        };
+        $scope.checkByPass = function () {
+            $modal.open({
+                templateUrl: 'app/customers/attendance/modal/checkByPass.html'
+            });
+        };
+        $scope.checkByCustomer = function () {
+            $modal.open({
+                templateUrl: 'app/customers/attendance/modal/checkByCustomer.html'
+            });
+        };
 
         $scope.selectCourse = function (course) {
             if ($scope.selectedCourse != null && $scope.selectedCourse.sid == course.sid) {

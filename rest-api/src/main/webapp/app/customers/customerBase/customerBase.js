@@ -29,54 +29,11 @@ define([
             $scope.selected.edit = false;
         }
 
-        $scope.subscribe = function (customer) {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/customers/customerBase/modal/subscribeClass.html',
-                controller: "subscribeClassController",
-                size: 'lg',
-                resolve: {
-                    customer: function () {
-                        return customer;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function () {
-                notificationService.success("Pomyślnie zapisano");
-                customerHttpClient.courses(customer).$promise.then(
-                    function (result) {
-                        $scope.customerCourses = result;
-                    }
-                );
-            });
-        };
-
-        $scope.join = function (customer) {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/customers/customerBase/modal/joinClass.html',
-                controller: "joinClassController",
-                size: 'lg',
-                resolve: {
-                    customer: function () {
-                        return customer;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function () {
-                notificationService.success("Pomyślnie zapisano");
-                customerHttpClient.courses(customer).$promise.then(
-                    function (result) {
-                        $scope.customerCourses = result;
-                    }
-                );
-            });
-        };
-
         $scope.add = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/customers/customerBase/modal/addCustomer.html',
-                controller: "addCustomerController"
+                controller: "addCustomerController",
+                size: 'lg'
             });
 
             modalInstance.result.then(function () {
@@ -97,6 +54,19 @@ define([
                     customerHttpClient.findAll().$promise.then(
                         function (result) {
                             $scope.customers = result;
+                        }
+                    );
+                });
+        }
+        $scope.delete = function (customer) {
+            delete customer['edit'];
+            customerHttpClient.delete({ sid: customer.sid }).$promise.then(
+                function () {
+                    $scope.selected = null;
+                    customerHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.customers = result;
+                            notificationService.success("Pomyślnie usunięto");
                         }
                     );
                 });

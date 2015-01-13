@@ -3,9 +3,15 @@
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
-    <h4 class="modal-title" id="add-modal-label">Dodaj nowego klienta</h4>
+    <h4 class="modal-title" ng-if="page==0">Dodaj nowego klienta</h4>
+    <h4 class="modal-title" ng-if="page==1">Dopisz do zajęć -
+            <strong>
+                {{customer.firstName}}
+                {{customer.lastName}}
+            </strong>
+    </h4>
 </div>
-<div class="modal-body">
+<div class="modal-body" ng-if="page==0">
     <form class="form-horizontal" role="form" name="newCustomer">
         <div class="form-group">
             <label for="newFirstName" class="col-sm-3 control-label">
@@ -13,7 +19,7 @@
                 <span class="text-danger">*</span>
             </label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                 <input type="text" class="form-control" id="newFirstName" placeholder="Imię"
                        ng-model="customer.firstName" required/>
             </div>
@@ -24,7 +30,7 @@
                 <span class="text-danger">*</span>
             </label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                 <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko"
                        ng-model="customer.lastName" required/>
             </div>
@@ -35,7 +41,7 @@
                 <span class="text-danger">*</span>
             </label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                 <select ng-model="customer.gender" class="form-control" id="newGender" required>
                     <option value="MALE">{{ 'MALE' | translate }}</option>
                     <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
@@ -43,22 +49,96 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="newMobile" class="col-sm-3 control-label">Telefon</label>
+            <label for="newMobile" class="col-sm-3 control-label">Telefon
+                <span class="text-danger">*</span>
+            </label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng-model="customer.mobile">
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng-model="customer.mobile" required>
             </div>
         </div>
 
-        <div class="form-group text-right">
-            <label class="col-sm-offset-3">
+        <div class="form-group">
+            <label class="col-xs-offset-1 col-sm-offset-9 text-right">
                 <span class="text-danger">*</span>
                 <span>- pole wymagane</span>
             </label>
         </div>
     </form>
 </div>
+<div class="modal-body" ng-if="page==1">
+    <ul class="nav nav-pills day-select">
+        <li ng-class="{'active' : day=='PN'}">
+            <a ng-click="setDay('PN')">Poniedziałek</a>
+        </li>
+        <li ng-class="{'active' : day=='WT'}">
+            <a ng-click="setDay('WT')">Wtorek</a>
+        </li>
+        <li ng-class="{'active' : day=='SR'}">
+            <a ng-click="setDay('SR')">Środa</a>
+        </li>
+        <li ng-class="{'active' : day=='CZ'}">
+            <a ng-click="setDay('CZ')">Czwartek</a>
+        </li>
+        <li ng-class="{'active' : day=='PT'}">
+            <a ng-click="setDay('PT')">Piątek</a>
+        </li>
+        <li ng-class="{'active' : day=='SB'}">
+            <a ng-click="setDay('SB')">Sobota</a>
+        </li>
+        <li ng-class="{'active' : day=='ND'}">
+            <a ng-click="setDay('ND')">Niedziela</a>
+        </li>
+    </ul>
+    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+        <tbody>
+        <tr ng-repeat="course in courses | orderBy: 'startTime' | filter: { day : day}" ng-click="selectCourse(course)" ng-class="{'selected': course == selected}">
+            <td>{{course.day | translate}}</td>
+            <td>{{course.startTime}} - {{course.endTime}}</td>
+            <td ng-bind="course.style.name"></td>
+            <td>{{course.room.name | translate}}</td>
+            <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
+            <td>
+                <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
+                <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="cancel()">Anuluj</button>
-    <button ng-click="create(customer)" class="btn btn-success" ng-class="{'disabled' : newCustomer.$invalid}">Zapisz</button>
+    <ul class="nav-horizontal text-center">
+        <li>
+            <a href="javascript:void(0)" ng-click="cancel()"ng-if="page==0">
+                <i class="fa fa-close"></i>
+                Anuluj
+            </a>
+        </li>
+        <li class="active" ng-if="page==0 && !isNotValid(customer)">
+            <a href="javascript:void(0)" ng-click="createCustomer(customer)">
+                <i class="fa fa-mail-forward"></i>
+                Dalej
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav-horizontal text-center">
+        <li>
+            <a href="javascript:void(0)" ng-click="cancel()" ng-if="page==1">
+                <i class="fa fa-close"></i>
+                Pomiń
+            </a>
+        </li>
+        <li class="active">
+            <a href="javascript:void(0)" ng-click="subscribe(selected)" ng-if="page==1 && selected!=null">
+                <i class="fa fa-check-square-o"></i>
+                Dopisz
+            </a>
+        </li>
+    </ul>
+    <!--<button class="btn btn-default" ng-click="cancel()" ng-if="page==0">Anuluj</button>-->
+    <!--<button class="btn btn-default" ng-click="cancel()" ng-if="page==1">Pomiń</button>-->
+    <!--<button ng-click="createCustomer(customer)" class="btn btn-success" ng-class="{'disabled' : isNotValid(customer)}" ng-if="page==0">Zapisz</button>-->
+    <!--<button ng-click="subscribe(selected)" class="btn btn-success" ng-class="{'disabled' : selected==null}" ng-if="page==1">Dopisz</button>-->
 </div>

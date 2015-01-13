@@ -4,6 +4,8 @@ define([
     'ngTouch',
     'loadingBar',
 
+    'core/module',
+
     'services/module',
     'services/authorityService',
 
@@ -27,6 +29,7 @@ define([
         'activePortal.customers',
         'activePortal.services',
 
+        'activePortal.core',
         'activePortal.services'
     ], function ($urlRouterProvider) {
 

@@ -30,6 +30,7 @@
             <user-service>
                 <user name="test" password="test" authorities="Administrator"/>
                 <user name="basia" password="misiu18" authorities="Sekretariat"/>
+                <user name="sekretariat" password="" authorities="Sekretariat"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>
