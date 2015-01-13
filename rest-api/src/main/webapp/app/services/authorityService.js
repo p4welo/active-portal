@@ -35,22 +35,4 @@ define([
             }
         })
     });
-
-    module.factory('roleService', function () {
-        var copyProperties = function (role) {
-            if (role == null) {
-                return;
-            }
-            return {
-                sid: role.sid,
-                objectState: role.objectState,
-                name: role.name
-            }
-        }
-
-        return {
-            copyProperties: copyProperties
-        }
-    })
-
 });

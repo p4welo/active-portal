@@ -5,7 +5,7 @@ define([
     'services/courseService'
 ], function (module) {
 
-    module.controller("coursesController", function ($scope, courseHttpClient, courseService, notificationService, $modal) {
+    module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal) {
         $scope.day = 'PN';
         $scope.classes = courseHttpClient.findAll();
         $scope.days = [
@@ -78,7 +78,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = courseService.copyProperties(course);
+            $scope.selected = angular.copy(course);
             $scope.selected.edit = false;
         }
 

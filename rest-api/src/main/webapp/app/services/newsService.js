@@ -42,21 +42,4 @@ define([
             }
         })
     });
-
-    module.service("newsService", function () {
-        this.copyProperties = function (news) {
-            if (news == null) {
-                return;
-            }
-            return {
-                sid: news.sid,
-                objectState: news.objectState,
-                title: news.title,
-                createdAt: news.createdAt,
-                content: news.content,
-                imageSrc: news.imageSrc,
-                imageAlt: news.imageAlt
-            }
-        }
-    })
 });

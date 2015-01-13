@@ -5,7 +5,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller("roomsController", function ($scope, roomHttpClient, roomService, $modal, notificationService) {
+    module.controller("roomsController", function ($scope, roomHttpClient, $modal, notificationService) {
 
         $scope.rooms = roomHttpClient.findAll();
 
@@ -30,7 +30,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = roomService.copyProperties(room);
+            $scope.selected = angular.copy(room);
             $scope.selected.edit = false;
         }
 

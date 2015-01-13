@@ -5,7 +5,7 @@ define([
     'services/categoryService'
 ], function (module) {
 
-    module.controller("categoriesController", function ($scope, $modal, categoryHttpClient, categoryService, notificationService) {
+    module.controller("categoriesController", function ($scope, $modal, categoryHttpClient, notificationService) {
         $scope.categories = categoryHttpClient.findAll();
 
         $scope.add = function () {
@@ -28,7 +28,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = categoryService.copyProperties(category);
+            $scope.selected = angular.copy(category);
             $scope.selected.edit = false;
         }
 

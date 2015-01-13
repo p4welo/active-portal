@@ -7,7 +7,6 @@
         </div>
     </div>
 
-
     <div class="row customer-base">
         <div class="col-xs-12 col-lg-4 pull-right" ng-if="selected != null">
             <div class="block">
@@ -21,23 +20,10 @@
                         </a>
                     </div>
                     <h2>
-                        <!--<i class="gi gi-parents"></i>-->
                         <span ng-bind="selected.firstName"></span>
                         <span ng-bind="selected.lastName"></span>
                     </h2>
                 </div>
-                <!--<div class="block-title">-->
-                <!--<div class="block-options text-center">-->
-                <!--<a class="btn btn-alt btn-success" ng-click="subscribe(selected)">-->
-                <!--<i class="fa fa-times"></i>-->
-                <!--Zapisz na zajęcia-->
-                <!--</a>-->
-                <!--<a class="btn btn-alt btn-info" ng-click="join(selected)">-->
-                <!--<i class="fa fa-times"></i>-->
-                <!--Dopisz do grupy-->
-                <!--</a>-->
-                <!--</div>-->
-                <!--</div>-->
 
                 <form class="form-horizontal form-bordered" method="post">
                     <div class="form-group">
@@ -101,9 +87,9 @@
                     <div class="table-options clearfix text-right">
                         <ul class="nav-horizontal">
                             <li>
-                                <a href="javascript:void(0)" ng-click="add()" class="">
+                                <a href="javascript:void(0)">
                                     <i class="fa fa-male"></i>
-                                    Panel klienta
+                                    Panel klienta TODO
                                 </a>
                             </li>
                         </ul>
@@ -120,20 +106,6 @@
                     </tr>
                     </tbody>
                 </table>
-
-                <!--<h5>Obecności</h5>-->
-                <!--<table class="table table-vcenter table-bordered table-condensed">-->
-                <!--<tbody>-->
-                <!--<tr ng-repeat="p in customerPresence | orderBy: '-date'">-->
-                <!--<td ng-bind="p.date | date:'dd.MM.yyyy hh:mm'"></td>-->
-                <!--<td ng-bind="p.lesson.course.style.name"></td>-->
-                <!--<td>-->
-                <!--<span class="label label-success" ng-if="p.present">TAK</span>-->
-                <!--<span class="label label-danger" ng-if="!p.present">NIE</span>-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-                <!--</table>-->
             </div>
         </div>
 
@@ -151,12 +123,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--<div class="col-xs-4 pull-left">-->
-                        <!--<a title="" class="btn btn-alt btn-default" ng-click="add()">-->
-                        <!--<i class="fa fa-plus"></i>-->
-                        <!--Dodaj-->
-                        <!--</a>-->
-                        <!--</div>-->
                     </div>
                 </div>
 

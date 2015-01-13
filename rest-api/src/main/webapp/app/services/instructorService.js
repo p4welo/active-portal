@@ -42,19 +42,4 @@ define([
             }
         })
     });
-
-    module.service("instructorService", function () {
-        this.copyProperties = function (instructor) {
-            if (instructor == null) {
-                return;
-            }
-            return {
-                sid: instructor.sid,
-                objectState: instructor.objectState,
-                firstName: instructor.firstName,
-                lastName: instructor.lastName,
-                nick: instructor.nick
-            }
-        }
-    })
 });

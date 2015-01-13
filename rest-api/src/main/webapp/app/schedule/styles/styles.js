@@ -6,7 +6,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("stylesController", function ($scope, $modal, styleHttpClient, styleService, categoryHttpClient, notificationService) {
+    module.controller("stylesController", function ($scope, $modal, styleHttpClient, categoryHttpClient, notificationService) {
 
         var EDIT_STYLE_KEY = 'edit';
         var EDIT_CATEGORY_KEY = 'editcategory';
@@ -34,7 +34,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = styleService.copyProperties(style);
+            $scope.selected = angular.copy(style);
             $scope.selected[EDIT_STYLE_KEY] = false;
             $scope.selected[EDIT_CATEGORY_KEY] = false;
         }

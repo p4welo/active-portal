@@ -57,20 +57,4 @@ define([
             }
         })
     });
-
-    module.service('customerService', function () {
-        this.copyProperties = function (customer) {
-            if (customer == null) {
-                return;
-            }
-            return {
-                sid: customer.sid,
-                objectState: customer.objectState,
-                firstName: customer.firstName,
-                lastName: customer.lastName,
-                mobile: customer.mobile,
-                gender: customer.gender
-            }
-        }
-    })
 });

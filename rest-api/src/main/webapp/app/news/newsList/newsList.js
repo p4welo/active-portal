@@ -4,7 +4,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("newsListController", function ($scope, newsHttpClient, newsService, notificationService) {
+    module.controller("newsListController", function ($scope, newsHttpClient, notificationService) {
 
         var EDIT_NEWS_KEY = 'edit';
 
@@ -48,7 +48,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = newsService.copyProperties(news);
+            $scope.selected = angular.copy(news);
             $scope.selected[EDIT_NEWS_KEY] = false;
         }
 

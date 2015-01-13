@@ -37,21 +37,4 @@ define([
             }
         })
     });
-
-    module.service("userService", function () {
-        this.copyProperties = function (user) {
-            if (user == null) {
-                return;
-            }
-            return {
-                sid: user.sid,
-                objectState: user.objectState,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                login: user.login,
-                email: user.email,
-                role: user.role
-            }
-        }
-    })
 });

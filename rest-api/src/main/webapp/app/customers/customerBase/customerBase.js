@@ -7,7 +7,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("customerBaseController", function ($scope, $modal, customerHttpClient, customerService, notificationService) {
+    module.controller("customerBaseController", function ($scope, $modal, customerHttpClient, notificationService) {
         $scope.customers = customerHttpClient.findAll();
 
         $scope.select = function (customer) {
@@ -15,7 +15,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = customerService.copyProperties(customer);
+            $scope.selected = angular.copy(customer);
             customerHttpClient.presence(customer).$promise.then(
                 function (result) {
                     $scope.customerPresence = result;

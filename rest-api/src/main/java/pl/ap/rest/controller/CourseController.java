@@ -11,6 +11,7 @@ import pl.ap.rest.api.CourseApiMappings;
 import pl.ap.rest.dto.CourseStateDto;
 import pl.ap.rest.dto.presence.CoursePresenceDto;
 import pl.ap.service.ICourseService;
+import pl.ap.service.ICourseUnitService;
 import pl.ap.service.ICustomerPresenceService;
 import pl.ap.service.IInstructorService;
 
@@ -30,6 +31,9 @@ public class CourseController {
 
     @Resource
     private ICustomerPresenceService customerPresenceService;
+
+    @Resource
+    private ICourseUnitService courseUnitService;
 
     @RequestMapping(value = CourseApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -165,5 +169,16 @@ public class CourseController {
         Map<Customer, List<CustomerPresence>> presences = customerPresenceService.findLastByCourse(course, 10);
 
         return null;
+    }
+
+    @RequestMapping(value = CourseApiMappings.FIND_LESSONS, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<CourseUnit> findLessons(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("findLessons()");
+
+        Course course = courseService.getBySid(sid);
+        Assert.notNull(course);
+
+        return courseUnitService.findBy(CourseUnit.FIELD_COURSE, course);
     }
 }

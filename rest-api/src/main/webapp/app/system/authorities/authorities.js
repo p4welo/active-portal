@@ -4,7 +4,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("authorityController", function ($scope, authorityHttpClient, roleService, notificationService) {
+    module.controller("authorityController", function ($scope, authorityHttpClient, notificationService) {
         $scope.roles = authorityHttpClient.findRoles();
         $scope.authorities = [];
 
@@ -13,7 +13,7 @@ define([
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = roleService.copyProperties(role);
+            $scope.selected = angular.copy(role);
             authorityHttpClient.findByRole({ sid: role.sid }).$promise.then(
                 function (result) {
                     $scope.authorities = result;

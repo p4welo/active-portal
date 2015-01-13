@@ -5,7 +5,7 @@ define([
     'services/instructorService'
 ], function (module) {
 
-    module.controller("instructorsController", function ($scope, $modal, instructorHttpClient, instructorService, notificationService) {
+    module.controller("instructorsController", function ($scope, $modal, instructorHttpClient, notificationService) {
         $scope.instructors = instructorHttpClient.findAll();
         $scope.selectedCourses = [];
 
@@ -30,7 +30,7 @@ define([
                 return;
             }
             $scope.selectedCourses = [];
-            $scope.selected = instructorService.copyProperties(instructor);
+            $scope.selected = angular.copy(instructor);
             instructorHttpClient.courses({sid: instructor.sid}).$promise.then(
                 function (value) {
                     $scope.selectedCourses = value;

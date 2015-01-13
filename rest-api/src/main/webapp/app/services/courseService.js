@@ -57,33 +57,10 @@ define([
                 url: "rest/course/:sid/room",
                 method: "PUT"
             },
-            findPresence: {
-                url: "rest/course/:sid/presence/last",
+            findLessons: {
+                url: "rest/course/:sid/lessons",
                 method: 'GET'
             }
         })
     });
-
-    module.service("courseService", function () {
-        this.copyProperties = function (course) {
-            if (course == null) {
-                return;
-            }
-            return {
-                sid: course.sid,
-                objectState: course.objectState,
-                style: course.style,
-                instructor: course.instructor,
-                day: course.day,
-                startTime: course.startTime,
-                endTime: course.endTime,
-                canJoin: course.canJoin,
-                canRegister: course.canRegister,
-                inProgress: course.inProgress,
-                level: course.level,
-                room: course.room,
-                comment: course.comment
-            }
-        }
-    })
 });
