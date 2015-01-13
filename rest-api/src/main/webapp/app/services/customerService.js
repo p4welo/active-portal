@@ -57,4 +57,17 @@ define([
             }
         })
     });
+
+    module.factory('customerFactory', function () {
+        var customers = {};
+
+        return {
+            setCustomer: function (customer) {
+                customers[customer.sid] = customer;
+            },
+            getCustomer: function (sid) {
+                return customers[sid];
+            }
+        }
+    });
 });

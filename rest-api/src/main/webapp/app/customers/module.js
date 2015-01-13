@@ -10,9 +10,14 @@ define([
                 controller: "attendanceController"
             })
             .state('customerBase', {
-                url: "/customerBase",
+                url: "/customers",
                 templateUrl: "app/customers/customerBase/customerBase.html",
                 controller: "customerBaseController"
+            })
+            .state('customerDetails', {
+                url: "/customer/:sid/details",
+                templateUrl: "app/customers/customerDetails/customerDetails.html",
+                controller: "customerDetailsController"
             });
     });
 });
