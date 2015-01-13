@@ -108,14 +108,14 @@
     </table>
 </div>
 <div class="modal-footer">
-    <ul class="nav-horizontal text-center">
+    <ul class="nav-horizontal text-center" ng-if="page==0">
         <li>
-            <a href="javascript:void(0)" ng-click="cancel()"ng-if="page==0">
+            <a href="javascript:void(0)" ng-click="cancel()">
                 <i class="fa fa-close"></i>
                 Anuluj
             </a>
         </li>
-        <li class="active" ng-if="page==0 && !isNotValid(customer)">
+        <li class="active" ng-if="!isNotValid(customer)">
             <a href="javascript:void(0)" ng-click="createCustomer(customer)">
                 <i class="fa fa-mail-forward"></i>
                 Dalej
@@ -123,15 +123,15 @@
         </li>
     </ul>
 
-    <ul class="nav-horizontal text-center">
+    <ul class="nav-horizontal text-center" ng-if="page==1">
         <li>
-            <a href="javascript:void(0)" ng-click="cancel()" ng-if="page==1">
+            <a href="javascript:void(0)" ng-click="cancel()">
                 <i class="fa fa-close"></i>
                 Pomiń
             </a>
         </li>
         <li class="active">
-            <a href="javascript:void(0)" ng-click="subscribe(selected)" ng-if="page==1 && selected!=null">
+            <a href="javascript:void(0)" ng-click="subscribe(selected)" ng-if="selected!=null">
                 <i class="fa fa-check-square-o"></i>
                 Dopisz
             </a>

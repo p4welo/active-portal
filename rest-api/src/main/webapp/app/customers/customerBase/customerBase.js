@@ -16,11 +16,6 @@ define([
                 return;
             }
             $scope.selected = angular.copy(customer);
-            customerHttpClient.presence(customer).$promise.then(
-                function (result) {
-                    $scope.customerPresence = result;
-                }
-            );
             customerHttpClient.courses(customer).$promise.then(
                 function (result) {
                     $scope.customerCourses = result;
