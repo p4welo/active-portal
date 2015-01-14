@@ -9,6 +9,7 @@ import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CustomerApiMappings;
+import pl.ap.rest.dto.CustomerDto;
 import pl.ap.service.ICustomerService;
 
 import javax.annotation.Resource;
@@ -33,12 +34,18 @@ public class CustomerController {
 
     @RequestMapping(value = CustomerApiMappings.CREATE, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public Customer create(@RequestBody Customer customer) {
+    public Customer create(@RequestBody CustomerDto dto) {
         LOGGER.info("create()");
 
-        Assert.notNull(customer);
+        Assert.notNull(dto);
+        Assert.notNull(dto.getCustomer());
+        Assert.notNull(dto.getCourses());
 
-        return customerService.save(customer);
+        Customer customer = customerService.save(dto.getCustomer());
+        for (Course course : dto.getCourses()) {
+            customerService.joinCourse(customer, course);
+        }
+        return customer;
     }
 
     @RequestMapping(value = CustomerApiMappings.GET, method = RequestMethod.GET)

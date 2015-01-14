@@ -11,6 +11,8 @@
             </strong>
     </h4>
 </div>
+
+        <!--PAGE 0-->
 <div class="modal-body" ng-if="page==0">
     <form class="form-horizontal" role="form" name="newCustomer">
         <div class="form-group">
@@ -66,6 +68,24 @@
         </div>
     </form>
 </div>
+<div class="modal-footer" ng-if="page==0">
+    <ul class="nav-horizontal text-center">
+        <li>
+            <a href="javascript:void(0)" ng-click="cancel()">
+                <i class="fa fa-close"></i>
+                Anuluj
+            </a>
+        </li>
+        <li class="active" ng-if="isValidCustomer(customer)">
+            <a href="javascript:void(0)" ng-click="nextPage()">
+                <i class="fa fa-chevron-right"></i>
+                Dalej
+            </a>
+        </li>
+    </ul>
+</div>
+
+        <!--PAGE 1-->
 <div class="modal-body" ng-if="page==1">
     <ul class="nav nav-pills day-select">
         <li ng-class="{'active' : day=='PN'}">
@@ -90,9 +110,9 @@
             <a ng-click="setDay('ND')">Niedziela</a>
         </li>
     </ul>
-    <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+    <table class="table table-editable table-striped table-vcenter table-condensed table-hover" style="margin-top:10px">
         <tbody>
-        <tr ng-repeat="course in courses | orderBy: 'startTime' | filter: { day : day}" ng-click="selectCourse(course)" ng-class="{'selected': course == selected}">
+        <tr ng-repeat="course in availableCourses | orderBy: 'startTime' | filter: { day : day}" ng-click="selectCourse(course)" ng-class="{'selected': isSelected(course)}">
             <td>{{course.day | translate}}</td>
             <td>{{course.startTime}} - {{course.endTime}}</td>
             <td ng-bind="course.style.name"></td>
@@ -106,39 +126,25 @@
         </tr>
         </tbody>
     </table>
-</div>
-<div class="modal-footer">
-    <ul class="nav-horizontal text-center" ng-if="page==0">
-        <li>
-            <a href="javascript:void(0)" ng-click="cancel()">
-                <i class="fa fa-close"></i>
-                Anuluj
-            </a>
-        </li>
-        <li class="active" ng-if="!isNotValid(customer)">
-            <a href="javascript:void(0)" ng-click="createCustomer(customer)">
-                <i class="fa fa-mail-forward"></i>
-                Dalej
-            </a>
+    <ul>
+        <li ng-repeat="c in courses">
+            {{c.style.name}}
         </li>
     </ul>
-
-    <ul class="nav-horizontal text-center" ng-if="page==1">
+</div>
+<div class="modal-footer" ng-if="page==1">
+    <ul class="nav-horizontal text-center">
         <li>
-            <a href="javascript:void(0)" ng-click="cancel()">
-                <i class="fa fa-close"></i>
-                Pomiń
+            <a href="javascript:void(0)" ng-click="previousPage()">
+                <i class="fa fa-chevron-left"></i>
+                Wstecz
             </a>
         </li>
         <li class="active">
-            <a href="javascript:void(0)" ng-click="subscribe(selected)" ng-if="selected!=null">
+            <a href="javascript:void(0)" ng-click="create(customer, courses)">
                 <i class="fa fa-check-square-o"></i>
-                Dopisz
+                Zapisz
             </a>
         </li>
     </ul>
-    <!--<button class="btn btn-default" ng-click="cancel()" ng-if="page==0">Anuluj</button>-->
-    <!--<button class="btn btn-default" ng-click="cancel()" ng-if="page==1">Pomiń</button>-->
-    <!--<button ng-click="createCustomer(customer)" class="btn btn-success" ng-class="{'disabled' : isNotValid(customer)}" ng-if="page==0">Zapisz</button>-->
-    <!--<button ng-click="subscribe(selected)" class="btn btn-success" ng-class="{'disabled' : selected==null}" ng-if="page==1">Dopisz</button>-->
 </div>

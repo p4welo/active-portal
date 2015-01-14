@@ -1,52 +1,54 @@
 define([
     'schedule/module',
-    'services/customerService'
+    'services/customerService',
+    'services/courseService'
 ], function (module) {
 
-    module.controller('addCustomerController', function ($scope, customerHttpClient, $modalInstance) {
+    module.controller('addCustomerController', function ($scope, customerHttpClient, courseHttpClient, $modalInstance) {
         $scope.page = 0;
         $scope.customer = {};
-        $scope.courses = [];
+        $scope.courses = null;
+        $scope.availableCourses = null;
         $scope.day = 'PN';
 
-//        WIDOK 0
-        $scope.createCustomer = function (customer) {
-            customerHttpClient.create(customer).$promise.then(
-                function (result) {
-                    $scope.customer = result;
-                    $scope.courses = customerHttpClient.coursesToJoin({ sid: result.sid });
-                    $scope.page = 1;
-
-                });
-        }
-        $scope.isNotValid = function (customer) {
-            return customer == null || customer.firstName == null || customer.lastName == null || customer.gender == null || customer.mobile == null;
+//        CUSTOMER CREATION - PAGE 0
+        $scope.isValidCustomer = function (customer) {
+            return customer != null && customer.firstName != null && customer.lastName != null && customer.gender != null && customer.mobile != null;
         }
 
         $scope.cancel = function () {
             $modalInstance.dismiss();
         }
-        $scope.close = function () {
-            $modalInstance.close();
+        $scope.nextPage = function () {
+            $scope.page = 1;
+            $scope.courses = [];
+            $scope.availableCourses = courseHttpClient.findAll();
         }
 
-//        WIDOK 1
+//        COURSE SUBSCRIPTION - PAGE 1
         $scope.selectCourse = function (course) {
-            if ($scope.selected == course) {
-                $scope.selected = null;
-                return;
+            var idx = $scope.courses.indexOf(course);
+            if (idx == -1) {
+                $scope.courses.push(course);
             }
-            $scope.selected = course;
+            else {
+                $scope.courses.splice(idx, 1);
+            }
         }
         $scope.setDay = function (day) {
-            $scope.selected = null;
             $scope.day = day;
         }
-        $scope.subscribe = function (course) {
-            customerHttpClient.subscribe({ sid: $scope.customer.sid }, course).$promise.then(
+        $scope.isSelected = function (course) {
+            return $scope.courses.indexOf(course) > -1;
+        }
+        $scope.create = function (customer, courses) {
+            customerHttpClient.create({customer: customer, courses: courses}).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
+        }
+        $scope.previousPage = function () {
+            $scope.page = 0;
         }
     });
 });
