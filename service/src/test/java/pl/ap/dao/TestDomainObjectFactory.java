@@ -2,10 +2,7 @@ package pl.ap.dao;
 
 import org.joda.time.DateTime;
 import pl.ap.domain.*;
-import pl.ap.domain.enums.CourseLevelEnum;
-import pl.ap.domain.enums.DayEnum;
-import pl.ap.domain.enums.GenderEnum;
-import pl.ap.domain.enums.ObjectStateEnum;
+import pl.ap.domain.enums.*;
 import pl.ap.service.util.SidUtils;
 
 import static pl.ap.service.util.SidUtils.generate;
@@ -159,5 +156,18 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         subscription.setCustomer(customer);
         subscription.setCourse(course);
         return subscription;
+    }
+
+    public static Pass getPass(Customer customer) {
+        Pass pass = new Pass();
+        pass.setSid(SidUtils.generate());
+        pass.setObjectState(ObjectStateEnum.ACTIVE);
+        pass.setCustomer(customer);
+        pass.setPurchaseDate(new DateTime());
+        pass.setEntrancePool(8);
+        pass.setEntrancesUsed(4);
+        pass.setStyleName("Joga");
+        pass.setType(PassTypeEnum.ADULT_8_ENTRANCES_MONTH);
+        return pass;
     }
 }

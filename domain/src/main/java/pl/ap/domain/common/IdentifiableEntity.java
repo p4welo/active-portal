@@ -18,8 +18,10 @@ public abstract class IdentifiableEntity extends StatefulEntity {
 
     public static final String FIELD_SID = "sid";
 
-    @Column(nullable = false, length = 32)
-    @Length(max = 32)
+    public static final int MAX_LENGTH_SID = 32;
+
+    @Column(nullable = false, length = MAX_LENGTH_SID)
+    @Length(max = MAX_LENGTH_SID)
     @NotNull
     protected String sid;
 

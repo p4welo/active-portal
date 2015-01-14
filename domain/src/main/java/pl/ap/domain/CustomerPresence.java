@@ -44,6 +44,8 @@ public class CustomerPresence extends DataEntity {
     @NotNull
     private boolean present;
 
+//    private String passSid;
+
     public Customer getCustomer() {
         return customer;
     }

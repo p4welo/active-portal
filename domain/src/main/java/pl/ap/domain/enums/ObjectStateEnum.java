@@ -8,5 +8,6 @@ package pl.ap.domain.enums;
 public enum ObjectStateEnum {
     ACTIVE,
     INACTIVE,
-    DELETED
+    DELETED,
+    CANCELED
 }

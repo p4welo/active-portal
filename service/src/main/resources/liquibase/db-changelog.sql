@@ -404,3 +404,20 @@ INSERT INTO role (object_state, sid, name) VALUES
   (0, "5vm322iriigmfe0889c96b50c1168103", "Administrator"),
   (0, "5vmlvoojd7434e0889c96b50c1168103", "Sekretariat"),
   (0, "5vm32299f32253teg9c96b50c1168103", "Klient");
+
+--changeset pawel:30
+CREATE TABLE pass (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  object_state INT(4) NOT NULL,
+  sid VARCHAR(32) NOT NULL,
+  purchase_date TIMESTAMP NOT NULL,
+  type INT(4) NOT NULL,
+  entrances_used INT(4) NOT NULL DEFAULT 0,
+  entrance_pool INT(4) NOT NULL,
+  course_sid VARCHAR(32),
+  style_name VARCHAR (32),
+  customer_id INT(11) NOT NULL,
+  FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE pass ADD INDEX pass_customer_idx (customer_id);
+ALTER TABLE pass ADD INDEX pass_sid_idx (sid);
