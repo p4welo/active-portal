@@ -5,7 +5,7 @@
     </button>
     <h4 class="modal-title" id="add-modal-label">Sprzedaż karnetu</h4>
 </div>
-<div class="modal-body">
+<div class="modal-body" ng-if="page == 0">
     <div class="wizard-steps">
         <div class="row">
             <div class="col-xs-6 active">
@@ -18,24 +18,26 @@
     </div>
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
-            <li ng-class="{'active': customerSubview == 0}">
-                <a href="javascript:void(0)" ng-click="setSubview(0)">Szukaj klienta</a>
+            <li ng-class="{'active': existingCustomer}">
+                <a href="javascript:void(0)" ng-click="setExistingCustomer(true)">Szukaj klienta</a>
             </li>
-            <li ng-class="{'active': customerSubview == 1}">
-                <a href="javascript:void(0)" ng-click="setSubview(1)">Nowy klient</a>
+            <li ng-class="{'active': !existingCustomer}">
+                <a href="javascript:void(0)" ng-click="setExistingCustomer(false)">Nowy klient</a>
             </li>
         </ul>
     </div>
 
-        <div ng-if="customerSubview == 0">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Szukaj..." ng-model="customerFilter" />
-                </div>
+    <div ng-if="existingCustomer">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Szukaj..." ng-model="customerFilter"/>
             </div>
-            <table class="table table-hover">
+        </div>
+        <div class="col-sm-12">
+            <table class="table table-hover table-editable">
                 <tbody>
-                <tr ng-repeat="cust in customers | filter: customerFilter | orderBy: 'lastName' | limitTo: 5">
+                <tr ng-repeat="cust in customers | filter: customerFilter | orderBy: 'lastName' | limitTo: 5"
+                    ng-click="selectCustomer(cust)" ng-class="{'selected': cust == customer}">
                     <td ng-bind="cust.firstName"></td>
                     <td ng-bind="cust.lastName"></td>
                     <td ng-bind="cust.mobile"></td>
@@ -43,8 +45,9 @@
                 </tbody>
             </table>
         </div>
-        <div ng-if="customerSubview == 1">
-            <form class="form-horizontal" role="form" name="newCustomer">
+    </div>
+    <div ng-if="!existingCustomer">
+        <form class="form-horizontal" role="form">
             <div class="form-group">
                 <label for="newFirstName" class="col-sm-3 control-label">
                     Imię
@@ -53,7 +56,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="newFirstName" placeholder="Imię"
-                           ng-model="customer.firstName" required/>
+                           ng-model="newCustomer.firstName" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -64,7 +67,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko"
-                           ng-model="customer.lastName" required/>
+                           ng-model="newCustomer.lastName" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -74,7 +77,7 @@
                 </label>
 
                 <div class="col-sm-8">
-                    <select ng-model="customer.gender" class="form-control" id="newGender" required>
+                    <select ng-model="newCustomer.gender" class="form-control" id="newGender" required>
                         <option value="MALE">{{ 'MALE' | translate }}</option>
                         <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
                     </select>
@@ -86,7 +89,8 @@
                 </label>
 
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng-model="customer.mobile" required>
+                    <input type="text" class="form-control" id="newMobile" placeholder="Telefon"
+                           ng-model="newCustomer.mobile" required>
                 </div>
             </div>
 
@@ -96,10 +100,54 @@
                     <span>- pole wymagane</span>
                 </label>
             </div>
-    </form>
-        </div>
+        </form>
+    </div>
 </div>
-<div class="modal-footer">
-    <!--<button class="btn btn-default" ng-click="cancel()">Anuluj</button>-->
-    <!--<button ng-click="" class="btn btn-success">Zapisz</button>-->
+<div class="modal-footer" ng-if="page == 0">
+    <ul class="nav-horizontal text-center">
+        <li>
+            <a href="javascript:void(0)" ng-click="cancel()">
+                <i class="fa fa-close"></i>
+                Anuluj
+            </a>
+        </li>
+        <li class="active" ng-if="isValidCustomer()">
+            <a href="javascript:void(0)" ng-click="passPage()">
+                <i class="fa fa-chevron-right"></i>
+                Dalej
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="modal-body" ng-if="page == 1">
+    <div class="wizard-steps">
+        <div class="row">
+            <div class="col-xs-6 active">
+                <span>
+                    <i class="fa fa-check"></i>
+                </span>
+            </div>
+            <div class="col-xs-6 active">
+                <span>2. Karnet</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer" ng-if="page == 1">
+    <ul class="nav-horizontal text-center">
+        <li>
+            <a href="javascript:void(0)" ng-click="customerPage()">
+                <i class="fa fa-chevron-left"></i>
+                Wstecz
+            </a>
+        </li>
+        <li class="active">
+            <a href="javascript:void(0)">
+                <i class="fa fa-chevron-right"></i>
+                Dalej
+            </a>
+        </li>
+    </ul>
 </div>
