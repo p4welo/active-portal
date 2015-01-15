@@ -111,24 +111,25 @@ define([
                 }
             );
 
-            function hasAuth (key) {
+            function hasAuth(key) {
 
                 if ($scope.currentAuth != null) {
                     return $scope.currentAuth.indexOf(key) > -1;
                 }
             }
-
+//            SYSTEM
+            $scope.systemAuth = function () {
+                return $scope.usersAuth() || $scope.authoritiesAuth();
+            }
             $scope.usersAuth = function () {
                 return hasAuth("AUTH_SYSTEM_USERS");
             }
             $scope.authoritiesAuth = function () {
                 return hasAuth("AUTH_SYSTEM_AUTHORITIES");
             }
-            $scope.newsListAuth = function () {
-                return hasAuth("AUTH_NEWS_NEWS_LIST");
-            }
-            $scope.newsletterAuth = function () {
-                return hasAuth("AUTH_NEWS_NEWSLETTER");
+//            GRAFIK
+            $scope.scheduleAuth = function () {
+                return $scope.roomsAuth() || $scope.instructorsAuth() || $scope.categoriesAuth() || $scope.stylesAuth() || $scope.coursesAuth()
             }
             $scope.roomsAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_ROOMS");
@@ -144,6 +145,10 @@ define([
             }
             $scope.coursesAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_SCHEDULE");
+            }
+//            SEKRETARIAT
+            $scope.officeAuth = function () {
+                return $scope.customerBaseAuth() || $scope.attendanceAuth();
             }
             $scope.customerBaseAuth = function () {
                 return hasAuth("AUTH_CUSTOMERS_CUSTOMER_BASE");

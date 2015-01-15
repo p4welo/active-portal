@@ -24,7 +24,6 @@
     <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon144.png" sizes="144x144">
     <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon152.png" sizes="152x152">
 
-    <!--<link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen" />-->
     <link rel="stylesheet" href="assets/lib/pro-ui/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/lib/pro-ui/css/plugins.css">
     <link rel="stylesheet" href="assets/lib/pro-ui/css/main.css">
@@ -53,29 +52,14 @@
                 <a href="index.html" class="sidebar-brand">
                     <i class="gi gi-baseball"></i><strong>Active</strong>Portal
                 </a>
-
-                <!--<div class="sidebar-section sidebar-user clearfix">-->
-                    <!--<div class="sidebar-user-avatar">-->
-                        <!--<a href="page_ready_user_profile.html">-->
-                            <!--<img src="assets/lib/pro-ui/img/placeholders/avatars/avatar2.jpg" alt="avatar">-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--<div class="sidebar-user-name">-->
-                        <!--<span ng-bind="user.firstName"></span>-->
-                        <!--<span ng-bind="user.lastName"></span>-->
-                    <!--</div>-->
-                    <!--<div class="sidebar-user-links"></div>-->
-                <!--</div>-->
-
                 <ul class="sidebar-nav" ng-controller="menuController">
-                    <li ng-if="usersAuth()">
+                    <li>
                         <a ui-sref="dashboard" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="fa fa-tachometer sidebar-nav-icon"></i>
                             Dashboard
                         </a>
                     </li>
-
-                    <li class="sidebar-header">
+                    <li class="sidebar-header" ng-if="systemAuth()">
                         <span class="sidebar-header-title">SYSTEM</span>
                     </li>
                     <li ng-if="usersAuth()">
@@ -90,24 +74,7 @@
                             Uprawnienia
                         </a>
                     </li>
-
-                    <!--<li class="sidebar-header">-->
-                        <!--<span class="sidebar-header-title">AKTUALNOŚCI</span>-->
-                    <!--</li>-->
-                    <!--<li ng-if="newsListAuth()">-->
-                        <!--<a ui-sref="newsList" class="sidebar-nav-menu" ui-sref-active="active">-->
-                            <!--<i class="gi gi-fire sidebar-nav-icon"></i>-->
-                            <!--Lista-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li ng-if="newsletterAuth()">-->
-                        <!--<a ui-sref="newsletter" class="sidebar-nav-menu" ui-sref-active="active">-->
-                            <!--<i class="fa fa-rss sidebar-nav-icon"></i>-->
-                            <!--Newsletter-->
-                        <!--</a>-->
-                    <!--</li>-->
-
-                    <li class="sidebar-header">
+                    <li class="sidebar-header" ng-if="scheduleAuth()">
                         <span class="sidebar-header-title">GRAFIK</span>
                     </li>
                     <li ng-if="roomsAuth()">
@@ -140,8 +107,7 @@
                             Grafik zajęć
                         </a>
                     </li>
-
-                    <li class="sidebar-header">
+                    <li class="sidebar-header" ng-if="officeAuth()">
                         <span class="sidebar-header-title">SEKRETARIAT</span>
                     </li>
                     <li ng-if="customerBaseAuth()">
@@ -156,28 +122,6 @@
                             Obecności
                         </a>
                     </li>
-
-                    <!--<li class="sidebar-header">-->
-                        <!--<span class="sidebar-header-title">SOCIAL MEDIA</span>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a class="sidebar-nav-menu">-->
-                            <!--<i class="si si-facebook sidebar-nav-icon"></i>-->
-                            <!--Facebook-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a class="sidebar-nav-menu">-->
-                            <!--<i class="si si-twitter sidebar-nav-icon"></i>-->
-                            <!--Twitter-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a class="sidebar-nav-menu">-->
-                            <!--<i class="si si-google_plus sidebar-nav-icon"></i>-->
-                            <!--Google+-->
-                        <!--</a>-->
-                    <!--</li>-->
                 </ul>
             </div>
         </div>
@@ -200,17 +144,6 @@
                         Uwagi
                     </a>
                 </li>
-                <!--<li>-->
-                    <!--<a href="#" data-toggle="tooltip" data-placement="bottom" title="Wiadomości">-->
-                        <!--<i class="gi gi-envelope"></i>-->
-                        <!--<span class="label label-primary label-indicator">4</span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#" data-toggle="tooltip" data-placement="bottom" title="Ustawienia">-->
-                        <!--<i class="gi gi-cogwheel"></i>-->
-                    <!--</a>-->
-                <!--</li>-->
                 <li>
                     <a href="logout" data-toggle="tooltip" data-placement="bottom" title="Wyloguj">
                         <i class="gi gi-gi gi-exit"></i>
