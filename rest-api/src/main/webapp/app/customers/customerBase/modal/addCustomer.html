@@ -14,6 +14,16 @@
 
         <!--PAGE 0-->
 <div class="modal-body" ng-if="page==0">
+    <div class="wizard-steps">
+        <div class="row">
+            <div class="col-xs-6 active">
+                <span>1. Klient</span>
+            </div>
+            <div class="col-xs-6">
+                <span>2. Zajęcia</span>
+            </div>
+        </div>
+    </div>
     <form class="form-horizontal" role="form" name="newCustomer">
         <div class="form-group">
             <label for="newFirstName" class="col-sm-3 control-label">
@@ -87,6 +97,18 @@
 
         <!--PAGE 1-->
 <div class="modal-body" ng-if="page==1">
+    <div class="wizard-steps">
+        <div class="row">
+            <div class="col-xs-6 active">
+                <span>
+                    <i class="fa fa-check"></i>
+                </span>
+            </div>
+            <div class="col-xs-6 active">
+                <span>2. Zajęcia</span>
+            </div>
+        </div>
+    </div>
     <ul class="nav nav-pills day-select">
         <li ng-class="{'active' : day=='PN'}">
             <a ng-click="setDay('PN')">Poniedziałek</a>

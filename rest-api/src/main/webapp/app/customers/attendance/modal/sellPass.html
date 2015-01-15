@@ -6,134 +6,100 @@
     <h4 class="modal-title" id="add-modal-label">Sprzedaż karnetu</h4>
 </div>
 <div class="modal-body">
-    <form id="basic-wizard" action="page_forms_wizard.php" method="post" class="form-horizontal form-bordered ui-formwizard">
-        <div id="first" class="step ui-formwizard-content" style="display: block;">
-            <div class="wizard-steps">
-                <div class="row">
-                    <div class="col-xs-4 active">
-                        <span>1. Klient</span>
-                    </div>
-                    <div class="col-xs-4">
-                        <span>2. Personal</span>
-                    </div>
-                    <div class="col-xs-4">
-                        <span>3. Extras</span>
-                    </div>
-                </div>
+    <div class="wizard-steps">
+        <div class="row">
+            <div class="col-xs-6 active">
+                <span>1. Klient</span>
             </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-username">Username</label>
-                <div class="col-md-6">
-                    <input type="text" id="example-username" name="example-username" class="form-control ui-wizard-content" placeholder="Your username..">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-email">Email</label>
-                <div class="col-md-6">
-                    <input type="text" id="example-email" name="example-email" class="form-control ui-wizard-content" placeholder="test@example.com">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-password">Password</label>
-                <div class="col-md-6">
-                    <input type="password" id="example-password" name="example-password" class="form-control ui-wizard-content" placeholder="Choose a crazy one..">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-password2">Retype Password</label>
-                <div class="col-md-6">
-                    <input type="password" id="example-password2" name="example-password2" class="form-control ui-wizard-content" placeholder="..and confirm it!">
-                </div>
+            <div class="col-xs-6">
+                <span>2. Karnet</span>
             </div>
         </div>
-        <div id="second" class="step ui-formwizard-content" style="display: none;">
-            <div class="wizard-steps">
-                <div class="row">
-                    <div class="col-xs-4 done">
-                        <span><i class="fa fa-check"></i></span>
-                    </div>
-                    <div class="col-xs-4 active">
-                        <span>2. Personal</span>
-                    </div>
-                    <div class="col-xs-4">
-                        <span>3. Extras</span>
-                    </div>
+    </div>
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': customerSubview == 0}">
+                <a href="javascript:void(0)" ng-click="setSubview(0)">Szukaj klienta</a>
+            </li>
+            <li ng-class="{'active': customerSubview == 1}">
+                <a href="javascript:void(0)" ng-click="setSubview(1)">Nowy klient</a>
+            </li>
+        </ul>
+    </div>
+
+        <div ng-if="customerSubview == 0">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Szukaj..." ng-model="customerFilter" />
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-firstname">Firstname</label>
-                <div class="col-md-6">
-                    <input type="text" id="example-firstname" name="example-firstname" class="form-control ui-wizard-content" placeholder="John.." disabled="disabled">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-lastname">Lastname</label>
-                <div class="col-md-6">
-                    <input type="text" id="example-lastname" name="example-lastname" class="form-control ui-wizard-content" placeholder="Doe.." disabled="disabled">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-address">Address</label>
-                <div class="col-md-6">
-                    <input type="text" id="example-address" name="example-address" class="form-control ui-wizard-content" placeholder="Where do you live?" disabled="disabled">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="example-city">City</label>
-                <div class="col-md-6">
-                    <input type="text" id="example-city" name="example-city" class="form-control ui-wizard-content" placeholder="Which one?" disabled="disabled">
-                </div>
-            </div>
+            <table class="table table-hover">
+                <tbody>
+                <tr ng-repeat="cust in customers | filter: customerFilter | orderBy: 'lastName' | limitTo: 5">
+                    <td ng-bind="cust.firstName"></td>
+                    <td ng-bind="cust.lastName"></td>
+                    <td ng-bind="cust.mobile"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div id="third" class="step ui-formwizard-content" style="display: none;">
-            <div class="wizard-steps">
-                <div class="row">
-                    <div class="col-xs-4 done">
-                        <span><i class="fa fa-check"></i></span>
-                    </div>
-                    <div class="col-xs-4 done">
-                        <span><i class="fa fa-check"></i></span>
-                    </div>
-                    <div class="col-xs-4 active">
-                        <span>3. Extras</span>
-                    </div>
+        <div ng-if="customerSubview == 1">
+            <form class="form-horizontal" role="form" name="newCustomer">
+            <div class="form-group">
+                <label for="newFirstName" class="col-sm-3 control-label">
+                    Imię
+                    <span class="text-danger">*</span>
+                </label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="newFirstName" placeholder="Imię"
+                           ng-model="customer.firstName" required/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label" for="example-bio">Bio</label>
-                <div class="col-md-8">
-                    <textarea id="example-bio" name="example-bio" rows="5" class="form-control ui-wizard-content" placeholder="Tell us your story.." disabled="disabled"></textarea>
+                <label for="newLastName" class="col-sm-3 control-label">
+                    Nazwisko
+                    <span class="text-danger">*</span>
+                </label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko"
+                           ng-model="customer.lastName" required/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label" for="example-newsletter">Newsletter</label>
-                <div class="col-md-6">
-                    <div class="checkbox">
-                        <label for="example-newsletter">
-                            <input type="checkbox" id="example-newsletter" name="example-newsletter" class="ui-wizard-content" disabled="disabled"> Sign up
-                        </label>
-                    </div>
+                <label for="newGender" class="col-sm-3 control-label">
+                    Płeć
+                    <span class="text-danger">*</span>
+                </label>
+
+                <div class="col-sm-8">
+                    <select ng-model="customer.gender" class="form-control" id="newGender" required>
+                        <option value="MALE">{{ 'MALE' | translate }}</option>
+                        <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label"><a href="#modal-terms" data-toggle="modal">Terms</a></label>
-                <div class="col-md-6">
-                    <label class="switch switch-primary" for="example-terms">
-                        <input type="checkbox" id="example-terms" name="example-terms" value="1" class="ui-wizard-content" disabled="disabled">
-                        <span data-toggle="tooltip" title="" data-original-title="I agree to the terms!"></span>
-                    </label>
+                <label for="newMobile" class="col-sm-3 control-label">Telefon
+                    <span class="text-danger">*</span>
+                </label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng-model="customer.mobile" required>
                 </div>
             </div>
-        </div>
-        <div class="form-group form-actions">
-            <div class="col-md-8 col-md-offset-4">
-                <input type="reset" class="btn btn-sm btn-warning ui-wizard-content ui-formwizard-button" id="back" value="Back" disabled="disabled">
-                <input type="button" class="btn btn-sm btn-primary ui-wizard-content ui-formwizard-button" id="next" value="Next">
+
+            <div class="form-group">
+                <label class="col-xs-offset-1 col-sm-offset-9 text-right">
+                    <span class="text-danger">*</span>
+                    <span>- pole wymagane</span>
+                </label>
             </div>
-        </div>
     </form>
+        </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="cancel()">Anuluj</button>
-    <button ng-click="" class="btn btn-success">Zapisz</button>
+    <!--<button class="btn btn-default" ng-click="cancel()">Anuluj</button>-->
+    <!--<button ng-click="" class="btn btn-success">Zapisz</button>-->
 </div>
