@@ -22,7 +22,8 @@ define([
         $scope.sellPass = function () {
             $modal.open({
                 templateUrl: 'app/customers/attendance/modal/sellPass.html',
-                controller: "sellPassController"
+                controller: "sellPassController",
+                size: 'lg'
             });
         };
         $scope.checkByPass = function () {

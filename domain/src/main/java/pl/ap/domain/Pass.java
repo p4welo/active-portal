@@ -35,6 +35,8 @@ public class Pass extends IdentifiableEntity {
 
     public static final String FIELD_CUSTOMER = "customer";
 
+    public static final String FIELD_BARCODE = "barcode";
+
     @Id
     @GeneratedValue
     @Column
@@ -71,6 +73,9 @@ public class Pass extends IdentifiableEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Customer customer;
+
+    @Column
+    private String barcode;
 
     public DateTime getPurchaseDate() {
         return purchaseDate;
@@ -136,5 +141,13 @@ public class Pass extends IdentifiableEntity {
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

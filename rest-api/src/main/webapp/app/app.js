@@ -75,8 +75,23 @@ define([
                 AUTH_SCHEDULE_STYLES: "GRAFIK: Style taneczne",
                 AUTH_SCHEDULE_SCHEDULE: "GRAFIK: Grafik zajęć",
                 AUTH_CUSTOMERS_CUSTOMER_BASE: "SEKRETARIAT: Baza klientów",
-                AUTH_CUSTOMERS_CUSTOMER_PRESENCE: "SEKRETARIAT: Obecności"
+                AUTH_CUSTOMERS_CUSTOMER_PRESENCE: "SEKRETARIAT: Obecności",
+
+                PASS_ADULT: "DOROŚLI",
+                PASS_CHILD: "DZIECI",
+
+                ADULT_1_ENTRANCE: "Pojedyncze wejście (1h)",
+                ADULT_4_ENTRANCES_MONTH: "4 wejścia (1h) w miesiącu",
+                ADULT_8_ENTRANCES_MONTH: "8 wejść (1h) w miesiącu",
+                ADULT_OPEN_MONTH: "Karnet OPEN",
+
+                CHILD_1_ENTRANCE: "Pojedyncze wejście (45 min)",
+                CHILD_4_ENTRANCES_MONTH: "4 wejścia (45 min) w miesiącu",
+                CHILD_8_ENTRANCES_MONTH: "8 wejść (45 min) w miesiącu",
+                CHILD_OPEN_MONTH: "Karnet OPEN",
+                CHILD_FORMATION_MONTH: "8 wejść (1h) - Formacja taneczna"
             });
+
             $translateProvider.preferredLanguage('pl');
         })
 

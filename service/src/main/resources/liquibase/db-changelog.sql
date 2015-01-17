@@ -421,3 +421,6 @@ CREATE TABLE pass (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE pass ADD INDEX pass_customer_idx (customer_id);
 ALTER TABLE pass ADD INDEX pass_sid_idx (sid);
+
+--changeset pawel:31
+ALTER TABLE pass ADD COLUMN barcode VARCHAR(32);

@@ -1,8 +1,12 @@
 define([
-    'uiBootstrap'
+    'uiBootstrap',
+    'ngTranslate'
 ], function () {
 
-    return angular.module('activePortal.customers', ['ui.bootstrap.modal'], function ($stateProvider) {
+    return angular.module('activePortal.customers', [
+        'pascalprecht.translate',
+        'ui.bootstrap.modal'
+    ], function ($stateProvider) {
         $stateProvider
             .state('attendance', {
                 url: "/attendance",
