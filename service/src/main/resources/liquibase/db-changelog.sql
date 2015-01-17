@@ -424,3 +424,7 @@ ALTER TABLE pass ADD INDEX pass_sid_idx (sid);
 
 --changeset pawel:31
 ALTER TABLE pass ADD COLUMN barcode VARCHAR(32);
+
+--changeset pawel:32
+ALTER TABLE customer ADD COLUMN mobile2 VARCHAR(9);
+ALTER TABLE customer ADD COLUMN email VARCHAR(64);

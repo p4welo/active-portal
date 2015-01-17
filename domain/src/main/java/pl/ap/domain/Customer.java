@@ -23,6 +23,10 @@ public class Customer extends IdentifiableEntity {
 
     public static final String FIELD_MOBILE = "mobile";
 
+    public static final String FIELD_MOBILE2 = "mobile2";
+
+    public static final String FIELD_EMAIL = "email";
+
     public static final String FIELD_GENDER = "gender";
 
     @Id
@@ -42,6 +46,14 @@ public class Customer extends IdentifiableEntity {
     @Column(length = 9)
     @Length(max = 9)
     private String mobile;
+
+    @Column(length = 9)
+    @Length(max = 9)
+    private String mobile2;
+
+    @Column(length = 64)
+    @Length(max = 64)
+    private String email;
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
@@ -88,5 +100,21 @@ public class Customer extends IdentifiableEntity {
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMobile2() {
+        return mobile2;
+    }
+
+    public void setMobile2(String mobile2) {
+        this.mobile2 = mobile2;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
