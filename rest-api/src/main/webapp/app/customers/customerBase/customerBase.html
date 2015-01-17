@@ -74,6 +74,28 @@
                             <p class="form-control-static" ng-bind="selected.mobile"></p>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="mobile2" class="col-xs-3 control-label">Telefon 2</label>
+
+                        <div class="col-xs-9" ng-if="selected.edit">
+                            <input type="text" placeholder="Telefon" class="form-control" id="mobile2"
+                                   ng-model="selected.mobile2"/>
+                        </div>
+                        <div class="col-xs-9" ng-if="!selected.edit">
+                            <p class="form-control-static" ng-bind="selected.mobile2"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-xs-3 control-label">Email</label>
+
+                        <div class="col-xs-9" ng-if="selected.edit">
+                            <input type="text" placeholder="Email" class="form-control" id="email"
+                                   ng-model="selected.email"/>
+                        </div>
+                        <div class="col-xs-9" ng-if="!selected.edit">
+                            <p class="form-control-static" ng-bind="selected.email"></p>
+                        </div>
+                    </div>
 
                     <div class="form-group form-actions" ng-if="selected.edit">
                         <div class="col-xs-9 col-xs-offset-3">
