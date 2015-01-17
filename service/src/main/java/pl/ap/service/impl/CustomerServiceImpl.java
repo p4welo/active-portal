@@ -44,6 +44,8 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
                 Customer.FIELD_FIRST_NAME,
                 Customer.FIELD_LAST_NAME,
                 Customer.FIELD_MOBILE,
+                Customer.FIELD_MOBILE2,
+                Customer.FIELD_EMAIL,
                 Customer.FIELD_GENDER
         };
     }
