@@ -14,7 +14,7 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="style" ng-model="course.style" ng-options="s.name for s in styles" class="form-control" required></select>
+                <select id="style" ng-model="course.style" ng-options="s.name for s in styles | orderBy: 'name'" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
@@ -61,7 +61,7 @@
             <label for="instructor" class="col-sm-3 control-label">Instruktor</label>
 
             <div class="col-sm-9">
-                <select id="instructor" ng-model="course.instructor" ng-options="i.firstName + ' ' + i.lastName for i in instructors" class="form-control"></select>
+                <select id="instructor" ng-model="course.instructor" ng-options="i.firstName + ' ' + i.lastName for i in instructors | orderBy: 'firstName'" class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
@@ -71,7 +71,7 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms" class="form-control" required></select>
+                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms | orderBy: 'name'" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
