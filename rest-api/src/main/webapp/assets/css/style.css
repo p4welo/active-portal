@@ -7,7 +7,8 @@
 }
 
 .splash.themed-background {
-    background-color: #352b4e;
+    background-color: white;
+    /*background-color: #352b4e;*/
 }
 
 a.sidebar-brand {
@@ -27,9 +28,9 @@ a.sidebar-brand {
     width: 100%;
 }
 
-.splash h2 {
+.splash h2, .splash img {
     text-align: center;
-    color: white;
+    /*color: white;*/
 }
 
 .ui-pnotify h4 {
