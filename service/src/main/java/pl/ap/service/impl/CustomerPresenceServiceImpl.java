@@ -41,7 +41,7 @@ public class CustomerPresenceServiceImpl extends AbstractServiceImpl<CustomerPre
     @Transactional(readOnly = true)
     public Map<Customer, List<CustomerPresence>> findLastByCourse(Course course, int maxResults) {
 
-        List<CoursePresenceDaoDto> dtos = customerPresenceDao.findByCourse(course);
+//        List<CoursePresenceDaoDto> dtos = customerPresenceDao.findByCourse(course);
         return null;
     }
 }
