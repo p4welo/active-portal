@@ -136,14 +136,14 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         return course;
     }
 
-    public static CourseUnit getCourseUnit(Course course) {
-        CourseUnit unit = new CourseUnit();
+    public static CourseLesson getCourseUnit(Course course) {
+        CourseLesson unit = new CourseLesson();
         unit.setCourse(course);
         unit.setDateTime(new DateTime());
         return unit;
     }
 
-    public static CustomerPresence getCustomerPresence(Customer customer, CourseUnit unit) {
+    public static CustomerPresence getCustomerPresence(Customer customer, CourseLesson unit) {
         CustomerPresence presence = new CustomerPresence();
         presence.setCustomer(customer);
         presence.setLesson(unit);

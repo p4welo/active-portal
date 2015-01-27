@@ -38,7 +38,7 @@ public class CustomerPresence extends DataEntity {
     @ForeignKey(name = "lesson_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private CourseUnit lesson;
+    private CourseLesson lesson;
 
     @Column
     @NotNull
@@ -54,11 +54,11 @@ public class CustomerPresence extends DataEntity {
         this.customer = customer;
     }
 
-    public CourseUnit getLesson() {
+    public CourseLesson getLesson() {
         return lesson;
     }
 
-    public void setLesson(CourseUnit lesson) {
+    public void setLesson(CourseLesson lesson) {
         this.lesson = lesson;
     }
 

@@ -1,7 +1,6 @@
 package pl.ap.dao.dto;
 
 import org.joda.time.DateTime;
-import pl.ap.domain.CourseUnit;
 import pl.ap.domain.Customer;
 
 /**

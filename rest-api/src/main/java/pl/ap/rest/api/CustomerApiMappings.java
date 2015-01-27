@@ -10,6 +10,8 @@ public interface CustomerApiMappings {
 
     public static final String CREATE = CUSTOMER_PREFIX + CommonApiMappings.CREATE_SUFFIX;
 
+    public static final String FIND_SIMILAR = CUSTOMER_PREFIX + "/similar";
+
     public static final String GET = CUSTOMER_PREFIX + CommonApiMappings.GET_SUFFIX;
 
     public static final String UPDATE = CUSTOMER_PREFIX + CommonApiMappings.UPDATE_SUFFIX;

@@ -1,7 +1,7 @@
 package pl.ap.dao.impl;
 
 import pl.ap.dao.IAbstractDao;
-import pl.ap.dao.ICourseUnitDao;
+import pl.ap.dao.ICourseLessonDao;
 import pl.ap.dao.TestDomainObjectFactory;
 import pl.ap.domain.*;
 
@@ -10,17 +10,17 @@ import javax.annotation.Resource;
 /**
  * Created by parado on 2014-10-17.
  */
-public class CourseUnitDaoImplTest extends AbstractDaoImplTest<CourseUnit> {
+public class CourseLessonDaoImplTest extends AbstractDaoImplTest<CourseLesson> {
     @Resource
-    private ICourseUnitDao courseUnitDao;
+    private ICourseLessonDao courseUnitDao;
 
     @Override
-    protected IAbstractDao<CourseUnit> getDao() {
+    protected IAbstractDao<CourseLesson> getDao() {
         return courseUnitDao;
     }
 
     @Override
-    protected CourseUnit getEntity() {
+    protected CourseLesson getEntity() {
         CourseCategory category = TestDomainObjectFactory.getCourseCategory();
         persist(category);
         CourseStyle style = TestDomainObjectFactory.getCourseStyle(category);

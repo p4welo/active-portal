@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
  * Created by parado on 2014-09-24.
  */
 @Entity
-@Table(name = "course_unit")
-public class CourseUnit extends DataEntity {
+@Table(name = "course_lesson")
+public class CourseLesson extends DataEntity {
 
     public static final String FIELD_COURSE = "course";
 

@@ -3,12 +3,11 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
-import pl.ap.dao.ICourseUnitDao;
+import pl.ap.dao.ICourseLessonDao;
 import pl.ap.dao.ICustomerPresenceDao;
 import pl.ap.dao.ICustomerSubscriptionDao;
 import pl.ap.dao.dto.CoursePresenceDaoDto;
 import pl.ap.domain.Course;
-import pl.ap.domain.CourseUnit;
 import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
 import pl.ap.service.ICustomerPresenceService;
@@ -31,7 +30,7 @@ public class CustomerPresenceServiceImpl extends AbstractServiceImpl<CustomerPre
     private ICustomerSubscriptionDao customerSubscriptionDao;
 
     @Resource
-    private ICourseUnitDao courseUnitDao;
+    private ICourseLessonDao courseLessonDao;
 
     @Override
     protected IAbstractDao<CustomerPresence> getDao() {

@@ -14,6 +14,7 @@ define([
         $scope.levels = [
             "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
         ];
+//        $scope.customers = [];
 
         $scope.add = function () {
             var modalInstance = $modal.open(
@@ -76,6 +77,7 @@ define([
         $scope.select = function (course) {
             if ($scope.selected != null && $scope.selected.sid == course.sid) {
                 $scope.selected = null;
+                $scope.customers = [];
                 return;
             }
             $scope.selected = angular.copy(course);

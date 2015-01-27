@@ -145,4 +145,14 @@ public class CustomerController {
 
         customerService.joinCourse(customer, course);
     }
+
+    @RequestMapping(value = CustomerApiMappings.FIND_SIMILAR, method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Customer> findSimilar(@RequestBody Customer customer) {
+        LOGGER.info("findSimilar()");
+
+        Assert.notNull(customer);
+
+        return customerService.findSimilar(customer);
+    }
 }

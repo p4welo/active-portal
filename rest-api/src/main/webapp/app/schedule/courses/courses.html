@@ -18,12 +18,6 @@
             </div>
 
             <ul class="nav-horizontal text-right">
-                <li>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-trash"></i>
-                        Usuń
-                    </a>
-                </li>
                 <li ng-if="selected.objectState == 'INACTIVE'">
                     <a href="javascript:void(0)" class="" ng-click="publish(selected)">
                         <i class="fa fa-unlock"></i>
@@ -118,77 +112,81 @@
             </form>
         </div>
     </div>
-
-    <div class="block col-xs-12 col-lg-8 pull-left">
-        <div class="block-title">
-            <div class="block-options">
-                <div class="table-options clearfix" style="padding-bottom: 0">
-                    <ul class="nav-horizontal">
-                        <li>
-                            <a href="javascript:void(0)" ng-click="add()">
-                                <i class="fa fa-plus-circle"></i> Dodaj zajęcia
-                            </a>
-                        </li>
-                    </ul>
-                    <ul style="margin-top: -40px" class="nav nav-tabs day-select">
-                        <li class="pull-right" ng-class="{'active' : day=='ND'}">
-                            <a ng-click="setDay('ND')">Niedziela</a>
-                        </li>
-                        <li class="pull-right" ng-class="{'active' : day=='SB'}">
-                            <a ng-click="setDay('SB')">Sobota</a>
-                        </li>
-                        <li class="pull-right" ng-class="{'active' : day=='PT'}">
-                            <a ng-click="setDay('PT')">Piątek</a>
-                        </li>
-                        <li class="pull-right" ng-class="{'active' : day=='CZ'}">
-                            <a ng-click="setDay('CZ')">Czwartek</a>
-                        </li>
-                        <li class="pull-right" ng-class="{'active' : day=='SR'}">
-                            <a ng-click="setDay('SR')">Środa</a>
-                        </li>
-                        <li class="pull-right" ng-class="{'active' : day=='WT'}">
-                            <a ng-click="setDay('WT')">Wtorek</a>
-                        </li>
-                        <li class="pull-right" ng-class="{'active' : day=='PN'}">
-                            <a ng-click="setDay('PN')">Poniedziałek</a>
-                        </li>
-                    </ul>
+    <div class="col-xs-12 col-lg-8 pull-left">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options">
+                    <div class="table-options clearfix" style="padding-bottom: 0">
+                        <div class="row col-sm-12">
+                            <ul class="nav-horizontal">
+                                <li>
+                                    <a href="javascript:void(0)" ng-click="add()">
+                                        <i class="fa fa-plus-circle"></i> Dodaj zajęcia
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul style="margin-top: -40px" class="nav nav-tabs day-select">
+                            <li class="pull-right" ng-class="{'active' : day=='ND'}">
+                                <a ng-click="setDay('ND')">Niedziela</a>
+                            </li>
+                            <li class="pull-right" ng-class="{'active' : day=='SB'}">
+                                <a ng-click="setDay('SB')">Sobota</a>
+                            </li>
+                            <li class="pull-right" ng-class="{'active' : day=='PT'}">
+                                <a ng-click="setDay('PT')">Piątek</a>
+                            </li>
+                            <li class="pull-right" ng-class="{'active' : day=='CZ'}">
+                                <a ng-click="setDay('CZ')">Czwartek</a>
+                            </li>
+                            <li class="pull-right" ng-class="{'active' : day=='SR'}">
+                                <a ng-click="setDay('SR')">Środa</a>
+                            </li>
+                            <li class="pull-right" ng-class="{'active' : day=='WT'}">
+                                <a ng-click="setDay('WT')">Wtorek</a>
+                            </li>
+                            <li class="pull-right" ng-class="{'active' : day=='PN'}">
+                                <a ng-click="setDay('PN')">Poniedziałek</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
-            <thead>
-            <tr>
-                <th>Dzień</th>
-                <th>Godziny</th>
-                <th>Nazwa</th>
-                <th>Sala</th>
-                <th>Instruktor</th>
-                <th>Dostępność</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
-                ng-class="{'selected': selected != null && course.sid == selected.sid}">
-                <td>{{course.day | translate}}</td>
-                <td>{{course.startTime}} - {{course.endTime}}</td>
-                <td ng-bind="course.style.name"></td>
-                <td>{{course.room.name | translate}}</td>
-                <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
-                <td>
-                    <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
-                    <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
-                    <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
-                </td>
-                <td>
+            <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>Dzień</th>
+                    <th>Godziny</th>
+                    <th>Nazwa</th>
+                    <th>Sala</th>
+                    <th>Instruktor</th>
+                    <th>Dostępność</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
+                    ng-class="{'selected': selected != null && course.sid == selected.sid}">
+                    <td>{{course.day | translate}}</td>
+                    <td>{{course.startTime}} - {{course.endTime}}</td>
+                    <td ng-bind="course.style.name"></td>
+                    <td>{{course.room.name | translate}}</td>
+                    <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
+                    <td>
+                        <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
+                        <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                        <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+                    </td>
+                    <td>
                     <span class="label" ng-class="resolveStatusCss(course)">
                         {{ course.objectState | translate }}
                     </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 </div>

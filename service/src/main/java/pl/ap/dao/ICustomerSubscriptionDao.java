@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface ICustomerSubscriptionDao extends IAbstractDao<CustomerSubscription> {
     List<Course> findCoursesByCustomer(Customer customer);
+
+    List<Customer> findCustomersByCourse(Course course);
 }

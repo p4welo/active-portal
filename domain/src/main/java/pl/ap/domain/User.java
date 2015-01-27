@@ -27,8 +27,6 @@ public class User extends IdentifiableEntity {
 
     public static final String FIELD_LOGIN = "login";
 
-    public static final String FIELD_PASSWORD = "password";
-
     public static final String FIELD_EMAIL = "email";
 
     public static final String FIELD_ROLE = "role";

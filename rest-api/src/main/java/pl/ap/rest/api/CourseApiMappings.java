@@ -32,5 +32,7 @@ public interface CourseApiMappings {
 
     public static final String FIND_LESSONS = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/lessons";
 
+    public static final String FIND_CUSTOMERS = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/customers";
+
     public static final String FIND_LAST_PRESENCE = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/presence/last";
 }

@@ -54,6 +54,10 @@ define([
             subscribe: {
                 url: "rest/customer/:sid/subscribe",
                 method: 'PUT'
+            },
+            findSimilar: {
+                url: "rest/customer/similar",
+                method: 'POST'
             }
         })
     });

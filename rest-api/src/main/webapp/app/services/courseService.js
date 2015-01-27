@@ -60,6 +60,10 @@ define([
             findLessons: {
                 url: "rest/course/:sid/lessons",
                 method: 'GET'
+            },
+            findCustomers: {
+                url: "rest/course/:sid/customers",
+                method: 'GET'
             }
         })
     });

@@ -84,4 +84,16 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
     public List<Course> findCoursesToRegister(Customer customer) {
         return courseDao.findRegisterableForCustomer(customer);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Customer> findByCourse(Course course) {
+        return customerSubscriptionDao.findCustomersByCourse(course);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public List<Customer> findSimilar(Customer customer) {
+        return customerDao.findBy(Customer.FIELD_LAST_NAME, customer.getLastName());
+    }
 }

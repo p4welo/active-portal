@@ -20,9 +20,15 @@ define([
             $modalInstance.dismiss();
         }
         $scope.nextPage = function () {
-            $scope.page = 1;
-            $scope.courses = [];
-            $scope.availableCourses = courseHttpClient.findAll();
+            customerHttpClient.findSimilar($scope.customer).$promise.then(
+                function (result) {
+                    console.table(result);
+
+                    $scope.page = 1;
+                    $scope.courses = [];
+                    $scope.availableCourses = courseHttpClient.findAll();
+                }
+            )
         }
 
 //        COURSE SUBSCRIPTION - PAGE 1

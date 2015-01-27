@@ -32,4 +32,14 @@ public class CustomerSubscriptionDaoImpl extends AbstractDaoImpl<CustomerSubscri
                 .setProjection(Projections.property(CustomerSubscription.FIELD_COURSE));
         return criteria.list();
     }
+
+    @Override
+    public List<Customer> findCustomersByCourse(Course course) {
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(CustomerSubscription.FIELD_COURSE, course))
+                .createAlias(CustomerSubscription.FIELD_CUSTOMER, CustomerSubscription.FIELD_CUSTOMER)
+                .addOrder(Order.asc(CustomerSubscription.FIELD_CUSTOMER + "." + Customer.FIELD_LAST_NAME))
+                .setProjection(Projections.property(CustomerSubscription.FIELD_CUSTOMER));
+        return criteria.list();
+    }
 }

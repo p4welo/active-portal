@@ -1,6 +1,6 @@
 package pl.ap.rest.dto.presence;
 
-import pl.ap.domain.CourseUnit;
+import pl.ap.domain.CourseLesson;
 
 import java.util.List;
 
@@ -8,14 +8,14 @@ import java.util.List;
  * Created by parado on 2014-11-03.
  */
 public class CoursePresenceDto {
-    private List<CourseUnit> lessons;
+    private List<CourseLesson> lessons;
     private List<CoursePresenceDto> customerPresence;
 
-    public List<CourseUnit> getLessons() {
+    public List<CourseLesson> getLessons() {
         return lessons;
     }
 
-    public void setLessons(List<CourseUnit> lessons) {
+    public void setLessons(List<CourseLesson> lessons) {
         this.lessons = lessons;
     }
 

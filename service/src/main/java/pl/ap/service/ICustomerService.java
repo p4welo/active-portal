@@ -23,4 +23,8 @@ public interface ICustomerService extends IIdentifiableService<Customer> {
     List<Course> findCoursesToJoin(Customer customer);
 
     List<Course> findCoursesToRegister(Customer customer);
+
+    List<Customer> findByCourse(Course course);
+
+    List<Customer> findSimilar(Customer customer);
 }

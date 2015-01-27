@@ -19,7 +19,7 @@ public class CustomerPresenceDaoImplTest extends AbstractDaoImplTest<CustomerPre
     private ICustomerPresenceDao customerPresenceDao;
 
     private Customer customer;
-    private CourseUnit unit;
+    private CourseLesson unit;
 
     @Override
     protected IAbstractDao<CustomerPresence> getDao() {

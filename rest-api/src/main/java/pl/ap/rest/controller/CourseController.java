@@ -10,10 +10,7 @@ import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CourseApiMappings;
 import pl.ap.rest.dto.CourseStateDto;
 import pl.ap.rest.dto.presence.CoursePresenceDto;
-import pl.ap.service.ICourseService;
-import pl.ap.service.ICourseUnitService;
-import pl.ap.service.ICustomerPresenceService;
-import pl.ap.service.IInstructorService;
+import pl.ap.service.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,7 +30,10 @@ public class CourseController {
     private ICustomerPresenceService customerPresenceService;
 
     @Resource
-    private ICourseUnitService courseUnitService;
+    private ICourseLessonService courseUnitService;
+
+    @Resource
+    private ICustomerService customerService;
 
     @RequestMapping(value = CourseApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -173,12 +173,23 @@ public class CourseController {
 
     @RequestMapping(value = CourseApiMappings.FIND_LESSONS, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public List<CourseUnit> findLessons(@PathVariable(ApiKeys.SID) String sid) {
+    public List<CourseLesson> findLessons(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("findLessons()");
 
         Course course = courseService.getBySid(sid);
         Assert.notNull(course);
 
-        return courseUnitService.findBy(CourseUnit.FIELD_COURSE, course);
+        return courseUnitService.findBy(CourseLesson.FIELD_COURSE, course);
+    }
+
+    @RequestMapping(value = CourseApiMappings.FIND_CUSTOMERS, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Customer> findCustomers(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("findCustomers()");
+
+        Course course = courseService.getBySid(sid);
+        Assert.notNull(course);
+
+        return customerService.findByCourse(course);
     }
 }
