@@ -55,7 +55,9 @@ a.sidebar-brand {
 .table-editable tbody {
     cursor: pointer;
 }
-
+.day-select {
+    margin-bottom: 20px;
+}
 .day-select li {
     cursor: pointer;
 }

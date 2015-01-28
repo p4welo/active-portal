@@ -59,11 +59,13 @@ define([
             },
             findLessons: {
                 url: "rest/course/:sid/lessons",
-                method: 'GET'
+                method: 'GET',
+                isArray: true
             },
             findCustomers: {
                 url: "rest/course/:sid/customers",
-                method: 'GET'
+                method: 'GET',
+                isArray: true
             }
         })
     });

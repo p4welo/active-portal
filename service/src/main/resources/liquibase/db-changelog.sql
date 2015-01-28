@@ -431,3 +431,13 @@ ALTER TABLE customer ADD COLUMN email VARCHAR(64);
 
 --changeset pawel:33
 RENAME TABLE course_unit TO course_lesson;
+
+--changeset pawel:34
+CREATE TABLE customer_contact_data (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  type INT(4) NOT NULL,
+  value VARCHAR(255) NOT NULL,
+  customer_id INT(11) NOT NULL,
+  FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE customer_contact_data ADD INDEX customer_contact_data_customer_idx (customer_id);

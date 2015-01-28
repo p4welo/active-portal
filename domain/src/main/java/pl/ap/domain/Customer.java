@@ -1,5 +1,7 @@
 package pl.ap.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import pl.ap.domain.annotations.Unique;
@@ -8,6 +10,8 @@ import pl.ap.domain.enums.GenderEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by parado on 2014-09-24.
@@ -28,6 +32,8 @@ public class Customer extends IdentifiableEntity {
     public static final String FIELD_EMAIL = "email";
 
     public static final String FIELD_GENDER = "gender";
+
+    public static final String FIELD_CONTACT_DATA_LIST = "contactDataList";
 
     @Id
     @GeneratedValue
@@ -59,6 +65,18 @@ public class Customer extends IdentifiableEntity {
     @Enumerated(EnumType.ORDINAL)
     @NotNull
     private GenderEnum gender;
+
+    @OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+    @JoinColumn(name="customer_id", nullable=false)
+    private List<CustomerContactData> contactDataList;
+
+    public List<CustomerContactData> getContactDataList() {
+        return contactDataList;
+    }
+
+    public void setContactDataList(List<CustomerContactData> contactDataList) {
+        this.contactDataList = contactDataList;
+    }
 
     public String getFirstName() {
         return firstName;
