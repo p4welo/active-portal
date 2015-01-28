@@ -83,9 +83,5 @@ define([
             $scope.selected.edit = false;
             $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
         }
-
-        $scope.resolveStatusCss = function (course) {
-            return {'label-success': course.objectState == 'ACTIVE', 'label-danger': course.objectState == 'INACTIVE'}
-        }
     });
 });

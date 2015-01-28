@@ -172,4 +172,16 @@ define([
                 return hasAuth("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
             }
         })
+
+//        .run(function ($rootScope) {
+//            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+//                if (!fromState.abstract) {
+//                    if ($("#navbar-collapse-1").hasClass("in")) {
+//                        $("#navbar-collapse-1").removeClass("in");
+//                        $("#navbar-collapse-1").style("height", "1px");
+//                        $("#nav-toggle-button").addClass("collapsed");
+//                    }
+//                }
+//            });
+//        })
 });

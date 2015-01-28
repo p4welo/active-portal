@@ -55,9 +55,11 @@ a.sidebar-brand {
 .table-editable tbody {
     cursor: pointer;
 }
+
 .day-select {
     margin-bottom: 20px;
 }
+
 .day-select li {
     cursor: pointer;
 }
@@ -87,8 +89,8 @@ a.sidebar-brand {
 }
 
 /*.attendance span {*/
-    /*font-size: 56px;*/
-    /*color: black;*/
+/*font-size: 56px;*/
+/*color: black;*/
 /*}*/
 
 .attendance img {
@@ -107,10 +109,11 @@ a.sidebar-brand {
 .selected > td {
     background-color: #d9416c !important;
     color: white;
+    border-color: #D9416C ;
 }
 
 .themed-background-spring > td {
-    background-color: #27ae60!important;
+    background-color: #27ae60 !important;
     color: white;
 }
 
@@ -124,4 +127,24 @@ td.presence-icon {
 
 td.object-state {
     color: #FFF;
+}
+
+td.object-state div {
+    border-radius: 50%;
+    width: 20px;
+}
+
+.table-hover > tbody > tr.table-content > td {
+    background-color: #F2EBED;
+    border-top: 0;
+}
+
+.table > tbody + tbody {
+    border-top: 0;
+}
+
+.table-hover > tbody > tr.table-content:hover > td {
+    background-color: #F2EBED;
+    /*background-color: #fff;*/
+    cursor: default;
 }

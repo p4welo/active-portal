@@ -84,17 +84,12 @@
                     <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
                 </td>
                 <td class="text-center object-state">
-                    <div class="themed-border-spring themed-background-spring text-center"
-                         style="border-radius: 50%; width: 20px;" ng-if="course.objectState == 'ACTIVE'">
+                    <div class="themed-border-spring themed-background-spring text-center" ng-if="course.objectState == 'ACTIVE'">
                         <i class="fa fa-check"></i>
                     </div>
-                    <div class="themed-border-fire themed-background-fire text-center"
-                         style="border-radius: 50%; width: 20px;" ng-if="course.objectState == 'INACTIVE'">
+                    <div class="themed-border-fire themed-background-fire text-center" ng-if="course.objectState == 'INACTIVE'">
                         <i class="fa fa-remove"></i>
                     </div>
-                    <!--<span class="label" ng-class="resolveStatusCss(course)">-->
-                    <!--{{ course.objectState | translate }}-->
-                    <!--</span>-->
                 </td>
             </tr>
             </tbody>
