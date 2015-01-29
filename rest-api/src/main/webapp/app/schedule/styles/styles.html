@@ -19,7 +19,14 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="javascript:void(0)" ng-click="add()">
-                            <i class="fa fa-plus-circle"></i> Dodaj styl
+                            <i class="fa fa-plus-circle"></i>
+                            Dodaj styl
+                        </a>
+                    </li>
+                    <li ng-class="{'disabled': selected == null}">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-trash"></i>
+                            Usuń
                         </a>
                     </li>
                 </ul>
@@ -63,36 +70,9 @@
                     </td>
                 </tr>
                 <tr class="table-content" ng-if="selected != null && style.sid == selected.sid">
-                    <td colspan="3">
-                        <div class="col-sm-6">
-                            <div class="block">
-
-                                <div class="block-title">
-                                    <h2>&nbsp;</h2>
-                                    <div class="block-options pull-right">
-                                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" ng-click="selected.edit = !selected.edit" ng-class="{'active': selected.edit}">
-                                            <i class="fa fa-cog" ng-if="!selected.edit"></i>
-                                            <i class="fa fa-close" ng-if="selected.edit"></i>
-                                        </a>
-                                    </div>
-                                    <!--<div class="row">-->
-                                        <!--<div class="pull-right">-->
-                                            <!--<a ng-click="selected.edit = !selected.edit"-->
-                                               <!--class="btn-alt btn btn-default enable-tooltip"-->
-                                               <!--ng-class="{'active': selected.edit}">-->
-                                            <!--<span ng-if="!selected.edit">-->
-                                                <!--<i class="fa fa-pencil"></i>-->
-                                                <!--Edytuj-->
-                                            <!--</span>-->
-                                            <!--<span ng-if="selected.edit">-->
-                                                <!--<i class="fa fa-close"></i>-->
-                                                <!--Anuluj-->
-                                            <!--</span>-->
-                                            <!--</a>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                </div>
-
+                    <td colspan="3" style="padding: 0">
+                        <div class="block">
+                            <div class="col-sm-6">
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="category" class="col-xs-3 control-label">Kategoria</label>

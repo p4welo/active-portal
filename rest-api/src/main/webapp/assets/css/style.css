@@ -38,11 +38,6 @@ a.sidebar-brand {
     font-weight: bold;
 }
 
-.ui-pnotify.stack-bottomright {
-    bottom: 25px !important;
-    top: auto !important;
-}
-
 .ui-pnotify-container {
     z-index: 1055;
 }
@@ -137,6 +132,11 @@ td.object-state div {
 .table-hover > tbody > tr.table-content > td {
     background-color: #F2EBED;
     border-top: 0;
+}
+
+tr.table-content .block {
+    margin-bottom: 0;
+    overflow: auto;
 }
 
 .table > tbody + tbody {

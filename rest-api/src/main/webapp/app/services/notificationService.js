@@ -4,30 +4,33 @@ define([
 ], function (module) {
 
     module.service('notificationService', function () {
+        var opts = {
+            addclass: "stack-bottomright",
+            stack: {dir1: "up", dir2: "left"},
+            styling: "fontawesome"
+        }
         this.success = function (content) {
-            new PNotify({
-                text: content,
-                title: 'Sukces!',
-                type: 'success'
-            });
+            opts.text = content;
+            opts.title = 'Sukces!';
+            opts.type = 'success';
+
+            new PNotify(opts);
         };
 
         this.info = function (content) {
-            new PNotify({
-                text: content,
-                title: 'Info!',
-                type: 'info',
-                addclass: 'stack-bottomright'
-            });
+            opts.text = content;
+            opts.title = 'Info!';
+            opts.type = 'info';
+
+            new PNotify(opts);
         };
 
         this.error = function (content) {
-            new PNotify({
-                text: content,
-                title: 'Błąd',
-                type: 'error',
-                addclass: 'stack-bottomright'
-            });
+            opts.text = content;
+            opts.title = 'Błąd!';
+            opts.type = 'error';
+
+            new PNotify(opts);
         }
     })
 
