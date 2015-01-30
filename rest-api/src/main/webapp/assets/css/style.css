@@ -139,6 +139,10 @@ tr.table-content .block {
     overflow: auto;
 }
 
+.table-content td {
+    padding: 0 !important;
+}
+
 .table > tbody + tbody {
     border-top: 0;
 }

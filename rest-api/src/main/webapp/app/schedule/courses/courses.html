@@ -22,6 +22,24 @@
                         <i class="fa fa-plus-circle"></i> Dodaj zajęcia
                     </a>
                 </li>
+                <li ng-class="{'disabled': selected == null}">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-trash"></i>
+                        Usuń
+                    </a>
+                </li>
+                <!--<li ng-if="selected.objectState == 'INACTIVE'">-->
+                    <!--<a href="javascript:void(0)" ng-click="publish(selected)">-->
+                        <!--<i class="fa fa-unlock"></i>-->
+                        <!--Publikuj-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li ng-if="selected.objectState == 'ACTIVE'">-->
+                    <!--<a href="javascript:void(0)" ng-click="deactivate(selected)">-->
+                        <!--<i class="fa fa-lock"></i>-->
+                        <!--Dezaktywuj-->
+                    <!--</a>-->
+                <!--</li>-->
             </ul>
         </div>
     </header>
@@ -56,7 +74,7 @@
             </ul>
         </div>
 
-        <table class="table table-editable table-striped table-vcenter table-hover">
+        <table class="table table-editable table-hover">
             <thead>
             <tr>
                 <th>Dzień</th>
@@ -69,9 +87,8 @@
                 <th>Status</th>
             </tr>
             </thead>
-            <tbody>
-            <tr ng-repeat="course in classes | filter: { day : day}" ng-click="select(course)"
-                ng-class="{'selected': selected != null && course.sid == selected.sid}">
+            <tbody ng-repeat="course in classes | filter: { day : day}">
+            <tr ng-click="select(course)" ng-class="{'selected': isEqual(selected, course)}">
                 <td>{{course.day | translate}}</td>
                 <td>{{course.startTime}} - {{course.endTime}}</td>
                 <td ng-bind="course.style.name"></td>
@@ -84,11 +101,126 @@
                     <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
                 </td>
                 <td class="text-center object-state">
-                    <div class="themed-border-spring themed-background-spring text-center" ng-if="course.objectState == 'ACTIVE'">
+                    <div class="themed-border-spring themed-background-spring text-center" ng-if="isActive(course)">
                         <i class="fa fa-check"></i>
                     </div>
-                    <div class="themed-border-fire themed-background-fire text-center" ng-if="course.objectState == 'INACTIVE'">
+                    <div class="themed-border-fire themed-background-fire text-center" ng-if="!isActive(course)">
                         <i class="fa fa-remove"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr class="table-content" ng-if="isEqual(selected, course)">
+                <td colspan="8">
+                    <div class="block">
+                        <div class="col-sm-6">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Nazwa</label>
+
+                                    <div class="col-xs-9">
+                                        <p class="form-control-static">
+                                            {{ selected.style.name }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="level" class="col-xs-3 control-label">Poziom</label>
+
+                                    <div class="col-xs-9" ng-if="selected.edit">
+                                        <select id="level" ng-model="selected.level"
+                                                ng-options="l | translate for l in levels"
+                                                class="form-control"></select>
+                                    </div>
+                                    <div class="col-xs-9" ng-if="!selected.edit">
+                                        <p class="form-control-static">
+                                            {{ selected.level | translate }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="day" class="col-xs-3 control-label">Dzień</label>
+
+                                    <div class="col-xs-9" ng-if="selected.edit">
+                                        <select id="day" ng-model="selected.day"
+                                                ng-options="day | translate for day in days"
+                                                class="form-control"></select>
+                                    </div>
+                                    <div class="col-xs-9" ng-if="!selected.edit">
+                                        <p class="form-control-static">
+                                            {{ selected.day | translate }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="startTime" class="col-xs-3 control-label">Start</label>
+
+                                    <div class="col-xs-9" ng-if="selected.edit">
+                                        <input id="startTime" class="form-control" type="text"
+                                               ng-model="selected.startTime"/>
+                                    </div>
+                                    <div class="col-xs-9" ng-if="!selected.edit">
+                                        <p class="form-control-static">
+                                            {{ selected.startTime }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="endTime" class="col-xs-3 control-label">Koniec</label>
+
+                                    <div class="col-xs-9" ng-if="selected.edit">
+                                        <input id="endTime" class="form-control" type="text"
+                                               ng-model="selected.endTime"/>
+                                    </div>
+                                    <div class="col-xs-9" ng-if="!selected.edit">
+                                        <p class="form-control-static">
+                                            {{ selected.endTime }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-actions" ng-if="selected.edit">
+                                    <div class="col-xs-9 col-xs-offset-3">
+                                        <button class="btn btn-sm btn-primary" ng-click="update(selected)">
+                                            <i class="fa fa-check"></i>
+                                            Zapisz
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="nav-horizontal">
+                                <!--<li ng-if="selected.objectState == 'INACTIVE'">-->
+                                    <!--<a href="javascript:void(0)" class="" ng-click="publish(selected)">-->
+                                        <!--<i class="fa fa-unlock"></i>-->
+                                        <!--Publikuj-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li ng-if="selected.objectState == 'ACTIVE'">-->
+                                    <!--<a href="javascript:void(0)" class="" ng-click="deactivate(selected)">-->
+                                        <!--<i class="fa fa-lock"></i>-->
+                                        <!--Dezaktywuj-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="javascript:void(0)">-->
+                                        <!--<i class="fa fa-pencil-square-o"></i> Zamieść notkę-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                            </ul>
+
+                            <!--<table class="table table-hover">-->
+                                <!--<tbody>-->
+                                <!--<tr ng-repeat="lesson in lessons">-->
+                                    <!--<td ng-bind="lesson.dateTime"></td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -97,114 +229,6 @@
     </div>
 </div>
 
-<div class="col-sm-6" ng-if="selected != null">
-    <div class="block">
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Nazwa</label>
 
-                <div class="col-xs-9">
-                    <p class="form-control-static">
-                        {{ selected.style.name }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="level" class="col-xs-3 control-label">Poziom</label>
-
-                <div class="col-xs-9" ng-if="selected.edit">
-                    <select id="level" ng-model="selected.level" ng-options="l | translate for l in levels"
-                            class="form-control"></select>
-                </div>
-                <div class="col-xs-9" ng-if="!selected.edit">
-                    <p class="form-control-static">
-                        {{ selected.level | translate }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="day" class="col-xs-3 control-label">Dzień</label>
-
-                <div class="col-xs-9" ng-if="selected.edit">
-                    <select id="day" ng-model="selected.day" ng-options="day | translate for day in days"
-                            class="form-control"></select>
-                </div>
-                <div class="col-xs-9" ng-if="!selected.edit">
-                    <p class="form-control-static">
-                        {{ selected.day | translate }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="startTime" class="col-xs-3 control-label">Start</label>
-
-                <div class="col-xs-9" ng-if="selected.edit">
-                    <input id="startTime" class="form-control" type="text" ng-model="selected.startTime"/>
-                </div>
-                <div class="col-xs-9" ng-if="!selected.edit">
-                    <p class="form-control-static">
-                        {{ selected.startTime }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="endTime" class="col-xs-3 control-label">Koniec</label>
-
-                <div class="col-xs-9" ng-if="selected.edit">
-                    <input id="endTime" class="form-control" type="text" ng-model="selected.endTime"/>
-                </div>
-                <div class="col-xs-9" ng-if="!selected.edit">
-                    <p class="form-control-static">
-                        {{ selected.endTime }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group form-actions" ng-if="selected.edit">
-                <div class="col-xs-9 col-xs-offset-3">
-                    <button class="btn btn-sm btn-primary" ng-click="update(selected)">
-                        <i class="fa fa-check"></i>
-                        Zapisz
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="col-sm-6" ng-if="selected != null">
-    <div class="block">
-        <ul class="nav-horizontal">
-            <li ng-if="selected.objectState == 'INACTIVE'">
-                <a href="javascript:void(0)" class="" ng-click="publish(selected)">
-                    <i class="fa fa-unlock"></i>
-                    Publikuj
-                </a>
-            </li>
-            <li ng-if="selected.objectState == 'ACTIVE'">
-                <a href="javascript:void(0)" class="" ng-click="deactivate(selected)">
-                    <i class="fa fa-lock"></i>
-                    Dezaktywuj
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="fa fa-pencil-square-o"></i> Zamieść notkę
-                </a>
-            </li>
-        </ul>
-
-        <table class="table table-hover">
-            <tbody>
-            <tr ng-repeat="lesson in lessons">
-                <td ng-bind="lesson.dateTime"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 </div>
 </div>

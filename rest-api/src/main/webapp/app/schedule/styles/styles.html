@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-editable table-vcenter table-hover">
+            <table class="table table-editable table-hover">
                 <thead>
                 <tr>
                     <th>Nazwa</th>
@@ -55,22 +55,20 @@
                 </tr>
                 </thead>
                 <tbody ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}">
-                <tr ng-click="select(style)" ng-class="{'selected': selected != null && style.sid == selected.sid}">
+                <tr ng-click="select(style)" ng-class="{'selected': isEqual(selected, style)}">
                     <td ng-bind="style.name"></td>
                     <td ng-bind="style.category.name"></td>
                     <td class="text-center object-state">
-                        <div class="themed-border-spring themed-background-spring text-center"
-                             ng-if="style.objectState == 'ACTIVE'">
+                        <div class="themed-border-spring themed-background-spring text-center" ng-if="isActive(style)">
                             <i class="fa fa-check"></i>
                         </div>
-                        <div class="themed-border-fire themed-background-fire text-center"
-                             ng-if="style.objectState == 'INACTIVE'">
+                        <div class="themed-border-fire themed-background-fire text-center" ng-if="!isActive(style)">
                             <i class="fa fa-remove"></i>
                         </div>
                     </td>
                 </tr>
-                <tr class="table-content" ng-if="selected != null && style.sid == selected.sid">
-                    <td colspan="3" style="padding: 0">
+                <tr class="table-content" ng-if="isEqual(selected, style)">
+                    <td colspan="3">
                         <div class="block">
                             <div class="col-sm-6">
                                 <form class="form-horizontal">
@@ -85,10 +83,7 @@
                                             </p>
                                         </div>
                                         <div class="col-xs-9" ng-if="selected.editcategory">
-                                            <select id="category" ng-model="selected.category"
-                                                    ng-options="c.name for c in categories track by c.sid"
-                                                    class="form-control"
-                                                    ng-change="setCategory(selected)"></select>
+                                            <select id="category" ng-model="selected.category" ng-options="c.name for c in categories track by c.sid" class="form-control" ng-change="setCategory(selected)"></select>
                                         </div>
                                     </div>
 
@@ -119,12 +114,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-
-    <div class="col-sm-6" ng-if="selected != null">
-        <div class="block">
-
         </div>
     </div>
 </div>

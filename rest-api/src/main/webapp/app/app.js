@@ -173,6 +173,15 @@ define([
             }
         })
 
+        .run(function ($rootScope) {
+            $rootScope.isActive = function (obj) {
+                return obj.objectState == 'ACTIVE';
+            }
+            $rootScope.isEqual = function (obj1, obj2) {
+                return obj1 != null && obj2.sid == obj1.sid
+            }
+        })
+
 //        .run(function ($rootScope) {
 //            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 //                if (!fromState.abstract) {
