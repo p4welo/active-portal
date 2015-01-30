@@ -2,6 +2,10 @@
     display: none;
 }
 
+#page-content {
+    overflow: auto;
+}
+
 .splash {
     display: none;
 }
@@ -47,7 +51,7 @@ a.sidebar-brand {
     margin-top: 2px;
 }
 
-.table-editable tbody {
+.table-editable > tbody {
     cursor: pointer;
 }
 
