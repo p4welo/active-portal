@@ -77,7 +77,6 @@
         <table class="table table-editable table-hover">
             <thead>
             <tr>
-                <th>Dzień</th>
                 <th>Godziny</th>
                 <th>Nazwa</th>
                 <th>Poziom</th>
@@ -89,7 +88,6 @@
             </thead>
             <tbody ng-repeat="course in classes | filter: { day : day}">
             <tr ng-click="select(course)" ng-class="{'selected': isEqual(selected, course)}">
-                <td>{{course.day | translate}}</td>
                 <td>{{course.startTime}} - {{course.endTime}}</td>
                 <td ng-bind="course.style.name"></td>
                 <td>{{course.level | translate}}</td>
@@ -110,7 +108,7 @@
                 </td>
             </tr>
             <tr class="table-content" ng-if="isEqual(selected, course)">
-                <td colspan="8">
+                <td colspan="7">
                     <div class="block">
                         <div class="col-sm-6">
                             <form class="form-horizontal">
