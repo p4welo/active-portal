@@ -1,15 +1,17 @@
 define([
     'schedule/module',
+    'lodash',
     'schedule/styles/modal/addStyle',
     'services/styleService',
     'services/categoryService',
     'services/notificationService'
-], function (module) {
+], function (module, _) {
 
     module.controller("stylesController", function ($scope, $modal, styleHttpClient, categoryHttpClient, notificationService) {
 
-        var EDIT_STYLE_KEY = 'edit';
-        var EDIT_CATEGORY_KEY = 'editcategory';
+        var CATEGORY_KEY = "category";
+        var NAME_KEY = "name";
+        var OBJECT_PROPERTIES = [CATEGORY_KEY, NAME_KEY];
 
         $scope.styles = styleHttpClient.findAll();
         $scope.categories = categoryHttpClient.findAll();
@@ -35,39 +37,67 @@ define([
                 return;
             }
             $scope.selected = angular.copy(style);
-            $scope.selected[EDIT_STYLE_KEY] = false;
-            $scope.selected[EDIT_CATEGORY_KEY] = false;
-        }
 
-        $scope.editCategory = function (style) {
-            style[EDIT_CATEGORY_KEY] = true;
-            $scope.category = style.category;
+            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
+                $scope.selected[OBJECT_PROPERTIES[i]] = {
+                    value: style[OBJECT_PROPERTIES[i]],
+                    edit: false,
+                    saving: false,
+                    hover: false,
+                    oldVal: {}
+                }
+            }
         }
+        $scope.edit = function (style, property) {
+            style[property].edit = true;
+            style[property].oldVal = style[property].value;
+        }
+        $scope.cancel = function (style, property) {
+            style[property].value = style[property].oldVal;
+            style[property].edit = false;
+            style[property].hover = false;
+        }
+        $scope.save = function (style, property) {
+            style[property].saving = true;
+            if (property == CATEGORY_KEY) {
+                styleHttpClient.setCategory({sid: style.sid}, style.category.value).$promise.then(
+                    function () {
+                        style[property].edit = false;
+                        style[property].saving = false;
+                        style[property].hover = false;
 
-        $scope.setCategory = function (style) {
-            styleHttpClient.setCategory({sid: style.sid}, style.category).$promise.then(
-                function () {
-                    style[EDIT_CATEGORY_KEY] = false;
-                    styleHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.styles = result;
+                        notificationService.success("Pomyślnie zapisano");
+                        styleHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.styles = result;
+                            });
+                    });
+            }
+            else if (property == NAME_KEY){
+                var obj = _.findWhere($scope.styles, {sid: style.sid});
+                obj.name = style.name.value;
+                if (obj != null) {
+                    styleHttpClient.update({ sid: style.sid }, obj).$promise.then(
+                        function () {
+                            style[property].edit = false;
+                            style[property].saving = false;
+                            style[property].hover = false;
+
+                            notificationService.success("Pomyślnie zapisano");
+                            styleHttpClient.findAll().$promise.then(
+                                function (result) {
+                                    $scope.styles = result;
+                                });
                         });
-                    notificationService.success("Pomyślnie zapisano");
-                });
+                }
+            }
         }
-
-        $scope.update = function (style) {
-            delete style[EDIT_STYLE_KEY];
-            delete style[EDIT_CATEGORY_KEY];
-
-            styleHttpClient.update({ sid: style.sid }, style).$promise.then(
-                function () {
-                    notificationService.success("Pomyślnie zapisano");
-                    styleHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.styles = result;
-                        });
-                });
+        $scope.hover = function (style, property) {
+            style[property].hover = true;
+        }
+        $scope.leave = function (style, property) {
+            style[property].hover = false;
         }
     });
-});
+})
+;

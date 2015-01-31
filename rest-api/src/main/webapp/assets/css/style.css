@@ -153,6 +153,9 @@ tr.table-content .block {
 
 .table-hover > tbody > tr.table-content:hover > td {
     background-color: #F2EBED;
-    /*background-color: #fff;*/
     cursor: default;
+}
+
+.btn-link {
+    cursor: pointer;
 }

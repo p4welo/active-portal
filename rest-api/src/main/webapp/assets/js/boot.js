@@ -12,6 +12,7 @@
             require.config({
                 baseUrl: './app',
                 paths: {
+                    'lodash': "../vendor/lodash/lodash.min",
                     'ngResource': "../vendor/angular-resource/angular-resource",
                     'uiRouter': "../vendor/angular-ui-router/release/angular-ui-router",
                     'uiBootstrap': "../vendor/angular-ui-bootstrap/ui-bootstrap-tpls",
