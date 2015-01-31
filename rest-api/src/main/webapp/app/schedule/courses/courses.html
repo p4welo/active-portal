@@ -61,7 +61,12 @@
             </ul>
         </div>
 
-        <table class="table table-editable table-hover">
+        <div class="row text-center" ng-if="courseLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <span>Ładowanie...</span>
+        </div>
+        <p ng-if="!courseLoading && classes.length == 0">Brak wyników spełniających kryteria.</p>
+        <table class="table table-editable table-hover" ng-if="!courseLoading">
             <thead>
             <tr>
                 <th>Godziny</th>

@@ -14,7 +14,13 @@ define([
         var NAME_KEY = "name";
         var OBJECT_PROPERTIES = [CATEGORY_KEY, NAME_KEY];
 
-        $scope.styles = styleHttpClient.findAll();
+        $scope.styleLoading = true;
+        styleHttpClient.findAll().$promise.then(
+            function (result) {
+                $scope.styles = result;
+                $scope.styleLoading = false;
+            }
+        );
         $scope.categories = categoryHttpClient.findAll();
 
         $scope.add = function () {
@@ -71,8 +77,10 @@ define([
                     oldVal: {}
                 }
             }
+            $scope.courseLoading = true;
             styleHttpClient.findCourses({sid: style.sid}).$promise.then(
                 function (result) {
+                    $scope.courseLoading = false;
                     $scope.selected.courses = result;
                 }
             )

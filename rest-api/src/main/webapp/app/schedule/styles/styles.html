@@ -46,7 +46,12 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-editable table-hover">
+            <div class="row text-center" ng-if="styleLoading">
+                <i class="fa fa-spin fa-spinner"></i>
+                <span>Ładowanie...</span>
+            </div>
+            <p ng-if="!styleLoading && styles.length == 0">Brak wyników spełniających kryteria.</p>
+            <table class="table table-editable table-hover" ng-if="!styleLoading">
                 <thead>
                 <tr>
                     <th>Nazwa</th>
@@ -146,7 +151,12 @@
                             </div>
                             <div class="col-sm-6">
                                 <h5>Terminy w grafiku</h5>
-                                <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+                                <div class="row text-center" ng-if="courseLoading">
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                    <span>Ładowanie...</span>
+                                </div>
+                                <p ng-if="!courseLoading && selected.courses.length == 0">Brak wyników spełniających kryteria.</p>
+                                <table class="table table-vcenter table-bordered table-condensed" id="general-table" ng-if="!courseLoading">
                                     <tbody>
                                     <tr ng-repeat="c in selected.courses" class="class-popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
                                         <td>

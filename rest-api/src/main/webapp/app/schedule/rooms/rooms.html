@@ -44,7 +44,12 @@
                 </div>
             </div>
         </div>
-        <table class="table table-editable table-hover">
+        <div class="row text-center" ng-if="roomLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <span>Ładowanie...</span>
+        </div>
+        <p ng-if="!roomLoading && rooms.length == 0">Brak wyników spełniających kryteria.</p>
+        <table class="table table-editable table-hover" ng-if="!roomLoading">
             <thead>
             <tr>
                 <th>Kod</th>

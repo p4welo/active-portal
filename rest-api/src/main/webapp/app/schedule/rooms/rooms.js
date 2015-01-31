@@ -7,7 +7,13 @@ define([
 
     module.controller("roomsController", function ($scope, roomHttpClient, $modal, notificationService) {
 
-        $scope.rooms = roomHttpClient.findAll();
+        $scope.roomLoading = true;
+        roomHttpClient.findAll().$promise.then(
+            function (result) {
+                $scope.rooms = result;
+                $scope.roomLoading = false;
+            }
+        );
 
         $scope.add = function () {
 

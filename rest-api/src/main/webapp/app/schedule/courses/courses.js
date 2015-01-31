@@ -6,8 +6,16 @@ define([
 ], function (module) {
 
     module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal) {
+
+        $scope.courseLoading = true;
+        courseHttpClient.findAll().$promise.then(
+            function (result) {
+                $scope.classes = result;
+                $scope.courseLoading = false;
+            }
+        );
+
         $scope.day = 'PN';
-        $scope.classes = courseHttpClient.findAll();
         $scope.days = [
             "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
         ];

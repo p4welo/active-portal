@@ -6,7 +6,13 @@ define([
 ], function (module) {
 
     module.controller("instructorsController", function ($scope, $modal, instructorHttpClient, notificationService) {
-        $scope.instructors = instructorHttpClient.findAll();
+        $scope.instructorLoading = true;
+        instructorHttpClient.findAll().$promise.then(
+            function (result) {
+                $scope.instructors = result;
+                $scope.instructorLoading = false;
+            }
+        );
         $scope.selectedCourses = [];
 
         $scope.add = function () {
@@ -31,8 +37,10 @@ define([
             }
             $scope.selectedCourses = [];
             $scope.selected = angular.copy(instructor);
+            $scope.courseLoading = true;
             instructorHttpClient.courses({sid: instructor.sid}).$promise.then(
                 function (value) {
+                    $scope.courseLoading = false;
                     $scope.selectedCourses = value;
                 });
             $scope.selected.edit = false;
