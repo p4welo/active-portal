@@ -14,7 +14,8 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="style" ng-model="course.style" ng-options="s.name for s in styles | orderBy: 'name'" class="form-control" required></select>
+                <select id="style" ng-model="course.style" ng-options="s.name for s in styles | orderBy: 'name'"
+                        class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
@@ -24,7 +25,8 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="level" ng-model="course.level" ng-options="l | translate for l in levels" class="form-control" required></select>
+                <select id="level" ng-model="course.level" ng-options="l | translate for l in levels"
+                        class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
@@ -34,7 +36,8 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="day" ng-model="course.day" ng-options="d | translate for d in days" class="form-control" required></select>
+                <select id="day" ng-model="course.day" ng-options="d | translate for d in days" class="form-control"
+                        required></select>
             </div>
         </div>
         <div class="form-group">
@@ -43,8 +46,12 @@
                 <span class="text-danger">*</span>
             </label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="startTime" placeholder="00:00" ng-model="course.startTime" required>
+            <div class="col-xs-4">
+                <select id="startTime" ng-model="start.hours" ng-options="h for h in hours" class="form-control" required></select>
+            </div>
+            <p class="form-control-static col-xs-1">:</p>
+            <div class="col-xs-4">
+                <select ng-model="start.minutes" ng-options="m for m in minutes" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
@@ -53,15 +60,21 @@
                 <span class="text-danger">*</span>
             </label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="endTime" placeholder="00:00" ng-model="course.endTime" required>
+            <div class="col-xs-4">
+                <select id="endTime" ng-model="end.hours" ng-options="h for h in hours" class="form-control" required></select>
+            </div>
+            <p class="form-control-static col-xs-1">:</p>
+            <div class="col-xs-4">
+                <select ng-model="end.minutes" ng-options="m for m in minutes" class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
             <label for="instructor" class="col-sm-3 control-label">Instruktor</label>
 
             <div class="col-sm-9">
-                <select id="instructor" ng-model="course.instructor" ng-options="i.firstName + ' ' + i.lastName for i in instructors | orderBy: 'firstName'" class="form-control"></select>
+                <select id="instructor" ng-model="course.instructor"
+                        ng-options="i.firstName + ' ' + i.lastName for i in instructors | orderBy: 'firstName'"
+                        class="form-control"></select>
             </div>
         </div>
         <div class="form-group">
@@ -71,7 +84,8 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms | orderBy: 'name'" class="form-control" required></select>
+                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms | orderBy: 'name'"
+                        class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
@@ -81,7 +95,8 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="type" ng-model="course.type" ng-options="t | translate for t in types" class="form-control" required></select>
+                <select id="type" ng-model="course.type" ng-options="t | translate for t in types" class="form-control"
+                        required></select>
             </div>
         </div>
 
@@ -95,5 +110,7 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
-    <button ng-click="save(course)" class="btn btn-alt btn-primary" ng-class="{'disabled' : newCourse.$invalid}">Zapisz</button>
+    <button ng-click="save(course)" class="btn btn-alt btn-primary" ng-class="{'disabled' : newCourse.$invalid}">
+        Zapisz
+    </button>
 </div>
