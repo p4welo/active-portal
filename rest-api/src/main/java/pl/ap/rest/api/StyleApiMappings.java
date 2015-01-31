@@ -17,6 +17,8 @@ public interface StyleApiMappings
 
    public static final String DEACTIVATE = STYLE_PREFIX + CommonApiMappings.DEACTIVATE_SUFFIX;
 
+   public static final String FIND_COURSES = STYLE_PREFIX + CommonApiMappings.SID_SUFFIX + "/courses";
+
    public static final String UPDATE = STYLE_PREFIX + CommonApiMappings.UPDATE_SUFFIX;
 
    public static final String DELETE = STYLE_PREFIX + CommonApiMappings.DELETE_SUFFIX;

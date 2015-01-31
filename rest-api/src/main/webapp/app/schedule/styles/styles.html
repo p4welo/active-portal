@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li ng-class="{'disabled': selected == null}">
-                        <a href="javascript:void(0)">
+                        <a href="javascript:void(0)" ng-click="delete(selected)">
                             <i class="fa fa-trash"></i>
                             Usuń
                         </a>
@@ -143,6 +143,29 @@
 
                                     </form>
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>Terminy w grafiku</h5>
+                                <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+                                    <tbody>
+                                    <tr ng-repeat="c in selected.courses" class="class-popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+                                        <td>
+                                            {{c.day | translate}}
+                                        </td>
+                                        <td>
+                                            {{c.startTime}} - {{c.endTime}}
+                                        </td>
+                                        <td>
+                                            {{c.level | translate}}
+                                        </td>
+                                        <td>
+                                            <span ng-if="!c.inProgress && c.canRegister">Zapisy</span>
+                                            <span ng-if="c.inProgress && !c.canJoin">Brak miejsc</span>
+                                            <span ng-if="c.inProgress && c.canJoin">Można dołączyć</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </td>

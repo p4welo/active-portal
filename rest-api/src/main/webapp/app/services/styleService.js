@@ -27,6 +27,11 @@ define([
                 url: "rest/style/:sid/deactivate",
                 method: 'GET'
             },
+            findCourses: {
+                url: "rest/style/:sid/courses",
+                method: 'GET',
+                isArray: true
+            },
             update: {
                 url: "rest/style/:sid",
                 method: 'PUT'

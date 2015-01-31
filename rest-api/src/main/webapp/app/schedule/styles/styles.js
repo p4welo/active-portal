@@ -2,6 +2,7 @@ define([
     'schedule/module',
     'lodash',
     'schedule/styles/modal/addStyle',
+    'schedule/styles/modal/deleteStyle',
     'services/styleService',
     'services/categoryService',
     'services/notificationService'
@@ -30,6 +31,29 @@ define([
                 notificationService.success("Pomyślnie zapisano");
             });
         };
+        $scope.delete = function (style) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/schedule/styles/modal/deleteStyle.html',
+                controller: "deleteStyleController",
+                resolve: {
+                    courses: function () {
+                        return style.courses;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                styleHttpClient.delete({sid: style.sid}).$promise.then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        styleHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.styles = result;
+                            })
+                    }
+                )
+            });
+        }
 
         $scope.select = function (style) {
             if ($scope.selected != null && $scope.selected.sid == style.sid) {
@@ -47,6 +71,11 @@ define([
                     oldVal: {}
                 }
             }
+            styleHttpClient.findCourses({sid: style.sid}).$promise.then(
+                function (result) {
+                    $scope.selected.courses = result;
+                }
+            )
         }
         $scope.edit = function (style, property) {
             style[property].edit = true;
@@ -73,7 +102,7 @@ define([
                             });
                     });
             }
-            else if (property == NAME_KEY){
+            else if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.styles, {sid: style.sid});
                 obj.name = style.name.value;
                 if (obj != null) {

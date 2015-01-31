@@ -4,10 +4,12 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import pl.ap.domain.Course;
 import pl.ap.domain.CourseCategory;
 import pl.ap.domain.CourseStyle;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.StyleApiMappings;
+import pl.ap.service.ICourseService;
 import pl.ap.service.ICourseStyleService;
 
 import javax.annotation.Resource;
@@ -22,6 +24,9 @@ public class StyleController {
 
     @Resource
     private ICourseStyleService styleService;
+
+    @Resource
+    private ICourseService courseService;
 
     @RequestMapping(value = StyleApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -67,6 +72,17 @@ public class StyleController {
         Assert.notNull(style);
 
         return styleService.deactivate(style);
+    }
+
+    @RequestMapping(value = StyleApiMappings.FIND_COURSES, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Course> findCourses(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("findCourses()");
+
+        CourseStyle style = styleService.getBySid(sid);
+        Assert.notNull(style);
+
+        return courseService.findBy(Course.FIELD_STYLE, style);
     }
 
     @RequestMapping(value = StyleApiMappings.SET_CATEGORY, method = RequestMethod.PUT)
