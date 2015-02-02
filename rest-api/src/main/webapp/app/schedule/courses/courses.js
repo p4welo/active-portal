@@ -1,6 +1,7 @@
 define([
     'schedule/module',
     'schedule/courses/modal/addCourse',
+    'schedule/courses/modal/deleteCourse',
     'services/notificationService',
     'services/courseService'
 ], function (module) {
@@ -67,6 +68,26 @@ define([
             $scope.selected = null;
             $scope.day = day;
 
+        }
+
+        $scope.delete = function (course) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/schedule/courses/modal/deleteCourse.html',
+                controller: "deleteCourseController"
+            });
+
+            modalInstance.result.then(function () {
+                $scope.selected = null;
+                courseHttpClient.delete({sid: course.sid}).$promise.then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        courseHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.classes = result;
+                            })
+                    }
+                )
+            });
         }
 
         $scope.deactivate = function (course) {

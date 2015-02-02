@@ -2,9 +2,8 @@ define([
     'schedule/module'
 ], function (module) {
 
-    module.controller('deleteStyleController', function (courses, $scope, $modalInstance) {
+    module.controller('deleteCourseController', function ($scope, $modalInstance) {
 
-        $scope.courses = courses;
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };

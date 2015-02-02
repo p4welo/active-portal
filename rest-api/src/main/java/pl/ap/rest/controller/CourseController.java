@@ -111,7 +111,7 @@ public class CourseController {
 
     @RequestMapping(value = CourseApiMappings.DELETE, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    @Secured("hasRole('ROLE_ADMIN')")
+//    @Secured("hasRole('Administrator')")
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
 
