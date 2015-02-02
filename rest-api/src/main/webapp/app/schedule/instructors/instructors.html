@@ -81,7 +81,9 @@
 
                                 <form class="form-group">
                                     <label for="firstName" class="col-sm-3 control-label"
-                                           ng-click="edit(selected, 'firstName')">Imię</label>
+                                           ng-click="edit(selected, 'firstName')"
+                                           ng-mouseover="hover(selected, 'firstName')"
+                                           ng-mouseleave="leave(selected, 'firstName')">Imię</label>
                                     <div class="col-sm-9" ng-if="!selected.firstName.edit">
                                         <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.firstName.value"
@@ -114,7 +116,9 @@
 
                                 <form class="form-group">
                                     <label for="lastName" class="col-sm-3 control-label"
-                                           ng-click="edit(selected, 'lastName')">Nazwisko</label>
+                                           ng-click="edit(selected, 'lastName')"
+                                           ng-mouseover="hover(selected, 'lastName')"
+                                           ng-mouseleave="leave(selected, 'lastName')">Nazwisko</label>
                                     <div class="col-sm-9" ng-if="!selected.lastName.edit">
                                         <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.lastName.value"
@@ -147,7 +151,8 @@
 
                                 <form class="form-group">
                                     <label for="nick" class="col-sm-3 control-label"
-                                           ng-click="edit(selected, 'nick')">Pseudonim</label>
+                                           ng-click="edit(selected, 'nick')" ng-mouseover="hover(selected, 'nick')"
+                                           ng-mouseleave="leave(selected, 'nick')">Pseudonim</label>
                                     <div class="col-sm-9" ng-if="!selected.nick.edit">
                                         <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.nick.value"

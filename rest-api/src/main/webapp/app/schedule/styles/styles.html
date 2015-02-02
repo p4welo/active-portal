@@ -79,7 +79,9 @@
                                 <div class="form-horizontal">
                                     <form class="form-group">
                                         <label for="category" class="col-sm-3 control-label"
-                                               ng-click="edit(selected, 'category')">Kategoria</label>
+                                               ng-click="edit(selected, 'category')"
+                                               ng-mouseover="hover(selected, 'category')"
+                                               ng-mouseleave="leave(selected, 'category')">Kategoria</label>
 
                                         <div class="col-sm-9" ng-if="!selected.category.edit">
                                             <p class="form-control-static">
@@ -116,7 +118,9 @@
 
                                     <form class="form-group">
                                         <label for="name" class="col-sm-3 control-label"
-                                               ng-click="edit(selected, 'name')">Nazwa</label>
+                                               ng-click="edit(selected, 'name')"
+                                               ng-mouseover="hover(selected, 'name')"
+                                               ng-mouseleave="leave(selected, 'name')">Nazwa</label>
                                         <div class="col-sm-9" ng-if="!selected.name.edit">
                                             <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.name.value"

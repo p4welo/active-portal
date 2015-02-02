@@ -89,7 +89,9 @@
 
                                 <form class="form-group">
                                     <label for="name" class="col-sm-3 control-label"
-                                           ng-click="edit(selected, 'name')">Nazwa</label>
+                                           ng-click="edit(selected, 'name')"
+                                           ng-mouseover="hover(selected, 'name')"
+                                           ng-mouseleave="leave(selected, 'name')">Nazwa</label>
                                     <div class="col-sm-9" ng-if="!selected.name.edit">
                                         <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.name.value"
