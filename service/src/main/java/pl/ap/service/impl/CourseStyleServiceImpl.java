@@ -3,14 +3,17 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IAbstractDao;
+import pl.ap.dao.ICourseDao;
 import pl.ap.dao.ICourseStyleDao;
 import pl.ap.dao.IIdentifiableDao;
+import pl.ap.domain.Course;
 import pl.ap.domain.CourseCategory;
 import pl.ap.domain.CourseStyle;
 import pl.ap.service.ICourseCategoryService;
 import pl.ap.service.ICourseStyleService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by parado on 19.03.14.
@@ -21,6 +24,9 @@ public class CourseStyleServiceImpl extends IdentifiableServiceImpl<CourseStyle>
 
     @Resource
     private ICourseStyleDao styleDao;
+
+    @Resource
+    private ICourseDao courseDao;
 
     @Resource
     private ICourseCategoryService categoryService;
@@ -53,5 +59,11 @@ public class CourseStyleServiceImpl extends IdentifiableServiceImpl<CourseStyle>
         category = categoryService.getBySid(category.getSid());
         style.setCategory(category);
         return super.update(style);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Course> findActiveByStyle(CourseStyle style) {
+        return courseDao.findActiveByStyle(style);
     }
 }

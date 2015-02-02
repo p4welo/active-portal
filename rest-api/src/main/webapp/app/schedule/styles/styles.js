@@ -78,7 +78,7 @@ define([
                 }
             }
             $scope.courseLoading = true;
-            styleHttpClient.findCourses({sid: object.sid}).$promise.then(
+            styleHttpClient.findActiveCourses({sid: object.sid}).$promise.then(
                 function (result) {
                     $scope.courseLoading = false;
                     $scope.selected.courses = result;

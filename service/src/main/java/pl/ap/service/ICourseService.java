@@ -1,6 +1,7 @@
 package pl.ap.service;
 
 import pl.ap.domain.Course;
+import pl.ap.domain.CourseStyle;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.Room;
 import pl.ap.domain.enums.CourseStateEnum;

@@ -2,13 +2,11 @@ package pl.ap.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICourseDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IInstructorDao;
 import pl.ap.domain.Course;
 import pl.ap.domain.Instructor;
-import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.IInstructorService;
 
 import javax.annotation.Resource;
@@ -45,6 +43,6 @@ public class InstructorServiceImpl extends IdentifiableServiceImpl<Instructor> i
     @Override
     @Transactional(readOnly = true)
     public List<Course> findCourses(Instructor instructor) {
-        return courseDao.findByInstructor(instructor);
+        return courseDao.findActiveByInstructor(instructor);
     }
 }

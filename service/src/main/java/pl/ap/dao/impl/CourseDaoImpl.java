@@ -4,10 +4,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.*;
 import org.springframework.stereotype.Repository;
 import pl.ap.dao.ICourseDao;
-import pl.ap.domain.Course;
-import pl.ap.domain.Customer;
-import pl.ap.domain.CustomerSubscription;
-import pl.ap.domain.Instructor;
+import pl.ap.domain.*;
 import pl.ap.domain.enums.ObjectStateEnum;
 
 import java.util.List;
@@ -55,9 +52,10 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     }
 
     @Override
-    public List<Course> findByInstructor(Instructor instructor) {
+    public List<Course> findActiveByInstructor(Instructor instructor) {
         Criteria criteria = createCriteria()
                 .add(Restrictions.eq(Course.FIELD_INSTRUCTOR, instructor))
+                .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))
                 .addOrder(Order.asc(Course.FIELD_DAY))
                 .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
@@ -93,6 +91,16 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
                 .setProjection(Property.forName(CustomerSubscription.FIELD_COURSE + "." + Course.FIELD_ID));
         criteria.add(Subqueries.propertyNotIn(Course.FIELD_ID, customersCourses));
 
+        return criteria.list();
+    }
+
+    @Override
+    public List<Course> findActiveByStyle(CourseStyle style) {
+        Criteria criteria = createCriteria()
+                .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))
+                .add(Restrictions.eq(Course.FIELD_STYLE, style))
+                .addOrder(Order.asc(Course.FIELD_DAY))
+                .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
     }
 }

@@ -85,6 +85,17 @@ public class StyleController {
         return courseService.findBy(Course.FIELD_STYLE, style);
     }
 
+    @RequestMapping(value = StyleApiMappings.FIND_ACTIVE_COURSES, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Course> findActiveCourses(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("findActiveCourses()");
+
+        CourseStyle style = styleService.getBySid(sid);
+        Assert.notNull(style);
+
+        return styleService.findActiveByStyle(style);
+    }
+
     @RequestMapping(value = StyleApiMappings.SET_CATEGORY, method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle setCategory(@RequestBody CourseCategory category, @PathVariable(ApiKeys.SID) String sid) {

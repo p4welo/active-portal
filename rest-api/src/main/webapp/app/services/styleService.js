@@ -32,6 +32,11 @@ define([
                 method: 'GET',
                 isArray: true
             },
+            findActiveCourses: {
+                url: "rest/style/:sid/courses/active",
+                method: 'GET',
+                isArray: true
+            },
             update: {
                 url: "rest/style/:sid",
                 method: 'PUT'
