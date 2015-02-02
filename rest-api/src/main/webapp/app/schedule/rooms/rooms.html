@@ -54,21 +54,12 @@
             <tr>
                 <th>Kod</th>
                 <th>Nazwa</th>
-                <th>Status</th>
             </tr>
             </thead>
             <tbody ng-repeat="room in rooms | filter: filterName">
             <tr ng-click="select(room)" ng-class="{'selected': isEqual(selected, room)}">
                 <td ng-bind="room.code"></td>
                 <td ng-bind="room.name"></td>
-                <td class="text-center object-state">
-                    <div class="themed-border-spring themed-background-spring text-center" ng-if="isActive(room)">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="themed-border-fire themed-background-fire text-center" ng-if="!isActive(room)">
-                        <i class="fa fa-remove"></i>
-                    </div>
-                </td>
             </tr>
             <tr class="table-content" ng-if="isEqual(selected, room)">
                 <td colspan="3">

@@ -56,21 +56,12 @@
                 <tr>
                     <th>Nazwa</th>
                     <th>Kategoria</th>
-                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody ng-repeat="style in styles | orderBy : 'name' | filter: { name : filterName}">
                 <tr ng-click="select(style)" ng-class="{'selected': isEqual(selected, style)}">
                     <td ng-bind="style.name"></td>
                     <td ng-bind="style.category.name"></td>
-                    <td class="text-center object-state">
-                        <div class="themed-border-spring themed-background-spring text-center" ng-if="isActive(style)">
-                            <i class="fa fa-check"></i>
-                        </div>
-                        <div class="themed-border-fire themed-background-fire text-center" ng-if="!isActive(style)">
-                            <i class="fa fa-remove"></i>
-                        </div>
-                    </td>
                 </tr>
                 <tr class="table-content" ng-if="isEqual(selected, style)">
                     <td colspan="3">

@@ -56,7 +56,6 @@
                 <th>Imię</th>
                 <th>Nazwisko</th>
                 <th>Pseudonim</th>
-                <th>Status</th>
             </tr>
             </thead>
             <tbody ng-repeat="instructor in instructors | filter: filterName">
@@ -64,14 +63,6 @@
                 <td ng-bind="instructor.firstName"></td>
                 <td ng-bind="instructor.lastName"></td>
                 <td ng-bind="instructor.nick"></td>
-                <td class="text-center object-state">
-                    <div class="themed-border-spring themed-background-spring text-center" ng-if="isActive(instructor)">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="themed-border-fire themed-background-fire text-center" ng-if="!isActive(instructor)">
-                        <i class="fa fa-remove"></i>
-                    </div>
-                </td>
             </tr>
             <tr class="table-content" ng-if="isEqual(selected, instructor)">
                 <td colspan="4">
@@ -182,51 +173,6 @@
                                         </div>
                                     </div>
                                 </form>
-
-                                <!--<div class="form-group">-->
-                                    <!--<label for="firstName" class="col-xs-3 control-label">Imię</label>-->
-
-                                    <!--<div class="col-xs-9" ng-if="selected.edit">-->
-                                        <!--<input type="text" placeholder="Imię" class="form-control" id="firstName"-->
-                                               <!--ng-model="selected.firstName"/>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-9" ng-if="!selected.edit">-->
-                                        <!--<p class="form-control-static" ng-bind="selected.firstName"></p>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--<div class="form-group">-->
-                                    <!--<label for="lastName" class="col-xs-3 control-label">Nazwisko</label>-->
-
-                                    <!--<div class="col-xs-9" ng-if="selected.edit">-->
-                                        <!--<input type="text" placeholder="Nazwisko" class="form-control" id="lastName"-->
-                                               <!--ng-model="selected.lastName"/>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-9" ng-if="!selected.edit">-->
-                                        <!--<p class="form-control-static" ng-bind="selected.lastName"></p>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--<div class="form-group">-->
-                                    <!--<label for="nick" class="col-xs-3 control-label">Pseudonim</label>-->
-
-                                    <!--<div class="col-xs-9" ng-if="selected.edit">-->
-                                        <!--<input type="text" placeholder="Pseudonim" class="form-control" id="nick"-->
-                                               <!--ng-model="selected.nick"/>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-9" ng-if="!selected.edit">-->
-                                        <!--<p class="form-control-static" ng-bind="selected.nick"></p>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--<div class="form-group form-actions" ng-if="selected.edit">-->
-                                    <!--<div class="col-xs-9 col-xs-offset-3">-->
-                                        <!--<button class="btn btn-sm btn-primary" ng-click="update(selected)">-->
-                                            <!--<i class="fa fa-check"></i>-->
-                                            <!--Zapisz-->
-                                        <!--</button>-->
-                                    <!--</div>-->
-                                <!--</div>-->
                             </div>
                         </div>
                         <div class="col-sm-6">
