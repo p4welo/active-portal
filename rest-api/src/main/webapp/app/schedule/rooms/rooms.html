@@ -74,38 +74,72 @@
                 <td colspan="3">
                     <div class="block">
                         <div class="col-sm-6">
-                            <form class="form-horizontal" method="post">
+                            <div class="form-horizontal" method="post">
 
                                 <div class="form-group">
-                                    <label for="code" class="col-xs-3 control-label">Kod</label>
+                                    <label for="code" class="col-sm-3 control-label">Kod</label>
 
-                                    <div class="col-xs-9" ng-if="selected.edit">
+                                    <div class="col-sm-9" ng-if="selected.edit">
                                         <input type="text" placeholder="Kod" class="form-control" id="code" ng-model="selected.code"/>
                                     </div>
-                                    <div class="col-xs-9" ng-if="!selected.edit">
+                                    <div class="col-sm-9" ng-if="!selected.edit">
                                         <p class="form-control-static" ng-bind="selected.code"></p>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name" class="col-xs-3 control-label">Nazwa</label>
+                                <!--<div class="form-group">-->
+                                    <!--<label for="" class="col-sm-3 control-label">Nazwa</label>-->
 
-                                    <div class="col-xs-9" ng-if="selected.edit">
-                                        <input type="text" placeholder="Nazwa" class="form-control" id="name" ng-model="selected.name"/>
-                                    </div>
-                                    <div class="col-xs-9" ng-if="!selected.edit">
-                                        <p class="form-control-static" ng-bind="selected.name"></p>
-                                    </div>
-                                </div>
+                                    <!--<div class="col-sm-9" ng-if="selected.edit">-->
+                                        <!--<input type="text" placeholder="Nazwa" class="form-control" id="" ng-model="selected.name"/>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-9" ng-if="!selected.edit">-->
+                                        <!--<p class="form-control-static" ng-bind="selected.name"></p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
-                                <div class="form-group form-actions" ng-if="selected.edit">
-                                    <div class="col-xs-9 col-xs-offset-3">
-                                        <button class="btn btn-sm btn-primary" ng-click="update(selected)">
-                                            <i class="fa fa-check"></i>
-                                            Zapisz
-                                        </button>
+                                <form class="form-group">
+                                    <label for="name" class="col-sm-3 control-label"
+                                           ng-click="edit(selected, 'name')">Nazwa</label>
+                                    <div class="col-sm-9" ng-if="!selected.name.edit">
+                                        <p class="form-control-static">
+                                                <span class="btn-link" ng-bind="selected.name.value"
+                                                      ng-click="edit(selected, 'name')"
+                                                      ng-mouseover="hover(selected, 'name')"
+                                                      ng-mouseleave="leave(selected, 'name')"></span>
+                                            <i class="fa fa-edit" ng-show="selected.name.hover"></i>
+                                        </p>
                                     </div>
-                                </div>
-                            </form>
+                                    <div class="col-sm-6" ng-if="selected.name.edit">
+                                        <input type="text" placeholder="Nazwa" class="form-control" id="name"
+                                               ng-model="selected.name.value"/>
+                                    </div>
+                                    <div class="col-sm-3" ng-if="selected.name.edit">
+                                        <div class="btn" ng-if="selected.name.saving">
+                                            <i class="fa fa-spin fa-spinner"></i>
+                                        </div>
+                                        <div ng-if="!selected.name.saving">
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                               ng-click="cancel(selected, 'name')">
+                                                <i class="fa fa-remove"></i>
+                                            </a>
+                                            <button class="btn btn-alt btn-primary"
+                                                    ng-click="save(selected, 'name')">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                <!--<div class="form-group form-actions" ng-if="selected.edit">-->
+                                    <!--<div class="col-xs-9 col-xs-offset-3">-->
+                                        <!--<button class="btn btn-sm btn-primary" ng-click="update(selected)">-->
+                                            <!--<i class="fa fa-check"></i>-->
+                                            <!--Zapisz-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </div>
                         </div>
                     </div>
                 </td>

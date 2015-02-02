@@ -61,16 +61,16 @@ define([
             });
         }
 
-        $scope.select = function (style) {
-            if ($scope.selected != null && $scope.selected.sid == style.sid) {
+        $scope.select = function (object) {
+            if ($scope.selected != null && $scope.selected.sid == object.sid) {
                 $scope.selected = null;
                 return;
             }
-            $scope.selected = angular.copy(style);
+            $scope.selected = angular.copy(object);
 
             for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
                 $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: style[OBJECT_PROPERTIES[i]],
+                    value: object[OBJECT_PROPERTIES[i]],
                     edit: false,
                     saving: false,
                     hover: false,
@@ -78,30 +78,30 @@ define([
                 }
             }
             $scope.courseLoading = true;
-            styleHttpClient.findCourses({sid: style.sid}).$promise.then(
+            styleHttpClient.findCourses({sid: object.sid}).$promise.then(
                 function (result) {
                     $scope.courseLoading = false;
                     $scope.selected.courses = result;
                 }
             )
         }
-        $scope.edit = function (style, property) {
-            style[property].edit = true;
-            style[property].oldVal = style[property].value;
+        $scope.edit = function (object, property) {
+            object[property].edit = true;
+            object[property].oldVal = object[property].value;
         }
-        $scope.cancel = function (style, property) {
-            style[property].value = style[property].oldVal;
-            style[property].edit = false;
-            style[property].hover = false;
+        $scope.cancel = function (object, property) {
+            object[property].value = object[property].oldVal;
+            object[property].edit = false;
+            object[property].hover = false;
         }
-        $scope.save = function (style, property) {
-            style[property].saving = true;
+        $scope.save = function (object, property) {
+            object[property].saving = true;
             if (property == CATEGORY_KEY) {
-                styleHttpClient.setCategory({sid: style.sid}, style.category.value).$promise.then(
+                styleHttpClient.setCategory({sid: object.sid}, object.category.value).$promise.then(
                     function () {
-                        style[property].edit = false;
-                        style[property].saving = false;
-                        style[property].hover = false;
+                        object[property].edit = false;
+                        object[property].saving = false;
+                        object[property].hover = false;
 
                         notificationService.success("Pomyślnie zapisano");
                         styleHttpClient.findAll().$promise.then(
@@ -111,14 +111,14 @@ define([
                     });
             }
             else if (property == NAME_KEY) {
-                var obj = _.findWhere($scope.styles, {sid: style.sid});
-                obj.name = style.name.value;
+                var obj = _.findWhere($scope.styles, {sid: object.sid});
+                obj.name = object.name.value;
                 if (obj != null) {
-                    styleHttpClient.update({ sid: style.sid }, obj).$promise.then(
+                    styleHttpClient.update({ sid: object.sid }, obj).$promise.then(
                         function () {
-                            style[property].edit = false;
-                            style[property].saving = false;
-                            style[property].hover = false;
+                            object[property].edit = false;
+                            object[property].saving = false;
+                            object[property].hover = false;
 
                             notificationService.success("Pomyślnie zapisano");
                             styleHttpClient.findAll().$promise.then(
@@ -129,11 +129,11 @@ define([
                 }
             }
         }
-        $scope.hover = function (style, property) {
-            style[property].hover = true;
+        $scope.hover = function (object, property) {
+            object[property].hover = true;
         }
-        $scope.leave = function (style, property) {
-            style[property].hover = false;
+        $scope.leave = function (object, property) {
+            object[property].hover = false;
         }
     });
 })
