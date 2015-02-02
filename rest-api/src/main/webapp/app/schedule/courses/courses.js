@@ -81,9 +81,11 @@ define([
                 courseHttpClient.delete({sid: course.sid}).$promise.then(
                     function () {
                         notificationService.success("Pomyślnie usunięto");
+                        $scope.courseLoading = true;
                         courseHttpClient.findAll().$promise.then(
                             function (result) {
                                 $scope.classes = result;
+                                $scope.courseLoading = false;
                             })
                     }
                 )
