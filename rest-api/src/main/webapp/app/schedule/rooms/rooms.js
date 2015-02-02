@@ -70,7 +70,7 @@ define([
             object[property].saving = true;
             if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.rooms, {sid: object.sid});
-                obj.name = object.name.value;
+                obj[NAME_KEY] = object[NAME_KEY].value;
                 if (obj != null) {
                     roomHttpClient.update({ sid: object.sid }, obj).$promise.then(
                         function () {
