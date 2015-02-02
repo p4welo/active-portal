@@ -111,7 +111,6 @@ public class CourseController {
 
     @RequestMapping(value = CourseApiMappings.DELETE, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-//    @Secured("hasRole('Administrator')")
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
 
@@ -143,6 +142,18 @@ public class CourseController {
         Assert.notNull(instructor);
 
         return courseService.setInstructor(course, instructor);
+    }
+
+    @RequestMapping(value = CourseApiMappings.SET_STYLE, method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Course setStyle(@RequestBody CourseStyle style, @PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("setCategory()");
+
+        Course course = courseService.getBySid(sid);
+        Assert.notNull(course);
+        Assert.notNull(style);
+
+        return courseService.setStyle(course, style);
     }
 
     @RequestMapping(value = CourseApiMappings.SET_ROOM, method = RequestMethod.PUT)

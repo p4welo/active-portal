@@ -81,6 +81,7 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
         course.setDay(c.getDay());
         course.setStartTime(c.getStartTime());
         course.setEndTime(c.getEndTime());
+        course.setLevel(c.getLevel());
         return super.update(course);
     }
 
@@ -136,6 +137,14 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
             course.setInProgress(true);
             course.setCanJoin(false);
         }
+        return super.update(course);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Course setStyle(Course course, CourseStyle style) {
+        style = styleService.getBySid(style.getSid());
+        course.setStyle(style);
         return super.update(course);
     }
 

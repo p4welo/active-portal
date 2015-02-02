@@ -66,6 +66,10 @@ define([
                 url: "rest/course/:sid/customers",
                 method: 'GET',
                 isArray: true
+            },
+            setStyle: {
+                url: "rest/course/:sid/style",
+                method: "PUT"
             }
         })
     });

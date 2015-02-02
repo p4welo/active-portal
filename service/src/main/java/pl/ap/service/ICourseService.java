@@ -27,4 +27,6 @@ public interface ICourseService extends IIdentifiableService<Course> {
     Course setRoom(Course course, Room room);
 
     Course setState(Course course, CourseStateEnum state);
+
+    Course setStyle(Course course, CourseStyle style);
 }

@@ -3,10 +3,16 @@ define([
     'schedule/courses/modal/addCourse',
     'core/modal/deleteConfirm',
     'services/notificationService',
-    'services/courseService'
+    'services/courseService',
+    'services/styleService'
 ], function (module) {
 
-    module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal) {
+    module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient) {
+
+        var STYLE_KEY = "style";
+        var LEVEL_KEY = "level";
+        var DAY_KEY = "day";
+        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY];
 
         $scope.courseLoading = true;
         courseHttpClient.findAll().$promise.then(
@@ -15,6 +21,7 @@ define([
                 $scope.courseLoading = false;
             }
         );
+        $scope.styles = styleHttpClient.findAll();
 
         $scope.day = 'PN';
         $scope.days = [
@@ -109,7 +116,67 @@ define([
             }
             $scope.selected = angular.copy(course);
             $scope.selected.edit = false;
+
+            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
+                $scope.selected[OBJECT_PROPERTIES[i]] = {
+                    value: course[OBJECT_PROPERTIES[i]],
+                    edit: false,
+                    saving: false,
+                    hover: false,
+                    oldVal: {}
+                }
+            }
+
             $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
+        }
+        $scope.edit = function (object, property) {
+            object[property].edit = true;
+            object[property].oldVal = object[property].value;
+        }
+        $scope.cancel = function (object, property) {
+            object[property].value = object[property].oldVal;
+            object[property].edit = false;
+            object[property].hover = false;
+        }
+        $scope.hover = function (object, property) {
+            object[property].hover = true;
+        }
+        $scope.leave = function (object, property) {
+            object[property].hover = false;
+        }
+        $scope.save = function (course, property) {
+            course[property].saving = true;
+
+            if (property == STYLE_KEY) {
+                courseHttpClient.setStyle({sid: course.sid}, course.style.value).$promise.then(
+                    function () {
+                        course[property].edit = false;
+                        course[property].saving = false;
+                        course[property].hover = false;
+                        courseHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.classes = result;
+                            });
+                        notificationService.success("Pomyślnie zapisano");
+                    });
+            }
+            else {
+                var obj = _.findWhere($scope.classes, {sid: course.sid});
+                obj[property] = course[property].value;
+                if (obj != null) {
+                    courseHttpClient.update({ sid: obj.sid }, obj).$promise.then(
+                        function () {
+                            course[property].edit = false;
+                            course[property].saving = false;
+                            course[property].hover = false;
+                            courseHttpClient.findAll().$promise.then(
+                                function (result) {
+                                    $scope.classes = result;
+                                });
+                            notificationService.success("Pomyślnie zapisano");
+                        });
+                }
+            }
         }
     });
 });

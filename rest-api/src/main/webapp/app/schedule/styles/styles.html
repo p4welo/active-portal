@@ -86,7 +86,7 @@
                                         <div class="col-sm-6" ng-if="selected.category.edit">
                                             <select id="category" ng-model="selected.category.value"
                                                     ng-options="c.name for c in categories track by c.sid"
-                                                    class="form-control" ng-change="setCategory(selected)"
+                                                    class="form-control"
                                                     ng-disabled="selected.category.saving"></select>
 
                                         </div>

@@ -30,6 +30,8 @@ public interface CourseApiMappings {
 
     public static final String SET_ROOM = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/room";
 
+    public static final String SET_STYLE = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/style";
+
     public static final String FIND_LESSONS = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/lessons";
 
     public static final String FIND_CUSTOMERS = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/customers";
