@@ -136,6 +136,16 @@
                         <i class="fa fa-bars fa-fw"></i>
                     </a>
                 </li>
+                <li ng-if="isLocal()">
+                    <a href="javascript:void(0)">
+                        <strong>WERSJA LOKALNA</strong>
+                    </a>
+                </li>
+                <li ng-if="!isLocal()">
+                    <a href="javascript:void(0)">
+                        <strong>WERSJA PRODUKCYJNA</strong>
+                    </a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav-custom pull-right">

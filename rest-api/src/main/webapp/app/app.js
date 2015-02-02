@@ -173,24 +173,15 @@ define([
             }
         })
 
-        .run(function ($rootScope) {
+        .run(function ($rootScope, $location) {
             $rootScope.isActive = function (obj) {
                 return obj.objectState == 'ACTIVE';
             }
             $rootScope.isEqual = function (obj1, obj2) {
                 return obj1 != null && obj2.sid == obj1.sid
             }
+            $rootScope.isLocal = function () {
+                return $location.host()=='localhost'
+            }
         })
-
-//        .run(function ($rootScope) {
-//            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-//                if (!fromState.abstract) {
-//                    if ($("#navbar-collapse-1").hasClass("in")) {
-//                        $("#navbar-collapse-1").removeClass("in");
-//                        $("#navbar-collapse-1").style("height", "1px");
-//                        $("#nav-toggle-button").addClass("collapsed");
-//                    }
-//                }
-//            });
-//        })
 });

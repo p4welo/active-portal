@@ -58,6 +58,26 @@ define([
                 });
         }
 
+        $scope.delete = function (instructor) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/core/modal/deleteConfirm.html',
+                controller: "deleteConfirmDialogController"
+            });
+
+            modalInstance.result.then(function () {
+                $scope.selected = null;
+                instructorHttpClient.delete({sid: instructor.sid}).$promise.then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        instructorHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.instructors = result;
+                            })
+                    }
+                )
+            });
+        }
+
         $scope.resolveStatusCss = function (instructor) {
             return {'label-success': instructor.objectState == 'ACTIVE', 'label-danger': instructor.objectState == 'INACTIVE'}
         }

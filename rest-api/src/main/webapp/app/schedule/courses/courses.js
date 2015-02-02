@@ -1,7 +1,7 @@
 define([
     'schedule/module',
     'schedule/courses/modal/addCourse',
-    'schedule/courses/modal/deleteCourse',
+    'core/modal/deleteConfirm',
     'services/notificationService',
     'services/courseService'
 ], function (module) {
@@ -67,13 +67,12 @@ define([
         $scope.setDay = function (day) {
             $scope.selected = null;
             $scope.day = day;
-
         }
 
         $scope.delete = function (course) {
             var modalInstance = $modal.open({
-                templateUrl: 'app/schedule/courses/modal/deleteCourse.html',
-                controller: "deleteCourseController"
+                templateUrl: 'app/core/modal/deleteConfirm.html',
+                controller: "deleteConfirmDialogController"
             });
 
             modalInstance.result.then(function () {
@@ -81,11 +80,9 @@ define([
                 courseHttpClient.delete({sid: course.sid}).$promise.then(
                     function () {
                         notificationService.success("Pomyślnie usunięto");
-                        $scope.courseLoading = true;
                         courseHttpClient.findAll().$promise.then(
                             function (result) {
                                 $scope.classes = result;
-                                $scope.courseLoading = false;
                             })
                     }
                 )

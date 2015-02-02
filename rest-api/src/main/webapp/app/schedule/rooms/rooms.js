@@ -1,6 +1,7 @@
 define([
     'schedule/module',
     'schedule/rooms/modal/addRoom',
+    'core/modal/deleteConfirm',
     'services/notificationService',
     'services/roomService'
 ], function (module) {
@@ -16,7 +17,6 @@ define([
         );
 
         $scope.add = function () {
-
             var modalInstance = $modal.open({
                 templateUrl: 'app/schedule/rooms/modal/addRoom.html',
                 controller: "addRoomController"
@@ -50,6 +50,26 @@ define([
                             $scope.rooms = result;
                         });
                 });
+        }
+
+        $scope.delete = function (room) {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/core/modal/deleteConfirm.html',
+                controller: "deleteConfirmDialogController"
+            });
+
+            modalInstance.result.then(function () {
+                $scope.selected = null;
+                roomHttpClient.delete({sid: room.sid}).$promise.then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        roomHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.rooms = result;
+                            })
+                    }
+                )
+            });
         }
 
         $scope.resolveStatusCss = function (room) {

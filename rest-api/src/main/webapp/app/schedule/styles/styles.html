@@ -90,14 +90,14 @@
                                                 <i class="fa fa-edit" ng-show="selected.category.hover"></i>
                                             </p>
                                         </div>
-                                        <div class="col-sm-7" ng-if="selected.category.edit">
+                                        <div class="col-sm-6" ng-if="selected.category.edit">
                                             <select id="category" ng-model="selected.category.value"
                                                     ng-options="c.name for c in categories track by c.sid"
                                                     class="form-control" ng-change="setCategory(selected)"
                                                     ng-disabled="selected.category.saving"></select>
 
                                         </div>
-                                        <div class="col-sm-2" ng-if="selected.category.edit">
+                                        <div class="col-sm-3" ng-if="selected.category.edit">
                                             <div class="btn" ng-if="selected.category.saving">
                                                 <i class="fa fa-spin fa-spinner"></i>
                                             </div>
@@ -126,11 +126,11 @@
                                                 <i class="fa fa-edit" ng-show="selected.name.hover"></i>
                                             </p>
                                         </div>
-                                        <div class="col-sm-7" ng-if="selected.name.edit">
+                                        <div class="col-sm-6" ng-if="selected.name.edit">
                                             <input type="text" placeholder="Nazwa" class="form-control" id="name"
                                                    ng-model="selected.name.value"/>
                                         </div>
-                                        <div class="col-sm-2" ng-if="selected.name.edit">
+                                        <div class="col-sm-3" ng-if="selected.name.edit">
                                             <div class="btn" ng-if="selected.name.saving">
                                                 <i class="fa fa-spin fa-spinner"></i>
                                             </div>
