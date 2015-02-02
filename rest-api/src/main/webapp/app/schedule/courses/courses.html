@@ -22,6 +22,18 @@
                         <i class="fa fa-plus-circle"></i> Dodaj zajęcia
                     </a>
                 </li>
+                <li ng-class="{'disabled': selected == null || isActive(selected)}">
+                    <a href="javascript:void(0)" ng-click="publish(selected)">
+                        <i class="fa fa-eye"></i>
+                        Publikuj
+                    </a>
+                </li>
+                <li ng-class="{'disabled': selected == null || !isActive(selected)}">
+                    <a href="javascript:void(0)" ng-click="deactivate(selected)">
+                        <i class="fa fa-eye-slash"></i>
+                        Ukryj
+                    </a>
+                </li>
                 <li ng-class="{'disabled': selected == null}">
                     <a href="javascript:void(0)">
                         <i class="fa fa-trash"></i>
