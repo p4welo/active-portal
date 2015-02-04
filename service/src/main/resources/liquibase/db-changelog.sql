@@ -434,10 +434,21 @@ RENAME TABLE course_unit TO course_lesson;
 
 --changeset pawel:34
 CREATE TABLE customer_contact_data (
-  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  type INT(4) NOT NULL,
-  value VARCHAR(255) NOT NULL,
-  customer_id INT(11) NOT NULL,
-  FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type INT(4) NOT NULL,
+value VARCHAR(255) NOT NULL,
+customer_id INT(11) NOT NULL,
+FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE customer_contact_data ADD INDEX customer_contact_data_customer_idx (customer_id);
+
+--changeset pawel:35
+CREATE TABLE course_instructor_relation (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  course_id INT(11) NOT NULL,
+  instructor_id INT(11) NOT NULL,
+  FOREIGN KEY course_fk (course_id) REFERENCES course(id) ON DELETE CASCADE,
+  FOREIGN KEY instructor_fk (instructor_id) REFERENCES instructor(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE course_instructor_relation ADD INDEX course_instructor_relation_course_idx (course_id);
+ALTER TABLE course_instructor_relation ADD INDEX course_instructor_relation_instructor_idx (instructor_id);

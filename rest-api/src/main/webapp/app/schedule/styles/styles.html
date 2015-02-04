@@ -161,9 +161,9 @@
                                     <span>Ładowanie...</span>
                                 </div>
                                 <p ng:if="!courseLoading && selected.courses.length == 0">Brak wyników spełniających kryteria.</p>
-                                <table class="table table-vcenter table-bordered table-condensed" id="general-table" ng:if="!courseLoading">
+                                <table class="table table-bordered table-condensed" id="general-table" ng:if="!courseLoading">
                                     <tbody>
-                                    <tr ng:repeat="c in selected.courses" class="class-popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+                                    <tr ng:repeat="c in selected.courses">
                                         <td>
                                             {{c.day | translate}}
                                         </td>

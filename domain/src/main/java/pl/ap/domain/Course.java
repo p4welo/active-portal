@@ -1,5 +1,7 @@
 package pl.ap.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.CourseLevelEnum;
@@ -7,6 +9,7 @@ import pl.ap.domain.enums.DayEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by parado on 18.03.14.
@@ -88,12 +91,27 @@ public class Course extends IdentifiableEntity {
     @JoinColumn(name = "room_id", nullable = true)
     private Room room;
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name="course_instructor_relation",
+            joinColumns={@JoinColumn(name="course_id")},
+            inverseJoinColumns={@JoinColumn(name="instructor_id")})
+    private List<Instructor> instructors;
+
     public Boolean getCanJoin() {
         return canJoin;
     }
 
     public void setCanJoin(Boolean canJoin) {
         this.canJoin = canJoin;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
     }
 
     public Boolean getCanRegister() {
