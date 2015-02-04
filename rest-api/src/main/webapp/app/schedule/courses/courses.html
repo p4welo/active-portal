@@ -81,16 +81,48 @@
 <table class="table table-editable table-hover" ng:if="!courseLoading">
 <thead>
 <tr>
-    <th>Godziny</th>
-    <th>Nazwa</th>
-    <th>Poziom</th>
-    <th>Sala</th>
-    <th>Instruktor</th>
-    <th>Dostępność</th>
-    <th>Status</th>
+    <th>
+        <a href="javascript:void(0)" ng:click="toggleSort('startTime')">
+            Godziny
+            <i ng:class="sortIcon('startTime')"></i>
+        </a>
+    </th>
+    <th>
+        <a href="javascript:void(0)" ng:click="toggleSort('style.name')">
+            Nazwa
+            <i ng:class="sortIcon('style.name')"></i>
+        </a>
+    </th>
+    <th>
+        <a href="javascript:void(0)" ng:click="toggleSort('level')">
+            Poziom
+            <i ng:class="sortIcon('level')"></i>
+        </a>
+    </th>
+    <th>
+        <a href="javascript:void(0)" ng:click="toggleSort('room.name')">
+            Sala
+            <i ng:class="sortIcon('room.name')"></i>
+        </a>
+    </th>
+    <th>
+        <a href="javascript:void(0)" ng:click="toggleSort('instructor.firstName')">
+            Instruktor
+            <i ng:class="sortIcon('instructor.firstName')"></i>
+        </a>
+    </th>
+    <th>
+        Dostępność
+    </th>
+    <th>
+        <a href="javascript:void(0)" ng:click="toggleSort('objectState')">
+            Status
+            <i ng:class="sortIcon('objectState')"></i>
+        </a>
+    </th>
 </tr>
 </thead>
-<tbody ng:repeat="course in classes | filter: { day : day}">
+<tbody ng:repeat="course in classes | filter: { day : day} | orderBy:sort.column:sort.descending">
 <tr ng:click="select(course)" ng:class="{'selected': isEqual(selected, course)}">
     <td>{{course.startTime}} - {{course.endTime}}</td>
     <td ng:bind="course.style.name"></td>
@@ -250,18 +282,18 @@
             <!--</div>-->
 
             <!--<div class="form-group">-->
-                <!--<label for="day" class="col-xs-3 control-label">Dzień</label>-->
+            <!--<label for="day" class="col-xs-3 control-label">Dzień</label>-->
 
-                <!--<div class="col-xs-9" ng:if="selected.edit">-->
-                    <!--<select id="day" ng:model="selected.day"-->
-                            <!--ng-options="day | translate for day in days"-->
-                            <!--class="form-control"></select>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-                    <!--<p class="form-control-static">-->
-                        <!--{{ selected.day | translate }}-->
-                    <!--</p>-->
-                <!--</div>-->
+            <!--<div class="col-xs-9" ng:if="selected.edit">-->
+            <!--<select id="day" ng:model="selected.day"-->
+            <!--ng-options="day | translate for day in days"-->
+            <!--class="form-control"></select>-->
+            <!--</div>-->
+            <!--<div class="col-xs-9" ng:if="!selected.edit">-->
+            <!--<p class="form-control-static">-->
+            <!--{{ selected.day | translate }}-->
+            <!--</p>-->
+            <!--</div>-->
             <!--</div>-->
 
             <div class="form-group">

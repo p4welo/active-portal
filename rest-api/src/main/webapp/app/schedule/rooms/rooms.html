@@ -52,11 +52,21 @@
         <table class="table table-editable table-hover" ng:if="!roomLoading">
             <thead>
             <tr>
-                <th>Kod</th>
-                <th>Nazwa</th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('code')">
+                        Kod
+                        <i ng:class="sortIcon('code')"></i>
+                    </a>
+                </th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('name')">
+                        Nazwa
+                        <i ng:class="sortIcon('name')"></i>
+                    </a>
+                </th>
             </tr>
             </thead>
-            <tbody ng:repeat="room in rooms | filter: filterName">
+            <tbody ng:repeat="room in rooms | filter: filterName | orderBy:sort.column:sort.descending">
             <tr ng:click="select(room)" ng:class="{'selected': isEqual(selected, room)}">
                 <td ng:bind="room.code"></td>
                 <td ng:bind="room.name"></td>

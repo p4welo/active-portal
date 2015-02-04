@@ -11,6 +11,7 @@ define([
         var NAME_KEY = "name";
         var OBJECT_PROPERTIES = [NAME_KEY];
 
+        // =======================================
         $scope.roomLoading = true;
         roomHttpClient.findAll().$promise.then(
             function (result) {
@@ -18,7 +19,29 @@ define([
                 $scope.roomLoading = false;
             }
         );
+        // =======================================
+        $scope.sort = {
+            column: 'code',
+            descending: false
+        };
+        $scope.toggleSort = function(column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
+        };
+        $scope.sortIcon = function (column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                return sort.descending ? "fa fa-caret-down" : "fa fa-caret-up";
+            }
+            return "";
+        }
 
+        // =======================================
         $scope.add = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/schedule/rooms/modal/addRoom.html',
@@ -33,7 +56,7 @@ define([
                     });
             });
         }
-
+        // =======================================
         $scope.select = function (room) {
             if ($scope.selected != null && $scope.selected.sid == room.sid) {
                 $scope.selected = null;
@@ -88,18 +111,7 @@ define([
             }
         }
 
-//        $scope.update = function (room) {
-//            delete room['edit'];
-//            roomHttpClient.update({ sid: room.sid }, room).$promise.then(
-//                function () {
-//                    notificationService.success("Pomyślnie zapisano");
-//                    roomHttpClient.findAll().$promise.then(
-//                        function (result) {
-//                            $scope.rooms = result;
-//                        });
-//                });
-//        }
-
+        // =======================================
         $scope.delete = function (room) {
             var modalInstance = $modal.open({
                 templateUrl: 'app/core/modal/deleteConfirm.html',
@@ -118,10 +130,6 @@ define([
                     }
                 )
             });
-        }
-
-        $scope.resolveStatusCss = function (room) {
-            return {'label-success': room.objectState == 'ACTIVE', 'label-danger': room.objectState == 'INACTIVE'}
         }
     });
 });

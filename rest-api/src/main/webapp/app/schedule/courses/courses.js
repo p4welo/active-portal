@@ -31,6 +31,30 @@ define([
             "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
         ];
 
+        // =======================================
+        $scope.sort = {
+            column: 'startTime',
+            descending: false
+        };
+        $scope.toggleSort = function(column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
+        };
+        $scope.sortIcon = function (column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                return sort.descending ? "fa fa-caret-down" : "fa fa-caret-up";
+            }
+            return "";
+        }
+
+        // =======================================
+
         $scope.add = function () {
             var modalInstance = $modal.open(
                 {

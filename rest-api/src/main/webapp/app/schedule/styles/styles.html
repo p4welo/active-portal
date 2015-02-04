@@ -54,11 +54,21 @@
             <table class="table table-editable table-hover" ng:if="!styleLoading">
                 <thead>
                 <tr>
-                    <th>Nazwa</th>
-                    <th>Kategoria</th>
+                    <th>
+                        <a href="javascript:void(0)" ng:click="toggleSort('name')">
+                            Nazwa
+                            <i ng:class="sortIcon('name')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng:click="toggleSort('category.name')">
+                            Kategoria
+                            <i ng:class="sortIcon('category.name')"></i>
+                        </a>
+                    </th>
                 </tr>
                 </thead>
-                <tbody ng:repeat="style in styles | orderBy : 'name' | filter: { name : filterName}">
+                <tbody ng:repeat="style in styles | filter: { name : filterName} | orderBy:sort.column:sort.descending">
                 <tr ng:click="select(style)" ng:class="{'selected': isEqual(selected, style)}">
                     <td ng:bind="style.name"></td>
                     <td ng:bind="style.category.name"></td>
