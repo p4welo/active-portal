@@ -12,6 +12,7 @@ define([
         var NICK_KEY = "nick";
         var OBJECT_PROPERTIES = [FIRST_NAME_KEY, LAST_NAME_KEY, NICK_KEY];
 
+        // =======================================
         $scope.instructorLoading = true;
         instructorHttpClient.findAll().$promise.then(
             function (result) {
@@ -19,8 +20,31 @@ define([
                 $scope.instructorLoading = false;
             }
         );
-        $scope.selectedCourses = [];
 
+        // =======================================
+        $scope.sort = {
+            column: 'firstName',
+            descending: false
+        };
+        $scope.toggleSort = function(column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
+        };
+        $scope.sortIcon = function (column) {
+            var sort = $scope.sort;
+            if (sort.column == column) {
+                return sort.descending ? "fa fa-caret-down" : "fa fa-caret-up";
+            }
+            return "";
+        }
+
+        // =======================================
+        $scope.selectedCourses = [];
         $scope.add = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/schedule/instructors/modal/addInstructor.html',
@@ -36,6 +60,7 @@ define([
             });
         }
 
+        // =======================================
         $scope.select = function (instructor) {
             if ($scope.selected != null && $scope.selected.sid == instructor.sid) {
                 $scope.selected = null;
@@ -96,18 +121,7 @@ define([
             }
         }
 
-        $scope.update = function (instructor) {
-            delete instructor['edit'];
-            instructorHttpClient.update({ sid: instructor.sid }, instructor).$promise.then(
-                function () {
-                    notificationService.success("Pomyślnie zapisano");
-                    instructorHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.instructors = result;
-                        });
-                });
-        }
-
+        // =======================================
         $scope.delete = function (instructor) {
             var modalInstance = $modal.open({
                 templateUrl: 'app/core/modal/deleteConfirm.html',

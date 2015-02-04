@@ -53,22 +53,31 @@
         <table class="table table-editable table-hover" ng:if="!instructorLoading">
             <thead>
             <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Pseudonim</th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('firstName')">
+                        Imię
+                        <i ng:class="sortIcon('firstName')"></i>
+                    </a>
+                </th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('lastName')">
+                        Nazwisko
+                        <i ng:class="sortIcon('lastName')"></i>
+                    </a>
+                </th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('nick')">
+                        Pseudonim
+                        <i ng:class="sortIcon('nick')"></i>
+                    </a>
+                </th>
             </tr>
             </thead>
-            <tbody ng:repeat="instructor in instructors | filter: filterName">
+            <tbody ng:repeat="instructor in instructors | filter: filterName | orderBy:sort.column:sort.descending">
             <tr ng:click="select(instructor)" ng:class="{'selected': isEqual(selected, instructor)}">
-                <td>
-                    <a ng:bind="instructor.firstName" href="javacript:void(0)"></a>
-                </td>
-                <td>
-                    <a ng:bind="instructor.lastName" href="javacript:void(0)"></a>
-                </td>
-                <td>
-                    <a ng:bind="instructor.nick" href="javacript:void(0)"></a>
-                </td>
+                <td ng:bind="instructor.firstName"></td>
+                <td ng:bind="instructor.lastName"></td>
+                <td ng:bind="instructor.nick"></td>
             </tr>
             <tr class="table-content" ng:if="isEqual(selected, instructor)">
                 <td colspan="4">
