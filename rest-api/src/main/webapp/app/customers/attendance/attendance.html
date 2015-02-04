@@ -21,7 +21,7 @@
 
     <div class="row customer-presence">
         <div class="col-sm-4 col-lg-3">
-            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)" ng-click="sellPass()">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)" ng:click="sellPass()">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-flatie animation-fadeIn">
                         <i class="fa fa-credit-card"></i>
@@ -35,7 +35,7 @@
             </a>
         </div>
         <div class="col-sm-4 col-lg-3">
-            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)" ng-click="checkByPass()">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)" ng:click="checkByPass()">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
                         <i class="fa fa-barcode"></i>
@@ -49,7 +49,7 @@
             </a>
         </div>
         <div class="col-sm-4 col-lg-3">
-            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)" ng-click="checkByCustomer()">
+            <a class="widget widget-hover-effect1 customer-record" href="javascript:void(0)" ng:click="checkByCustomer()">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
                         <i class="fa fa-paw"></i>
@@ -83,26 +83,26 @@
             <div class="table-options clearfix">
 
                 <ul class="nav nav-pills day-select">
-                    <li ng-class="{'active' : day=='PN'}">
-                        <a ng-click="setDay('PN')">Poniedziałek</a>
+                    <li ng:class="{'active' : day=='PN'}">
+                        <a ng:click="setDay('PN')">Poniedziałek</a>
                     </li>
-                    <li ng-class="{'active' : day=='WT'}">
-                        <a ng-click="setDay('WT')">Wtorek</a>
+                    <li ng:class="{'active' : day=='WT'}">
+                        <a ng:click="setDay('WT')">Wtorek</a>
                     </li>
-                    <li ng-class="{'active' : day=='SR'}">
-                        <a ng-click="setDay('SR')">Środa</a>
+                    <li ng:class="{'active' : day=='SR'}">
+                        <a ng:click="setDay('SR')">Środa</a>
                     </li>
-                    <li ng-class="{'active' : day=='CZ'}">
-                        <a ng-click="setDay('CZ')">Czwartek</a>
+                    <li ng:class="{'active' : day=='CZ'}">
+                        <a ng:click="setDay('CZ')">Czwartek</a>
                     </li>
-                    <li ng-class="{'active' : day=='PT'}">
-                        <a ng-click="setDay('PT')">Piątek</a>
+                    <li ng:class="{'active' : day=='PT'}">
+                        <a ng:click="setDay('PT')">Piątek</a>
                     </li>
-                    <li ng-class="{'active' : day=='SB'}">
-                        <a ng-click="setDay('SB')">Sobota</a>
+                    <li ng:class="{'active' : day=='SB'}">
+                        <a ng:click="setDay('SB')">Sobota</a>
                     </li>
-                    <li ng-class="{'active' : day=='ND'}">
-                        <a ng-click="setDay('ND')">Niedziela</a>
+                    <li ng:class="{'active' : day=='ND'}">
+                        <a ng:click="setDay('ND')">Niedziela</a>
                     </li>
                 </ul>
             </div>
@@ -118,11 +118,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="course in courses | filter: { day : day}" ng-click="selectCourse(course)"
-                    ng-class="{'selected': selectedCourse != null && course.sid == selectedCourse.sid}">
+                <tr ng:repeat="course in courses | filter: { day : day}" ng:click="selectCourse(course)"
+                    ng:class="{'selected': selectedCourse != null && course.sid == selectedCourse.sid}">
                     <td>{{course.day | translate}}</td>
                     <td>{{course.startTime}} - {{course.endTime}}</td>
-                    <td ng-bind="course.style.name"></td>
+                    <td ng:bind="course.style.name"></td>
                     <td>{{course.room.name | translate}}</td>
                     <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
                 </tr>
@@ -131,29 +131,29 @@
         </div>
     </div>
 
-    <div class="row col-sm-12" ng-if="selectedCourse != null">
+    <div class="row col-sm-12" ng:if="selectedCourse != null">
         <div class="col-sm-4 col-lg-3">
             <div class="block full">
                 <div class="block-title">
                     <h2>Ostatnie zajęcia</h2>
                 </div>
                 <div class="list-group">
-                    <a href="javascript:void(0)" class="list-group-item" ng-repeat="lesson in lessons"
-                       ng-click="selectLesson(lesson)"
-                       ng-class="{'selected': selectedLesson != null && course.sid == selectedLesson.sid}">
-                        <h4 class="list-group-item-heading" ng-bind="lesson.dateTime"></h4>
+                    <a href="javascript:void(0)" class="list-group-item" ng:repeat="lesson in lessons"
+                       ng:click="selectLesson(lesson)"
+                       ng:class="{'selected': selectedLesson != null && course.sid == selectedLesson.sid}">
+                        <h4 class="list-group-item-heading" ng:bind="lesson.dateTime"></h4>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-8 col-lg-9" ng-if="selectedLesson!=null">
+        <div class="col-sm-8 col-lg-9" ng:if="selectedLesson!=null">
             <div class="block">
                 <div class="block-title">
                     <h2>Obecność</h2>
                 </div>
                 <div class="tab-content">
                     <ul>
-                        <li ng-repeat="p in presence">{{p.customer.firstName}}</li>
+                        <li ng:repeat="p in presence">{{p.customer.firstName}}</li>
                     </ul>
                 </div>
             </div>

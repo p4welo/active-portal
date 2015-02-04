@@ -17,13 +17,13 @@
                  class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="javascript:void(0)" ng-click="add()">
+                        <a href="javascript:void(0)" ng:click="add()">
                             <i class="fa fa-plus-circle"></i>
                             Dodaj pomieszczenie
                         </a>
                     </li>
-                    <li ng-class="{'disabled': selected == null}">
-                        <a href="javascript:void(0)" ng-click="delete(selected)">
+                    <li ng:class="{'disabled': selected == null}">
+                        <a href="javascript:void(0)" ng:click="delete(selected)">
                             <i class="fa fa-trash"></i>
                             Usuń
                         </a>
@@ -37,31 +37,31 @@
         <div class="table-options clearfix">
             <div class="col-xs-6 col-sm-4 pull-right">
                 <div class="input-group">
-                    <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control">
+                    <input type="text" ng:model="filterName" placeholder="Szukaj..." class="form-control">
                     <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                     </span>
                 </div>
             </div>
         </div>
-        <div class="row text-center" ng-if="roomLoading">
+        <div class="row text-center" ng:if="roomLoading">
             <i class="fa fa-spin fa-spinner"></i>
             <span>Ładowanie...</span>
         </div>
-        <p ng-if="!roomLoading && rooms.length == 0">Brak wyników spełniających kryteria.</p>
-        <table class="table table-editable table-hover" ng-if="!roomLoading">
+        <p ng:if="!roomLoading && rooms.length == 0">Brak wyników spełniających kryteria.</p>
+        <table class="table table-editable table-hover" ng:if="!roomLoading">
             <thead>
             <tr>
                 <th>Kod</th>
                 <th>Nazwa</th>
             </tr>
             </thead>
-            <tbody ng-repeat="room in rooms | filter: filterName">
-            <tr ng-click="select(room)" ng-class="{'selected': isEqual(selected, room)}">
-                <td ng-bind="room.code"></td>
-                <td ng-bind="room.name"></td>
+            <tbody ng:repeat="room in rooms | filter: filterName">
+            <tr ng:click="select(room)" ng:class="{'selected': isEqual(selected, room)}">
+                <td ng:bind="room.code"></td>
+                <td ng:bind="room.name"></td>
             </tr>
-            <tr class="table-content" ng-if="isEqual(selected, room)">
+            <tr class="table-content" ng:if="isEqual(selected, room)">
                 <td colspan="3">
                     <div class="block">
                         <div class="col-sm-6">
@@ -70,43 +70,43 @@
                                 <div class="form-group">
                                     <label for="code" class="col-sm-3 control-label">Kod</label>
 
-                                    <div class="col-sm-9" ng-if="selected.edit">
-                                        <input type="text" placeholder="Kod" class="form-control" id="code" ng-model="selected.code"/>
+                                    <div class="col-sm-9" ng:if="selected.edit">
+                                        <input type="text" placeholder="Kod" class="form-control" id="code" ng:model="selected.code"/>
                                     </div>
-                                    <div class="col-sm-9" ng-if="!selected.edit">
-                                        <p class="form-control-static" ng-bind="selected.code"></p>
+                                    <div class="col-sm-9" ng:if="!selected.edit">
+                                        <p class="form-control-static" ng:bind="selected.code"></p>
                                     </div>
                                 </div>
 
                                 <form class="form-group">
                                     <label for="name" class="col-sm-3 control-label"
-                                           ng-click="edit(selected, 'name')"
-                                           ng-mouseover="hover(selected, 'name')"
-                                           ng-mouseleave="leave(selected, 'name')">Nazwa</label>
-                                    <div class="col-sm-9" ng-if="!selected.name.edit">
+                                           ng:click="edit(selected, 'name')"
+                                           ng:mouseover="hover(selected, 'name')"
+                                           ng:mouseleave="leave(selected, 'name')">Nazwa</label>
+                                    <div class="col-sm-9" ng:if="!selected.name.edit">
                                         <p class="form-control-static">
-                                                <span class="btn-link" ng-bind="selected.name.value"
-                                                      ng-click="edit(selected, 'name')"
-                                                      ng-mouseover="hover(selected, 'name')"
-                                                      ng-mouseleave="leave(selected, 'name')"></span>
-                                            <i class="fa fa-edit" ng-show="selected.name.hover"></i>
+                                                <span class="btn-link" ng:bind="selected.name.value"
+                                                      ng:click="edit(selected, 'name')"
+                                                      ng:mouseover="hover(selected, 'name')"
+                                                      ng:mouseleave="leave(selected, 'name')"></span>
+                                            <i class="fa fa-edit" ng:show="selected.name.hover"></i>
                                         </p>
                                     </div>
-                                    <div class="col-sm-6" ng-if="selected.name.edit">
+                                    <div class="col-sm-6" ng:if="selected.name.edit">
                                         <input type="text" placeholder="Nazwa" class="form-control" id="name"
-                                               ng-model="selected.name.value"/>
+                                               ng:model="selected.name.value"/>
                                     </div>
-                                    <div class="col-sm-3" ng-if="selected.name.edit">
-                                        <div class="btn" ng-if="selected.name.saving">
+                                    <div class="col-sm-3" ng:if="selected.name.edit">
+                                        <div class="btn" ng:if="selected.name.saving">
                                             <i class="fa fa-spin fa-spinner"></i>
                                         </div>
-                                        <div ng-if="!selected.name.saving">
+                                        <div ng:if="!selected.name.saving">
                                             <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                               ng-click="cancel(selected, 'name')">
+                                               ng:click="cancel(selected, 'name')">
                                                 <i class="fa fa-remove"></i>
                                             </a>
                                             <button class="btn btn-alt btn-primary"
-                                                    ng-click="save(selected, 'name')">
+                                                    ng:click="save(selected, 'name')">
                                                 <i class="fa fa-check"></i>
                                             </button>
                                         </div>

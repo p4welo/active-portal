@@ -1,10 +1,10 @@
 <div class="modal-header">
-    <button type="button" class="close" ng-click="cancel()">
+    <button type="button" class="close" ng:click="cancel()">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
-    <h4 class="modal-title" ng-if="page==0">Dodaj nowego klienta</h4>
-    <h4 class="modal-title" ng-if="page==1">Dopisz do zajęć -
+    <h4 class="modal-title" ng:if="page==0">Dodaj nowego klienta</h4>
+    <h4 class="modal-title" ng:if="page==1">Dopisz do zajęć -
             <strong>
                 {{customer.firstName}}
                 {{customer.lastName}}
@@ -13,7 +13,7 @@
 </div>
 
         <!--PAGE 0-->
-<div class="modal-body" ng-if="page==0">
+<div class="modal-body" ng:if="page==0">
     <div class="wizard-steps">
         <div class="row">
             <div class="col-xs-6 active">
@@ -33,7 +33,7 @@
 
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="newFirstName" placeholder="Imię"
-                       ng-model="customer.firstName" required/>
+                       ng:model="customer.firstName" required/>
             </div>
         </div>
         <div class="form-group">
@@ -44,7 +44,7 @@
 
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko"
-                       ng-model="customer.lastName" required/>
+                       ng:model="customer.lastName" required/>
             </div>
         </div>
         <div class="form-group">
@@ -54,7 +54,7 @@
             </label>
 
             <div class="col-sm-8">
-                <select ng-model="customer.gender" class="form-control" id="newGender" required>
+                <select ng:model="customer.gender" class="form-control" id="newGender" required>
                     <option value="MALE">{{ 'MALE' | translate }}</option>
                     <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
                 </select>
@@ -66,7 +66,7 @@
             </label>
 
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng-model="customer.mobile" required>
+                <input type="text" class="form-control" id="newMobile" placeholder="Telefon" ng:model="customer.mobile" required>
             </div>
         </div>
         <div class="form-group">
@@ -74,7 +74,7 @@
             </label>
 
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="newMobile2" placeholder="Telefon" ng-model="customer.mobile2">
+                <input type="text" class="form-control" id="newMobile2" placeholder="Telefon" ng:model="customer.mobile2">
             </div>
         </div>
         <div class="form-group">
@@ -82,7 +82,7 @@
             </label>
 
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="newEmail" placeholder="Telefon" ng-model="customer.email">
+                <input type="text" class="form-control" id="newEmail" placeholder="Telefon" ng:model="customer.email">
             </div>
         </div>
 
@@ -94,16 +94,16 @@
         </div>
     </form>
 </div>
-<div class="modal-footer" ng-if="page==0">
+<div class="modal-footer" ng:if="page==0">
     <ul class="nav-horizontal text-center">
         <li>
-            <a href="javascript:void(0)" ng-click="cancel()">
+            <a href="javascript:void(0)" ng:click="cancel()">
                 <i class="fa fa-close"></i>
                 Anuluj
             </a>
         </li>
-        <li class="active" ng-if="isValidCustomer(customer)">
-            <a href="javascript:void(0)" ng-click="nextPage()">
+        <li class="active" ng:if="isValidCustomer(customer)">
+            <a href="javascript:void(0)" ng:click="nextPage()">
                 <i class="fa fa-chevron-right"></i>
                 Dalej
             </a>
@@ -112,7 +112,7 @@
 </div>
 
         <!--PAGE 1-->
-<div class="modal-body" ng-if="page==1">
+<div class="modal-body" ng:if="page==1">
     <div class="wizard-steps">
         <div class="row">
             <div class="col-xs-6 active">
@@ -126,60 +126,60 @@
         </div>
     </div>
     <ul class="nav nav-pills day-select">
-        <li ng-class="{'active' : day=='PN'}">
-            <a ng-click="setDay('PN')">Poniedziałek</a>
+        <li ng:class="{'active' : day=='PN'}">
+            <a ng:click="setDay('PN')">Poniedziałek</a>
         </li>
-        <li ng-class="{'active' : day=='WT'}">
-            <a ng-click="setDay('WT')">Wtorek</a>
+        <li ng:class="{'active' : day=='WT'}">
+            <a ng:click="setDay('WT')">Wtorek</a>
         </li>
-        <li ng-class="{'active' : day=='SR'}">
-            <a ng-click="setDay('SR')">Środa</a>
+        <li ng:class="{'active' : day=='SR'}">
+            <a ng:click="setDay('SR')">Środa</a>
         </li>
-        <li ng-class="{'active' : day=='CZ'}">
-            <a ng-click="setDay('CZ')">Czwartek</a>
+        <li ng:class="{'active' : day=='CZ'}">
+            <a ng:click="setDay('CZ')">Czwartek</a>
         </li>
-        <li ng-class="{'active' : day=='PT'}">
-            <a ng-click="setDay('PT')">Piątek</a>
+        <li ng:class="{'active' : day=='PT'}">
+            <a ng:click="setDay('PT')">Piątek</a>
         </li>
-        <li ng-class="{'active' : day=='SB'}">
-            <a ng-click="setDay('SB')">Sobota</a>
+        <li ng:class="{'active' : day=='SB'}">
+            <a ng:click="setDay('SB')">Sobota</a>
         </li>
-        <li ng-class="{'active' : day=='ND'}">
-            <a ng-click="setDay('ND')">Niedziela</a>
+        <li ng:class="{'active' : day=='ND'}">
+            <a ng:click="setDay('ND')">Niedziela</a>
         </li>
     </ul>
     <table class="table table-editable table-striped table-vcenter table-condensed table-hover" style="margin-top:10px">
         <tbody>
-        <tr ng-repeat="course in availableCourses | orderBy: 'startTime' | filter: { day : day}" ng-click="selectCourse(course)" ng-class="{'selected': isSelected(course)}">
+        <tr ng:repeat="course in availableCourses | orderBy: 'startTime' | filter: { day : day}" ng:click="selectCourse(course)" ng:class="{'selected': isSelected(course)}">
             <td>{{course.day | translate}}</td>
             <td>{{course.startTime}} - {{course.endTime}}</td>
-            <td ng-bind="course.style.name"></td>
+            <td ng:bind="course.style.name"></td>
             <td>{{course.room.name | translate}}</td>
             <td>{{course.instructor.firstName}} {{course.instructor.lastName}}</td>
             <td>
-                <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
-                <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
-                <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+                <span ng:if="!course.inProgress && course.canRegister">Zapisy</span>
+                <span ng:if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                <span ng:if="course.inProgress && course.canJoin">Można dołączyć</span>
             </td>
         </tr>
         </tbody>
     </table>
     <ul>
-        <li ng-repeat="c in courses">
+        <li ng:repeat="c in courses">
             {{c.style.name}}
         </li>
     </ul>
 </div>
-<div class="modal-footer" ng-if="page==1">
+<div class="modal-footer" ng:if="page==1">
     <ul class="nav-horizontal text-center">
         <li>
-            <a href="javascript:void(0)" ng-click="previousPage()">
+            <a href="javascript:void(0)" ng:click="previousPage()">
                 <i class="fa fa-chevron-left"></i>
                 Wstecz
             </a>
         </li>
         <li class="active">
-            <a href="javascript:void(0)" ng-click="create(customer, courses)">
+            <a href="javascript:void(0)" ng:click="create(customer, courses)">
                 <i class="fa fa-check-square-o"></i>
                 Zapisz
             </a>

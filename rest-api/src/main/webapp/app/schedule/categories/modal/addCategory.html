@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <button type="button" class="close" ng-click="cancel()">
+    <button type="button" class="close" ng:click="cancel()">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
@@ -11,19 +11,19 @@
             <label for="newName" class="col-sm-3 control-label">Nazwa</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="newName" placeholder="Nazwa" ng-model="category.name">
+                <input type="text" class="form-control" id="newName" placeholder="Nazwa" ng:model="category.name">
             </div>
         </div>
         <div class="form-group">
             <label for="newCode" class="col-sm-3 control-label">Symbol</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="newCode" placeholder="Symbol" ng-model="category.code">
+                <input type="text" class="form-control" id="newCode" placeholder="Symbol" ng:model="category.code">
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
-    <button ng-click="create(category)" class="btn btn-alt btn-primary">Zapisz</button>
+    <button class="btn btn-alt btn-default" ng:click="cancel()">Anuluj</button>
+    <button ng:click="create(category)" class="btn btn-alt btn-primary">Zapisz</button>
 </div>

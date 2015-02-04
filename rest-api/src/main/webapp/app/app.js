@@ -8,6 +8,7 @@ define([
 
     'services/module',
     'services/authorityService',
+    'services/notificationService',
 
     'dashboard/dashboard',
     'customers/index',
@@ -102,8 +103,11 @@ define([
                         'responseError': function (rejection) {
 
                             var status = rejection.status;
+//                            if (status == 401) {
+//                                window.location.replace("/login.html");
+//                            }
                             if (status == 401) {
-                                window.location.replace("/login.html");
+                                window.location.reload();
                             }
                             else if (status == 403) {
                                 $location.path("/403");

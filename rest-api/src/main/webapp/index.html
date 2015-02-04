@@ -37,87 +37,83 @@
     <link href="assets/css/style.css" rel="stylesheet" media="screen"/>
 </head>
 <body>
-<div class="splash themed-background" ng-cloak>
-    <!--<h2>-->
-        <!--Ładowanie...-->
-    <!--</h2>-->
+<div class="splash themed-background" ng:cloak>
     <h2>
-        <img src="assets/img/preloaders/128x128/Preloader_2/Preloader_2.gif" />
+        <img src="assets/img/preloaders/64x64/Preloader_2/Preloader_2.gif" />
     </h2>
-    <!--<h2>Jeśli ładowanie trwa zbyt długo, spróbuj przeładować stronę (klawisz F5)</h2>-->
 </div>
-<div id="page-container" class="sidebar-partial sidebar-visible-lg animated fadeIn" ng-cloak>
+<div id="page-container" class="sidebar-partial sidebar-visible-lg animated fadeIn" ng:cloak>
     <div id="sidebar">
         <div class="sidebar-scroll">
             <div class="sidebar-content">
                 <a href="index.html" class="sidebar-brand">
                     <strong>ACTIVE</strong>PORTAL
                 </a>
-                <ul class="sidebar-nav" ng-controller="menuController">
+                <ul class="sidebar-nav" ng:controller="menuController">
                     <li>
                         <a ui-sref="dashboard" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="fa fa-tachometer sidebar-nav-icon"></i>
                             Dashboard
                         </a>
                     </li>
-                    <li class="sidebar-header" ng-if="systemAuth()">
+                    <li class="sidebar-header" ng:if="systemAuth()">
                         <span class="sidebar-header-title">SYSTEM</span>
                     </li>
-                    <li ng-if="usersAuth()">
+                    <li ng:if="usersAuth()">
                         <a ui-sref="users" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-user sidebar-nav-icon"></i>
                             Użytkownicy
                         </a>
                     </li>
-                    <li ng-if="authoritiesAuth()">
+                    <li ng:if="authoritiesAuth()">
                         <a ui-sref="authorities" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-keys sidebar-nav-icon"></i>
                             Uprawnienia
                         </a>
                     </li>
-                    <li class="sidebar-header" ng-if="scheduleAuth()">
+                    <li class="sidebar-header" ng:if="scheduleAuth()">
                         <span class="sidebar-header-title">GRAFIK</span>
                     </li>
-                    <li ng-if="roomsAuth()">
+                    <li ng:if="roomsAuth()">
                         <a ui-sref="rooms" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="fa fa-bank sidebar-nav-icon"></i>
                             Pomieszczenia
                         </a>
                     </li>
-                    <li ng-if="instructorsAuth()">
+                    <li ng:if="instructorsAuth()">
                         <a ui-sref="instructors" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-certificate sidebar-nav-icon"></i>
                             Instruktorzy
                         </a>
                     </li>
-                    <li ng-if="categoriesAuth()">
+                    <li ng:if="categoriesAuth()">
                         <a ui-sref="categories" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-folder_open sidebar-nav-icon"></i>
                             Kategorie zajęć
                         </a>
                     </li>
-                    <li ng-if="stylesAuth()">
+                    <li ng:if="stylesAuth()">
                         <a ui-sref="styles" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-eyedropper sidebar-nav-icon"></i>
                             Style taneczne
                         </a>
                     </li>
-                    <li ng-if="coursesAuth()">
+                    <li ng:if="coursesAuth()">
                         <a ui-sref="courses" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-table sidebar-nav-icon"></i>
                             Grafik zajęć
                         </a>
                     </li>
-                    <li class="sidebar-header" ng-if="officeAuth()">
+                    <li class="sidebar-header" ng:if="officeAuth()">
                         <span class="sidebar-header-title">SEKRETARIAT</span>
                     </li>
-                    <li ng-if="customerBaseAuth()">
+                    <li ng:if="customerBaseAuth()">
                         <a ui-sref="customerBase" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-parents sidebar-nav-icon"></i>
                             Baza klientów
                         </a>
                     </li>
-                    <li ng-if="attendanceAuth()">
+                    <li ng:if="attendanceAuth()">
                         <a ui-sref="attendance" class="sidebar-nav-menu" ui-sref-active="active">
                             <i class="gi gi-check sidebar-nav-icon"></i>
                             Obecności
@@ -136,12 +132,12 @@
                         <i class="fa fa-bars fa-fw"></i>
                     </a>
                 </li>
-                <li ng-if="isLocal()">
+                <li ng:if="isLocal()">
                     <a href="javascript:void(0)">
                         <strong>WERSJA LOKALNA</strong>
                     </a>
                 </li>
-                <li ng-if="!isLocal()">
+                <li ng:if="!isLocal()">
                     <a href="javascript:void(0)">
                         <strong>WERSJA PRODUKCYJNA</strong>
                     </a>

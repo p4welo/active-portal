@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <button type="button" class="close" ng-click="cancel()">
+    <button type="button" class="close" ng:click="cancel()">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
     <h4 class="modal-title" id="add-modal-label">Sprzedaż karnetu</h4>
 </div>
-<div class="modal-body" ng-if="page == 0">
+<div class="modal-body" ng:if="page == 0">
     <div class="wizard-steps">
         <div class="row">
             <div class="col-xs-6 active">
@@ -18,35 +18,35 @@
     </div>
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
-            <li ng-class="{'active': existingCustomer}">
-                <a href="javascript:void(0)" ng-click="setExistingCustomer(true)">Szukaj klienta</a>
+            <li ng:class="{'active': existingCustomer}">
+                <a href="javascript:void(0)" ng:click="setExistingCustomer(true)">Szukaj klienta</a>
             </li>
-            <li ng-class="{'active': !existingCustomer}">
-                <a href="javascript:void(0)" ng-click="setExistingCustomer(false)">Nowy klient</a>
+            <li ng:class="{'active': !existingCustomer}">
+                <a href="javascript:void(0)" ng:click="setExistingCustomer(false)">Nowy klient</a>
             </li>
         </ul>
     </div>
 
-    <div ng-if="existingCustomer" class="row">
+    <div ng:if="existingCustomer" class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Szukaj..." ng-model="customerFilter"/>
+                <input type="text" class="form-control" placeholder="Szukaj..." ng:model="customerFilter"/>
             </div>
         </div>
         <div class="col-sm-12">
             <table class="table table-hover table-editable">
                 <tbody>
-                <tr ng-repeat="cust in customers | filter: customerFilter | orderBy: 'lastName' | limitTo: 5"
-                    ng-click="selectCustomer(cust)" ng-class="{'selected': cust == customer}">
-                    <td ng-bind="cust.firstName"></td>
-                    <td ng-bind="cust.lastName"></td>
-                    <td ng-bind="cust.mobile"></td>
+                <tr ng:repeat="cust in customers | filter: customerFilter | orderBy: 'lastName' | limitTo: 5"
+                    ng:click="selectCustomer(cust)" ng:class="{'selected': cust == customer}">
+                    <td ng:bind="cust.firstName"></td>
+                    <td ng:bind="cust.lastName"></td>
+                    <td ng:bind="cust.mobile"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div ng-if="!existingCustomer">
+    <div ng:if="!existingCustomer">
         <form class="form-horizontal" role="form">
             <div class="form-group">
                 <label for="newFirstName" class="col-sm-3 control-label">
@@ -56,7 +56,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="newFirstName" placeholder="Imię"
-                           ng-model="newCustomer.firstName" required/>
+                           ng:model="newCustomer.firstName" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -67,7 +67,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko"
-                           ng-model="newCustomer.lastName" required/>
+                           ng:model="newCustomer.lastName" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -77,7 +77,7 @@
                 </label>
 
                 <div class="col-sm-8">
-                    <select ng-model="newCustomer.gender" class="form-control" id="newGender" required>
+                    <select ng:model="newCustomer.gender" class="form-control" id="newGender" required>
                         <option value="MALE">{{ 'MALE' | translate }}</option>
                         <option value="FEMALE">{{ 'FEMALE' | translate }}</option>
                     </select>
@@ -90,7 +90,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="newMobile" placeholder="Telefon"
-                           ng-model="newCustomer.mobile" required>
+                           ng:model="newCustomer.mobile" required>
                 </div>
             </div>
 
@@ -103,16 +103,16 @@
         </form>
     </div>
 </div>
-<div class="modal-footer" ng-if="page == 0">
+<div class="modal-footer" ng:if="page == 0">
     <ul class="nav-horizontal text-center">
         <li>
-            <a href="javascript:void(0)" ng-click="cancel()">
+            <a href="javascript:void(0)" ng:click="cancel()">
                 <i class="fa fa-close"></i>
                 Anuluj
             </a>
         </li>
-        <li class="active" ng-if="isValidCustomer()">
-            <a href="javascript:void(0)" ng-click="passPage()">
+        <li class="active" ng:if="isValidCustomer()">
+            <a href="javascript:void(0)" ng:click="passPage()">
                 <i class="fa fa-chevron-right"></i>
                 Dalej
             </a>
@@ -120,7 +120,7 @@
     </ul>
 </div>
 
-<div class="modal-body" ng-if="page == 1">
+<div class="modal-body" ng:if="page == 1">
     <div class="wizard-steps">
         <div class="row">
             <div class="col-xs-6 active">
@@ -139,7 +139,7 @@
                 <legend>Dorośli</legend>
                 <table class="table table-striped table-hover">
                     <tbody>
-                    <tr ng-repeat="pass in passes | filter: {group: 'PASS_ADULT'}">
+                    <tr ng:repeat="pass in passes | filter: {group: 'PASS_ADULT'}">
                         <td>{{ pass.type | translate }}</td>
                         <td class="text-right">{{ pass.price }}</td>
                     </tr>
@@ -151,7 +151,7 @@
                 <legend>Dzieci</legend>
                 <table class="table table-striped table-hover">
                     <tbody>
-                    <tr ng-repeat="pass in passes | filter: {group: 'PASS_CHILD'}">
+                    <tr ng:repeat="pass in passes | filter: {group: 'PASS_CHILD'}">
                         <td>{{ pass.type | translate }}</td>
                         <td class="text-right">{{ pass.price }}</td>
                     </tr>
@@ -161,10 +161,10 @@
         </div>
     </div>
 </div>
-<div class="modal-footer" ng-if="page == 1">
+<div class="modal-footer" ng:if="page == 1">
     <ul class="nav-horizontal text-center">
         <li>
-            <a href="javascript:void(0)" ng-click="customerPage()">
+            <a href="javascript:void(0)" ng:click="customerPage()">
                 <i class="fa fa-chevron-left"></i>
                 Wstecz
             </a>
