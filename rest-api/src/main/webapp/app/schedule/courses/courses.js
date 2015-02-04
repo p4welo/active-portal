@@ -3,18 +3,20 @@ define([
     'schedule/courses/modal/addCourse',
     'core/modal/deleteConfirm',
     'services/notificationService',
+    'services/roomService',
     'services/courseService',
     'services/styleService'
 ], function (module) {
 
-    module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient) {
+    module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient, roomHttpClient) {
 
         var STYLE_KEY = "style";
         var LEVEL_KEY = "level";
         var DAY_KEY = "day";
         var START_TIME_KEY = "startTime";
         var END_TIME_KEY = "endTime";
-        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY];
+        var ROOM_KEY = "room";
+        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY];
 
         $scope.courseLoading = true;
         courseHttpClient.findAll().$promise.then(
@@ -24,6 +26,7 @@ define([
             }
         );
         $scope.styles = styleHttpClient.findAll();
+        $scope.rooms = roomHttpClient.findAll();
 
         $scope.day = 'PN';
         $scope.days = [
@@ -66,7 +69,6 @@ define([
         }
 
         // =======================================
-
         $scope.add = function () {
             var modalInstance = $modal.open(
                 {
@@ -163,7 +165,7 @@ define([
                 }
             }
 
-            $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
+//            $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
         }
         $scope.edit = function (object, property) {
             object[property].edit = true;
@@ -193,6 +195,19 @@ define([
             course[property].saving = true;
             if (property == STYLE_KEY) {
                 courseHttpClient.setStyle({sid: course.sid}, course.style.value).$promise.then(
+                    function () {
+                        course[property].edit = false;
+                        course[property].saving = false;
+                        course[property].hover = false;
+                        courseHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.classes = result;
+                            });
+                        notificationService.success("Pomyślnie zapisano");
+                    });
+            }
+            else if (property == ROOM_KEY) {
+                courseHttpClient.setRoom({sid: course.sid}, course.room.value).$promise.then(
                     function () {
                         course[property].edit = false;
                         course[property].saving = false;

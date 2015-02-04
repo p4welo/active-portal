@@ -341,54 +341,48 @@
                 </div>
             </form>
 
+            <form class="form-group">
+                <label for="room" class="col-sm-3 control-label"
+                       ng:click="edit(selected, 'room')"
+                       ng:mouseover="hover(selected, 'room')"
+                       ng:mouseleave="leave(selected, 'room')">Sala</label>
 
-            <!--<div class="form-group">-->
-                <!--<label for="startTime" class="col-xs-3 control-label">Start</label>-->
+                <div class="col-sm-9" ng:if="!selected.room.edit">
+                    <p class="form-control-static">
+                                                <span class="btn-link" ng:bind="selected.room.value.name"
+                                                      ng:click="edit(selected, 'room')"
+                                                      ng:mouseover="hover(selected, 'room')"
+                                                      ng:mouseleave="leave(selected, 'room')"></span>
+                        <i class="fa fa-edit" ng:show="selected.room.hover"></i>
+                    </p>
+                </div>
+                <div class="col-sm-6" ng:if="selected.room.edit">
+                    <select id="room" ng:model="selected.room.value"
+                            ng:options="r.name for r in rooms track by r.sid"
+                            class="form-control"
+                            ng:disabled="selected.room.saving"></select>
 
-                <!--<div class="col-xs-9" ng:if="selected.edit">-->
-                    <!--<input id="startTime" class="form-control" type="text"-->
-                           <!--ng:model="selected.startTime"/>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-                    <!--<p class="form-control-static">-->
-                        <!--{{ selected.startTime }}-->
-                    <!--</p>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-                <!--<label for="endTime" class="col-xs-3 control-label">Koniec</label>-->
-
-                <!--<div class="col-xs-9" ng:if="selected.edit">-->
-                    <!--<input id="endTime" class="form-control" type="text"-->
-                           <!--ng:model="selected.endTime"/>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-                    <!--<p class="form-control-static">-->
-                        <!--{{ selected.endTime }}-->
-                    <!--</p>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="form-group form-actions" ng:if="selected.edit">-->
-            <!--<div class="col-xs-9 col-xs-offset-3">-->
-            <!--<button class="btn btn-sm btn-primary" ng:click="update(selected)">-->
-            <!--<i class="fa fa-check"></i>-->
-            <!--Zapisz-->
-            <!--</button>-->
-            <!--</div>-->
-            <!--</div>-->
+                </div>
+                <div class="col-sm-3" ng:if="selected.room.edit">
+                    <div class="btn" ng:if="selected.room.saving">
+                        <i class="fa fa-spin fa-spinner"></i>
+                    </div>
+                    <div ng:if="!selected.room.saving">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                           ng:click="cancel(selected, 'room')">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        <button class="btn btn-alt btn-primary"
+                                ng:click="save(selected, 'room')">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="col-sm-6">
 
-        <!--<table class="table table-hover">-->
-        <!--<tbody>-->
-        <!--<tr ng:repeat="lesson in lessons">-->
-        <!--<td ng:bind="lesson.dateTime"></td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--</table>-->
     </div>
 </div>
 </td>
