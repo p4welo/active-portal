@@ -1,4 +1,4 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn courses-page">
 <div class="content-header">
     <div class="header-section">
         <h1>
@@ -265,64 +265,110 @@
                 </div>
             </form>
 
+            <form class="form-group">
+                <label for="startTime" class="col-sm-3 control-label"
+                       ng:click="edit(selected, 'startTime')"
+                       ng:mouseover="hover(selected, 'startTime')"
+                       ng:mouseleave="leave(selected, 'startTime')">Start</label>
 
-            <!--<div class="form-group">-->
-            <!--<label for="level" class="col-xs-3 control-label">Poziom</label>-->
-
-            <!--<div class="col-xs-9" ng:if="selected.edit">-->
-            <!--<select id="level" ng:model="selected.level"-->
-            <!--ng-options="l | translate for l in levels"-->
-            <!--class="form-control"></select>-->
-            <!--</div>-->
-            <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-            <!--<p class="form-control-static">-->
-            <!--{{ selected.level | translate }}-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-            <!--<label for="day" class="col-xs-3 control-label">Dzień</label>-->
-
-            <!--<div class="col-xs-9" ng:if="selected.edit">-->
-            <!--<select id="day" ng:model="selected.day"-->
-            <!--ng-options="day | translate for day in days"-->
-            <!--class="form-control"></select>-->
-            <!--</div>-->
-            <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-            <!--<p class="form-control-static">-->
-            <!--{{ selected.day | translate }}-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <div class="form-group">
-                <label for="startTime" class="col-xs-3 control-label">Start</label>
-
-                <div class="col-xs-9" ng:if="selected.edit">
-                    <input id="startTime" class="form-control" type="text"
-                           ng:model="selected.startTime"/>
-                </div>
-                <div class="col-xs-9" ng:if="!selected.edit">
+                <div class="col-sm-9" ng:if="!selected.startTime.edit">
                     <p class="form-control-static">
-                        {{ selected.startTime }}
+                        <span class="btn-link" ng:click="edit(selected, 'startTime')"
+                              ng:mouseover="hover(selected, 'startTime')"
+                              ng:mouseleave="leave(selected, 'startTime')"
+                              ng:bind="selected.startTime.value"></span>
+                        <i class="fa fa-edit" ng:show="selected.startTime.hover"></i>
                     </p>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="endTime" class="col-xs-3 control-label">Koniec</label>
-
-                <div class="col-xs-9" ng:if="selected.edit">
-                    <input id="endTime" class="form-control" type="text"
-                           ng:model="selected.endTime"/>
+                <div class="col-sm-3" ng:if="selected.startTime.edit">
+                    <select id="startTime" ng:model="selected.startTime.value.hours" ng:options="h for h in hours" class="form-control" ng:disabled="selected.startTime.saving"></select>
                 </div>
-                <div class="col-xs-9" ng:if="!selected.edit">
+                <div class="col-sm-3" ng:if="selected.startTime.edit">
+                    <select id="startTime2" ng:model="selected.startTime.value.minutes" ng:options="m for m in minutes" class="form-control" ng:disabled="selected.startTime.saving"></select>
+                </div>
+                <div class="col-sm-3" ng:if="selected.startTime.edit">
+                    <div class="btn" ng:if="selected.startTime.saving">
+                        <i class="fa fa-spin fa-spinner"></i>
+                    </div>
+                    <div ng:if="!selected.startTime.saving">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                           ng:click="cancel(selected, 'startTime')">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        <button class="btn btn-alt btn-primary"
+                                ng:click="save(selected, 'startTime')">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <form class="form-group">
+                <label for="endTime" class="col-sm-3 control-label"
+                       ng:click="edit(selected, 'endTime')"
+                       ng:mouseover="hover(selected, 'endTime')"
+                       ng:mouseleave="leave(selected, 'endTime')">Koniec</label>
+
+                <div class="col-sm-9" ng:if="!selected.endTime.edit">
                     <p class="form-control-static">
-                        {{ selected.endTime }}
+                        <span class="btn-link" ng:click="edit(selected, 'endTime')"
+                              ng:mouseover="hover(selected, 'endTime')"
+                              ng:mouseleave="leave(selected, 'endTime')"
+                              ng:bind="selected.endTime.value"></span>
+                        <i class="fa fa-edit" ng:show="selected.endTime.hover"></i>
                     </p>
                 </div>
-            </div>
+                <div class="col-sm-3" ng:if="selected.endTime.edit">
+                    <select id="endTime" ng:model="selected.endTime.value.hours" ng:options="h for h in hours" class="form-control" ng:disabled="selected.endTime.saving"></select>
+                </div>
+                <div class="col-sm-3" ng:if="selected.endTime.edit">
+                    <select id="endTime2" ng:model="selected.endTime.value.minutes" ng:options="m for m in minutes" class="form-control" ng:disabled="selected.endTime.saving"></select>
+                </div>
+                <div class="col-sm-3" ng:if="selected.endTime.edit">
+                    <div class="btn" ng:if="selected.endTime.saving">
+                        <i class="fa fa-spin fa-spinner"></i>
+                    </div>
+                    <div ng:if="!selected.endTime.saving">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                           ng:click="cancel(selected, 'endTime')">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        <button class="btn btn-alt btn-primary"
+                                ng:click="save(selected, 'endTime')">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="startTime" class="col-xs-3 control-label">Start</label>-->
+
+                <!--<div class="col-xs-9" ng:if="selected.edit">-->
+                    <!--<input id="startTime" class="form-control" type="text"-->
+                           <!--ng:model="selected.startTime"/>-->
+                <!--</div>-->
+                <!--<div class="col-xs-9" ng:if="!selected.edit">-->
+                    <!--<p class="form-control-static">-->
+                        <!--{{ selected.startTime }}-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+                <!--<label for="endTime" class="col-xs-3 control-label">Koniec</label>-->
+
+                <!--<div class="col-xs-9" ng:if="selected.edit">-->
+                    <!--<input id="endTime" class="form-control" type="text"-->
+                           <!--ng:model="selected.endTime"/>-->
+                <!--</div>-->
+                <!--<div class="col-xs-9" ng:if="!selected.edit">-->
+                    <!--<p class="form-control-static">-->
+                        <!--{{ selected.endTime }}-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <!--<div class="form-group form-actions" ng:if="selected.edit">-->
             <!--<div class="col-xs-9 col-xs-offset-3">-->

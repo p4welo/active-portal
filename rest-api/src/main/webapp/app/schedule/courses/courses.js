@@ -12,7 +12,9 @@ define([
         var STYLE_KEY = "style";
         var LEVEL_KEY = "level";
         var DAY_KEY = "day";
-        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY];
+        var START_TIME_KEY = "startTime";
+        var END_TIME_KEY = "endTime";
+        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY];
 
         $scope.courseLoading = true;
         courseHttpClient.findAll().$promise.then(
@@ -30,6 +32,16 @@ define([
         $scope.levels = [
             "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
         ];
+        $scope.hours = [];
+        $scope.minutes = [];
+        for (var i = 7; i < 24; i++) {$scope.hours.push("" + i)}
+        for (var i = 0; i < 60; i+=5) {
+            var j = i;
+            if (j < 10) {
+                j = "0" + j;
+            }
+            $scope.minutes.push("" + j);
+        }
 
         // =======================================
         $scope.sort = {
@@ -156,6 +168,15 @@ define([
         $scope.edit = function (object, property) {
             object[property].edit = true;
             object[property].oldVal = object[property].value;
+            if (property == START_TIME_KEY || property == END_TIME_KEY) {
+                var obj = object[property].value.split(":");
+                object[property].value = {
+                    hours: obj[0],
+                    minutes: obj[1]
+                }
+            }
+
+
         }
         $scope.cancel = function (object, property) {
             object[property].value = object[property].oldVal;
@@ -170,7 +191,6 @@ define([
         }
         $scope.save = function (course, property) {
             course[property].saving = true;
-
             if (property == STYLE_KEY) {
                 courseHttpClient.setStyle({sid: course.sid}, course.style.value).$promise.then(
                     function () {
@@ -186,8 +206,15 @@ define([
             }
             else {
                 var obj = _.findWhere($scope.classes, {sid: course.sid});
-                obj[property] = course[property].value;
                 if (obj != null) {
+                    var newVal = course[property].value;
+                    if (property == START_TIME_KEY || property == END_TIME_KEY) {
+                        obj[property] = newVal.hours + ":" + newVal.minutes;
+                        course[property].value = newVal.hours + ":" + newVal.minutes;
+                    }
+                    else {
+                        obj[property] = newVal;
+                    }
                     courseHttpClient.update({ sid: obj.sid }, obj).$promise.then(
                         function () {
                             course[property].edit = false;
