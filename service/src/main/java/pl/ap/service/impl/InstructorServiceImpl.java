@@ -3,6 +3,7 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.ICourseDao;
+import pl.ap.dao.ICourseInstructorRelationDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IInstructorDao;
 import pl.ap.domain.Course;
@@ -23,7 +24,7 @@ public class InstructorServiceImpl extends IdentifiableServiceImpl<Instructor> i
     private IInstructorDao instructorDao;
 
     @Resource
-    private ICourseDao courseDao;
+    private ICourseInstructorRelationDao courseInstructorRelationDao;
 
     @Override
     protected IIdentifiableDao<Instructor> getDao() {
@@ -43,6 +44,6 @@ public class InstructorServiceImpl extends IdentifiableServiceImpl<Instructor> i
     @Override
     @Transactional(readOnly = true)
     public List<Course> findCourses(Instructor instructor) {
-        return courseDao.findActiveByInstructor(instructor);
+        return courseInstructorRelationDao.findActiveCoursesByInstructor(instructor);
     }
 }
