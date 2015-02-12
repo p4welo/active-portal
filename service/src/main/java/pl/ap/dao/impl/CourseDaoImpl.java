@@ -28,6 +28,7 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     public List<Course> findForSchedule() {
         Criteria criteria = createCriteria()
                 .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))
+                .add(Restrictions.eq(Course.FIELD_IN_PROGRESS, Boolean.TRUE))
                 .addOrder(Order.asc(Course.FIELD_DAY))
                 .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
