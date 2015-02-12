@@ -38,6 +38,7 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     public List<Course> findInProgress() {
         Criteria criteria = createCriteria()
                 .add(Restrictions.eq(Course.FIELD_IN_PROGRESS, true))
+                .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))
                 .addOrder(Order.asc(Course.FIELD_DAY))
                 .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
@@ -47,6 +48,7 @@ public class CourseDaoImpl extends IdentifiableDaoImpl<Course> implements ICours
     public List<Course> findRegistration() {
         Criteria criteria = createCriteria()
                 .add(Restrictions.eq(Course.FIELD_CAN_REGISTER, true))
+                .add(Restrictions.eq(Course.FIELD_OBJECT_STATE, ObjectStateEnum.ACTIVE))
                 .addOrder(Order.asc(Course.FIELD_DAY))
                 .addOrder(Order.asc(Course.FIELD_START_TIME));
         return criteria.list();
