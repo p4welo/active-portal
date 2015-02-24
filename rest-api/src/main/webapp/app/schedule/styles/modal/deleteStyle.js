@@ -2,7 +2,7 @@ define([
     'schedule/module'
 ], function (module) {
 
-    module.controller('deleteStyleController', function (courses, $scope, $modalInstance) {
+    module.controller('deleteStyleController', ['courses', '$scope', '$modalInstance', function (courses, $scope, $modalInstance) {
 
         $scope.courses = courses;
         $scope.cancel = function () {
@@ -11,5 +11,5 @@ define([
         $scope.confirm = function () {
             $modalInstance.close();
         }
-    })
+    }]);
 });

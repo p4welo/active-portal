@@ -5,7 +5,7 @@ define([
     'services/instructorService'
 ], function (module) {
 
-    module.controller("instructorsController", function ($scope, $modal, instructorHttpClient, notificationService) {
+    module.controller("instructorsController", ['$scope', '$modal', 'instructorHttpClient', 'notificationService', function ($scope, $modal, instructorHttpClient, notificationService) {
 
         var FIRST_NAME_KEY = "firstName";
         var LAST_NAME_KEY = "lastName";
@@ -141,5 +141,5 @@ define([
                 )
             });
         }
-    });
+    }]);
 });

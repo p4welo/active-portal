@@ -2,7 +2,7 @@ define([
     'dashboard/module'
 ], function (module) {
 
-    module.controller("dashboardController", function ($scope) {
+    module.controller("dashboardController", ['$scope', function ($scope) {
 
-    });
+    }]);
 });

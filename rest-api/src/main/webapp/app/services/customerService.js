@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('customerHttpClient', function ($resource) {
+    module.factory('customerHttpClient', ['$resource', function ($resource) {
 
         return $resource(null, null, {
 
@@ -60,9 +60,9 @@ define([
                 method: 'POST'
             }
         })
-    });
+    }]);
 
-    module.factory('customerFactory', function () {
+    module.factory('customerFactory', [function () {
         var customers = {};
 
         return {
@@ -73,5 +73,5 @@ define([
                 return customers[sid];
             }
         }
-    });
+    }]);
 });

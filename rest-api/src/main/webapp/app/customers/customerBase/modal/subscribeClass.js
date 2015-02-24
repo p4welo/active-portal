@@ -4,7 +4,7 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller('subscribeClassController', function ($scope, customer, customerHttpClient, $modalInstance) {
+    module.controller('subscribeClassController', ['$scope', 'customer', 'customerHttpClient', '$modalInstance', function ($scope, customer, customerHttpClient, $modalInstance) {
         $scope.day = '';
         $scope.customer = customer;
         $scope.classes = customerHttpClient.coursesToRegister({ sid: customer.sid });
@@ -27,6 +27,5 @@ define([
         $scope.cancel = function () {
             $modalInstance.dismiss();
         }
-    });
-
+    }]);
 });

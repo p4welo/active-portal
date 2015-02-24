@@ -4,7 +4,7 @@ define([
     'ngTouch',
     'loadingBar',
 
-    'core/module',
+    'core/modal/scanTicket',
 
     'services/module',
     'services/authorityService',
@@ -32,11 +32,11 @@ define([
 
         'activePortal.core',
         'activePortal.services'
-    ], function ($urlRouterProvider) {
+    ], ['$urlRouterProvider', function ($urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/dashboard");
-    })
-        .config(function ($translateProvider) {
+    }])
+        .config(['$translateProvider', function ($translateProvider) {
             $translateProvider.translations('pl', {
 
                 PN: 'Poniedziałek',
@@ -94,9 +94,9 @@ define([
             });
 
             $translateProvider.preferredLanguage('pl');
-        })
+        }])
 
-        .config(function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
 
             $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
                     return {
@@ -120,9 +120,9 @@ define([
                     };
                 }
             );
-        })
+        }])
 
-        .controller("menuController", function ($scope, authorityHttpClient) {
+        .controller("menuController", ['$scope', 'authorityHttpClient', function ($scope, authorityHttpClient) {
             $scope.currentAuth = [];
             authorityHttpClient.getCurrentAuthorities().$promise.then(
                 function (result) {
@@ -175,9 +175,9 @@ define([
             $scope.attendanceAuth = function () {
                 return hasAuth("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
             }
-        })
+        }])
 
-        .run(function ($rootScope, $location) {
+        .run(['$rootScope', '$location', '$modal', function ($rootScope, $location, $modal) {
             $rootScope.isActive = function (obj) {
                 return obj.objectState == 'ACTIVE';
             }
@@ -187,5 +187,14 @@ define([
             $rootScope.isLocal = function () {
                 return $location.host()=='localhost'
             }
-        })
+            $rootScope.scan = function () {
+                var modalInstance = $modal.open({
+                    templateUrl: 'app/core/modal/scanTicket.html',
+                    controller: "scanTicketDialogController"
+                });
+
+                modalInstance.result.then(function () {
+                });
+            }
+        }]);
 });

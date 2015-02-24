@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('roomHttpClient', function ($resource) {
+    module.factory('roomHttpClient', ['$resource', function ($resource) {
 
         return $resource(null, null, {
 
@@ -36,5 +36,5 @@ define([
                 method: 'DELETE'
             }
         })
-    });
+    }]);
 });

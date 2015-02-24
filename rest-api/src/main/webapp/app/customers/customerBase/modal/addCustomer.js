@@ -4,7 +4,7 @@ define([
     'services/courseService'
 ], function (module) {
 
-    module.controller('addCustomerController', function ($scope, customerHttpClient, courseHttpClient, $modalInstance) {
+    module.controller('addCustomerController', ['$scope', 'customerHttpClient', 'courseHttpClient', '$modalInstance', function ($scope, customerHttpClient, courseHttpClient, $modalInstance) {
         $scope.page = 0;
         $scope.customer = {};
         $scope.courses = null;
@@ -56,5 +56,5 @@ define([
         $scope.previousPage = function () {
             $scope.page = 0;
         }
-    });
+    }]);
 });

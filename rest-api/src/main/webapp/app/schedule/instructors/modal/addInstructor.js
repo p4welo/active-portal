@@ -3,7 +3,7 @@ define([
     'services/instructorService'
 ], function (module) {
 
-    module.controller('addInstructorController', function ($scope, $modalInstance, instructorHttpClient) {
+    module.controller('addInstructorController', ['$scope', '$modalInstance', 'instructorHttpClient', function ($scope, $modalInstance, instructorHttpClient) {
         $scope.instructor = {};
 
         $scope.cancel = function () {
@@ -16,6 +16,5 @@ define([
                     $modalInstance.close();
                 });
         }
-    });
-
+    }]);
 });

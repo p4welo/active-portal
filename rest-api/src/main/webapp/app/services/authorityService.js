@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('authorityHttpClient', function ($resource) {
+    module.factory('authorityHttpClient', ['$resource', function ($resource) {
 
         return $resource(null, null, {
             findRoles: {
@@ -34,5 +34,5 @@ define([
                 isArray: true
             }
         })
-    });
+    }]);
 });

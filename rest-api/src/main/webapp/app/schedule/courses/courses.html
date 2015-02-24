@@ -391,12 +391,17 @@
 </div>
 </div>
 <div class="col-sm-6">
-    <h5>Instruktorzy</h5>
-
+    <h5>
+        Instruktorzy
+        <button class="pull-right btn-link" ng:click="edit(selected, 'instructors')">
+            <i class="fa fa-edit"></i>
+        </button>
+    </h5>
     <p ng:if="selected.instructors.length == 0">Brak wyników spełniających kryteria.</p>
-    <table class="table table-vcenter table-bordered table-condensed" id="general-table">
+
+    <table class="table table-condensed" id="general-table">
         <tbody>
-        <tr ng:repeat="i in selected.instructors">
+        <tr ng:repeat="i in selected.instructors.value">
             <td>
                 {{i.firstName}}
             </td>
@@ -405,6 +410,11 @@
             </td>
             <td>
                 {{i.nick}}
+            </td>
+            <td ng:if="selected.instructors.edit">
+                <button class="btn-link pull-right">
+                    <i class="fa fa-remove"></i>
+                </button>
             </td>
         </tr>
         </tbody>

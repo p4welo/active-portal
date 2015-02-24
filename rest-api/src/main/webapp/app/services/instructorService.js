@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('instructorHttpClient', function ($resource) {
+    module.factory('instructorHttpClient', ['$resource', function ($resource) {
 
         return $resource(null, null, {
 
@@ -41,5 +41,5 @@ define([
                 isArray: true
             }
         })
-    });
+    }]);
 });

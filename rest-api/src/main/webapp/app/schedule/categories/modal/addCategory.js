@@ -3,7 +3,7 @@ define([
     'services/categoryService'
 ], function (module) {
 
-    module.controller('addCategoryController', function ($scope, $modalInstance, categoryHttpClient) {
+    module.controller('addCategoryController', ['$scope', '$modalInstance', 'categoryHttpClient', function ($scope, $modalInstance, categoryHttpClient) {
         $scope.category = {};
 
         $scope.cancel = function () {
@@ -16,6 +16,6 @@ define([
                     $modalInstance.close();
                 });
         }
-    });
+    }]);
 
 });

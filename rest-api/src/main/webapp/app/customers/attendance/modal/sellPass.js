@@ -4,7 +4,7 @@ define([
     'services/passService'
 ], function (module) {
 
-    module.controller('sellPassController', function ($scope, $modalInstance, customerHttpClient, passService) {
+    module.controller('sellPassController', ['$scope', '$modalInstance', 'customerHttpClient', 'passService', function ($scope, $modalInstance, customerHttpClient, passService) {
         $scope.cancel = function () {
             $modalInstance.dismiss();
         }
@@ -43,6 +43,6 @@ define([
         $scope.customerPage = function () {
             $scope.page = 0;
         }
-    });
+    }]);
 
 });

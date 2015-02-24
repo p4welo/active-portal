@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('categoryHttpClient', function ($resource) {
+    module.factory('categoryHttpClient', ['$resource', function ($resource) {
 
         return $resource(null, null, {
 
@@ -36,5 +36,5 @@ define([
                 method: 'DELETE'
             }
         })
-    });
+    }]);
 });

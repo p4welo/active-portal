@@ -5,7 +5,7 @@ define([
     'services/categoryService'
 ], function (module) {
 
-    module.controller("categoriesController", function ($scope, $modal, categoryHttpClient, notificationService) {
+    module.controller("categoriesController", ['$scope', '$modal', 'categoryHttpClient', 'notificationService', function ($scope, $modal, categoryHttpClient, notificationService) {
         $scope.categories = categoryHttpClient.findAll();
 
         $scope.add = function () {
@@ -45,5 +45,5 @@ define([
         $scope.resolveStatusCss = function (category) {
             return {'label-success': category.objectState == 'ACTIVE', 'label-danger': category.objectState == 'INACTIVE'}
         }
-    });
+    }]);
 });

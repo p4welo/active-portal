@@ -6,7 +6,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller('addCourseController', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient) {
+    module.controller('addCourseController', ['$scope', '$modalInstance', 'courseHttpClient', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient) {
         $scope.course = {};
         $scope.start = {
             hours: "15",
@@ -69,6 +69,5 @@ define([
                     $modalInstance.close();
                 });
         }
-    });
-
+    }]);
 });

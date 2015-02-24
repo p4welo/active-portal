@@ -7,7 +7,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("customerBaseController", function ($scope, $modal, customerHttpClient, customerFactory, notificationService, $state) {
+    module.controller("customerBaseController", ['$scope', '$modal', 'customerHttpClient', 'customerFactory', 'notificationService', '$state', function ($scope, $modal, customerHttpClient, customerFactory, notificationService, $state) {
         $scope.customers = customerHttpClient.findAll();
 
         $scope.select = function (customer) {
@@ -71,5 +71,5 @@ define([
             customerFactory.setCustomer(customer);
             $state.go("customerDetails", {sid: customer.sid})
         }
-    });
+    }]);
 });

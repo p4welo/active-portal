@@ -4,11 +4,12 @@ define([
     'core/modal/deleteConfirm',
     'services/notificationService',
     'services/roomService',
+    'services/instructorService',
     'services/courseService',
     'services/styleService'
 ], function (module) {
 
-    module.controller("coursesController", function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient, roomHttpClient) {
+    module.controller("coursesController", ['$scope', 'courseHttpClient', 'notificationService', '$modal', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient, instructorHttpClient, roomHttpClient) {
 
         var STYLE_KEY = "style";
         var LEVEL_KEY = "level";
@@ -16,7 +17,8 @@ define([
         var START_TIME_KEY = "startTime";
         var END_TIME_KEY = "endTime";
         var ROOM_KEY = "room";
-        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY];
+        var INSTRUCTORS_KEY = "instructors";
+        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY, INSTRUCTORS_KEY];
 
         $scope.courseLoading = true;
         courseHttpClient.findAll().$promise.then(
@@ -25,8 +27,10 @@ define([
                 $scope.courseLoading = false;
             }
         );
+
         $scope.styles = styleHttpClient.findAll();
         $scope.rooms = roomHttpClient.findAll();
+        $scope.instructors = instructorHttpClient.findAll();
 
         $scope.day = 'PN';
         $scope.days = [
@@ -165,7 +169,6 @@ define([
                 }
             }
 
-//            $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
         }
         $scope.edit = function (object, property) {
             object[property].edit = true;
@@ -244,5 +247,5 @@ define([
                 }
             }
         }
-    });
+    }]);
 });

@@ -2,7 +2,7 @@ define([
     'news/module'
 ], function (module) {
 
-    module.controller("newsletterController", function ($scope) {
+    module.controller("newsletterController", ['$scope', function ($scope) {
 
-    });
+    }]);
 });

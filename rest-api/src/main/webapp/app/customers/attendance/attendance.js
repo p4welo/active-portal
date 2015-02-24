@@ -4,7 +4,7 @@ define([
     'services/courseService'
 ], function (module) {
 
-    module.controller("attendanceController", function ($scope, $modal, courseHttpClient) {
+    module.controller("attendanceController", ['$scope', '$modal', 'courseHttpClient', function ($scope, $modal, courseHttpClient) {
         $scope.day = 'PN';
         $scope.courses = courseHttpClient.findInProgress();
         $scope.selectedCourse = null;
@@ -44,7 +44,6 @@ define([
             }
             $scope.selectedCourse = angular.copy(course);
 
-//            $scope.loadingLessons = true;
             $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
         }
 
@@ -60,5 +59,5 @@ define([
         }
 
 
-    });
+    }]);
 });

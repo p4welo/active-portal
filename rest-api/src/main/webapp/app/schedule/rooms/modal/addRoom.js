@@ -3,7 +3,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller('addRoomController', function ($scope, $modalInstance, roomHttpClient) {
+    module.controller('addRoomController', ['$scope', '$modalInstance', 'roomHttpClient', function ($scope, $modalInstance, roomHttpClient) {
         $scope.room = {};
 
         $scope.cancel = function () {
@@ -16,6 +16,5 @@ define([
                     $modalInstance.close();
                 });
         }
-    });
-
+    }]);
 });

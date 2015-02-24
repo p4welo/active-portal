@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('passService', function () {
+    module.factory('passService', [function () {
 
         return {
             getPasses: function () {
@@ -55,5 +55,5 @@ define([
                 ];
             }
         }
-    });
+    }]);
 });

@@ -3,6 +3,6 @@ define([
     'services/userService'
 ], function (module) {
 
-    module.controller("userController", function ($scope, userHttpClient) {
-    });
+    module.controller("userController", ['$scope, userHttpClient', function ($scope, userHttpClient) {
+    }]);
 });

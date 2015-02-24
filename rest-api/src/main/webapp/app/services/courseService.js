@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('courseHttpClient', function ($resource) {
+    module.factory('courseHttpClient', ['$resource', function ($resource) {
 
         return $resource(null, null, {
 
@@ -72,5 +72,5 @@ define([
                 method: "PUT"
             }
         })
-    });
+    }]);
 });

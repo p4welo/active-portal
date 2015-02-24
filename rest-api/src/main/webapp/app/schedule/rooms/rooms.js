@@ -6,7 +6,7 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller("roomsController", function ($scope, roomHttpClient, $modal, notificationService) {
+    module.controller("roomsController", ['$scope', 'roomHttpClient', '$modal', 'notificationService', function ($scope, roomHttpClient, $modal, notificationService) {
 
         var NAME_KEY = "name";
         var OBJECT_PROPERTIES = [NAME_KEY];
@@ -131,5 +131,5 @@ define([
                 )
             });
         }
-    });
+    }]);
 });

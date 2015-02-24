@@ -8,7 +8,7 @@ define([
     'services/notificationService'
 ], function (module, _) {
 
-    module.controller("stylesController", function ($scope, $modal, styleHttpClient, categoryHttpClient, notificationService) {
+    module.controller("stylesController", ['$scope', '$modal', 'styleHttpClient', 'categoryHttpClient', 'notificationService', function ($scope, $modal, styleHttpClient, categoryHttpClient, notificationService) {
 
         var CATEGORY_KEY = "category";
         var NAME_KEY = "name";
@@ -159,6 +159,5 @@ define([
         $scope.leave = function (object, property) {
             object[property].hover = false;
         }
-    });
-})
-;
+    }]);
+});

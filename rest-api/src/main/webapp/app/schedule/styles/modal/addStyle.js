@@ -4,7 +4,7 @@ define([
     'services/styleService'
 ], function (module) {
 
-    module.controller('addStyleController', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient) {
+    module.controller('addStyleController', ['$scope', '$modalInstance', 'categoryHttpClient', 'styleHttpClient', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient) {
         $scope.style = {};
         $scope.categories = categoryHttpClient.findAll();
 
@@ -18,6 +18,5 @@ define([
                     $modalInstance.close();
                 });
         }
-    });
-
+    }]);
 });

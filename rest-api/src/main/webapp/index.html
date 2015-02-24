@@ -39,7 +39,7 @@
 <body>
 <div class="splash themed-background" ng-cloak>
     <h2>
-        <img src="assets/img/preloaders/64x64/Preloader_2/Preloader_2.gif" />
+        <img src="assets/img/preloaders/wheel.svg" />
     </h2>
 </div>
 <div id="page-container" class="sidebar-partial sidebar-visible-lg animated fadeIn" ng-cloak>
@@ -130,16 +130,14 @@
                 <li>
                     <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
                         <i class="fa fa-bars fa-fw"></i>
+                        <!--<strong ng:if="isLocal()">LOCAL</strong>-->
+                        <!--<strong ng:if="!isLocal()">PROD</strong>-->
                     </a>
                 </li>
-                <li ng:if="isLocal()">
-                    <a href="javascript:void(0)">
-                        <strong>LOCAL</strong>
-                    </a>
-                </li>
-                <li ng:if="!isLocal()">
-                    <a href="javascript:void(0)">
-                        <strong>PROD</strong>
+                <li>
+                    <a href="javascript:void(0)" ng-click="scan()">
+                        <i class="fa fa-barcode"></i>
+                        Skanuj karnet
                     </a>
                 </li>
             </ul>

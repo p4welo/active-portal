@@ -4,7 +4,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("newsListController", function ($scope, newsHttpClient, notificationService) {
+    module.controller("newsListController", ['$scope', 'newsHttpClient', 'notificationService', function ($scope, newsHttpClient, notificationService) {
 
         var EDIT_NEWS_KEY = 'edit';
 
@@ -55,5 +55,5 @@ define([
         $scope.resolveStatusCss = function (news) {
             return {'label-success': news.objectState == 'ACTIVE', 'label-danger': news.objectState == 'INACTIVE'}
         }
-    });
+    }]);
 });

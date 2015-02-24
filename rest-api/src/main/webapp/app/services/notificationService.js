@@ -3,7 +3,7 @@ define([
     'pnotify'
 ], function (module) {
 
-    module.service('notificationService', function () {
+    module.service('notificationService', [function () {
         var opts = {
             addclass: "stack-bottomright",
             stack: {dir1: "up", dir2: "left"},
@@ -32,6 +32,5 @@ define([
 
             new PNotify(opts);
         }
-    })
-
+    }])
 });

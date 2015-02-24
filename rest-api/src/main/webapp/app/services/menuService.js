@@ -2,7 +2,7 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('menuHttpClient', function ($resource) {
+    module.factory('menuHttpClient', ['$resource', function ($resource) {
         var GET_MENU_KEY = "rest/menu";
 
         return $resource(null, null, {
@@ -11,6 +11,5 @@ define([
                 method: 'GET'
             }
         })
-    })
-
+    }]);
 });
