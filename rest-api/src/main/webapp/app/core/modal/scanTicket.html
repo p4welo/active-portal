@@ -8,20 +8,13 @@
 <div class="modal-body" ng-init="focusInput()">
     <form class="form-horizontal" ng-submit="confirm(code)">
         <div class="form-group">
-            <label for="code" class="col-sm-2 control-label">
-                Kod
-            </label>
-
-            <div class="col-sm-10">
+            <div class="col-sm-10 col-sm-offset-1" ng:hide="customerLoading">
                 <input type="text" class="form-control" id="code" placeholder="Kod" ng:model="code"/>
+            </div>
+            <div class="col-sm-12 text-center" ng:show="customerLoading">
+                <i class="fa fa-spin fa-spinner"></i>
+                <span>Ładowanie...</span>
             </div>
         </div>
     </form>
-</div>
-<div class="modal-footer">
-    <button type="submit" class="btn btn-alt btn-primary" ng:click="confirm(code)" ng:class="{'disabled': code.length==0}">
-        Potwierdź
-    </button>
-    <button type="button" class="btn btn-alt btn-default pull-left" style="margin-left: 0" ng:click="cancel()">Anuluj
-    </button>
 </div>

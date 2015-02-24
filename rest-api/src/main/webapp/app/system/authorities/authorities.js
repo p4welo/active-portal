@@ -4,7 +4,7 @@ define([
     'services/notificationService'
 ], function (module) {
 
-    module.controller("authorityController", ['$scope, authorityHttpClient, notificationService', function ($scope, authorityHttpClient, notificationService) {
+    module.controller("authorityController", ['$scope', 'authorityHttpClient', 'notificationService', function ($scope, authorityHttpClient, notificationService) {
         $scope.roles = authorityHttpClient.findRoles();
         $scope.authorities = [];
 
