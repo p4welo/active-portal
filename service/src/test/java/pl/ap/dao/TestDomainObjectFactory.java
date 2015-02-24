@@ -167,7 +167,7 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         ticket.setEntrancePool(8);
         ticket.setEntrancesUsed(4);
         ticket.setStyleName("Joga");
-        ticket.setType(PassTypeEnum.ADULT_8_ENTRANCES_MONTH);
+        ticket.setType(TicketTypeEnum.ADULT_8_ENTRANCES_MONTH);
         return ticket;
     }
 }

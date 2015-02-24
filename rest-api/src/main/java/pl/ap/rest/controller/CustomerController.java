@@ -12,6 +12,7 @@ import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CustomerApiMappings;
 import pl.ap.rest.dto.CustomerDto;
 import pl.ap.service.ICustomerService;
+import pl.ap.service.ITicketService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +26,9 @@ public class CustomerController {
 
     @Resource
     private ICustomerService customerService;
+
+    @Resource
+    private ITicketService ticketService;
 
     @RequestMapping(value = CustomerApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -155,5 +159,18 @@ public class CustomerController {
         Assert.notNull(customer);
 
         return customerService.findSimilar(customer);
+    }
+
+    @RequestMapping(value = CustomerApiMappings.BUY_TICKET, method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Customer buyTicket(@PathVariable(ApiKeys.SID) String sid, @RequestBody Ticket ticket) {
+        LOGGER.info("buyTicket()");
+
+        Customer customer = customerService.getBySid(sid);
+        Assert.notNull(customer);
+        Assert.notNull(ticket);
+
+        ticketService.buy(customer, ticket);
+        return customer;
     }
 }

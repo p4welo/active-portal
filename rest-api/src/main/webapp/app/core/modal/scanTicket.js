@@ -3,7 +3,7 @@ define([
     'services/ticketService'
 ], function (module) {
 
-    module.controller('scanTicketDialogController', ['$scope', '$state', '$modalInstance', '$timeout', 'ticketHttpClient', function ($scope, $state, $modalInstance, $timeout, ticketHttpClient) {
+    module.controller('scanTicketDialogController', ['$scope', '$state', '$modalInstance', '$timeout', 'ticketHttpClient', 'customerFactory', function ($scope, $state, $modalInstance, $timeout, ticketHttpClient, customerFactory) {
 
         $scope.code = "";
         $scope.customerLoading = false;
@@ -16,6 +16,7 @@ define([
                 ticketHttpClient.findCustomerByCode({code: code}).$promise.then(
                     function (result) {
                         if (result != null && result.hasOwnProperty("sid")) {
+                            customerFactory.setCustomer(result);
                             $state.go("customerDetails", {sid: result.sid})
                         }
                         else {

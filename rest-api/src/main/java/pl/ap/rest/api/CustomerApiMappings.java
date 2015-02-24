@@ -29,4 +29,6 @@ public interface CustomerApiMappings {
     public static final String JOIN = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/join";
 
     public static final String SUBSCRIBE = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/subscribe";
+
+    public static final String BUY_TICKET = CUSTOMER_PREFIX + CommonApiMappings.SID_SUFFIX + "/ticket";
 }

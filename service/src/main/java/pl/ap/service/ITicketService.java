@@ -8,4 +8,6 @@ import pl.ap.domain.Ticket;
  */
 public interface ITicketService extends IIdentifiableService<Ticket> {
     Customer findCustomerByCode(String code);
+
+    void buy(Customer customer, Ticket ticket);
 }

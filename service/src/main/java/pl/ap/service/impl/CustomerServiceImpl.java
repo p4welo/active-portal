@@ -1,13 +1,13 @@
 package pl.ap.service.impl;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.*;
-import pl.ap.domain.Course;
-import pl.ap.domain.Customer;
-import pl.ap.domain.CustomerPresence;
-import pl.ap.domain.CustomerSubscription;
+import pl.ap.domain.*;
+import pl.ap.domain.enums.TicketTypeEnum;
 import pl.ap.service.ICustomerService;
+import pl.ap.service.ITicketService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,6 +29,9 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
     private ICourseDao courseDao;
 
     @Resource
+    private ITicketService ticketService;
+
+    @Resource
     private ICustomerSubscriptionDao customerSubscriptionDao;
 
     @Override
@@ -38,7 +41,7 @@ public class CustomerServiceImpl extends IdentifiableServiceImpl<Customer> imple
 
     @Override
     protected String[] getUpdateFields() {
-        return  new String[] {
+        return new String[]{
                 Customer.FIELD_OBJECT_STATE,
                 Customer.FIELD_FIRST_NAME,
                 Customer.FIELD_LAST_NAME,

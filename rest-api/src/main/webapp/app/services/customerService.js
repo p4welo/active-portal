@@ -55,6 +55,10 @@ define([
                 url: "rest/customer/:sid/subscribe",
                 method: 'PUT'
             },
+            buyTicket: {
+                url: "rest/customer/:sid/ticket",
+                method: 'PUT'
+            },
             findSimilar: {
                 url: "rest/customer/similar",
                 method: 'POST'

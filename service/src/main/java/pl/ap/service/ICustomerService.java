@@ -3,6 +3,7 @@ package pl.ap.service;
 import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
+import pl.ap.domain.Ticket;
 
 import java.util.List;
 

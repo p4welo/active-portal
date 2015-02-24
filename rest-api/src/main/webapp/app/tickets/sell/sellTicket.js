@@ -5,7 +5,7 @@ define([
     'services/customerService',
 ], function (module) {
 
-    module.controller("sellTicketController", ['$scope', 'ticketService', '$stateParams', 'customerHttpClient', '$modal', function ($scope, ticketService, $stateParams, customerHttpClient, $modal) {
+    module.controller("sellTicketController", ['$scope', 'ticketService', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', function ($scope, ticketService, $stateParams, customerHttpClient, $modal, $state, customerFactory) {
         $scope.code = $stateParams.code;
         $scope.tickets = ticketService.getTickets();
         $scope.newCustomer = {};
@@ -40,7 +40,7 @@ define([
         }
 
         $scope.confirm = function () {
-            $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'app/tickets/sell/modal/confirmTicketSale.html',
                 controller: "confirmTicketSaleDialogController",
                 resolve: {
@@ -50,6 +50,22 @@ define([
                     ticket: function () {
                         return $scope.ticket;
                     }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                if ($scope.existingCustomer) {
+                    customerHttpClient.buyTicket({sid: $scope.customer.sid}, {
+                        type: $scope.ticket.type,
+                        barcode: $scope.code
+                    }).$promise.then(
+                        function (result) {
+                            if (result != null && result.hasOwnProperty("sid")) {
+                                customerFactory.setCustomer(result);
+                                $state.go("customerDetails", {sid: result.sid});
+                            }
+                        }
+                    )
                 }
             });
         }

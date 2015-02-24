@@ -21,6 +21,7 @@ public class TicketDaoImpl extends IdentifiableDaoImpl<Ticket> implements ITicke
         Criteria criteria = createCriteria();
         criteria.add(Restrictions.eq(Ticket.FIELD_BARCODE, code));
         criteria.setProjection(Projections.property(Ticket.FIELD_CUSTOMER));
+        criteria.setMaxResults(1);
         return (Customer) criteria.uniqueResult();
     }
 }

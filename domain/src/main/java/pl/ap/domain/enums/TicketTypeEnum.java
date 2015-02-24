@@ -3,7 +3,7 @@ package pl.ap.domain.enums;
 /**
  * Created by parado on 2015-01-14.
  */
-public enum PassTypeEnum {
+public enum TicketTypeEnum {
     ADULT_1_ENTRANCE,
     ADULT_4_ENTRANCES_MONTH,
     ADULT_8_ENTRANCES_MONTH,

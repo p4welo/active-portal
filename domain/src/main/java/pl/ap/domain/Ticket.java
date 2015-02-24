@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import org.joda.time.DateTime;
 import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
-import pl.ap.domain.enums.PassTypeEnum;
+import pl.ap.domain.enums.TicketTypeEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -50,7 +50,7 @@ public class Ticket extends IdentifiableEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     @NotNull
-    private PassTypeEnum type;
+    private TicketTypeEnum type;
 
     @Column(name = "entrances_used", nullable = false)
     @NotNull
@@ -67,7 +67,7 @@ public class Ticket extends IdentifiableEntity {
     @Column(name = "style_name")
     private String styleName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     @ForeignKey(name = "customer_fk")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -85,11 +85,11 @@ public class Ticket extends IdentifiableEntity {
         this.purchaseDate = purchaseDate;
     }
 
-    public PassTypeEnum getType() {
+    public TicketTypeEnum getType() {
         return type;
     }
 
-    public void setType(PassTypeEnum type) {
+    public void setType(TicketTypeEnum type) {
         this.type = type;
     }
 

@@ -11,7 +11,6 @@ define([
             $modalInstance.dismiss('cancel');
         };
         $scope.confirm = function () {
-
             $modalInstance.close();
         };
     }]);
