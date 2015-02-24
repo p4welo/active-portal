@@ -14,7 +14,8 @@ define([
     'customers/index',
     'news/index',
     'schedule/index',
-    'system/index'
+    'system/index',
+    'tickets/index'
 ], function () {
 
     return angular.module('activePortal', [
@@ -29,6 +30,7 @@ define([
         'activePortal.news',
         'activePortal.customers',
         'activePortal.services',
+        'activePortal.tickets',
 
         'activePortal.core',
         'activePortal.services'
@@ -188,12 +190,10 @@ define([
                 return $location.host()=='localhost'
             }
             $rootScope.scan = function () {
-                var modalInstance = $modal.open({
+                $modal.open({
                     templateUrl: 'app/core/modal/scanTicket.html',
-                    controller: "scanTicketDialogController"
-                });
-
-                modalInstance.result.then(function () {
+                    controller: "scanTicketDialogController",
+                    size: 'sm'
                 });
             }
         }]);

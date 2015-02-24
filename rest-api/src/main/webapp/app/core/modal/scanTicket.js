@@ -19,7 +19,7 @@ define([
                             $state.go("customerDetails", {sid: result.sid})
                         }
                         else {
-                            $state.go("dashboard");
+                            $state.go("sellTicket", {code: code});
                         }
                         $modalInstance.close();
                     }
