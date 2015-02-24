@@ -14,6 +14,8 @@ public interface ApiKeys {
 
     public static final String SID = "sid";
 
+    public static final String CODE = "code";
+
     public static final String ITEM = "item";
 
     public static final String ROLE = "role";

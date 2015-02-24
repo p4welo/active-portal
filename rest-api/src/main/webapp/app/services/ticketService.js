@@ -2,6 +2,16 @@ define([
     'services/module'
 ], function (module) {
 
+    module.factory('ticketHttpClient', ['$resource', function ($resource) {
+
+        return $resource(null, null, {
+            findCustomerByCode: {
+                url: "rest/ticket/:code/customer",
+                method: 'GET'
+            }
+        });
+    }])
+
     module.factory('ticketService', [function () {
 
         return {

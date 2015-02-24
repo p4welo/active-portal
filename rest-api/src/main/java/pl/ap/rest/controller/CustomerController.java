@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
+import pl.ap.domain.Ticket;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CustomerApiMappings;
 import pl.ap.rest.dto.CustomerDto;

@@ -1,7 +1,11 @@
 package pl.ap.dao.impl;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import pl.ap.dao.ITicketDao;
+import pl.ap.domain.Customer;
 import pl.ap.domain.Ticket;
 
 /**
@@ -11,4 +15,12 @@ import pl.ap.domain.Ticket;
 public class TicketDaoImpl extends IdentifiableDaoImpl<Ticket> implements ITicketDao {
 
     public static final String BEAN_NAME = "ticketDao";
+
+    @Override
+    public Customer findCustomerByCode(String code) {
+        Criteria criteria = createCriteria();
+        criteria.add(Restrictions.eq(Ticket.FIELD_BARCODE, code));
+        criteria.setProjection(Projections.property(Ticket.FIELD_CUSTOMER));
+        return (Customer) criteria.uniqueResult();
+    }
 }

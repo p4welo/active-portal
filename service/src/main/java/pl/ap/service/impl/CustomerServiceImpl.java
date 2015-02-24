@@ -7,7 +7,6 @@ import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
 import pl.ap.domain.CustomerSubscription;
-import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.service.ICustomerService;
 
 import javax.annotation.Resource;

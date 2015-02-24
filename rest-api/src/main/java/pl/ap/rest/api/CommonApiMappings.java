@@ -6,6 +6,8 @@ package pl.ap.rest.api;
 public interface CommonApiMappings {
     public static final String SID_SUFFIX = "/{" + ApiKeys.SID + "}";
 
+    public static final String CODE_SUFFIX = "/{" + ApiKeys.CODE + "}";
+
     public static final String FIND_ALL_SUFFIX = "/list";
 
     public static final String CREATE_SUFFIX = "/create";

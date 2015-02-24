@@ -1,8 +1,10 @@
 package pl.ap.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.ITicketDao;
+import pl.ap.domain.Customer;
 import pl.ap.domain.Ticket;
 import pl.ap.service.ITicketService;
 
@@ -31,5 +33,11 @@ public class TicketServiceImpl extends IdentifiableServiceImpl<Ticket> implement
                 Ticket.FIELD_ENTRANCES_USED,
                 Ticket.FIELD_OBJECT_STATE
         };
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Customer findCustomerByCode(String code) {
+        return ticketDao.findCustomerByCode(code);
     }
 }

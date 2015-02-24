@@ -1,8 +1,9 @@
 define([
-    'core/module'
+    'core/module',
+    'services/ticketService'
 ], function (module) {
 
-    module.controller('scanTicketDialogController', ['$scope', '$state', '$modalInstance', '$timeout', function ($scope, $state, $modalInstance, $timeout) {
+    module.controller('scanTicketDialogController', ['$scope', '$state', '$modalInstance', '$timeout', 'ticketHttpClient', function ($scope, $state, $modalInstance, $timeout, ticketHttpClient) {
 
         $scope.code = "";
         $scope.customerLoading = false;
@@ -11,13 +12,25 @@ define([
         };
         $scope.confirm = function (code) {
             $scope.customerLoading = true;
-//                $modalInstance.close();
-//            }
+            if (code != null) {
+                ticketHttpClient.findCustomerByCode({code: code}).$promise.then(
+                    function (result) {
+                        if (result != null && result.hasOwnProperty("sid")) {
+                            $state.go("customerDetails", {sid: result.sid})
+                        }
+                        else {
+                            $state.go("dashboard");
+                        }
+                        $modalInstance.close();
+                    }
+                )
+            }
         };
         $scope.focusInput = function () {
             $timeout(function () {
                 $("#code").focus();
             }, 100);
         };
-    }])
+    }
+    ])
 });
