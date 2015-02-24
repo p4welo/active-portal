@@ -36,13 +36,21 @@ define([
                 && $scope.newCustomer.mobile != null;
 
             var validExisting = $scope.existingCustomer && $scope.customer != null;
-            return validNew || validExisting;
+            return $scope.ticket != null && (validNew || validExisting);
         }
 
         $scope.confirm = function () {
             $modal.open({
                 templateUrl: 'app/tickets/sell/modal/confirmTicketSale.html',
-                controller: "confirmTicketSaleDialogController"
+                controller: "confirmTicketSaleDialogController",
+                resolve: {
+                    customer: function () {
+                        return $scope.existingCustomer ? $scope.customer : $scope.newCustomer;
+                    },
+                    ticket: function () {
+                        return $scope.ticket;
+                    }
+                }
             });
         }
     }]);

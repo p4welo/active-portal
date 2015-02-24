@@ -130,8 +130,18 @@
                     </div>
                 </form>
             </div>
-            <button ng:click="confirm()">confirm</button>
         </div>
+    </div>
+
+    <div class="block col-xs-12" ng:if="isValidCustomer()">
+        <ul class="nav-horizontal pull-right">
+            <li>
+                <a href="javascript:void(0)" ng:click="confirm()">
+                    <i class="fa fa-arrow-right"></i>
+                    Podsumowanie
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 

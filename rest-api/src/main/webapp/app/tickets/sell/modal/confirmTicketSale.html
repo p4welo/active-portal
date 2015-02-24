@@ -6,6 +6,20 @@
     <h4 class="modal-title" id="add-modal-label">Podsumowanie sprzedaży</h4>
 </div>
 <div class="modal-body">
-   <p>Klient:</p>
-   <p>Karnet:</p>
+    <h3>
+        <span ng:bind="customer.firstName"></span>
+        <span ng:bind="customer.lastName"></span>
+    </h3>
+    <h4>
+        {{ticket.type | translate | uppercase}}
+    </h4>
+    <h4 class="text-right">
+        Cena:
+        <strong ng:bind="ticket.price"></strong>
+    </h4>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-alt btn-primary" ng:click="confirm()">Potwierdź</button>
+    <button type="button" class="btn btn-alt btn-default pull-left" style="margin-left: 0" ng:click="cancel()">Anuluj
+    </button>
 </div>
