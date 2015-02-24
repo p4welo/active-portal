@@ -158,16 +158,16 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         return subscription;
     }
 
-    public static Pass getPass(Customer customer) {
-        Pass pass = new Pass();
-        pass.setSid(SidUtils.generate());
-        pass.setObjectState(ObjectStateEnum.ACTIVE);
-        pass.setCustomer(customer);
-        pass.setPurchaseDate(new DateTime());
-        pass.setEntrancePool(8);
-        pass.setEntrancesUsed(4);
-        pass.setStyleName("Joga");
-        pass.setType(PassTypeEnum.ADULT_8_ENTRANCES_MONTH);
-        return pass;
+    public static Ticket getPass(Customer customer) {
+        Ticket ticket = new Ticket();
+        ticket.setSid(SidUtils.generate());
+        ticket.setObjectState(ObjectStateEnum.ACTIVE);
+        ticket.setCustomer(customer);
+        ticket.setPurchaseDate(new DateTime());
+        ticket.setEntrancePool(8);
+        ticket.setEntrancesUsed(4);
+        ticket.setStyleName("Joga");
+        ticket.setType(PassTypeEnum.ADULT_8_ENTRANCES_MONTH);
+        return ticket;
     }
 }

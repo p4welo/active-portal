@@ -18,8 +18,8 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "pass")
-@Unique(fields = Pass.FIELD_SID, message = Pass.NON_UNIQUE_SID_MESSAGE, insensitive = false)
-public class Pass extends IdentifiableEntity {
+@Unique(fields = Ticket.FIELD_SID, message = Ticket.NON_UNIQUE_SID_MESSAGE, insensitive = false)
+public class Ticket extends IdentifiableEntity {
 
     public static final String FIELD_PURCHASE_DATE = "purchaseDate";
 
