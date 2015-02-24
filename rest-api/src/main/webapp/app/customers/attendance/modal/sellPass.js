@@ -1,10 +1,10 @@
 define([
     'customers/module',
     'services/customerService',
-    'services/passService'
+    'services/ticketService'
 ], function (module) {
 
-    module.controller('sellPassController', ['$scope', '$modalInstance', 'customerHttpClient', 'passService', function ($scope, $modalInstance, customerHttpClient, passService) {
+    module.controller('sellPassController', ['$scope', '$modalInstance', 'customerHttpClient', 'ticketService', function ($scope, $modalInstance, customerHttpClient, ticketService) {
         $scope.cancel = function () {
             $modalInstance.dismiss();
         }
@@ -39,7 +39,7 @@ define([
         }
 
 //        PASS
-        $scope.passes = passService.getPasses();
+        $scope.tickets = ticketService.getTickets();
         $scope.customerPage = function () {
             $scope.page = 0;
         }

@@ -2,10 +2,10 @@ define([
     'services/module'
 ], function (module) {
 
-    module.factory('passService', [function () {
+    module.factory('ticketService', [function () {
 
         return {
-            getPasses: function () {
+            getTickets: function () {
                 return [
                     {
                         type: "ADULT_1_ENTRANCE",

@@ -139,9 +139,9 @@
                 <legend>Dorośli</legend>
                 <table class="table table-striped table-hover">
                     <tbody>
-                    <tr ng:repeat="pass in passes | filter: {group: 'PASS_ADULT'}">
-                        <td>{{ pass.type | translate }}</td>
-                        <td class="text-right">{{ pass.price }}</td>
+                    <tr ng:repeat="ticket in tickets | filter: {group: 'PASS_ADULT'}">
+                        <td>{{ ticket.type | translate }}</td>
+                        <td class="text-right">{{ ticket.price }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -151,9 +151,9 @@
                 <legend>Dzieci</legend>
                 <table class="table table-striped table-hover">
                     <tbody>
-                    <tr ng:repeat="pass in passes | filter: {group: 'PASS_CHILD'}">
-                        <td>{{ pass.type | translate }}</td>
-                        <td class="text-right">{{ pass.price }}</td>
+                    <tr ng:repeat="ticket in tickets | filter: {group: 'PASS_CHILD'}">
+                        <td>{{ ticket.type | translate }}</td>
+                        <td class="text-right">{{ ticket.price }}</td>
                     </tr>
                     </tbody>
                 </table>
