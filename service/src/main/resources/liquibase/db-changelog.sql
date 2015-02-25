@@ -452,3 +452,8 @@ CREATE TABLE course_instructor_relation (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE course_instructor_relation ADD INDEX course_instructor_relation_course_idx (course_id);
 ALTER TABLE course_instructor_relation ADD INDEX course_instructor_relation_instructor_idx (instructor_id);
+
+--changeset pawel:36
+ALTER TABLE customer DROP COLUMN mobile;
+ALTER TABLE customer DROP COLUMN mobile2;
+ALTER TABLE customer DROP COLUMN email;

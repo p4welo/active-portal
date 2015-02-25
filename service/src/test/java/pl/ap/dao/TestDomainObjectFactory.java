@@ -82,7 +82,6 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         customer.setSid(generate());
         customer.setObjectState(ObjectStateEnum.ACTIVE);
         customer.setFirstName(buildLongString(14));
-        customer.setMobile(buildLongString(9));
         customer.setGender(GenderEnum.MALE);
         return customer;
     }
