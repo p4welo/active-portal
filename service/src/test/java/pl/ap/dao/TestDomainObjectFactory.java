@@ -169,4 +169,12 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         ticket.setType(TicketTypeEnum.ADULT_8_ENTRANCES_MONTH);
         return ticket;
     }
+
+    public static TicketTypeGroup getTicketTypeGroup() {
+        TicketTypeGroup group = new TicketTypeGroup();
+        group.setSid(SidUtils.generate());
+        group.setObjectState(ObjectStateEnum.ACTIVE);
+        group.setName("Dorośli");
+        return group;
+    }
 }

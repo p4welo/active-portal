@@ -170,7 +170,7 @@
     </div>
     <div class="col-sm-6" ng:if="selected.style.edit">
         <select id="style" ng:model="selected.style.value"
-                ng:options="s.name for s in styles track by s.sid"
+                ng:options="s.name for s in styles |orderBy: 'name' track by s.sid"
                 class="form-control"
                 ng:disabled="selected.style.saving"></select>
 

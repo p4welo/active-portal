@@ -457,3 +457,13 @@ ALTER TABLE course_instructor_relation ADD INDEX course_instructor_relation_inst
 ALTER TABLE customer DROP COLUMN mobile;
 ALTER TABLE customer DROP COLUMN mobile2;
 ALTER TABLE customer DROP COLUMN email;
+
+--changeset pawel:37
+CREATE TABLE ticket_type_group (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  object_state INT(4) NOT NULL,
+  sid VARCHAR(32) NOT NULL,
+  name VARCHAR(128) NOT NULL,
+  UNIQUE (sid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE ticket_type_group ADD INDEX ticket_type_group_sid_idx (sid);
