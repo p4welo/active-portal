@@ -21,7 +21,7 @@
             <div class="col-sm-9">
                 <select size="1" class="form-control" name="example-select" id="newCategory"
                         ng:model="new.category.sid">
-                    <option ng:repeat="category in categories" value="{{category.sid}}">{{category.name}}
+                    <option ng:repeat="category in categories | orderBy: 'name'" value="{{category.sid}}">{{category.name}}
                     </option>
                 </select>
             </div>
