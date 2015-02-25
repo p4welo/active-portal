@@ -5,103 +5,229 @@
                 <i class="gi gi-folder_open"></i>Kategorie zajęć<br>
             </h1>
         </div>
-    </div>
-
-    <div class="col-xs-12 col-lg-4 pull-right" ng:if="selected != null">
-        <div class="block">
-            <div class="block-title">
-                <div class="block-options pull-right">
-                    <a ng:click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"
-                       ng:class="{'active': selected.edit}">
-                        <span ng:if="!selected.edit">
-                            <i class="fa fa-pencil"></i>
-                            Edytuj
-                        </span>
-                        <span ng:if="selected.edit">
-                            <i class="fa fa-close"></i>
-                            Anuluj
-                        </span>
-                    </a>
-                </div>
-                <h2>
-                    <i class="gi gi-folder_open"></i>
-                </h2>
+        <header class="navbar navbar-default">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav-custom visible-xs">
+                    <li>
+                        <a aria-expanded="false" class="collapsed" href="javascript:void(0)" data-toggle="collapse" data-target="#horizontal-menu-collapse">Menu</a>
+                    </li>
+                </ul>
             </div>
-
-            <form class="form-horizontal form-bordered" method="post">
-
-                <div class="form-group">
-                    <label for="name" class="col-xs-3 control-label">Symbol</label>
-
-                    <div class="col-xs-9" ng:if="selected.edit">
-                        <input type="text" placeholder="Symbol" class="form-control" id="code" ng:model="selected.code"/>
-                    </div>
-                    <div class="col-xs-9" ng:if="!selected.edit">
-                        <p class="form-control-static" ng:bind="selected.code"></p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="col-xs-3 control-label">Nazwa</label>
-
-                    <div class="col-xs-9" ng:if="selected.edit">
-                        <input type="text" placeholder="Nazwa" class="form-control" id="name" ng:model="selected.name"/>
-                    </div>
-                    <div class="col-xs-9" ng:if="!selected.edit">
-                        <p class="form-control-static" ng:bind="selected.name"></p>
-                    </div>
-                </div>
-
-                <div class="form-group form-actions" ng:if="selected.edit">
-                    <div class="col-xs-9 col-xs-offset-3">
-                        <button class="btn btn-sm btn-primary" ng:click="update(selected)">
-                            <i class="fa fa-check"></i>
-                            Zapisz
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div style="height: 1px;" aria-expanded="false" id="horizontal-menu-collapse"
+                 class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="javascript:void(0)" ng:click="add()">
+                            <i class="fa fa-plus-circle"></i>
+                            Dodaj kategorię
+                        </a>
+                    </li>
+                    <li ng:class="{'disabled': selected == null}">
+                        <a href="javascript:void(0)" ng:click="delete(selected)">
+                            <i class="fa fa-trash"></i>
+                            Usuń
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
     </div>
 
-    <div class="block col-xs-12 col-lg-8 pull-left">
+    <div class="block col-xs-12">
         <div class="table-options clearfix">
-            <div class="col-xs-4 pull-left">
-                <button class="btn btn-success" ng:click="add()">
-                    <i class="fa fa-plus-circle"></i>
-                    Dodaj kategorię
-                </button>
-            </div>
             <div class="col-xs-6 col-sm-4 pull-right">
                 <div class="input-group">
                     <input type="text" ng:model="filterName" placeholder="Szukaj..." class="form-control">
-                             <span class="input-group-addon">
-                                <i class="fa fa-search"></i>
-                            </span>
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
                 </div>
             </div>
         </div>
-        <table class="table table-editable table-hover">
+        <div class="row text-center" ng:if="roomLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <span>Ładowanie...</span>
+        </div>
+        <p ng:if="!roomLoading && rooms.length == 0">Brak wyników spełniających kryteria.</p>
+        <table class="table table-editable table-hover" ng:if="!roomLoading">
             <thead>
             <tr>
-                <th class="text-center" style="width: 50px">Id</th>
-                <th>Symbol</th>
-                <th>Nazwa</th>
-                <th>Status</th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('code')">
+                        Kod
+                        <i ng:class="sortIcon('code')"></i>
+                    </a>
+                </th>
+                <th>
+                    <a href="javascript:void(0)" ng:click="toggleSort('name')">
+                        Nazwa
+                        <i ng:class="sortIcon('name')"></i>
+                    </a>
+                </th>
             </tr>
             </thead>
-            <tbody>
-            <tr ng:repeat="category in categories | filter: filterName" ng:click="select(category)" ng:class="{'selected':selected != null && category.sid == selected.sid}">
-                <td ng:bind="category.id"></td>
+            <tbody ng:repeat="category in categories | filter: filterName | orderBy:sort.column:sort.descending">
+            <tr ng:click="select(category)" ng:class="{'selected': isEqual(selected, category)}">
                 <td ng:bind="category.code"></td>
                 <td ng:bind="category.name"></td>
-                <td>
-                    <span class="label" ng:class="resolveStatusCss(category)">
-                        {{ category.objectState | translate }}
-                    </span>
+            </tr>
+            <tr class="table-content" ng:if="isEqual(selected, category)">
+                <td colspan="3">
+                    <div class="block">
+                        <div class="col-sm-6">
+                            <div class="form-horizontal" method="post">
+
+                                <div class="form-group">
+                                    <label for="code" class="col-sm-3 control-label">Kod</label>
+
+                                    <div class="col-sm-9" ng:if="selected.edit">
+                                        <input type="text" placeholder="Kod" class="form-control" id="code" ng:model="selected.code"/>
+                                    </div>
+                                    <div class="col-sm-9" ng:if="!selected.edit">
+                                        <p class="form-control-static" ng:bind="selected.code"></p>
+                                    </div>
+                                </div>
+
+                                <form class="form-group">
+                                    <label for="name" class="col-sm-3 control-label"
+                                           ng:click="edit(selected, 'name')"
+                                           ng:mouseover="hover(selected, 'name')"
+                                           ng:mouseleave="leave(selected, 'name')">Nazwa</label>
+                                    <div class="col-sm-9" ng:if="!selected.name.edit">
+                                        <p class="form-control-static">
+                                                <span class="btn-link" ng:bind="selected.name.value"
+                                                      ng:click="edit(selected, 'name')"
+                                                      ng:mouseover="hover(selected, 'name')"
+                                                      ng:mouseleave="leave(selected, 'name')"></span>
+                                            <i class="fa fa-edit" ng:show="selected.name.hover"></i>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6" ng:if="selected.name.edit">
+                                        <input type="text" placeholder="Nazwa" class="form-control" id="name"
+                                               ng:model="selected.name.value"/>
+                                    </div>
+                                    <div class="col-sm-3" ng:if="selected.name.edit">
+                                        <div class="btn" ng:if="selected.name.saving">
+                                            <i class="fa fa-spin fa-spinner"></i>
+                                        </div>
+                                        <div ng:if="!selected.name.saving">
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                               ng:click="cancel(selected, 'name')">
+                                                <i class="fa fa-remove"></i>
+                                            </a>
+                                            <button class="btn btn-alt btn-primary"
+                                                    ng:click="save(selected, 'name')">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
+
+
+    <!--<div class="col-xs-12 col-lg-4 pull-right" ng:if="selected != null">-->
+        <!--<div class="block">-->
+            <!--<div class="block-title">-->
+                <!--<div class="block-options pull-right">-->
+                    <!--<a ng:click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"-->
+                       <!--ng:class="{'active': selected.edit}">-->
+                        <!--<span ng:if="!selected.edit">-->
+                            <!--<i class="fa fa-pencil"></i>-->
+                            <!--Edytuj-->
+                        <!--</span>-->
+                        <!--<span ng:if="selected.edit">-->
+                            <!--<i class="fa fa-close"></i>-->
+                            <!--Anuluj-->
+                        <!--</span>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<h2>-->
+                    <!--<i class="gi gi-folder_open"></i>-->
+                <!--</h2>-->
+            <!--</div>-->
+
+            <!--<form class="form-horizontal form-bordered" method="post">-->
+
+                <!--<div class="form-group">-->
+                    <!--<label for="name" class="col-xs-3 control-label">Symbol</label>-->
+
+                    <!--<div class="col-xs-9" ng:if="selected.edit">-->
+                        <!--<input type="text" placeholder="Symbol" class="form-control" id="code" ng:model="selected.code"/>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-9" ng:if="!selected.edit">-->
+                        <!--<p class="form-control-static" ng:bind="selected.code"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="form-group">-->
+                    <!--<label for="name" class="col-xs-3 control-label">Nazwa</label>-->
+
+                    <!--<div class="col-xs-9" ng:if="selected.edit">-->
+                        <!--<input type="text" placeholder="Nazwa" class="form-control" id="name" ng:model="selected.name"/>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-9" ng:if="!selected.edit">-->
+                        <!--<p class="form-control-static" ng:bind="selected.name"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="form-group form-actions" ng:if="selected.edit">-->
+                    <!--<div class="col-xs-9 col-xs-offset-3">-->
+                        <!--<button class="btn btn-sm btn-primary" ng:click="update(selected)">-->
+                            <!--<i class="fa fa-check"></i>-->
+                            <!--Zapisz-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="block col-xs-12 col-lg-8 pull-left">-->
+        <!--<div class="table-options clearfix">-->
+            <!--<div class="col-xs-4 pull-left">-->
+                <!--<button class="btn btn-success" ng:click="add()">-->
+                    <!--<i class="fa fa-plus-circle"></i>-->
+                    <!--Dodaj kategorię-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-4 pull-right">-->
+                <!--<div class="input-group">-->
+                    <!--<input type="text" ng:model="filterName" placeholder="Szukaj..." class="form-control">-->
+                             <!--<span class="input-group-addon">-->
+                                <!--<i class="fa fa-search"></i>-->
+                            <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<table class="table table-editable table-hover">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th class="text-center" style="width: 50px">Id</th>-->
+                <!--<th>Symbol</th>-->
+                <!--<th>Nazwa</th>-->
+                <!--<th>Status</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr ng:repeat="category in categories | filter: filterName" ng:click="select(category)" ng:class="{'selected':selected != null && category.sid == selected.sid}">-->
+                <!--<td ng:bind="category.id"></td>-->
+                <!--<td ng:bind="category.code"></td>-->
+                <!--<td ng:bind="category.name"></td>-->
+                <!--<td>-->
+                    <!--<span class="label" ng:class="resolveStatusCss(category)">-->
+                        <!--{{ category.objectState | translate }}-->
+                    <!--</span>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
 </div>
