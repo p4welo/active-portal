@@ -18,10 +18,15 @@ define([
                 templateUrl: "app/customers/customerBase/customerBase.html",
                 controller: "customerBaseController"
             })
-            .state('customerDetails', {
-                url: "/customer/:sid/details",
-                templateUrl: "app/customers/customerDetails/customerDetails.html",
-                controller: "customerDetailsController"
+            .state('customerProfile', {
+                url: "/customer/:sid/profile",
+                templateUrl: "app/customers/profile/customerProfile.html",
+                controller: "customerProfileController"
+            })
+            .state('customerCard', {
+                url: "/customer/:sid/card",
+                templateUrl: "app/customers/card/customerCard.html",
+                controller: "customerCardController"
             });
     });
 });

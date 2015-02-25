@@ -17,7 +17,7 @@ define([
                     function (result) {
                         if (result != null && result.hasOwnProperty("sid")) {
                             customerFactory.setCustomer(result);
-                            $state.go("customerDetails", {sid: result.sid})
+                            $state.go("customerCard", {sid: result.sid})
                         }
                         else {
                             $state.go("sellTicket", {code: code});

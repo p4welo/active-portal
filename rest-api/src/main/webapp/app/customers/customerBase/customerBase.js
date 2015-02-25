@@ -67,9 +67,9 @@ define([
                 });
         }
 
-        $scope.customerDetails = function (customer) {
+        $scope.customerProfile = function (customer) {
             customerFactory.setCustomer(customer);
-            $state.go("customerDetails", {sid: customer.sid})
+            $state.go("customerProfile", {sid: customer.sid})
         }
     }]);
 });

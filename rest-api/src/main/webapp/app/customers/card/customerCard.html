@@ -1,0 +1,103 @@
+<div class="animated fadeIn">
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-user"></i>
+                <span ng:bind="customer.firstName"></span>
+                <span ng:bind="customer.lastName"></span>
+                <br>
+            </h1>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xs-12 pull-right">
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i>
+            <strong>Ostatnie</strong> zajęcia w karnecie!
+        </div>
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i>
+            Klient z długim stażem - <strong>Zaproponuj rabat</strong>
+        </div>
+        <div class="alert alert-warning">
+            <i class="fa fa-question-circle"></i>
+            <strong>Uzupełnij</strong> dane kontaktowe.
+        </div>
+        <div class="alert alert-success">
+            <i class="fa fa-info-circle"></i>
+            Za <strong>3 dni</strong> klient obchodzi urodziny.
+        </div>
+
+        <div class="block">
+            <div class="block-title">
+                <h4>Aktualne karnety</h4>
+            </div>
+            <table class="table">
+                <thead>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Karnet OPEN</td>
+                    <td>3</td>
+                    <td>/</td>
+                    <td>4</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xs-12 pull-left">
+        <div class="">
+            <a href="javascript:void(0)" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                        <i class="fa fa-sign-in"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        <strong>Wejście</strong> na zajęcia<br>
+                        <small>do których klient jest zapisany</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+        <div class="">
+            <a href="javascript:void(0)" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                        <i class="fa fa-flash"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Szybki <strong>zapis</strong><br>
+                        <small>do grupy zajęciowej</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="">
+            <a href="javascript:void(0)" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                        <i class="fa fa-coffee"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        <strong>Sklepik</strong>
+                        <small>zakupy</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+        <div class="">
+            <a href="javascript:void(0)" class="widget widget-hover-effect1" ng:click="customerProfile()">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                        <i class="gi gi-picture"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Przejdź do <strong>profilu</strong>
+                        <small>szczegóły klienta</small>
+                    </h3>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

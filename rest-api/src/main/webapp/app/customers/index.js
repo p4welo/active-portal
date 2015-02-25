@@ -1,5 +1,6 @@
 define([
     "customers/customerBase/customerBase",
     "customers/attendance/attendance",
-    "customers/customerDetails/customerDetails"
+    "customers/profile/customerProfile",
+    "customers/card/customerCard"
 ], function () {});
