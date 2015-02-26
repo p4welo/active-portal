@@ -4,6 +4,8 @@ define([
 ], function (module) {
 
     module.controller("customerCardController", ['$scope', '$stateParams', '$state', 'customerHttpClient', function ($scope, $stateParams, $state, customerHttpClient) {
+        $scope.ticketCode = $stateParams.code;
+
         customerHttpClient.get({sid: $stateParams.sid}).$promise.then(
             function (result) {
                 $scope.customer = result;

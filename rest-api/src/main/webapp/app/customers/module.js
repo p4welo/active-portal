@@ -24,7 +24,7 @@ define([
                 controller: "customerProfileController"
             })
             .state('customerCard', {
-                url: "/customer/:sid/card",
+                url: "/customer/:sid/card/:code",
                 templateUrl: "app/customers/card/customerCard.html",
                 controller: "customerCardController"
             });
