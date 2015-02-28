@@ -2,7 +2,7 @@ define([
     'tickets/module',
     'tickets/sell/modal/confirmTicketSale',
     'services/ticketService',
-    'services/customerService',
+    'services/customerService'
 ], function (module) {
 
     module.controller("sellTicketController", ['$scope', 'ticketService', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', function ($scope, ticketService, $stateParams, customerHttpClient, $modal, $state, customerFactory) {
