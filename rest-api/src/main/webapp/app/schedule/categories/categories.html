@@ -22,7 +22,7 @@
                             Dodaj kategorię
                         </a>
                     </li>
-                    <li ng:class="{'disabled': selected == null}">
+                    <li ng:class="{'disabled': selected == undefined}">
                         <a href="javascript:void(0)" ng:click="delete(selected)">
                             <i class="fa fa-trash"></i>
                             Usuń
@@ -130,104 +130,4 @@
             </tbody>
         </table>
     </div>
-
-
-
-    <!--<div class="col-xs-12 col-lg-4 pull-right" ng:if="selected != null">-->
-        <!--<div class="block">-->
-            <!--<div class="block-title">-->
-                <!--<div class="block-options pull-right">-->
-                    <!--<a ng:click="selected.edit = !selected.edit" class="btn-alt btn btn-success enable-tooltip"-->
-                       <!--ng:class="{'active': selected.edit}">-->
-                        <!--<span ng:if="!selected.edit">-->
-                            <!--<i class="fa fa-pencil"></i>-->
-                            <!--Edytuj-->
-                        <!--</span>-->
-                        <!--<span ng:if="selected.edit">-->
-                            <!--<i class="fa fa-close"></i>-->
-                            <!--Anuluj-->
-                        <!--</span>-->
-                    <!--</a>-->
-                <!--</div>-->
-                <!--<h2>-->
-                    <!--<i class="gi gi-folder_open"></i>-->
-                <!--</h2>-->
-            <!--</div>-->
-
-            <!--<form class="form-horizontal form-bordered" method="post">-->
-
-                <!--<div class="form-group">-->
-                    <!--<label for="name" class="col-xs-3 control-label">Symbol</label>-->
-
-                    <!--<div class="col-xs-9" ng:if="selected.edit">-->
-                        <!--<input type="text" placeholder="Symbol" class="form-control" id="code" ng:model="selected.code"/>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-                        <!--<p class="form-control-static" ng:bind="selected.code"></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<div class="form-group">-->
-                    <!--<label for="name" class="col-xs-3 control-label">Nazwa</label>-->
-
-                    <!--<div class="col-xs-9" ng:if="selected.edit">-->
-                        <!--<input type="text" placeholder="Nazwa" class="form-control" id="name" ng:model="selected.name"/>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-9" ng:if="!selected.edit">-->
-                        <!--<p class="form-control-static" ng:bind="selected.name"></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<div class="form-group form-actions" ng:if="selected.edit">-->
-                    <!--<div class="col-xs-9 col-xs-offset-3">-->
-                        <!--<button class="btn btn-sm btn-primary" ng:click="update(selected)">-->
-                            <!--<i class="fa fa-check"></i>-->
-                            <!--Zapisz-->
-                        <!--</button>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="block col-xs-12 col-lg-8 pull-left">-->
-        <!--<div class="table-options clearfix">-->
-            <!--<div class="col-xs-4 pull-left">-->
-                <!--<button class="btn btn-success" ng:click="add()">-->
-                    <!--<i class="fa fa-plus-circle"></i>-->
-                    <!--Dodaj kategorię-->
-                <!--</button>-->
-            <!--</div>-->
-            <!--<div class="col-xs-6 col-sm-4 pull-right">-->
-                <!--<div class="input-group">-->
-                    <!--<input type="text" ng:model="filterName" placeholder="Szukaj..." class="form-control">-->
-                             <!--<span class="input-group-addon">-->
-                                <!--<i class="fa fa-search"></i>-->
-                            <!--</span>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<table class="table table-editable table-hover">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th class="text-center" style="width: 50px">Id</th>-->
-                <!--<th>Symbol</th>-->
-                <!--<th>Nazwa</th>-->
-                <!--<th>Status</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr ng:repeat="category in categories | filter: filterName" ng:click="select(category)" ng:class="{'selected':selected != null && category.sid == selected.sid}">-->
-                <!--<td ng:bind="category.id"></td>-->
-                <!--<td ng:bind="category.code"></td>-->
-                <!--<td ng:bind="category.name"></td>-->
-                <!--<td>-->
-                    <!--<span class="label" ng:class="resolveStatusCss(category)">-->
-                        <!--{{ category.objectState | translate }}-->
-                    <!--</span>-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
 </div>

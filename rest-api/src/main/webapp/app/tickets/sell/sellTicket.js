@@ -13,31 +13,31 @@ define([
         $scope.existingCustomer = true;
         $scope.setExistingCustomer = function (isExistingCustomer) {
             $scope.existingCustomer = isExistingCustomer;
-        }
+        };
         $scope.selectCustomer = function (customer) {
             if ($scope.customer == customer) {
-                $scope.customer = null;
+                $scope.customer = undefined;
                 return;
             }
             $scope.customer = customer;
-        }
+        };
         $scope.selectType = function (ticket) {
             if ($scope.ticket == ticket) {
-                $scope.ticket = null;
+                $scope.ticket = undefined;
                 return;
             }
             $scope.ticket = ticket;
-        }
+        };
         $scope.isValidCustomer = function () {
-            var validNew = !$scope.existingCustomer
-                && $scope.newCustomer.firstName != null
-                && $scope.newCustomer.lastName != null
-                && $scope.newCustomer.gender != null
-                && $scope.newCustomer.mobile != null;
+            var validNew = !$scope.existingCustomer &&
+                $scope.newCustomer.firstName !== undefined &&
+                $scope.newCustomer.lastName !== undefined &&
+                $scope.newCustomer.gender !== undefined &&
+                $scope.newCustomer.mobile !== undefined;
 
-            var validExisting = $scope.existingCustomer && $scope.customer != null;
-            return $scope.ticket != null && (validNew || validExisting);
-        }
+            var validExisting = $scope.existingCustomer && $scope.customer !== undefined;
+            return $scope.ticket !== undefined && (validNew || validExisting);
+        };
 
         $scope.confirm = function () {
             var modalInstance = $modal.open({
@@ -60,14 +60,14 @@ define([
                         barcode: $scope.code
                     }).$promise.then(
                         function (result) {
-                            if (result != null && result.hasOwnProperty("sid")) {
+                            if (result !== undefined && result.hasOwnProperty("sid")) {
                                 customerFactory.setCustomer(result);
                                 $state.go("customerCard", {sid: result.sid});
                             }
                         }
-                    )
+                    );
                 }
             });
-        }
+        };
     }]);
 });

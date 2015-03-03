@@ -17,6 +17,6 @@ define([
 
         $scope.customerProfile = function () {
             $state.go("customerProfile", {sid: $scope.customer.sid});
-        }
+        };
     }]);
 });

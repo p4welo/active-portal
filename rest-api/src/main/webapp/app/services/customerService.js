@@ -63,7 +63,7 @@ define([
                 url: "rest/customer/similar",
                 method: 'POST'
             }
-        })
+        });
     }]);
 
     module.factory('customerFactory', [function () {
@@ -76,6 +76,6 @@ define([
             getCustomer: function (sid) {
                 return customers[sid];
             }
-        }
+        };
     }]);
 });

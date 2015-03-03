@@ -5,4 +5,6 @@ target/
 bower/
 .settings/
 .project
-node_modules/
+node_modules
+target-grunt
+dist

@@ -119,7 +119,7 @@
                 </thead>
                 <tbody>
                 <tr ng:repeat="course in courses | filter: { day : day}" ng:click="selectCourse(course)"
-                    ng:class="{'selected': selectedCourse != null && course.sid == selectedCourse.sid}">
+                    ng:class="{'selected': selectedCourse !== undefined && course.sid == selectedCourse.sid}">
                     <td>{{course.day | translate}}</td>
                     <td>{{course.startTime}} - {{course.endTime}}</td>
                     <td ng:bind="course.style.name"></td>
@@ -131,7 +131,7 @@
         </div>
     </div>
 
-    <div class="row col-sm-12" ng:if="selectedCourse != null">
+    <div class="row col-sm-12" ng:if="selectedCourse !== undefined">
         <div class="col-sm-4 col-lg-3">
             <div class="block full">
                 <div class="block-title">
@@ -140,7 +140,7 @@
                 <div class="list-group">
                     <a href="javascript:void(0)" class="list-group-item" ng:repeat="lesson in lessons"
                        ng:click="selectLesson(lesson)"
-                       ng:class="{'selected': selectedLesson != null && course.sid == selectedLesson.sid}">
+                       ng:class="{'selected': selectedLesson !== undefined && course.sid == selectedLesson.sid}">
                         <h4 class="list-group-item-heading" ng:bind="lesson.dateTime"></h4>
                     </a>
                 </div>

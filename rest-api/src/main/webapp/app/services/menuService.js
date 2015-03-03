@@ -10,6 +10,6 @@ define([
                 url: GET_MENU_KEY,
                 method: 'GET'
             }
-        })
+        });
     }]);
 });

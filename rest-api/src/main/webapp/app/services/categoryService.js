@@ -35,6 +35,6 @@ define([
                 url: "rest/category/:sid",
                 method: 'DELETE'
             }
-        })
+        });
     }]);
 });

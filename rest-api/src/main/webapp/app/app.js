@@ -134,67 +134,67 @@ define([
 
             function hasAuth(key) {
 
-                if ($scope.currentAuth != null) {
+                if ($scope.currentAuth !== undefined) {
                     return $scope.currentAuth.indexOf(key) > -1;
                 }
             }
 //            SYSTEM
             $scope.systemAuth = function () {
                 return $scope.usersAuth() || $scope.authoritiesAuth();
-            }
+            };
             $scope.usersAuth = function () {
                 return hasAuth("AUTH_SYSTEM_USERS");
-            }
+            };
             $scope.authoritiesAuth = function () {
                 return hasAuth("AUTH_SYSTEM_AUTHORITIES");
-            }
+            };
 //            GRAFIK
             $scope.scheduleAuth = function () {
-                return $scope.roomsAuth() || $scope.instructorsAuth() || $scope.categoriesAuth() || $scope.stylesAuth() || $scope.coursesAuth()
-            }
+                return $scope.roomsAuth() || $scope.instructorsAuth() || $scope.categoriesAuth() || $scope.stylesAuth() || $scope.coursesAuth();
+            };
             $scope.roomsAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_ROOMS");
-            }
+            };
             $scope.instructorsAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_INSTRUCTORS");
-            }
+            };
             $scope.categoriesAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_CATEGORIES");
-            }
+            };
             $scope.stylesAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_STYLES");
-            }
+            };
             $scope.coursesAuth = function () {
                 return hasAuth("AUTH_SCHEDULE_SCHEDULE");
-            }
+            };
 //            SEKRETARIAT
             $scope.officeAuth = function () {
                 return $scope.customerBaseAuth() || $scope.attendanceAuth();
-            }
+            };
             $scope.customerBaseAuth = function () {
                 return hasAuth("AUTH_CUSTOMERS_CUSTOMER_BASE");
-            }
+            };
             $scope.attendanceAuth = function () {
                 return hasAuth("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
-            }
+            };
         }])
 
         .run(['$rootScope', '$location', '$modal', function ($rootScope, $location, $modal) {
             $rootScope.isActive = function (obj) {
                 return obj.objectState == 'ACTIVE';
-            }
+            };
             $rootScope.isEqual = function (obj1, obj2) {
-                return obj1 != null && obj2.sid == obj1.sid
-            }
+                return obj1 !== undefined && obj2.sid == obj1.sid;
+            };
             $rootScope.isLocal = function () {
-                return $location.host()=='localhost'
-            }
+                return $location.host()=='localhost';
+            };
             $rootScope.scan = function () {
                 $modal.open({
                     templateUrl: 'app/core/modal/scanTicket.html',
                     controller: "scanTicketDialogController",
                     size: 'sm'
                 });
-            }
+            };
         }]);
 });

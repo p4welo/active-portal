@@ -11,7 +11,7 @@ define([
         $scope.newsList = newsHttpClient.findAll();
         $scope.add = function () {
 
-        }
+        };
 
         $scope.update = function (news) {
             delete news[EDIT_NEWS_KEY];
@@ -21,7 +21,7 @@ define([
                     $scope.newsList = result;
                 });
             });
-        }
+        };
 
         $scope.publish = function (news) {
             newsHttpClient.publish({ sid: news.sid }).$promise.then(function (value) {
@@ -31,7 +31,7 @@ define([
                 });
                 notificationService.success("Pomyślnie zapisano");
             });
-        }
+        };
 
         $scope.deactivate = function (news) {
             newsHttpClient.deactivate({ sid: news.sid }).$promise.then(function (value) {
@@ -41,19 +41,19 @@ define([
                 });
                 notificationService.success("Pomyślnie zapisano");
             });
-        }
+        };
 
         $scope.select = function (news) {
-            if ($scope.selected != null && $scope.selected.sid == news.sid) {
-                $scope.selected = null;
+            if ($scope.selected !== undefined && $scope.selected.sid == news.sid) {
+                $scope.selected = undefined;
                 return;
             }
             $scope.selected = angular.copy(news);
             $scope.selected[EDIT_NEWS_KEY] = false;
-        }
+        };
 
         $scope.resolveStatusCss = function (news) {
-            return {'label-success': news.objectState == 'ACTIVE', 'label-danger': news.objectState == 'INACTIVE'}
-        }
+            return {'label-success': news.objectState == 'ACTIVE', 'label-danger': news.objectState == 'INACTIVE'};
+        };
     }]);
 });

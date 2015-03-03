@@ -40,6 +40,6 @@ define([
                 url: "rest/news/:sid",
                 method: 'DELETE'
             }
-        })
+        });
     }]);
 });

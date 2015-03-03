@@ -13,12 +13,16 @@ define([
 
 //        CUSTOMER CREATION - PAGE 0
         $scope.isValidCustomer = function (customer) {
-            return customer != null && customer.firstName != null && customer.lastName != null && customer.gender != null && customer.mobile != null;
-        }
+            return customer !== undefined &&
+                customer.firstName !== undefined &&
+                customer.lastName !== undefined &&
+                customer.gender !== undefined &&
+                customer.mobile !== undefined;
+        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss();
-        }
+        };
         $scope.nextPage = function () {
             customerHttpClient.findSimilar($scope.customer).$promise.then(
                 function (result) {
@@ -28,8 +32,8 @@ define([
                     $scope.courses = [];
                     $scope.availableCourses = courseHttpClient.findAll();
                 }
-            )
-        }
+            );
+        };
 
 //        COURSE SUBSCRIPTION - PAGE 1
         $scope.selectCourse = function (course) {
@@ -40,21 +44,21 @@ define([
             else {
                 $scope.courses.splice(idx, 1);
             }
-        }
+        };
         $scope.setDay = function (day) {
             $scope.day = day;
-        }
+        };
         $scope.isSelected = function (course) {
             return $scope.courses.indexOf(course) > -1;
-        }
+        };
         $scope.create = function (customer, courses) {
             customerHttpClient.create({customer: customer, courses: courses}).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
-        }
+        };
         $scope.previousPage = function () {
             $scope.page = 0;
-        }
+        };
     }]);
 });

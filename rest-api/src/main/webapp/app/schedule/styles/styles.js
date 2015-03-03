@@ -29,7 +29,7 @@ define([
             column: 'name',
             descending: false
         };
-        $scope.toggleSort = function(column) {
+        $scope.toggleSort = function (column) {
             var sort = $scope.sort;
             if (sort.column == column) {
                 sort.descending = !sort.descending;
@@ -44,7 +44,7 @@ define([
                 return sort.descending ? "fa fa-caret-down" : "fa fa-caret-up";
             }
             return "";
-        }
+        };
 
         // =======================================
         $scope.add = function () {
@@ -62,32 +62,34 @@ define([
             });
         };
         $scope.delete = function (style) {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/schedule/styles/modal/deleteStyle.html',
-                controller: "deleteStyleController",
-                resolve: {
-                    courses: function () {
-                        return style.courses;
+            if (style !== undefined) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'app/schedule/styles/modal/deleteStyle.html',
+                    controller: "deleteStyleController",
+                    resolve: {
+                        courses: function () {
+                            return style.courses;
+                        }
                     }
-                }
-            });
+                });
 
-            modalInstance.result.then(function () {
-                styleHttpClient.delete({sid: style.sid}).$promise.then(
-                    function () {
-                        notificationService.success("Pomyślnie usunięto");
-                        styleHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.styles = result;
-                            })
-                    }
-                )
-            });
-        }
+                modalInstance.result.then(function () {
+                    styleHttpClient.delete({sid: style.sid}).$promise.then(
+                        function () {
+                            notificationService.success("Pomyślnie usunięto");
+                            styleHttpClient.findAll().$promise.then(
+                                function (result) {
+                                    $scope.styles = result;
+                                });
+                        }
+                    );
+                });
+            }
+        };
         // =======================================
         $scope.select = function (object) {
-            if ($scope.selected != null && $scope.selected.sid == object.sid) {
-                $scope.selected = null;
+            if ($scope.selected !== undefined && $scope.selected.sid == object.sid) {
+                $scope.selected = undefined;
                 return;
             }
             $scope.selected = angular.copy(object);
@@ -99,7 +101,7 @@ define([
                     saving: false,
                     hover: false,
                     oldVal: {}
-                }
+                };
             }
             $scope.courseLoading = true;
             styleHttpClient.findActiveCourses({sid: object.sid}).$promise.then(
@@ -107,17 +109,17 @@ define([
                     $scope.courseLoading = false;
                     $scope.selected.courses = result;
                 }
-            )
-        }
+            );
+        };
         $scope.edit = function (object, property) {
             object[property].edit = true;
             object[property].oldVal = object[property].value;
-        }
+        };
         $scope.cancel = function (object, property) {
             object[property].value = object[property].oldVal;
             object[property].edit = false;
             object[property].hover = false;
-        }
+        };
         $scope.save = function (object, property) {
             object[property].saving = true;
             if (property == CATEGORY_KEY) {
@@ -137,7 +139,7 @@ define([
             else if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.styles, {sid: object.sid});
                 obj.name = object.name.value;
-                if (obj != null) {
+                if (obj !== undefined) {
                     styleHttpClient.update({ sid: object.sid }, obj).$promise.then(
                         function () {
                             object[property].edit = false;
@@ -152,12 +154,12 @@ define([
                         });
                 }
             }
-        }
+        };
         $scope.hover = function (object, property) {
             object[property].hover = true;
-        }
+        };
         $scope.leave = function (object, property) {
             object[property].hover = false;
-        }
+        };
     }]);
 });

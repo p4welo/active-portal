@@ -12,7 +12,7 @@
             <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
                 <tbody>
                 <tr ng:repeat="role in roles" ng:click="select(role)"
-                    ng:class="{'selected':selected != null && role.name == selected.name}">
+                    ng:class="{'selected':selected !== undefined && role.name == selected.name}">
                     <td ng:bind="role.name"></td>
                 </tr>
                 </tbody>
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-7 pull-right" ng:if="selected != null">
+    <div class="col-xs-12 col-lg-7 pull-right" ng:if="selected !== undefined">
         <div class="block">
             <table class="table table-editable table-striped table-vcenter table-condensed table-hover">
                 <tbody>

@@ -9,8 +9,8 @@ define([
         $scope.authorities = [];
 
         $scope.select = function (role) {
-            if ($scope.selected != null && $scope.selected.name == role.name) {
-                $scope.selected = null;
+            if ($scope.selected !== undefined && $scope.selected.name == role.name) {
+                $scope.selected = undefined;
                 return;
             }
             $scope.selected = angular.copy(role);
@@ -20,7 +20,7 @@ define([
                 }
             );
             $scope.selected.edit = false;
-        }
+        };
 
         $scope.change = function ($event, relation) {
             var role = $scope.selected;
@@ -31,7 +31,7 @@ define([
                         relation.checked = result.checked;
                         notificationService.success("Pomyślnie zapisano");
                     }
-                )
+                );
             }
             else {
                 authorityHttpClient.uncheck({ sid: role.sid }, relation.authority).$promise.then(
@@ -39,8 +39,8 @@ define([
                         relation.checked = result.checked;
                         notificationService.success("Pomyślnie zapisano");
                     }
-                )
+                );
             }
-        }
+        };
     }]);
 });

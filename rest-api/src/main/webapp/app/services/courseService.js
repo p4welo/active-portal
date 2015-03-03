@@ -71,6 +71,6 @@ define([
                 url: "rest/course/:sid/style",
                 method: "PUT"
             }
-        })
+        });
     }]);
 });

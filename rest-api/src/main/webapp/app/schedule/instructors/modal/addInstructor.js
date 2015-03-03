@@ -3,7 +3,7 @@ define([
     'services/instructorService'
 ], function (module) {
 
-    module.controller('addInstructorController', ['$scope', '$modalInstance', 'instructorHttpClient', function ($scope, $modalInstance, instructorHttpClient) {
+    module.controller('addInstructorController', ['$scope', '$modalInstance', 'instructorHttpClient', '$timeout', function ($scope, $modalInstance, instructorHttpClient, $timeout) {
         $scope.instructor = {};
 
         $scope.cancel = function () {
@@ -15,6 +15,11 @@ define([
                 function () {
                     $modalInstance.close();
                 });
-        }
+        };
+        $scope.focusInput = function (id) {
+            $timeout(function () {
+                $(id).focus();
+            }, 100);
+        };
     }]);
 });

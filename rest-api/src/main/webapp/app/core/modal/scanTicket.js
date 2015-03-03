@@ -12,26 +12,26 @@ define([
         };
         $scope.confirm = function (code) {
             $scope.customerLoading = true;
-            if (code != null) {
+            if (code !== undefined) {
                 ticketHttpClient.findCustomerByCode({code: code}).$promise.then(
                     function (result) {
-                        if (result != null && result.hasOwnProperty("sid")) {
+                        if (result !== undefined && result.hasOwnProperty("sid")) {
                             customerFactory.setCustomer(result);
-                            $state.go("customerCard", {sid: result.sid, code: code})
+                            $state.go("customerCard", {sid: result.sid, code: code});
                         }
                         else {
                             $state.go("sellTicket", {code: code});
                         }
                         $modalInstance.close();
                     }
-                )
+                );
             }
         };
-        $scope.focusInput = function () {
+        $scope.focusInput = function (id) {
             $timeout(function () {
-                $("#code").focus();
+                $(id).focus();
             }, 100);
         };
     }
-    ])
+    ]);
 });

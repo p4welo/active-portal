@@ -11,8 +11,8 @@ define([
         $scope.customers = customerHttpClient.findAll();
 
         $scope.select = function (customer) {
-            if ($scope.selected != null && $scope.selected.sid == customer.sid) {
-                $scope.selected = null;
+            if ($scope.selected !== undefined && $scope.selected.sid == customer.sid) {
+                $scope.selected = undefined;
                 return;
             }
             $scope.selected = angular.copy(customer);
@@ -22,7 +22,7 @@ define([
                 }
             );
             $scope.selected.edit = false;
-        }
+        };
 
         $scope.add = function () {
             var modalInstance = $modal.open({
@@ -39,10 +39,10 @@ define([
                     }
                 );
             });
-        }
+        };
 
         $scope.update = function (customer) {
-            delete customer['edit'];
+            delete customer.edit;
             customerHttpClient.update({ sid: customer.sid }, customer).$promise.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
@@ -52,9 +52,9 @@ define([
                         }
                     );
                 });
-        }
+        };
         $scope.delete = function (customer) {
-            delete customer['edit'];
+            delete customer.edit;
             customerHttpClient.delete({ sid: customer.sid }).$promise.then(
                 function () {
                     $scope.selected = null;
@@ -65,11 +65,11 @@ define([
                         }
                     );
                 });
-        }
+        };
 
         $scope.customerProfile = function (customer) {
             customerFactory.setCustomer(customer);
-            $state.go("customerProfile", {sid: customer.sid})
-        }
+            $state.go("customerProfile", {sid: customer.sid});
+        };
     }]);
 });

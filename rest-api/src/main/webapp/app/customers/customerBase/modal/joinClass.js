@@ -15,17 +15,17 @@ define([
                 return;
             }
             $scope.selected = course;
-        }
+        };
 
         $scope.join = function (course) {
             customerHttpClient.join({ sid: $scope.customer.sid }, course).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
-        }
+        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss();
-        }
+        };
     }]);
 });

@@ -40,6 +40,6 @@ define([
                 method: "GET",
                 isArray: true
             }
-        })
+        });
     }]);
 });

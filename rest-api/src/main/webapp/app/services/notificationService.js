@@ -8,7 +8,7 @@ define([
             addclass: "stack-bottomright",
             stack: {dir1: "up", dir2: "left"},
             styling: "fontawesome"
-        }
+        };
         this.success = function (content) {
             opts.text = content;
             opts.title = 'Sukces!';
@@ -31,6 +31,6 @@ define([
             opts.type = 'error';
 
             new PNotify(opts);
-        }
-    }])
+        };
+    }]);
 });

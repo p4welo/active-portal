@@ -6,16 +6,16 @@ define([
     'services/roomService'
 ], function (module) {
 
-    module.controller('addCourseController', ['$scope', '$modalInstance', 'courseHttpClient', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient) {
+    module.controller('addCourseController', ['$scope', '$modalInstance', 'courseHttpClient', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', '$timeout', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient, $timeout) {
         $scope.course = {};
         $scope.start = {
             hours: "15",
             minutes: "00"
-        }
+        };
         $scope.end = {
             hours: "16",
             minutes: "00"
-        }
+        };
 
         $scope.styles = styleHttpClient.findAll();
         $scope.instructors = instructorHttpClient.findAll();
@@ -31,8 +31,8 @@ define([
         ];
         $scope.hours = [];
         $scope.minutes = [];
-        for (var i = 7; i < 24; i++) {$scope.hours.push("" + i)}
-        for (var i = 0; i < 60; i+=5) {
+        for (var i = 7; i < 24; i++) {$scope.hours.push("" + i);}
+        for (i = 0; i < 60; i+=5) {
             var j = i;
             if (j < 10) {
                 j = "0" + j;
@@ -63,11 +63,16 @@ define([
                 course.inProgress = true;
             }
 
-            delete course['type'];
+            delete course.type;
             courseHttpClient.create(course).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
-        }
+        };
+        $scope.focusInput = function (id) {
+            $timeout(function () {
+                $(id).focus();
+            }, 100);
+        };
     }]);
 });

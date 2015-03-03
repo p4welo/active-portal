@@ -7,6 +7,6 @@ define([
         };
         $scope.confirm = function () {
             $modalInstance.close();
-        }
+        };
     }]);
 });

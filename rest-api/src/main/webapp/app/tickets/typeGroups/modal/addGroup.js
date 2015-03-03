@@ -3,7 +3,7 @@ define([
     'services/ticketTypeGroupService'
 ], function (module) {
 
-    module.controller('addTicketTypeGroupController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', function ($scope, $modalInstance, ticketTypeGroupHttpClient) {
+    module.controller('addTicketTypeGroupController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', '$timeout', function ($scope, $modalInstance, ticketTypeGroupHttpClient, $timeout) {
         $scope.group = {};
 
         $scope.cancel = function () {
@@ -15,6 +15,11 @@ define([
                 function () {
                     $modalInstance.close();
                 });
-        }
+        };
+        $scope.focusInput = function (id) {
+            $timeout(function () {
+                $(id).focus();
+            }, 100);
+        };
     }]);
 });

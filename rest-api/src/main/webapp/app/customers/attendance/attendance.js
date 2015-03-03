@@ -17,7 +17,7 @@ define([
         $scope.setDay = function (day) {
             $scope.selectedCourse = null;
             $scope.day = day;
-        }
+        };
 
         $scope.sellPass = function () {
             $modal.open({
@@ -38,26 +38,22 @@ define([
         };
 
         $scope.selectCourse = function (course) {
-            if ($scope.selectedCourse != null && $scope.selectedCourse.sid == course.sid) {
-                $scope.selectedCourse = null;
+            if ($scope.selectedCourse !== undefined && $scope.selectedCourse.sid == course.sid) {
+                $scope.selectedCourse = undefined;
                 return;
             }
             $scope.selectedCourse = angular.copy(course);
 
             $scope.lessons = courseHttpClient.findLessons({sid: course.sid});
-        }
+        };
 
         $scope.selectLesson = function (lesson) {
-            if ($scope.selectedLesson != null && $scope.selectedLesson.sid == lesson.sid) {
-                $scope.selectedLesson = null;
+            if ($scope.selectedLesson !== undefined && $scope.selectedLesson.sid == lesson.sid) {
+                $scope.selectedLesson = undefined;
                 return;
             }
             $scope.selectedLesson = angular.copy(lesson);
-
-//            $scope.loadingPresence = true;
             $scope.presence = courseHttpClient.findPresence({sid: lesson.sid});
-        }
-
-
+        };
     }]);
 });

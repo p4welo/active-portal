@@ -49,6 +49,6 @@ define([
                 url: "rest/style/:sid/category",
                 method: "PUT"
             }
-        })
+        });
     }]);
 });

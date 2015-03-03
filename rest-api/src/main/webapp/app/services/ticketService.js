@@ -39,7 +39,7 @@ define([
                 method: 'GET'
             }
         });
-    }])
+    }]);
 
     module.factory('ticketService', [function () {
 
@@ -93,6 +93,6 @@ define([
                     }
                 ];
             }
-        }
+        };
     }]);
 });

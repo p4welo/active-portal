@@ -35,6 +35,6 @@ define([
                 url: "rest/user/:sid",
                 method: 'DELETE'
             }
-        })
+        });
     }]);
 });

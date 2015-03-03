@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-4 pull-right" ng:if="selected != null">
+    <div class="col-xs-12 col-lg-4 pull-right" ng:if="selected !== undefined">
         <div class="block">
             <div class="block-title">
                 <div class="block-options pull-right">
@@ -109,7 +109,7 @@
             </thead>
             <tbody>
             <tr ng:repeat="n in newsList | filter: filterName | orderBy: '-createdAt'" ng:click="select(n)"
-                ng:class="{'selected':  selected != null && n.sid == selected.sid}">
+                ng:class="{'selected':  selected !== undefined && n.sid == selected.sid}">
                 <td ng:bind="n.createdAt"></td>
                 <td ng:bind="n.title"></td>
                 <td>

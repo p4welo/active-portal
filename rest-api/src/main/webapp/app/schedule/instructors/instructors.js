@@ -26,7 +26,7 @@ define([
             column: 'firstName',
             descending: false
         };
-        $scope.toggleSort = function(column) {
+        $scope.toggleSort = function (column) {
             var sort = $scope.sort;
             if (sort.column == column) {
                 sort.descending = !sort.descending;
@@ -41,7 +41,7 @@ define([
                 return sort.descending ? "fa fa-caret-down" : "fa fa-caret-up";
             }
             return "";
-        }
+        };
 
         // =======================================
         $scope.selectedCourses = [];
@@ -58,12 +58,12 @@ define([
                     });
                 notificationService.success("Pomyślnie zapisano");
             });
-        }
+        };
 
         // =======================================
         $scope.select = function (instructor) {
-            if ($scope.selected != null && $scope.selected.sid == instructor.sid) {
-                $scope.selected = null;
+            if ($scope.selected !== undefined && $scope.selected.sid == instructor.sid) {
+                $scope.selected = undefined;
                 return;
             }
             $scope.selectedCourses = [];
@@ -76,7 +76,7 @@ define([
                     saving: false,
                     hover: false,
                     oldVal: {}
-                }
+                };
             }
 
             $scope.courseLoading = true;
@@ -85,27 +85,27 @@ define([
                     $scope.courseLoading = false;
                     $scope.selectedCourses = value;
                 });
-        }
+        };
         $scope.edit = function (object, property) {
             object[property].edit = true;
             object[property].oldVal = object[property].value;
-        }
+        };
         $scope.cancel = function (object, property) {
             object[property].value = object[property].oldVal;
             object[property].edit = false;
             object[property].hover = false;
-        }
+        };
         $scope.hover = function (object, property) {
             object[property].hover = true;
-        }
+        };
         $scope.leave = function (object, property) {
             object[property].hover = false;
-        }
+        };
         $scope.save = function (object, property) {
             object[property].saving = true;
             var obj = _.findWhere($scope.instructors, {sid: object.sid});
             obj[property] = object[property].value;
-            if (obj != null) {
+            if (obj !== undefined) {
                 instructorHttpClient.update({ sid: object.sid }, obj).$promise.then(
                     function () {
                         object[property].edit = false;
@@ -119,27 +119,29 @@ define([
                             });
                     });
             }
-        }
+        };
 
         // =======================================
         $scope.delete = function (instructor) {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/core/modal/deleteConfirm.html',
-                controller: "deleteConfirmDialogController"
-            });
+            if (instructor !== undefined) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'app/core/modal/deleteConfirm.html',
+                    controller: "deleteConfirmDialogController"
+                });
 
-            modalInstance.result.then(function () {
-                $scope.selected = null;
-                instructorHttpClient.delete({sid: instructor.sid}).$promise.then(
-                    function () {
-                        notificationService.success("Pomyślnie usunięto");
-                        instructorHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.instructors = result;
-                            })
-                    }
-                )
-            });
-        }
+                modalInstance.result.then(function () {
+                    $scope.selected = undefined;
+                    instructorHttpClient.delete({sid: instructor.sid}).$promise.then(
+                        function () {
+                            notificationService.success("Pomyślnie usunięto");
+                            instructorHttpClient.findAll().$promise.then(
+                                function (result) {
+                                    $scope.instructors = result;
+                                });
+                        }
+                    );
+                });
+            }
+        };
     }]);
 });

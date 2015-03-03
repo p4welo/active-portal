@@ -35,6 +35,6 @@ define([
                 url: "rest/room/:sid",
                 method: 'DELETE'
             }
-        })
+        });
     }]);
 });
