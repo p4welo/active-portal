@@ -16,6 +16,7 @@ import pl.ap.service.IInstructorService;
 import pl.ap.service.IRoomService;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -160,6 +161,7 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
         if (oldInstructor != null) {
             Instructor instructor = instructorService.getBySid(oldInstructor.getSid());
             course.setInstructor(instructor);
+            course.setInstructors(Arrays.asList(instructor));
         }
         Room room = roomService.getBySid(course.getRoom().getSid());
         course.setRoom(room);
