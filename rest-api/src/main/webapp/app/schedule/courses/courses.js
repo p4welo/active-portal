@@ -104,15 +104,17 @@ define([
         };
 
         $scope.publish = function (course) {
-            courseHttpClient.publish({ sid: course.sid }).$promise.then(
-                function (result) {
-                    course.objectState = result.objectState;
-                    courseHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.classes = result;
-                        });
-                    notificationService.success("Pomyślnie zapisano");
-                });
+            if (course !== undefined) {
+                courseHttpClient.publish({ sid: course.sid }).$promise.then(
+                    function (result) {
+                        course.objectState = result.objectState;
+                        courseHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.classes = result;
+                            });
+                        notificationService.success("Pomyślnie zapisano");
+                    });
+            }
         };
 
         $scope.setDay = function (day) {
@@ -143,15 +145,17 @@ define([
         };
 
         $scope.deactivate = function (course) {
-            courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
-                function (result) {
-                    course.objectState = result.objectState;
-                    courseHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.classes = result;
-                        });
-                    notificationService.success("Pomyślnie zapisano");
-                });
+            if (course !== undefined) {
+                courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
+                    function (result) {
+                        course.objectState = result.objectState;
+                        courseHttpClient.findAll().$promise.then(
+                            function (result) {
+                                $scope.classes = result;
+                            });
+                        notificationService.success("Pomyślnie zapisano");
+                    });
+            }
         };
 
         $scope.select = function (course) {
