@@ -77,7 +77,7 @@
     <i class="fa fa-spin fa-spinner"></i>
     <span>Ładowanie...</span>
 </div>
-<p ng:if="!courseLoading && classes.length == 0">Brak wyników spełniających kryteria.</p>
+
 <table class="table table-editable table-hover" ng:if="!courseLoading">
 <thead>
 <tr>
@@ -425,6 +425,7 @@
 </tr>
 </tbody>
 </table>
+<p ng:if="!courseLoading && classes.length == 0">Brak wyników spełniających kryteria.</p>
 </div>
 </div>
 

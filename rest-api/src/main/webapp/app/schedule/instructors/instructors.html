@@ -49,7 +49,7 @@
             <i class="fa fa-spin fa-spinner"></i>
             <span>Ładowanie...</span>
         </div>
-        <p ng:if="!instructorLoading && instructors.length == 0">Brak wyników spełniających kryteria.</p>
+
         <table class="table table-editable table-hover" ng:if="!instructorLoading">
             <thead>
             <tr>
@@ -214,5 +214,6 @@
             </tr>
             </tbody>
         </table>
+        <p ng:if="!instructorLoading && instructors.length == 0">Brak wyników spełniających kryteria.</p>
     </div>
 </div>
