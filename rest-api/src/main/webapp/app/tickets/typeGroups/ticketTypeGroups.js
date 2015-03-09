@@ -7,7 +7,8 @@ define([
 
     module.controller("ticketGroupsController", ['$scope', 'ticketTypeGroupHttpClient', 'notificationService', '$modal', function ($scope, ticketTypeGroupHttpClient, notificationService, $modal) {
         var NAME_KEY = "name";
-        var OBJECT_PROPERTIES = [NAME_KEY];
+        var DESCRIPTION_KEY = "description";
+        var OBJECT_PROPERTIES = [NAME_KEY, DESCRIPTION_KEY];
 
         // =======================================
         $scope.groupLoading = true;
@@ -89,9 +90,9 @@ define([
         };
         $scope.save = function (object, property) {
             object[property].saving = true;
-            if (property == NAME_KEY) {
+            if (property == NAME_KEY || property == DESCRIPTION_KEY) {
                 var obj = _.findWhere($scope.groups, {sid: object.sid});
-                obj[NAME_KEY] = object[NAME_KEY].value;
+                obj[property] = object[property].value;
                 if (obj !== undefined) {
                     ticketTypeGroupHttpClient.update({ sid: object.sid }, obj).$promise.then(
                         function () {

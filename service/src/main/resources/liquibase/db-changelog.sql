@@ -470,15 +470,21 @@ ALTER TABLE ticket_type_group ADD INDEX ticket_type_group_sid_idx (sid);
 
 --changeset pawel:38
 CREATE TABLE ticket_type (
-  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  object_state INT(4) NOT NULL,
-  sid VARCHAR(32) NOT NULL,
-  price NUMERIC(10,2) NOT NULL,
-  entrance_pool INT(4) NOT NULL,
-  period_type INT(4) NOT NULL,
-  period_amount INT (4) NOT NULL,
-  group_id INT(11) NOT NULL,
-  FOREIGN KEY group_fk (group_id) REFERENCES ticket_type_group(id) ON DELETE CASCADE
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+object_state INT(4) NOT NULL,
+sid VARCHAR(32) NOT NULL,
+price NUMERIC(10,2) NOT NULL,
+entrance_pool INT(4) NOT NULL,
+period_type INT(4) NOT NULL,
+period_amount INT (4) NOT NULL,
+group_id INT(11) NOT NULL,
+FOREIGN KEY group_fk (group_id) REFERENCES ticket_type_group(id) ON DELETE CASCADE
 );
 ALTER TABLE ticket_type ADD INDEX ticket_type_sid_idx (sid);
 ALTER TABLE ticket_type ADD INDEX ticket_type_group_id_idx (group_id);
+
+--changeset pawel:39
+ALTER TABLE ticket_type_group ADD COLUMN description VARCHAR(256);
+
+--changeset pawel:40
+ALTER TABLE ticket_type ADD COLUMN name VARCHAR(128) NOT NULL;

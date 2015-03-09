@@ -24,7 +24,7 @@ define([
 
         // =======================================
         $scope.sort = {
-            column: 'name',
+            column: NAME_KEY,
             descending: false
         };
         $scope.toggleSort = function (column) {
@@ -123,7 +123,7 @@ define([
                     });
             }
             else if (property == NAME_KEY) {
-                var obj = _.findWhere($scope.styles, {sid: object.sid});
+                var obj = _.findWhere($scope.types, {sid: object.sid});
                 obj.name = object.name.value;
                 if (obj !== undefined) {
                     ticketTypeHttpClient.update({ sid: object.sid }, obj).$promise.then(

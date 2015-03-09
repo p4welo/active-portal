@@ -7,6 +7,10 @@ define([
     module.controller('addTicketTypeController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', 'ticketTypeHttpClient', '$timeout', function ($scope, $modalInstance, ticketTypeGroupHttpClient, ticketTypeHttpClient, $timeout) {
         $scope.type = {};
         $scope.groups = ticketTypeGroupHttpClient.findAll();
+        $scope.periodList = [];
+        for (var i = 0; i < 31; i++) {
+            $scope.periodList.push(i);
+        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

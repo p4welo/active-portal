@@ -5,16 +5,8 @@
     </button>
     <h4 class="modal-title" id="add-modal-label">Dodaj karnet</h4>
 </div>
-<div class="modal-body" ng:init="focusInput('#newName')">
+<div class="modal-body" ng:init="focusInput('#newGroup')">
     <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="newName" class="col-sm-3 control-label">Nazwa</label>
-
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="newName" placeholder="Nazwa"
-                       ng:model="type.name">
-            </div>
-        </div>
         <div class="form-group">
             <label for="newGroup" class="col-sm-3 control-label">Grupa docelowa</label>
 
@@ -23,6 +15,40 @@
                         ng:model="type.group.sid">
                     <option ng:repeat="group in groups | orderBy: 'name'" value="{{group.sid}}">{{group.name}}
                     </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newName" class="col-sm-3 control-label">Nazwa</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="newName" placeholder="Nazwa" ng:model="type.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newPrice" class="col-sm-3 control-label">Cena</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="newPrice" placeholder="Cena" ng:model="type.price">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newEntrancePool" class="col-sm-3 control-label">Ilość wejść</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="newEntrancePool" placeholder="Ilość wejść" ng:model="type.entrancePool">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newValidityPeriod" class="col-sm-3 control-label">Ważność</label>
+
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="newValidityPeriod" placeholder="Ważność" ng:model="type.periodAmount">
+            </div>
+            <div class="col-sm-6">
+                <select size="1" class="form-control" name="example-select" id="newValidityPeriodType" ng:model="type.periodType">
+                    <option value="DAY">Dni</option>
+                    <option value="MONTH">Miesięcy</option>
                 </select>
             </div>
         </div>

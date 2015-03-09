@@ -83,6 +83,9 @@ define([
                 PASS_ADULT: "DOROŚLI",
                 PASS_CHILD: "DZIECI",
 
+                PERIOD_MONTH: "Miesięcy",
+                PERIOD_DAY: "Dni",
+
                 ADULT_1_ENTRANCE: "Pojedyncze wejście (1h)",
                 ADULT_4_ENTRANCES_MONTH: "4 wejścia (1h) w miesiącu",
                 ADULT_8_ENTRANCES_MONTH: "8 wejść (1h) w miesiącu",

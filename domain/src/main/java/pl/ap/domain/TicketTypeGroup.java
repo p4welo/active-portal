@@ -17,7 +17,11 @@ public class TicketTypeGroup extends IdentifiableEntity {
 
     public static final String FIELD_NAME = "name";
 
+    public static final String FIELD_DESCRIPTION = "description";
+
     public static final int MAX_LENGTH_NAME = 128;
+
+    public static final int MAX_LENGTH_DESCRIPTION = 256;
 
     @Id
     @GeneratedValue
@@ -28,6 +32,18 @@ public class TicketTypeGroup extends IdentifiableEntity {
     @Column(length = MAX_LENGTH_NAME)
     @Length(max = MAX_LENGTH_NAME)
     private String name;
+
+    @Column(length = MAX_LENGTH_DESCRIPTION)
+    @Length(max = MAX_LENGTH_DESCRIPTION)
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getName() {
         return name;

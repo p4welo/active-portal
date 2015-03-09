@@ -40,6 +40,7 @@ public class StyleController {
     public CourseStyle create(@RequestBody CourseStyle courseStyle) {
         LOGGER.info("create()");
 
+        Assert.notNull(courseStyle);
         Assert.notNull(courseStyle.getCategory());
 
         return styleService.save(courseStyle);

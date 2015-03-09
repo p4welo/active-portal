@@ -66,15 +66,39 @@
                             <i ng:class="sortIcon('group.name')"></i>
                         </a>
                     </th>
+                    <th>
+                        <a href="javascript:void(0)" ng:click="toggleSort('entrancePool')">
+                            Ilość wejść
+                            <i ng:class="sortIcon('entrancePool')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng:click="toggleSort('periodAmount')">
+                            Ważność
+                            <i ng:class="sortIcon('periodAmount')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng:click="toggleSort('price')">
+                            Cena
+                            <i ng:class="sortIcon('price')"></i>
+                        </a>
+                    </th>
                 </tr>
                 </thead>
-                <tbody ng:repeat="type in types | filter: { name : filterName} | orderBy:sort.column:sort.descending">
+                <tbody ng:repeat="type in types | filter: filterName | orderBy:sort.column:sort.descending">
                 <tr ng:click="select(type)" ng:class="{'selected': isEqual(selected, type)}">
                     <td ng:bind="type.name"></td>
                     <td ng:bind="type.group.name"></td>
+                    <td ng:bind="type.entrancePool"></td>
+                    <td>
+                        <span ng:bind="type.periodAmount"></span>
+                        <span>{{"PERIOD_" + type.periodType | translate}}</span>
+                    </td>
+                    <td ng:bind="type.price"></td>
                 </tr>
                 <tr class="table-content" ng:if="isEqual(selected, type)">
-                    <td colspan="3">
+                    <td colspan="5">
                         <div class="block">
                             <div class="col-sm-6">
                                 <div class="form-horizontal">
@@ -94,7 +118,7 @@
                                             </p>
                                         </div>
                                         <div class="col-sm-6" ng:if="selected.group.edit">
-                                            <select id="category" ng:model="selected.group.value"
+                                            <select id="group" ng:model="selected.group.value"
                                                     ng:options="g.name for g in groups | orderBy: 'name' track by g.sid"
                                                     class="form-control"
                                                     ng:disabled="selected.group.saving"></select>
@@ -150,7 +174,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>

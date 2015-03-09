@@ -36,6 +36,7 @@ public class TicketTypeController {
         LOGGER.info("create()");
 
         Assert.notNull(type);
+        Assert.notNull(type.getGroup());
 
         return ticketTypeService.save(type);
     }

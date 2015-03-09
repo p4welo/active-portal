@@ -28,6 +28,7 @@ public class TicketTypeGroupServiceImpl extends IdentifiableServiceImpl<TicketTy
     protected String[] getUpdateFields() {
         return new String[] {
                 TicketTypeGroup.FIELD_NAME,
+                TicketTypeGroup.FIELD_DESCRIPTION,
                 TicketTypeGroup.FIELD_OBJECT_STATE
         };
     }

@@ -1,5 +1,7 @@
 package pl.ap.domain;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.DateTime;
 import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
@@ -17,6 +19,8 @@ import java.math.BigDecimal;
 @Unique(fields = TicketTypeGroup.FIELD_SID, message = TicketTypeGroup.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class TicketType extends IdentifiableEntity {
 
+    public static final String FIELD_NAME = "name";
+
     public static final String FIELD_PRICE = "price";
 
     public static final String FIELD_ENTRANCE_POOL = "entrancePool";
@@ -26,6 +30,8 @@ public class TicketType extends IdentifiableEntity {
     public static final String FIELD_PERIOD_AMOUNT = "periodAmount";
 
     public static final String FIELD_GROUP = "group";
+
+    public static final int MAX_LENGTH_NAME = 128;
 
     @Id
     @GeneratedValue
@@ -53,6 +59,11 @@ public class TicketType extends IdentifiableEntity {
     @NotNull
     private TicketTypeGroup group;
 
+    @NotBlank
+    @Column(length = MAX_LENGTH_NAME)
+    @Length(max = MAX_LENGTH_NAME)
+    private String name;
+
     @Override
     public Long getId() {
         return id;
@@ -77,6 +88,14 @@ public class TicketType extends IdentifiableEntity {
 
     public void setPeriodType(PeriodTypeEnum periodType) {
         this.periodType = periodType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getPeriodAmount() {
