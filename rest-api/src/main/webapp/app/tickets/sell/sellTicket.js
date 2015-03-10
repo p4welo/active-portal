@@ -5,9 +5,15 @@ define([
     'services/customerService'
 ], function (module) {
 
-    module.controller("sellTicketController", ['$scope', 'ticketService', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', function ($scope, ticketService, $stateParams, customerHttpClient, $modal, $state, customerFactory) {
+    module.controller("sellTicketController", ['$scope', 'ticketTypeHttpClient', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', 'ticketTypeGroupHttpClient', function ($scope, ticketTypeHttpClient, $stateParams, customerHttpClient, $modal, $state, customerFactory, ticketTypeGroupHttpClient) {
         $scope.code = $stateParams.code;
-        $scope.tickets = ticketService.getTickets();
+        ticketTypeGroupHttpClient.findAll().$promise.then(function (result) {
+            if (result !== undefined) {
+                $scope.selectedTicketGroupSid = result[0].sid;
+                $scope.ticketGroups = result;
+            }
+        });
+        $scope.ticketTypes = ticketTypeHttpClient.findAll();
         $scope.newCustomer = {};
         $scope.customers = customerHttpClient.findAll();
         $scope.existingCustomer = true;
@@ -68,6 +74,25 @@ define([
                     );
                 }
             });
+        };
+    }]);
+
+    module.filter("findByGroup", [function () {
+        return function (items, searchText) {
+
+            if (searchText !== undefined && searchText.length > 2) {
+                var result = [];
+                items.forEach(function (item) {
+                    if (item.group.sid.indexOf(searchText) > -1) {
+                        result.push(item);
+                    }
+                })
+                return result;
+            }
+            else {
+                return [];
+            }
+
         };
     }]);
 });

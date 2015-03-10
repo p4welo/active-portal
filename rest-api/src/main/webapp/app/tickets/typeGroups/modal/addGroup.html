@@ -8,7 +8,10 @@
 <div class="modal-body" ng:init="focusInput('#name')">
     <form class="form-horizontal" role="form">
         <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">Nazwa</label>
+            <label for="name" class="col-sm-3 control-label">
+                Nazwa
+                <span class="text-danger">*</span>
+            </label>
 
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="name" placeholder="Nazwa" ng:model="group.name">

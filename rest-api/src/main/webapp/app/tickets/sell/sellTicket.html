@@ -17,25 +17,32 @@
         <div class="block-title">
             <h2>Typ karnetu</h2>
         </div>
-        <div class="col-sm-6">
-            <legend>Dorośli</legend>
-            <table class="table table-striped table-hover table-editable">
-                <tbody>
-                <tr ng:repeat="t in tickets | filter: {group: 'PASS_ADULT'}" ng:click="selectType(t)" ng:class="{'selected': t == ticket}">
-                    <td>{{ t.type | translate }}</td>
-                    <td class="text-right">{{ t.price }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group" style="margin-bottom: 50px">
+                    <label for="group" class="col-sm-3 control-label">
+                        Grupa docelowa
+                    </label>
 
-        <div class="col-sm-6">
-            <legend>Dzieci</legend>
+                    <div class="col-sm-9">
+                        <select size="1" class="form-control" id="group" ng:model="selectedTicketGroupSid">
+                            <option ng:repeat="group in ticketGroups | orderBy: 'name'" value="{{group.sid}}">{{group.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <table class="table table-striped table-hover table-editable">
                 <tbody>
-                <tr ng:repeat="t in tickets | filter: {group: 'PASS_CHILD'}" ng:click="selectType(t)" ng:class="{'selected': t == ticket}">
-                    <td>{{ t.type | translate }}</td>
-                    <td class="text-right">{{ t.price }}</td>
+                <tr ng:repeat="t in ticketTypes | findByGroup: selectedTicketGroupSid | orderBy: 'group.name'" ng:click="selectType(t)" ng:class="{'selected': t == ticket}">
+                    <td ng:bind="t.name"></td>
+                    <td ng:bind="t.group.name"></td>
+                    <td>{{t.entrancePool > 0 ? t.entrancePool : "Bez limitu"}}</td>
+                    <td>
+                        <span ng:bind="t.periodAmount"></span>
+                        <span>{{"PERIOD_" + t.periodType | translate}}</span>
+                    </td>
+                    <td ng:bind="t.price"></td>
                 </tr>
                 </tbody>
             </table>
