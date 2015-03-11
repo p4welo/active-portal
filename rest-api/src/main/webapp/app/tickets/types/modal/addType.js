@@ -17,11 +17,18 @@ define([
         };
 
         $scope.save = function (type) {
+            type.price = type.price.replace(",", ".");
             ticketTypeHttpClient.create(type).$promise.then(
                 function () {
                     $modalInstance.close();
                 });
         };
+
+        $scope.$watch('type.price', function(newValue, oldValue) {
+            if (newValue !== undefined && newValue !== oldValue) {
+                $scope.type.price = newValue.replace(",", ".");
+            }
+        });
 
         $scope.focusInput = function (id) {
             $timeout(function () {
