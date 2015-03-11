@@ -7,6 +7,7 @@ define([
 
     module.controller("sellTicketController", ['$scope', 'ticketTypeHttpClient', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', 'ticketTypeGroupHttpClient', function ($scope, ticketTypeHttpClient, $stateParams, customerHttpClient, $modal, $state, customerFactory, ticketTypeGroupHttpClient) {
         $scope.code = $stateParams.code;
+        $scope.customerValid = false;
         ticketTypeGroupHttpClient.findAll().$promise.then(function (result) {
             if (result !== undefined) {
                 $scope.selectedTicketGroupSid = result[0].sid;
@@ -42,8 +43,16 @@ define([
                 $scope.newCustomer.mobile !== undefined;
 
             var validExisting = $scope.existingCustomer && $scope.customer !== undefined;
-            return $scope.ticket !== undefined && (validNew || validExisting);
+            $scope.customerValid = $scope.ticket !== undefined && (validNew || validExisting);
+            return $scope.customerValid;
         };
+        $scope.$watch('customerValid', function(newValue, oldValue) {
+            if (newValue !== oldValue && newValue === true) {
+                $('html, body').animate({
+                    scrollTop: $("#continue").offset().top
+                }, 2000);
+            }
+        });
 
         $scope.confirm = function () {
             var modalInstance = $modal.open({
