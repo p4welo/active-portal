@@ -1,3 +1,13 @@
+@import url("../lib/pro-ui/css/bootstrap.min.css");
+@import url("../lib/pro-ui/css/plugins.css");
+@import url("../lib/pro-ui/css/main.css");
+@import url("../lib/pro-ui/css/themes/fancy.css");
+@import url("../lib/pro-ui/css/themes.css");
+@import url("../../vendor/pnotify/pnotify.core.css");
+@import url("../../vendor/angular-loading-bar/build/loading-bar.min.css");
+@import url("../../vendor/animate.css/animate.min.css");
+@import url("../../vendor/font-awesome/css/font-awesome.min.css");
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none;
 }
@@ -157,4 +167,24 @@ tr.table-content .block {
 
 .btn-link {
     cursor: pointer;
+}
+
+#login-container {
+    top: 50px;
+}
+
+.login-background {
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url('../img/back.jpg');
+    position: fixed;
+}
+
+#login-container, #login-alt-container {
+    margin-left: -190px;
+    width: 380px;
 }
