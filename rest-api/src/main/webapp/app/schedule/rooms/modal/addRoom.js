@@ -1,7 +1,8 @@
 define([
+    'jquery',
     'schedule/module',
     'services/roomService'
-], function (module) {
+], function ($, module) {
 
     module.controller('addRoomController', ['$scope', '$modalInstance', 'roomHttpClient', '$timeout', function ($scope, $modalInstance, roomHttpClient, $timeout) {
         $scope.room = {};

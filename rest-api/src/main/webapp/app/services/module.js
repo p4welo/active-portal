@@ -1,6 +1,7 @@
 define([
+    'angular',
     'ngResource'
-], function () {
+], function (angular) {
 
     return angular.module('activePortal.services', ['ngResource']);
 });

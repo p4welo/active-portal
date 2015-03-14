@@ -8,9 +8,7 @@
 
     <http use-expressions="true" disable-url-rewriting="true">
         <intercept-url pattern="/login.html" access="permitAll"/>
-        <intercept-url pattern="/assets/css/**" access="permitAll"/>
-        <intercept-url pattern="/assets/img/**" access="permitAll"/>
-        <intercept-url pattern="/assets/lib/**" access="permitAll"/>
+        <intercept-url pattern="/assets/**" access="permitAll"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
 
         <form-login login-page="/login.html"

@@ -1,6 +1,8 @@
 define([
+    'angular',
     'uiRouter',
     'ngAnimate',
+    'ngLocale',
     'ngTouch',
     'loadingBar',
 
@@ -15,8 +17,9 @@ define([
     'news/index',
     'schedule/index',
     'system/index',
-    'tickets/index'
-], function () {
+    'tickets/index',
+    "proUiApp"
+], function (angular) {
 
     return angular.module('activePortal', [
         'ngAnimate',
@@ -31,7 +34,6 @@ define([
         'activePortal.customers',
         'activePortal.services',
         'activePortal.tickets',
-
         'activePortal.core',
         'activePortal.services'
     ], ['$urlRouterProvider', function ($urlRouterProvider) {
@@ -194,7 +196,7 @@ define([
             };
             $rootScope.scan = function () {
                 $modal.open({
-                    templateUrl: 'app/core/modal/scanTicket.html',
+                    templateUrl: 'dist/app/core/modal/scanTicket.html',
                     controller: "scanTicketDialogController",
                     size: 'sm'
                 });

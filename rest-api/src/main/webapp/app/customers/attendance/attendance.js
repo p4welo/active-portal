@@ -1,8 +1,9 @@
 define([
+    'angular',
     'customers/module',
     'customers/attendance/modal/sellPass',
     'services/courseService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("attendanceController", ['$scope', '$modal', 'courseHttpClient', function ($scope, $modal, courseHttpClient) {
         $scope.day = 'PN';
@@ -21,19 +22,19 @@ define([
 
         $scope.sellPass = function () {
             $modal.open({
-                templateUrl: 'app/customers/attendance/modal/sellPass.html',
+                templateUrl: 'dist/app/customers/attendance/modal/sellPass.html',
                 controller: "sellPassController",
                 size: 'lg'
             });
         };
         $scope.checkByPass = function () {
             $modal.open({
-                templateUrl: 'app/customers/attendance/modal/checkByPass.html'
+                templateUrl: 'dist/app/customers/attendance/modal/checkByPass.html'
             });
         };
         $scope.checkByCustomer = function () {
             $modal.open({
-                templateUrl: 'app/customers/attendance/modal/checkByCustomer.html'
+                templateUrl: 'dist/app/customers/attendance/modal/checkByCustomer.html'
             });
         };
 

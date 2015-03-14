@@ -1,5 +1,7 @@
 define([
-], function () {
+    'angular',
+    'uiBootstrap'
+], function (angular) {
 
     return angular.module('activePortal.core', [
     ]);

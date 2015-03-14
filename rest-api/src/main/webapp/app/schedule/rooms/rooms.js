@@ -1,10 +1,11 @@
 define([
+    'angular',
     'schedule/module',
     'schedule/rooms/modal/addRoom',
     'core/modal/deleteConfirm',
     'services/notificationService',
     'services/roomService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("roomsController", ['$scope', 'roomHttpClient', '$modal', 'notificationService', function ($scope, roomHttpClient, $modal, notificationService) {
 
@@ -44,7 +45,7 @@ define([
         // =======================================
         $scope.add = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/schedule/rooms/modal/addRoom.html',
+                templateUrl: 'dist/app/schedule/rooms/modal/addRoom.html',
                 controller: "addRoomController"
             });
 
@@ -115,7 +116,7 @@ define([
         $scope.delete = function (room) {
             if (room !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/core/modal/deleteConfirm.html',
+                    templateUrl: 'dist/app/core/modal/deleteConfirm.html',
                     controller: "deleteConfirmDialogController"
                 });
 

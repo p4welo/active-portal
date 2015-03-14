@@ -1,8 +1,9 @@
 define([
+    'jquery',
     'schedule/module',
     'services/categoryService',
     'services/styleService'
-], function (module) {
+], function ($, module) {
 
     module.controller('addStyleController', ['$scope', '$modalInstance', 'categoryHttpClient', 'styleHttpClient', '$timeout', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient, $timeout) {
         $scope.style = {};

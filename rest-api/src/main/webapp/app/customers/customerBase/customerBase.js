@@ -1,11 +1,12 @@
 define([
+    'angular',
     'customers/module',
     'customers/customerBase/modal/subscribeClass',
     'customers/customerBase/modal/joinClass',
     'customers/customerBase/modal/addCustomer',
     'services/customerService',
     'services/notificationService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("customerBaseController", ['$scope', '$modal', 'customerHttpClient', 'customerFactory', 'notificationService', '$state', function ($scope, $modal, customerHttpClient, customerFactory, notificationService, $state) {
         $scope.customers = customerHttpClient.findAll();
@@ -26,7 +27,7 @@ define([
 
         $scope.add = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/customers/customerBase/modal/addCustomer.html',
+                templateUrl: 'dist/app/customers/customerBase/modal/addCustomer.html',
                 controller: "addCustomerController",
                 size: 'lg'
             });

@@ -8,3 +8,4 @@ bower/
 node_modules
 target-grunt
 dist
+.version

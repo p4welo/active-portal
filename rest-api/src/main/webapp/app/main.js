@@ -1,6 +1,7 @@
 require([
+    'angular',
     'app'
-], function () {
+], function (angular) {
 
     angular.bootstrap(document.getElementsByTagName("body")[0], ['activePortal']);
 });

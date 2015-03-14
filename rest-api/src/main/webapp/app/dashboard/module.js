@@ -1,13 +1,16 @@
 define([
-], function () {
+    'angular'
+], function (angular) {
 
     return angular.module('activePortal.dashboard', [
-    ], function ($stateProvider) {
-        $stateProvider
-            .state('dashboard', {
-                url: "/dashboard",
-                templateUrl: "app/dashboard/dashboard.html",
-                controller: "dashboardController"
-            });
-    });
+    ], ['$stateProvider',
+        function ($stateProvider) {
+            $stateProvider
+                .state('dashboard', {
+                    url: "/dashboard",
+                    templateUrl: "dist/app/dashboard/dashboard.html",
+                    controller: "dashboardController"
+                });
+        }
+    ]);
 });

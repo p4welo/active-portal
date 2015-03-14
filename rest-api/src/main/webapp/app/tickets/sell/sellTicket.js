@@ -1,9 +1,10 @@
 define([
+    'jquery',
     'tickets/module',
     'tickets/sell/modal/confirmTicketSale',
     'services/ticketService',
     'services/customerService'
-], function (module) {
+], function ($, module) {
 
     module.controller("sellTicketController", ['$scope', 'ticketTypeHttpClient', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', 'ticketTypeGroupHttpClient', function ($scope, ticketTypeHttpClient, $stateParams, customerHttpClient, $modal, $state, customerFactory, ticketTypeGroupHttpClient) {
         $scope.code = $stateParams.code;
@@ -56,7 +57,7 @@ define([
 
         $scope.confirm = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/tickets/sell/modal/confirmTicketSale.html',
+                templateUrl: 'dist/app/tickets/sell/modal/confirmTicketSale.html',
                 controller: "confirmTicketSaleDialogController",
                 resolve: {
                     customer: function () {
@@ -95,7 +96,7 @@ define([
                     if (item.group.sid.indexOf(searchText) > -1) {
                         result.push(item);
                     }
-                })
+                });
                 return result;
             }
             else {

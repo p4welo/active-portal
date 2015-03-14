@@ -1,10 +1,11 @@
 define([
+    'jquery',
     'schedule/module',
     'services/courseService',
     'services/styleService',
     'services/instructorService',
     'services/roomService'
-], function (module) {
+], function ($, module) {
 
     module.controller('addCourseController', ['$scope', '$modalInstance', 'courseHttpClient', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', '$timeout', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient, $timeout) {
         $scope.course = {};

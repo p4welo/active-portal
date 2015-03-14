@@ -1,7 +1,8 @@
 define([
+    'jquery',
     'schedule/module',
     'services/instructorService'
-], function (module) {
+], function ($, module) {
 
     module.controller('addInstructorController', ['$scope', '$modalInstance', 'instructorHttpClient', '$timeout', function ($scope, $modalInstance, instructorHttpClient, $timeout) {
         $scope.instructor = {};

@@ -1,4 +1,5 @@
 define([
+    'angular',
     'schedule/module',
     'schedule/courses/modal/addCourse',
     'core/modal/deleteConfirm',
@@ -7,7 +8,7 @@ define([
     'services/instructorService',
     'services/courseService',
     'services/styleService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("coursesController", ['$scope', 'courseHttpClient', 'notificationService', '$modal', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient, instructorHttpClient, roomHttpClient) {
 
@@ -78,7 +79,7 @@ define([
         $scope.add = function () {
             var modalInstance = $modal.open(
                 {
-                    templateUrl: 'app/schedule/courses/modal/addCourse.html',
+                    templateUrl: 'dist/app/schedule/courses/modal/addCourse.html',
                     controller: "addCourseController"
                 });
 
@@ -125,7 +126,7 @@ define([
         $scope.delete = function (course) {
             if (course !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/core/modal/deleteConfirm.html',
+                    templateUrl: 'dist/app/core/modal/deleteConfirm.html',
                     controller: "deleteConfirmDialogController"
                 });
 

@@ -1,4 +1,5 @@
 define([
+    'angular',
     'schedule/module',
     'lodash',
     'schedule/styles/modal/addStyle',
@@ -6,7 +7,7 @@ define([
     'services/styleService',
     'services/categoryService',
     'services/notificationService'
-], function (module, _) {
+], function (angular, module, _) {
 
     module.controller("stylesController", ['$scope', '$modal', 'styleHttpClient', 'categoryHttpClient', 'notificationService', function ($scope, $modal, styleHttpClient, categoryHttpClient, notificationService) {
 
@@ -49,7 +50,7 @@ define([
         // =======================================
         $scope.add = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/schedule/styles/modal/addStyle.html',
+                templateUrl: 'dist/app/schedule/styles/modal/addStyle.html',
                 controller: "addStyleController"
             });
 
@@ -64,7 +65,7 @@ define([
         $scope.delete = function (style) {
             if (style !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/schedule/styles/modal/deleteStyle.html',
+                    templateUrl: 'dist/app/schedule/styles/modal/deleteStyle.html',
                     controller: "deleteStyleController",
                     resolve: {
                         courses: function () {

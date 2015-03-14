@@ -1,7 +1,8 @@
 define([
+    'jquery',
     'core/module',
     'services/ticketService'
-], function (module) {
+], function ($, module) {
 
     module.controller('scanTicketDialogController', ['$scope', '$state', '$modalInstance', '$timeout', 'ticketHttpClient', 'customerFactory', function ($scope, $state, $modalInstance, $timeout, ticketHttpClient, customerFactory) {
 

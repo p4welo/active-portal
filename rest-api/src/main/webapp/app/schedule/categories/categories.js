@@ -1,9 +1,10 @@
 define([
+    'angular',
     'schedule/module',
     'schedule/categories/modal/addCategory',
     'services/notificationService',
     'services/categoryService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("categoriesController", ['$scope', '$modal', 'categoryHttpClient', 'notificationService', function ($scope, $modal, categoryHttpClient, notificationService) {
 
@@ -43,7 +44,7 @@ define([
         // =======================================
         $scope.add = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/schedule/categories/modal/addCategory.html',
+                templateUrl: 'dist/app/schedule/categories/modal/addCategory.html',
                 controller: "addCategoryController"
             });
 
@@ -113,7 +114,7 @@ define([
         $scope.delete = function (category) {
             if (category !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/core/modal/deleteConfirm.html',
+                    templateUrl: 'dist/app/core/modal/deleteConfirm.html',
                     controller: "deleteConfirmDialogController"
                 });
 

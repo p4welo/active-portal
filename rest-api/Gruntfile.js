@@ -1,6 +1,14 @@
 module.exports = function (grunt) {
+    'use strict';
+
+    var version = generateAndSaveNewVersion('.version');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        watch: {
+            files: ['<%= jshint.files %>'],
+            tasks: ['jshint']
+        },
         jshint: {
             files: ['Gruntfile.js', 'src/main/webapp/app/**/*.js'],
             options: {
@@ -11,28 +19,53 @@ module.exports = function (grunt) {
                 }
             }
         },
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: [
-                    'src/main/webapp/vendor/headjs-notify/dist/head.load.min.js',
-                    'src/main/webapp/assets/js/*.js'
-                ],
-                dest: 'src/main/webapp/dist/<%= pkg.name %>.js'
-            }
-        },
-        uglify: {
-            my_target: {
+        clean: [
+            "src/main/webapp/dist",
+            "src/main/webapp/assets/dist"
+        ],
+        cssmin: {
+            target: {
+                options: {
+                    keepSpecialComments: 0,
+                    rebase: false
+                },
                 files: [
                     {
                         expand: true,
-                        cwd: 'src/main/webapp/app',
-                        src: '**/*.js',
-                        dest: 'src/main/webapp/dist/app/'
+                        preserveLicenseComments: false,
+                        cwd: 'src/main/webapp/assets/css',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'src/main/webapp/assets/css',
+                        ext: '.min.css'
                     }
                 ]
+            }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [
+                        {
+                            json: {
+                                "version": version
+                            }
+                        }
+                    ]
+                },
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['src/main/webapp/*.html'],
+                        dest: 'src/main/webapp/'
+                    }
+                ]
+            }
+        },
+        copy: {
+            main: {
+                src: 'src/main/webapp/assets/css/style.css',
+                dest: 'src/main/webapp/assets/dist/style-' + version + ".css"
             }
         },
         htmlmin: {
@@ -44,35 +77,52 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'src/main/webapp/app',
+                        cwd: 'src/main/webapp/pages',
                         src: '**/*.html',
-                        dest: 'src/main/webapp/dist/app/'
+                        dest: 'src/main/webapp/'
                     },
                     {
                         expand: true,
-                        cwd: 'src/main/webapp',
-                        src: '*.html',
-                        dest: 'src/main/webapp/dist/'
+                        cwd: 'src/main/webapp/app',
+                        src: '**/*.html',
+                        dest: 'src/main/webapp/dist/app'
                     }
                 ]
             }
         },
-        cssmin: {
-            dist: {
-                files: {
-                    'src/main/webapp/assets/css/style.min.css': ['src/main/webapp/assets/css/*.css']
+        requirejs: {
+            compile: {
+                options: {
+                    mainConfigFile: "src/main/webapp/assets/js/start.js",
+                    baseUrl: "src/main/webapp/app",
+                    removeCombined: true,
+                    findNestedDependencies: true,
+                    preserveLicenseComments: false,
+
+                    out: "src/main/webapp/dist/main-" + version + ".js",
+                    name: "main"
                 }
             }
         }
     });
+
+    function generateAndSaveNewVersion(path) {
+        var version = new Date().getTime();
+        grunt.file.write(path, version);
+        return version;
+    }
+
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-replace');
 
-    grunt.registerTask('default', ['jshint', 'uglify', 'htmlmin']);
+//    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'requirejs', 'replace']);
+    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'htmlmin', 'requirejs', 'replace']);
 };
 

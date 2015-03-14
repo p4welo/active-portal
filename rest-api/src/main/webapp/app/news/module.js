@@ -1,22 +1,25 @@
 define([
+    'angular',
     'ngSanitize',
     'ngTranslate'
-], function () {
+], function (angular) {
 
     return angular.module('activePortal.news', [
         'ngSanitize',
         'pascalprecht.translate'
-    ], function ($stateProvider) {
+    ], ['$stateProvider',
+        function ($stateProvider) {
         $stateProvider
             .state('newsletter', {
                 url: "/newsletter",
-                templateUrl: "app/news/newsletter/newsletter.html",
+                templateUrl: "dist/app/news/newsletter/newsletter.html",
                 controller: "newsletterController"
             })
             .state('newsList', {
                 url: "/newsList",
-                templateUrl: "app/news/newsList/newsList.html",
+                templateUrl: "dist/app/news/newsList/newsList.html",
                 controller: "newsListController"
             });
-    });
+    }
+    ]);
 });

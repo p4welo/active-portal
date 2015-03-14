@@ -1,8 +1,9 @@
 define([
+    'jquery',
     'schedule/module',
     'services/ticketTypeGroupService',
     'services/ticketTypeService'
-], function (module) {
+], function ($, module) {
 
     module.controller('addTicketTypeController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', 'ticketTypeHttpClient', '$timeout', function ($scope, $modalInstance, ticketTypeGroupHttpClient, ticketTypeHttpClient, $timeout) {
         $scope.type = {};
@@ -10,7 +11,7 @@ define([
         $scope.periodList = [];
         for (var i = 0; i < 31; i++) {
             $scope.periodList.push(i);
-        };
+        }
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

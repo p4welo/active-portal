@@ -1,7 +1,8 @@
 define([
+    'jquery',
     'schedule/module',
     'services/ticketTypeGroupService'
-], function (module) {
+], function ($, module) {
 
     module.controller('addTicketTypeGroupController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', '$timeout', function ($scope, $modalInstance, ticketTypeGroupHttpClient, $timeout) {
         $scope.group = {};

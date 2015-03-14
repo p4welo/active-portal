@@ -1,11 +1,12 @@
 define([
+    'angular',
     'tickets/module',
     'core/modal/deleteConfirm',
     'tickets/types/modal/addType',
     'services/ticketTypeService',
     'services/ticketTypeGroupService',
     'services/notificationService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("ticketTypesController", ['$scope', '$modal', 'ticketTypeHttpClient', 'ticketTypeGroupHttpClient', 'notificationService', function ($scope, $modal, ticketTypeHttpClient, ticketTypeGroupHttpClient, notificationService) {
         var GROUP_KEY = "group";
@@ -47,7 +48,7 @@ define([
         // =======================================
         $scope.add = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/tickets/types/modal/addType.html',
+                templateUrl: 'dist/app/tickets/types/modal/addType.html',
                 controller: "addTicketTypeController"
             });
 
@@ -62,7 +63,7 @@ define([
         $scope.delete = function (type) {
             if (type !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/core/modal/deleteConfirm.html',
+                    templateUrl: 'dist/app/core/modal/deleteConfirm.html',
                     controller: "deleteConfirmDialogController"
                 });
 

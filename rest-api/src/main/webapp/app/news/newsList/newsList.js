@@ -1,8 +1,9 @@
 define([
+    'angular',
     'news/module',
     'services/newsService',
     'services/notificationService'
-], function (module) {
+], function (angular, module) {
 
     module.controller("newsListController", ['$scope', 'newsHttpClient', 'notificationService', function ($scope, newsHttpClient, notificationService) {
 
