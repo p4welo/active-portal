@@ -1,6 +1,7 @@
 define([
     'angular',
-    'ngTranslate'
+    'ngTranslate',
+    'uiBootstrap'
 ], function (angular) {
 
     return angular.module('activePortal.system', [

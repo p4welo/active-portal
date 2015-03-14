@@ -51,7 +51,8 @@ require.config({
     }
 });
 
-require(["main"],
-    function () {
+require(["proui", "main"],
+    function (App) {
+        App.init();
     }
 );

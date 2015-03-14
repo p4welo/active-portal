@@ -1,7 +1,8 @@
 define([
     'angular',
     'ngSanitize',
-    'ngTranslate'
+    'ngTranslate',
+    'uiBootstrap'
 ], function (angular) {
 
     return angular.module('activePortal.news', [

@@ -102,7 +102,6 @@ define([
             else {
                 return [];
             }
-
         };
     }]);
 });

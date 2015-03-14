@@ -1,5 +1,6 @@
 define([
-    'angular'
+    'angular',
+    'uiBootstrap'
 ], function (angular) {
 
     return angular.module('activePortal.dashboard', [
