@@ -87,4 +87,10 @@ public class TicketServiceImpl extends IdentifiableServiceImpl<Ticket> implement
 
         save(ticket);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Ticket findByCode(String code) {
+        return ticketDao.findByCode(code);
+    }
 }

@@ -21,4 +21,6 @@ public interface TicketApiMappings {
     public static final String DELETE = TICKET_PREFIX + CommonApiMappings.DELETE_SUFFIX;
 
     public static final String FIND_CUSTOMER_BY_CODE = TICKET_PREFIX + CommonApiMappings.CODE_SUFFIX + "/customer";
+
+    public static final String FIND_BY_CODE = TICKET_PREFIX + CommonApiMappings.CODE_SUFFIX;
 }

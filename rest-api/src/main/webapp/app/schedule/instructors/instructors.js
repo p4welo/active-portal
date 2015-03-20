@@ -5,6 +5,7 @@ define([
     'services/notificationService',
     'services/instructorService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("instructorsController", ['$scope', '$modal', 'instructorHttpClient', 'notificationService', function ($scope, $modal, instructorHttpClient, notificationService) {
 

@@ -3,6 +3,7 @@ define([
     'uiBootstrap',
     'ngTranslate'
 ], function (angular) {
+    "use strict";
 
     return angular.module('activePortal.schedule', [
         'pascalprecht.translate',

@@ -3,6 +3,7 @@ define([
     'schedule/module',
     'services/instructorService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('addInstructorController', ['$scope', '$modalInstance', 'instructorHttpClient', '$timeout', function ($scope, $modalInstance, instructorHttpClient, $timeout) {
         $scope.instructor = {};

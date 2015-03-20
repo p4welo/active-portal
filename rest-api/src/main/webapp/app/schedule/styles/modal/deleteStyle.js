@@ -1,6 +1,7 @@
 define([
     'schedule/module'
 ], function (module) {
+    "use strict";
 
     module.controller('deleteStyleController', ['courses', '$scope', '$modalInstance', function (courses, $scope, $modalInstance) {
 

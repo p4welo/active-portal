@@ -1,6 +1,7 @@
 define([
     'core/module'
 ], function (module) {
+    "use strict";
 
     module.directive('ngReallyClick', [function () {
             return {

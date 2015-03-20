@@ -4,6 +4,7 @@ define([
     'services/ticketTypeGroupService',
     'services/ticketTypeService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('addTicketTypeController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', 'ticketTypeHttpClient', '$timeout', function ($scope, $modalInstance, ticketTypeGroupHttpClient, ticketTypeHttpClient, $timeout) {
         $scope.type = {};

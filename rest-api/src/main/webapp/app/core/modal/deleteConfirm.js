@@ -1,6 +1,7 @@
 define([
     'core/module'
 ], function (module) {
+    "use strict";
 
     module.controller('deleteConfirmDialogController', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
 

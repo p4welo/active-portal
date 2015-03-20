@@ -3,6 +3,7 @@ define([
     'core/module',
     'services/ticketService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('scanTicketDialogController', ['$scope', '$state', '$modalInstance', '$timeout', 'ticketHttpClient', 'customerFactory', function ($scope, $state, $modalInstance, $timeout, ticketHttpClient, customerFactory) {
 

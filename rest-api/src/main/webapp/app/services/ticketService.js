@@ -1,6 +1,7 @@
 define([
     'services/module'
 ], function (module) {
+    "use strict";
 
     module.factory('ticketHttpClient', ['$resource', function ($resource) {
 
@@ -36,6 +37,10 @@ define([
             },
             findCustomerByCode: {
                 url: "rest/ticket/:code/customer",
+                method: 'GET'
+            },
+            findByCode: {
+                url: "rest/ticket/:code",
                 method: 'GET'
             }
         });

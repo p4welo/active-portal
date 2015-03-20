@@ -6,6 +6,7 @@ define([
     'services/instructorService',
     'services/roomService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('addCourseController', ['$scope', '$modalInstance', 'courseHttpClient', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', '$timeout', function ($scope, $modalInstance, courseHttpClient, styleHttpClient, instructorHttpClient, roomHttpClient, $timeout) {
         $scope.course = {};

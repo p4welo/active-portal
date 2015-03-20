@@ -4,6 +4,7 @@ define([
     'customers/attendance/modal/sellPass',
     'services/courseService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("attendanceController", ['$scope', '$modal', 'courseHttpClient', function ($scope, $modal, courseHttpClient) {
         $scope.day = 'PN';

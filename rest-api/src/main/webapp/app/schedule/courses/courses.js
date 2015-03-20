@@ -9,6 +9,7 @@ define([
     'services/courseService',
     'services/styleService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("coursesController", ['$scope', 'courseHttpClient', 'notificationService', '$modal', 'styleHttpClient', 'instructorHttpClient', 'roomHttpClient', function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient, instructorHttpClient, roomHttpClient) {
 

@@ -3,6 +3,7 @@ define([
     'services/courseService',
     'services/customerService'
 ], function (module) {
+    "use strict";
 
     module.controller('joinClassController', ['$scope', 'customer', 'customerHttpClient', '$modalInstance', function ($scope, customer, customerHttpClient, $modalInstance) {
         $scope.day = '';

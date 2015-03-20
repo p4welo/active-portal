@@ -10,4 +10,6 @@ public interface ITicketService extends IIdentifiableService<Ticket> {
     Customer findCustomerByCode(String code);
 
     void buy(Customer customer, Ticket ticket);
+
+    Ticket findByCode(String code);
 }

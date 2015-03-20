@@ -24,4 +24,12 @@ public class TicketDaoImpl extends IdentifiableDaoImpl<Ticket> implements ITicke
         criteria.setMaxResults(1);
         return (Customer) criteria.uniqueResult();
     }
+
+    @Override
+    public Ticket findByCode(String code) {
+        Criteria criteria = createCriteria();
+        criteria.add(Restrictions.eq(Ticket.FIELD_BARCODE, code));
+        criteria.setMaxResults(1);
+        return (Ticket) criteria.uniqueResult();
+    }
 }

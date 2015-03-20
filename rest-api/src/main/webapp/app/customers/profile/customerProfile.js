@@ -2,6 +2,7 @@ define([
     'customers/module',
     'services/customerService'
 ], function (module) {
+    "use strict";
 
     module.controller("customerProfileController", ['$scope', '$stateParams', '$state', 'customerHttpClient', function ($scope, $stateParams, $state, customerHttpClient) {
         customerHttpClient.get({sid: $stateParams.sid}).$promise.then(

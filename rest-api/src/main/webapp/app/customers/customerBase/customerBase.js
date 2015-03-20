@@ -7,6 +7,7 @@ define([
     'services/customerService',
     'services/notificationService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("customerBaseController", ['$scope', '$modal', 'customerHttpClient', 'customerFactory', 'notificationService', '$state', function ($scope, $modal, customerHttpClient, customerFactory, notificationService, $state) {
         $scope.customers = customerHttpClient.findAll();

@@ -96,7 +96,6 @@ module.exports = function (grunt) {
                     mainConfigFile: "src/main/webapp/assets/js/start.js",
                     baseUrl: "src/main/webapp/app",
                     removeCombined: true,
-                    findNestedDependencies: true,
                     preserveLicenseComments: false,
 
                     out: "src/main/webapp/dist/main-" + version + ".js",
@@ -123,6 +122,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-replace');
 
 //    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'requirejs', 'replace']);
-    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'htmlmin', 'requirejs', 'replace']);
+    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'htmlmin', 'replace']);
+//    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'htmlmin', 'requirejs', 'replace']);
 };
 

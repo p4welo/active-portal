@@ -3,10 +3,11 @@ define([
     'uiBootstrap',
     'ngTranslate'
 ], function (angular) {
+    "use strict";
 
     return angular.module('activePortal.tickets', [
         'pascalprecht.translate',
-        'ui.bootstrap.modal'
+        'ui.bootstrap'
     ], ['$stateProvider',
         function ($stateProvider) {
         $stateProvider

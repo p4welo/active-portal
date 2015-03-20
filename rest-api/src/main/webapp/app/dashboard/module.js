@@ -1,7 +1,7 @@
 define([
-    'angular',
-    'uiBootstrap'
+    'angular'
 ], function (angular) {
+    "use strict";
 
     return angular.module('activePortal.dashboard', [
     ], ['$stateProvider',

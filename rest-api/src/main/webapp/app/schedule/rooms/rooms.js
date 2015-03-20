@@ -6,6 +6,7 @@ define([
     'services/notificationService',
     'services/roomService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("roomsController", ['$scope', 'roomHttpClient', '$modal', 'notificationService', function ($scope, roomHttpClient, $modal, notificationService) {
 

@@ -4,6 +4,7 @@ define([
     'services/categoryService',
     'services/styleService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('addStyleController', ['$scope', '$modalInstance', 'categoryHttpClient', 'styleHttpClient', '$timeout', function ($scope, $modalInstance, categoryHttpClient, styleHttpClient, $timeout) {
         $scope.style = {};

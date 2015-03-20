@@ -3,6 +3,7 @@ define([
     'services/customerService',
     'services/courseService'
 ], function (module) {
+    "use strict";
 
     module.controller('addCustomerController', ['$scope', 'customerHttpClient', 'courseHttpClient', '$modalInstance', function ($scope, customerHttpClient, courseHttpClient, $modalInstance) {
         $scope.page = 0;

@@ -1,8 +1,8 @@
 define([
     'angular',
-    'ngTranslate',
-    'uiBootstrap'
+    'ngTranslate'
 ], function (angular) {
+    "use strict";
 
     return angular.module('activePortal.system', [
         'pascalprecht.translate'

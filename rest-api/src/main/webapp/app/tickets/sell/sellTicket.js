@@ -5,6 +5,7 @@ define([
     'services/ticketService',
     'services/customerService'
 ], function ($, module) {
+    "use strict";
 
     module.controller("sellTicketController", ['$scope', 'ticketTypeHttpClient', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', 'ticketTypeGroupHttpClient', function ($scope, ticketTypeHttpClient, $stateParams, customerHttpClient, $modal, $state, customerFactory, ticketTypeGroupHttpClient) {
         $scope.code = $stateParams.code;

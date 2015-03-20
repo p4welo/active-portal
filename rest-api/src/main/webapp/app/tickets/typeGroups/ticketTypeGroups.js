@@ -5,6 +5,7 @@ define([
     'services/notificationService',
     'tickets/typeGroups/modal/addGroup'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("ticketGroupsController", ['$scope', 'ticketTypeGroupHttpClient', 'notificationService', '$modal', function ($scope, ticketTypeGroupHttpClient, notificationService, $modal) {
         var NAME_KEY = "name";

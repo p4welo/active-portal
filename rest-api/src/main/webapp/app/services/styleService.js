@@ -1,6 +1,7 @@
 define([
     'services/module'
 ], function (module) {
+    "use strict";
 
     module.factory('styleHttpClient', ['$resource', function ($resource) {
 

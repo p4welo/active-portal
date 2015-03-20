@@ -1,6 +1,7 @@
 define([
     'proUiPlugins'
 ], function () {
+    "use strict";
     var App = function () {
 
         /* Helper variables - set in uiInit() */

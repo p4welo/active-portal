@@ -44,7 +44,7 @@
                 </a>
                 <ul class="sidebar-nav" ng:controller="menuController">
                     <li>
-                        <a ui-sref="dashboard" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="dashboard" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="fa fa-tachometer sidebar-nav-icon"></i>
                             Dashboard
                         </a>
@@ -62,31 +62,31 @@
                         <span class="sidebar-header-title">GRAFIK</span>
                     </li>
                     <li ng:if="roomsAuth()">
-                        <a ui-sref="rooms" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="rooms" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="fa fa-bank sidebar-nav-icon"></i>
                             Pomieszczenia
                         </a>
                     </li>
                     <li ng:if="instructorsAuth()">
-                        <a ui-sref="instructors" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="instructors" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="gi gi-certificate sidebar-nav-icon"></i>
                             Instruktorzy
                         </a>
                     </li>
                     <li ng:if="categoriesAuth()">
-                        <a ui-sref="categories" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="categories" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="gi gi-folder_open sidebar-nav-icon"></i>
                             Kategorie zajęć
                         </a>
                     </li>
                     <li ng:if="stylesAuth()">
-                        <a ui-sref="styles" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="styles" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="gi gi-eyedropper sidebar-nav-icon"></i>
                             Style taneczne
                         </a>
                     </li>
                     <li ng:if="coursesAuth()">
-                        <a ui-sref="courses" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="courses" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="gi gi-table sidebar-nav-icon"></i>
                             Grafik zajęć
                         </a>
@@ -95,13 +95,13 @@
                         <span class="sidebar-header-title">KARNETY</span>
                     </li>
                     <li>
-                        <a ui-sref="ticketGroups" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="ticketGroups" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="fa fa-venus-mars sidebar-nav-icon"></i>
                             Grupy docelowe
                         </a>
                     </li>
                     <li>
-                        <a ui-sref="ticketTypes" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="ticketTypes" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="fa fa-tags sidebar-nav-icon"></i>
                             Karnety
                         </a>
@@ -110,13 +110,13 @@
                         <span class="sidebar-header-title">SYSTEM</span>
                     </li>
                     <li ng:if="usersAuth()">
-                        <a ui-sref="users" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="users" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="gi gi-user sidebar-nav-icon"></i>
                             Użytkownicy
                         </a>
                     </li>
                     <li ng:if="authoritiesAuth()">
-                        <a ui-sref="authorities" class="sidebar-nav-menu" ui-sref-active="active">
+                        <a ui-sref="authorities" class="sidebar-nav-menu" ui-sref-active="active open">
                             <i class="gi gi-keys sidebar-nav-icon"></i>
                             Uprawnienia
                         </a>
@@ -130,7 +130,8 @@
         <header class="navbar navbar-default">
             <ul class="nav navbar-nav-custom">
                 <li>
-                    <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
+                    <a href="javascript:void(0)" ng:click="toggleSidebar()">
+                    <!--<a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">-->
                         <i class="fa fa-bars fa-fw"></i>
                     </a>
                 </li>
@@ -162,7 +163,7 @@
             <div class="pull-left">
                 <span id="year-copy"></span>
                 &copy;
-                <a href="http://active-porta.pl" target="_blank">
+                <a href="http://active-portal.pl" target="_blank">
                     Active-Portal 1.2
                 </a>
             </div>

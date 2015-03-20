@@ -1,13 +1,11 @@
 define([
     'angular',
+    'proui',
     'uiRouter',
     'ngAnimate',
     'ngLocale',
     'ngTouch',
     'loadingBar',
-    'uiBootstrap',
-
-    'core/modal/scanTicket',
 
     'services/module',
     'services/authorityService',
@@ -15,11 +13,13 @@ define([
 
     'dashboard/dashboard',
     'customers/index',
-    'news/index',
     'schedule/index',
     'system/index',
-    'tickets/index'
-], function (angular) {
+    'tickets/index',
+
+    'core/modal/scanTicket'
+], function (angular, App) {
+    "use strict";
 
     return angular.module('activePortal', [
         'ngAnimate',
@@ -30,7 +30,6 @@ define([
         'activePortal.dashboard',
         'activePortal.system',
         'activePortal.schedule',
-        'activePortal.news',
         'activePortal.customers',
         'activePortal.services',
         'activePortal.tickets',
@@ -206,6 +205,9 @@ define([
                         controller: "scanTicketDialogController",
                         size: 'sm'
                     });
+                };
+                $rootScope.toggleSidebar = function () {
+                    App.sidebar('toggle-sidebar');
                 };
             }
         ]);

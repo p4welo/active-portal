@@ -4,6 +4,7 @@ define([
     'services/authorityService',
     'services/notificationService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("authorityController", ['$scope', 'authorityHttpClient', 'notificationService', function ($scope, authorityHttpClient, notificationService) {
         $scope.roles = authorityHttpClient.findRoles();

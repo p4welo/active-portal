@@ -100,4 +100,13 @@ public class TicketController {
         Assert.notNull(code);
         return ticketService.findCustomerByCode(code);
     }
+
+    @RequestMapping(value = TicketApiMappings.FIND_BY_CODE, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Ticket findByCode(@PathVariable(ApiKeys.CODE) String code) {
+        LOGGER.info("findByCode()");
+
+        Assert.notNull(code);
+        return ticketService.findByCode(code);
+    }
 }

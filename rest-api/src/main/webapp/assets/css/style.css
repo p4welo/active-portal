@@ -188,3 +188,8 @@ tr.table-content .block {
     margin-left: -190px;
     width: 380px;
 }
+
+.sidebar-nav a:focus {
+    color: #f2ebed;
+    text-decoration: no-underline;
+}

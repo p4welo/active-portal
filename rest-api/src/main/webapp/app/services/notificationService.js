@@ -2,6 +2,7 @@ define([
     'services/module',
     'pnotify'
 ], function (module) {
+    "use strict";
 
     module.service('notificationService', [function () {
         var opts = {

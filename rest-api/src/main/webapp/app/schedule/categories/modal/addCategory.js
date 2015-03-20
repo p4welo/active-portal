@@ -3,6 +3,7 @@ define([
     'schedule/module',
     'services/categoryService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('addCategoryController', ['$scope', '$modalInstance', 'categoryHttpClient', '$timeout', function ($scope, $modalInstance, categoryHttpClient, $timeout) {
         $scope.category = {};

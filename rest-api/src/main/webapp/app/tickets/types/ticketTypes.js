@@ -7,6 +7,7 @@ define([
     'services/ticketTypeGroupService',
     'services/notificationService'
 ], function (angular, module) {
+    "use strict";
 
     module.controller("ticketTypesController", ['$scope', '$modal', 'ticketTypeHttpClient', 'ticketTypeGroupHttpClient', 'notificationService', function ($scope, $modal, ticketTypeHttpClient, ticketTypeGroupHttpClient, notificationService) {
         var GROUP_KEY = "group";

@@ -3,6 +3,7 @@ define([
     'schedule/module',
     'services/ticketTypeGroupService'
 ], function ($, module) {
+    "use strict";
 
     module.controller('addTicketTypeGroupController', ['$scope', '$modalInstance', 'ticketTypeGroupHttpClient', '$timeout', function ($scope, $modalInstance, ticketTypeGroupHttpClient, $timeout) {
         $scope.group = {};

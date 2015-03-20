@@ -8,4 +8,6 @@ import pl.ap.domain.Ticket;
  */
 public interface ITicketDao extends IIdentifiableDao<Ticket> {
     Customer findCustomerByCode(String code);
+
+    Ticket findByCode(String code);
 }

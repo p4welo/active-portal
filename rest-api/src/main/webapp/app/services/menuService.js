@@ -1,6 +1,7 @@
 define([
     'services/module'
 ], function (module) {
+    "use strict";
 
     module.factory('menuHttpClient', ['$resource', function ($resource) {
         var GET_MENU_KEY = "rest/menu";
