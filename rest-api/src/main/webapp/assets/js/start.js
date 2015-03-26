@@ -10,16 +10,16 @@ require.config({
         'ngTranslate': "../vendor/angular-translate/angular-translate",
         'ngAnimate': "../vendor/angular-animate/angular-animate",
         'ngSanitize': "../vendor/angular-sanitize/angular-sanitize",
-        'ngLocale': "../vendor/angular-locale/angular-locale_pl-pl",
+        'ngLocale': "../dist/assets/lib/angular-locale_pl-pl",
         'ngTouch': "../vendor/angular-touch/angular-touch",
 
         'uiRouter': "../vendor/angular-ui-router/release/angular-ui-router",
-        'uiBootstrap': "../vendor/angular-ui-bootstrap/ui-bootstrap-tpls",
+        'uiBootstrap': "../dist/assets/lib/ui-bootstrap-tpls",
 
         'loadingBar': "../vendor/angular-loading-bar/build/loading-bar",
         'pnotify': "../vendor/pnotify/pnotify.core",
-        'proUiPlugins': "../assets/lib/pro-ui/js/plugins",
-        'proUiApp': "../assets/lib/pro-ui/js/app"
+        'proUiPlugins': "../dist/assets/lib/pro-ui/js/plugins",
+        'proUiApp': "../dist/assets/lib/pro-ui/js/app"
     },
     shim: {
         'jquery': {
