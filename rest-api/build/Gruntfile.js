@@ -136,16 +136,11 @@ module.exports = function (grunt) {
         },
         "bower-install-simple": {
             options: {
-                color: true,
+                color: true
             },
             "prod": {
                 options: {
                     production: true
-                }
-            },
-            "dev": {
-                options: {
-                    production: false
                 }
             }
         },
