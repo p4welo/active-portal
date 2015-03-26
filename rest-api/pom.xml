@@ -71,12 +71,12 @@
                             <goal>npm</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>execute bower install</id>
-                        <goals>
-                            <goal>bower</goal>
-                        </goals>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>execute bower install</id>-->
+                        <!--<goals>-->
+                            <!--<goal>bower</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
                     <execution>
                         <id>execute grunt build</id>
                         <goals>

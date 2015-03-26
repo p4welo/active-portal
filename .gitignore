@@ -10,6 +10,6 @@ target-grunt
 dist
 .version
 vendor
-web/src/main/webapp/*.html
+rest-api/src/main/webapp/*.html
 style.min.css
 node
