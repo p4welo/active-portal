@@ -6,7 +6,7 @@
     "url": "https://github.com/p4welo/active-portal.git"
   },
   "scripts": {
-    "postinstall": "bower cache clean && bower install"
+    "postinstall": "bower install"
   },
   "dependencies": {
     "bower": "^1.3.12",
