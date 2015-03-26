@@ -302,5 +302,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks("grunt-bower-install-simple");
 
-    grunt.registerTask('default', ['jshint', 'clean', 'cssmin', 'htmlmin', 'uglify', 'copy', 'bower-install-simple', 'requirejs', 'replace']);
+    grunt.registerTask('default', ['bower-install-simple', 'jshint', 'clean', 'cssmin', 'htmlmin', 'uglify', 'copy', 'requirejs', 'replace']);
 };
