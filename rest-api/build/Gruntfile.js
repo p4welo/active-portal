@@ -134,6 +134,21 @@ module.exports = function (grunt) {
             files: ['<%= jshint.files %>'],
             tasks: ['jshint']
         },
+        "bower-install-simple": {
+            options: {
+                color: true,
+            },
+            "prod": {
+                options: {
+                    production: true
+                }
+            },
+            "dev": {
+                options: {
+                    production: false
+                }
+            }
+        },
         jshint: {
             files: ['Gruntfile.js', '../src/main/webapp/app/**/*.js'],
             options: {
@@ -285,6 +300,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks("grunt-bower-install-simple");
 
     grunt.registerTask('default', ['jshint', 'clean', 'cssmin', 'htmlmin', 'uglify', 'copy', 'requirejs', 'replace']);
 };
