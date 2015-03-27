@@ -4,15 +4,13 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-import pl.ap.domain.Course;
-import pl.ap.domain.Customer;
-import pl.ap.domain.CustomerPresence;
-import pl.ap.domain.Ticket;
+import pl.ap.domain.*;
 import pl.ap.rest.api.ApiKeys;
 import pl.ap.rest.api.CustomerApiMappings;
 import pl.ap.rest.dto.CustomerDto;
 import pl.ap.service.ICustomerService;
 import pl.ap.service.ITicketService;
+import pl.ap.service.ITicketTypeService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,6 +27,9 @@ public class CustomerController {
 
     @Resource
     private ITicketService ticketService;
+
+    @Resource
+    private ITicketTypeService ticketTypeService;
 
     @RequestMapping(value = CustomerApiMappings.FIND_ALL, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
@@ -169,7 +170,10 @@ public class CustomerController {
         Customer customer = customerService.getBySid(sid);
         Assert.notNull(customer);
         Assert.notNull(ticket);
-
+        Assert.notNull(ticket.getType());
+        TicketType type = ticketTypeService.getBySid(ticket.getType().getSid());
+        Assert.notNull(type);
+        ticket.setType(type);
         ticketService.buy(customer, ticket);
         return customer;
     }

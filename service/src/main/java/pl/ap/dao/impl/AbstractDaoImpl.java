@@ -6,7 +6,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.domain.common.DataEntity;
-import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.annotation.Resource;
 import java.lang.reflect.ParameterizedType;

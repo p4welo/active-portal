@@ -4,7 +4,7 @@
             <h1>
                 <i class="fa fa-tag"></i>
                 Sprzedaż karnetu:
-                <strong ng:bind="code"></strong>
+                <strong ng:bind="ticket.code"></strong>
                 <br>
             </h1>
         </div>
@@ -34,7 +34,7 @@
 
             <table class="table table-striped table-hover table-editable">
                 <tbody>
-                <tr ng:repeat="t in ticketTypes | findByGroup: selectedTicketGroupSid | orderBy: 'group.name'" ng:click="selectType(t)" ng:class="{'selected': t == ticket}">
+                <tr ng:repeat="t in ticketTypes | findByGroup: selectedTicketGroupSid | orderBy: 'group.name'" ng:click="selectType(t)" ng:class="{'selected': t == ticket.type}">
                     <td ng:bind="t.name"></td>
                     <td ng:bind="t.group.name"></td>
                     <td>{{t.entrancePool > 0 ? t.entrancePool : "Bez limitu"}}</td>

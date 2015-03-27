@@ -2,7 +2,6 @@ package pl.ap.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

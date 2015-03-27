@@ -2,7 +2,7 @@ package pl.ap.dao.impl;
 
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.IRoleDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.common.DataEntity;
 
 import javax.annotation.Resource;

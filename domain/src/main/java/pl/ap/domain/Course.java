@@ -93,9 +93,9 @@ public class Course extends IdentifiableEntity {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name="course_instructor_relation",
-            joinColumns={@JoinColumn(name="course_id")},
-            inverseJoinColumns={@JoinColumn(name="instructor_id")})
+    @JoinTable(name = "course_instructor_relation",
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "instructor_id")})
     private List<Instructor> instructors;
 
     public Boolean getCanJoin() {
@@ -200,5 +200,10 @@ public class Course extends IdentifiableEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return getStyle() + "/" + getLevel() + "/" + getDay() + "/" + getStartTime() + "-" + getEndTime() + "/" + getRoom();
     }
 }

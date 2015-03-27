@@ -40,7 +40,7 @@ define([
                 method: 'GET'
             },
             findByCode: {
-                url: "rest/ticket/:code",
+                url: "rest/ticket/code/:code",
                 method: 'GET'
             }
         });

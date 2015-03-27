@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.INewsDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.News;
 import pl.ap.domain.enums.ObjectStateEnum;
 

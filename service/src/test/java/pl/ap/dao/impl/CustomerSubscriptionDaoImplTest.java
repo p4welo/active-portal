@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.ICustomerSubscriptionDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.*;
 
 import javax.annotation.Resource;

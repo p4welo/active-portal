@@ -8,7 +8,10 @@ define([
     "use strict";
 
     module.controller("sellTicketController", ['$scope', 'ticketTypeHttpClient', '$stateParams', 'customerHttpClient', '$modal', '$state', 'customerFactory', 'ticketTypeGroupHttpClient', function ($scope, ticketTypeHttpClient, $stateParams, customerHttpClient, $modal, $state, customerFactory, ticketTypeGroupHttpClient) {
-        $scope.code = $stateParams.code;
+
+        $scope.ticket = {
+            barcode: $stateParams.code
+        };
         $scope.customerValid = false;
         ticketTypeGroupHttpClient.findAll().$promise.then(function (result) {
             if (result !== undefined) {
@@ -30,12 +33,12 @@ define([
             }
             $scope.customer = customer;
         };
-        $scope.selectType = function (ticket) {
-            if ($scope.ticket == ticket) {
-                $scope.ticket = undefined;
+        $scope.selectType = function (type) {
+            if ($scope.ticket.type == type) {
+                $scope.ticket.type = undefined;
                 return;
             }
-            $scope.ticket = ticket;
+            $scope.ticket.type = type;
         };
         $scope.isValidCustomer = function () {
             var validNew = !$scope.existingCustomer &&
@@ -45,10 +48,10 @@ define([
                 $scope.newCustomer.mobile !== undefined;
 
             var validExisting = $scope.existingCustomer && $scope.customer !== undefined;
-            $scope.customerValid = $scope.ticket !== undefined && (validNew || validExisting);
+            $scope.customerValid = $scope.ticket.type !== undefined && (validNew || validExisting);
             return $scope.customerValid;
         };
-        $scope.$watch('customerValid', function(newValue, oldValue) {
+        $scope.$watch('customerValid', function (newValue, oldValue) {
             if (newValue !== oldValue && newValue === true) {
                 $('html, body').animate({
                     scrollTop: $("#continue").offset().top
@@ -65,17 +68,14 @@ define([
                         return $scope.existingCustomer ? $scope.customer : $scope.newCustomer;
                     },
                     ticket: function () {
-                        return $scope.ticket;
+                        return $scope.ticket.type;
                     }
                 }
             });
 
             modalInstance.result.then(function () {
                 if ($scope.existingCustomer) {
-                    customerHttpClient.buyTicket({sid: $scope.customer.sid}, {
-                        type: $scope.ticket.type,
-                        barcode: $scope.code
-                    }).$promise.then(
+                    customerHttpClient.buyTicket({sid: $scope.customer.sid}, $scope.ticket).$promise.then(
                         function (result) {
                             if (result !== undefined && result.hasOwnProperty("sid")) {
                                 customerFactory.setCustomer(result);
@@ -90,19 +90,15 @@ define([
 
     module.filter("findByGroup", [function () {
         return function (items, searchText) {
-
-            if (searchText !== undefined && searchText.length > 2) {
-                var result = [];
+            var result = [];
+            if (searchText !== undefined) {
                 items.forEach(function (item) {
                     if (item.group.sid.indexOf(searchText) > -1) {
                         result.push(item);
                     }
                 });
-                return result;
             }
-            else {
-                return [];
-            }
+            return result;
         };
     }]);
 });

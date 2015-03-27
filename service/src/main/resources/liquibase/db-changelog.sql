@@ -488,3 +488,27 @@ ALTER TABLE ticket_type_group ADD COLUMN description VARCHAR(256);
 
 --changeset pawel:40
 ALTER TABLE ticket_type ADD COLUMN name VARCHAR(128) NOT NULL;
+
+--changeset pawel:41
+RENAME TABLE pass TO ticket;
+ALTER TABLE ticket DROP COLUMN type;
+
+--changeset pawel:42
+DROP TABLE ticket;
+CREATE TABLE ticket (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  object_state INT(4) NOT NULL,
+  sid VARCHAR(32) NOT NULL,
+  purchase_date TIMESTAMP NOT NULL,
+  type_id INT(11) NOT NULL,
+  entrances_used INT(4) NOT NULL DEFAULT 0,
+  customer_id INT(11) NOT NULL,
+  barcode VARCHAR(64),
+  course_sid VARCHAR(32),
+  style_name VARCHAR (32),
+  FOREIGN KEY customer_fk (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+  FOREIGN KEY type_fk (type_id) REFERENCES ticket_type(id) ON DELETE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE ticket ADD INDEX ticket_customer_idx (customer_id);
+ALTER TABLE ticket ADD INDEX ticket_type_idx (type_id);
+ALTER TABLE ticket ADD INDEX ticket_sid_idx (sid);

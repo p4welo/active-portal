@@ -2,12 +2,10 @@ package pl.ap.dao.impl;
 
 import pl.ap.dao.IAbstractDao;
 import pl.ap.dao.IAuthorityDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.Authority;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by parado on 2014-10-16.

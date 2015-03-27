@@ -1,4 +1,4 @@
-package pl.ap.dao;
+package pl.ap.factory;
 
 import pl.ap.service.util.SidUtils;
 

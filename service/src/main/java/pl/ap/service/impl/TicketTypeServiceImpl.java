@@ -39,6 +39,12 @@ public class TicketTypeServiceImpl extends IdentifiableServiceImpl<TicketType> i
     }
 
     @Override
+    @Transactional(readOnly = false)
+    public void delete(TicketType obj) {
+        deactivate(obj);
+    }
+
+    @Override
     protected String[] getUpdateFields() {
         return new String[] {
                 TicketType.FIELD_OBJECT_STATE,

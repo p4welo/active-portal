@@ -48,41 +48,9 @@ public class TicketServiceImpl extends IdentifiableServiceImpl<Ticket> implement
     public void buy(Customer customer, Ticket ticketData) {
         Ticket ticket = new Ticket();
         ticket.setBarcode(ticketData.getBarcode());
-        TicketTypeEnum type = ticketData.getType();
-        ticket.setType(type);
         ticket.setPurchaseDate(new DateTime());
-        int pool = 0;
-        switch (type) {
-            case ADULT_1_ENTRANCE:
-                pool = 1;
-                break;
-            case ADULT_4_ENTRANCES_MONTH:
-                pool = 4;
-                break;
-            case ADULT_8_ENTRANCES_MONTH:
-                pool = 8;
-                break;
-            case ADULT_OPEN_MONTH:
-                pool = -1;
-                break;
-            case CHILD_1_ENTRANCE:
-                pool = 1;
-                break;
-            case CHILD_4_ENTRANCES_MONTH:
-                pool = 4;
-                break;
-            case CHILD_8_ENTRANCES_MONTH:
-                pool = 8;
-                break;
-            case CHILD_OPEN_MONTH:
-                pool = -1;
-                break;
-            case CHILD_FORMATION_MONTH:
-                pool = -1;
-                break;
-        }
+        ticket.setType(ticketData.getType());
         ticket.setEntrancesUsed(0);
-        ticket.setEntrancePool(pool);
         ticket.setCustomer(customer);
 
         save(ticket);

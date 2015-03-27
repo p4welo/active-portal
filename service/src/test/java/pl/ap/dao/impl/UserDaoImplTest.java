@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.IUserDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.Role;
 import pl.ap.domain.User;
 

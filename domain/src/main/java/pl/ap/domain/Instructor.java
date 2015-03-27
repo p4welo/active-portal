@@ -1,14 +1,11 @@
 package pl.ap.domain;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by parado on 18.03.14.
@@ -71,5 +68,10 @@ public class Instructor extends IdentifiableEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return getFirstName() + "/" + getLastName() + "/" + getNick();
     }
 }

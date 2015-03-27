@@ -2,7 +2,7 @@ package pl.ap.dao.impl;
 
 import pl.ap.dao.ICourseStyleDao;
 import pl.ap.dao.IIdentifiableDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.CourseCategory;
 import pl.ap.domain.CourseStyle;
 

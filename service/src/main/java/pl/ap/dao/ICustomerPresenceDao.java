@@ -1,7 +1,5 @@
 package pl.ap.dao;
 
-import pl.ap.dao.dto.CoursePresenceDaoDto;
-import pl.ap.domain.Course;
 import pl.ap.domain.Customer;
 import pl.ap.domain.CustomerPresence;
 

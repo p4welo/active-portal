@@ -57,4 +57,9 @@ public class CourseStyle extends IdentifiableEntity {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return getName() + "/" + getCategory();
+    }
 }

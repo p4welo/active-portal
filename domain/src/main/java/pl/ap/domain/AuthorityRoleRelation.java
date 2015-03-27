@@ -63,4 +63,9 @@ public class AuthorityRoleRelation extends DataEntity {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return getAuthority() + "/" + getRole();
+    }
 }

@@ -35,9 +35,7 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
         persist(entities);
         int randomIndex = new Random().nextInt(entities.size());
         T entity = entities.get(randomIndex);
-
         T result = getDao().getById(entity.getId());
-
         assertNotNull(result);
         assertEquals(entity, result);
     }
@@ -45,10 +43,8 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     @Test
     public void testGetRandom() {
         persist(getEntities());
-
         T entity = getDao().getRandom();
         Assert.assertNotNull(entity);
-
         boolean notAllTheSame = false;
         for (int i = 0; i < 100; i++) {
             if (!entity.equals(getDao().getRandom())) {
@@ -61,13 +57,10 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     @Test
     public void testFind() {
         persist(getEntities());
-
         List<T> result = getDao().find(5, 10, "id", false);
-
         Assert.assertNotNull(result);
         Assert.assertTrue(result.size() == 10);
         Assert.assertTrue(result.get(0).getId() > result.get(1).getId());
-
         result = getDao().find(5, 10, "id", true);
         Assert.assertNotNull(result);
         Assert.assertTrue(result.size() == 10);
@@ -77,9 +70,7 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     @Test
     public void testSave() {
         T expected = getDao().save(getEntity());
-
         DataEntity result = getDao().getById(expected.getId());
-
         assertNotNull(result.getId());
         assertEquals(expected, result);
     }
@@ -88,9 +79,7 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     public void testGetById() {
         T expected = getEntity();
         persist(expected);
-
         T result = getDao().getById(expected.getId());
-
         assertEquals(expected, result);
     }
 
@@ -98,12 +87,9 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     public void testDelete() {
         T entity = getEntity();
         persist(entity);
-
         T result = getDao().getById(entity.getId());
         assertNotNull(result);
-
         getDao().delete(entity);
-
         result = getDao().getById(entity.getId());
         assertNull(result);
     }
@@ -111,8 +97,6 @@ public abstract class AbstractDaoImplTest<T extends DataEntity> extends GenericD
     protected abstract IAbstractDao<T> getDao();
 
     protected abstract T getEntity();
-
-//    protected abstract List<T> getEntities();
 
     protected List<T> getEntities() {
         List<T> entities = new ArrayList<>();

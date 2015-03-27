@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.DateTime;
 import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotNull;
  * Created by parado on 2015-01-14.
  */
 @Entity
-@Table(name = "pass")
+@Table(name = "ticket")
 @Unique(fields = Ticket.FIELD_SID, message = Ticket.NON_UNIQUE_SID_MESSAGE, insensitive = false)
 public class Ticket extends IdentifiableEntity {
 
@@ -26,8 +27,6 @@ public class Ticket extends IdentifiableEntity {
     public static final String FIELD_TYPE = "type";
 
     public static final String FIELD_ENTRANCES_USED = "entrancesUsed";
-
-    public static final String FIELD_ENTRANCE_POOL = "entrancePool";
 
     public static final String FIELD_COURSE_SID = "courseSid";
 
@@ -47,18 +46,9 @@ public class Ticket extends IdentifiableEntity {
     @NotNull
     private DateTime purchaseDate;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    @NotNull
-    private TicketTypeEnum type;
-
     @Column(name = "entrances_used", nullable = false)
     @NotNull
     private int entrancesUsed;
-
-    @Column(name = "entrance_pool", nullable = false)
-    @NotNull
-    private int entrancePool;
 
     @Column(name = "course_sid", length = IdentifiableEntity.MAX_LENGTH_SID)
     @Length(max = IdentifiableEntity.MAX_LENGTH_SID)
@@ -74,8 +64,24 @@ public class Ticket extends IdentifiableEntity {
     @NotNull
     private Customer customer;
 
-    @Column
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ticket_id", nullable = false)
+    @ForeignKey(name = "ticket_fk")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @NotNull
+    private TicketType type;
+
+    @Column(length = 64, nullable = false)
+    @NotBlank
     private String barcode;
+
+    public TicketType getType() {
+        return type;
+    }
+
+    public void setType(TicketType type) {
+        this.type = type;
+    }
 
     public DateTime getPurchaseDate() {
         return purchaseDate;
@@ -85,28 +91,12 @@ public class Ticket extends IdentifiableEntity {
         this.purchaseDate = purchaseDate;
     }
 
-    public TicketTypeEnum getType() {
-        return type;
-    }
-
-    public void setType(TicketTypeEnum type) {
-        this.type = type;
-    }
-
     public int getEntrancesUsed() {
         return entrancesUsed;
     }
 
     public void setEntrancesUsed(int entrancesUsed) {
         this.entrancesUsed = entrancesUsed;
-    }
-
-    public int getEntrancePool() {
-        return entrancePool;
-    }
-
-    public void setEntrancePool(int entrancePool) {
-        this.entrancePool = entrancePool;
     }
 
     public String getCourseSid() {
@@ -149,5 +139,10 @@ public class Ticket extends IdentifiableEntity {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    @Override
+    public String toString() {
+        return getType().getName() + " - " + getBarcode() + " " + getEntrancesUsed() + "/" + getType().getEntrancePool();
     }
 }

@@ -34,9 +34,7 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public Ticket create(@RequestBody Ticket ticket) {
         LOGGER.info("create()");
-
         Assert.notNull(ticket);
-
         return ticketService.save(ticket);
     }
 
@@ -51,10 +49,8 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public Ticket activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
-
         Ticket ticket = ticketService.getBySid(sid);
         Assert.notNull(ticket);
-
         return ticketService.activate(ticket);
     }
 
@@ -62,10 +58,8 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public Ticket deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
-
         Ticket ticket = ticketService.getBySid(sid);
         Assert.notNull(ticket);
-
         return ticketService.deactivate(ticket);
     }
 
@@ -73,11 +67,9 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public Ticket update(@RequestBody Ticket ticket, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
         Assert.notNull(ticketService.getBySid(sid));
         Assert.notNull(ticket);
         Assert.isTrue(sid.equals(ticket.getSid()));
-
         return ticketService.update(ticket);
     }
 
@@ -85,10 +77,8 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         Ticket ticket = ticketService.getBySid(sid);
         Assert.notNull(ticket);
-
         ticketService.delete(ticket);
     }
 
@@ -96,7 +86,6 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public Customer findCustomerByCode(@PathVariable(ApiKeys.CODE) String code) {
         LOGGER.info("findCustomerByCode()");
-
         Assert.notNull(code);
         return ticketService.findCustomerByCode(code);
     }
@@ -105,7 +94,6 @@ public class TicketController {
     @ResponseStatus(value = HttpStatus.OK)
     public Ticket findByCode(@PathVariable(ApiKeys.CODE) String code) {
         LOGGER.info("findByCode()");
-
         Assert.notNull(code);
         return ticketService.findByCode(code);
     }

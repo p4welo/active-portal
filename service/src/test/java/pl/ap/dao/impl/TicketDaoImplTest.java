@@ -3,9 +3,11 @@ package pl.ap.dao.impl;
 import org.junit.Before;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.dao.ITicketDao;
-import pl.ap.dao.TestDomainObjectFactory;
+import pl.ap.factory.TestDomainObjectFactory;
 import pl.ap.domain.Customer;
 import pl.ap.domain.Ticket;
+import pl.ap.domain.TicketType;
+import pl.ap.domain.TicketTypeGroup;
 
 import javax.annotation.Resource;
 
@@ -15,23 +17,29 @@ import javax.annotation.Resource;
 public class TicketDaoImplTest extends IdentifiableDaoImplTest<Ticket> {
 
     @Resource
-    private ITicketDao passDao;
+    private ITicketDao ticketDao;
 
     private Customer customer;
 
+    private TicketType type;
+
     @Override
     protected IIdentifiableDao<Ticket> getDao() {
-        return passDao;
+        return ticketDao;
     }
 
     @Before
     public void setup() {
         customer = TestDomainObjectFactory.getCustomer();
         persist(customer);
+        TicketTypeGroup group = TestDomainObjectFactory.getTicketTypeGroup();
+        persist(group);
+        type = TestDomainObjectFactory.getTicketType(group);
+        persist(type);
     }
 
     @Override
     protected Ticket getEntity() {
-        return TestDomainObjectFactory.getPass(customer);
+        return TestDomainObjectFactory.getTicket(customer, type);
     }
 }

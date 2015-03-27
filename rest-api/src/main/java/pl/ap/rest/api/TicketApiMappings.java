@@ -22,5 +22,5 @@ public interface TicketApiMappings {
 
     public static final String FIND_CUSTOMER_BY_CODE = TICKET_PREFIX + CommonApiMappings.CODE_SUFFIX + "/customer";
 
-    public static final String FIND_BY_CODE = TICKET_PREFIX + CommonApiMappings.CODE_SUFFIX;
+    public static final String FIND_BY_CODE = TICKET_PREFIX + "/code" + CommonApiMappings.CODE_SUFFIX;
 }

@@ -237,8 +237,14 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: '../src/main/webapp/assets/lib/',
-                        src: '**/*.*',
+                        src: '*',
                         dest: '../src/main/webapp/dist/assets/lib/'
+                    },
+                    {
+                        expand: true,
+                        cwd: '../src/main/webapp/assets/lib/pro-ui/js/',
+                        src: '**/*',
+                        dest: '../src/main/webapp/dist/assets/lib/pro-ui/js/'
                     }
                 ]
             }

@@ -1,9 +1,11 @@
-package pl.ap.dao;
+package pl.ap.factory;
 
 import org.joda.time.DateTime;
 import pl.ap.domain.*;
 import pl.ap.domain.enums.*;
 import pl.ap.service.util.SidUtils;
+
+import java.math.BigDecimal;
 
 import static pl.ap.service.util.SidUtils.generate;
 
@@ -30,7 +32,7 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         user.setObjectState(ObjectStateEnum.ACTIVE);
         user.setFirstName(buildLongString(20));
         user.setLastName(buildLongString(30));
-        user.setEmail("test@mail.com");
+        user.setEmail(buildLongString(8) + "@" + buildLongString(5) + ".pl");
         user.setLogin(buildLongString(8));
         user.setPassword(buildLongString(16));
         user.setRole(role);
@@ -157,16 +159,16 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         return subscription;
     }
 
-    public static Ticket getPass(Customer customer) {
+    public static Ticket getTicket(Customer customer, TicketType type) {
         Ticket ticket = new Ticket();
         ticket.setSid(SidUtils.generate());
         ticket.setObjectState(ObjectStateEnum.ACTIVE);
         ticket.setCustomer(customer);
         ticket.setPurchaseDate(new DateTime());
-        ticket.setEntrancePool(8);
         ticket.setEntrancesUsed(4);
-        ticket.setStyleName("Joga");
-        ticket.setType(TicketTypeEnum.ADULT_8_ENTRANCES_MONTH);
+        ticket.setStyleName(buildLongString(16));
+        ticket.setType(type);
+        ticket.setBarcode(buildLongString(32));
         return ticket;
     }
 
@@ -174,7 +176,20 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         TicketTypeGroup group = new TicketTypeGroup();
         group.setSid(SidUtils.generate());
         group.setObjectState(ObjectStateEnum.ACTIVE);
-        group.setName("Dorośli");
+        group.setName(buildLongString(12));
         return group;
+    }
+
+    public static TicketType getTicketType(TicketTypeGroup group) {
+        TicketType type = new TicketType();
+        type.setSid(SidUtils.generate());
+        type.setObjectState(ObjectStateEnum.ACTIVE);
+        type.setEntrancePool(4);
+        type.setName(buildLongString(32));
+        type.setGroup(group);
+        type.setPeriodAmount(1);
+        type.setPeriodType(PeriodTypeEnum.MONTH);
+        type.setPrice(BigDecimal.TEN);
+        return type;
     }
 }
