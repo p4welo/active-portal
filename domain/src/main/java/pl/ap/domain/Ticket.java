@@ -65,8 +65,8 @@ public class Ticket extends IdentifiableEntity {
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ticket_id", nullable = false)
-    @ForeignKey(name = "ticket_fk")
+    @JoinColumn(name = "type_id", nullable = false)
+    @ForeignKey(name = "type_fk")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @NotNull
     private TicketType type;

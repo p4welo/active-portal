@@ -14,6 +14,7 @@
         <module>domain</module>
         <module>service</module>
         <module>rest-api</module>
+        <module>web</module>
         <module>public-api</module>
     </modules>
 

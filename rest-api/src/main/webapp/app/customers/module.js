@@ -5,10 +5,8 @@ define([
 ], function (angular) {
     "use strict";
 
-    return angular.module('activePortal.customers', [
-            'pascalprecht.translate',
-            'ui.bootstrap.modal'
-        ], ['$stateProvider',
+    return angular.module('activePortal.customers', ['pascalprecht.translate', 'ui.bootstrap.modal'],
+        ['$stateProvider',
             function ($stateProvider) {
                 $stateProvider
                     .state('attendance', {
@@ -31,6 +29,7 @@ define([
                         templateUrl: "dist/app/customers/card/customerCard.html",
                         controller: "customerCardController"
                     });
-            }]
+            }
+        ]
     );
 });

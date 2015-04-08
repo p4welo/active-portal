@@ -1,13 +1,11 @@
 define([
     'angular',
-    'proui',
     'uiRouter',
     'ngAnimate',
     'ngLocale',
     'ngTouch',
     'loadingBar',
 
-    'services/module',
     'services/authorityService',
     'services/notificationService',
 
@@ -18,7 +16,7 @@ define([
     'tickets/index',
 
     'core/modal/scanTicket'
-], function (angular, App) {
+], function (angular) {
     "use strict";
 
     return angular.module('activePortal', [
@@ -35,14 +33,12 @@ define([
         'activePortal.tickets',
         'activePortal.core',
         'activePortal.services'
-    ], ['$urlRouterProvider',
-        function ($urlRouterProvider) {
-
-            $urlRouterProvider.otherwise("/dashboard");
-        }
     ])
-        .config(['$translateProvider',
-            function ($translateProvider) {
+        .config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', '$httpProvider',
+            function ($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, $httpProvider) {
+
+                $urlRouterProvider.otherwise("/dashboard");
+
                 $translateProvider.translations('pl', {
 
                     PN: 'Poniedziałek',
@@ -88,27 +84,10 @@ define([
                     PASS_CHILD: "DZIECI",
 
                     PERIOD_MONTH: "Miesięcy",
-                    PERIOD_DAY: "Dni",
-
-                    ADULT_1_ENTRANCE: "Pojedyncze wejście (1h)",
-                    ADULT_4_ENTRANCES_MONTH: "4 wejścia (1h) w miesiącu",
-                    ADULT_8_ENTRANCES_MONTH: "8 wejść (1h) w miesiącu",
-                    ADULT_OPEN_MONTH: "Karnet OPEN",
-
-                    CHILD_1_ENTRANCE: "Pojedyncze wejście (45 min)",
-                    CHILD_4_ENTRANCES_MONTH: "4 wejścia (45 min) w miesiącu",
-                    CHILD_8_ENTRANCES_MONTH: "8 wejść (45 min) w miesiącu",
-                    CHILD_OPEN_MONTH: "Karnet OPEN",
-                    CHILD_FORMATION_MONTH: "8 wejść (1h) - Formacja taneczna"
+                    PERIOD_DAY: "Dni"
                 });
 
                 $translateProvider.preferredLanguage('pl');
-            }
-        ])
-
-        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider',
-            function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
-
                 $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
                         return {
                             'responseError': function (rejection) {
@@ -127,64 +106,6 @@ define([
                         };
                     }
                 );
-            }
-        ])
-
-        .controller("menuController", ['$scope', 'authorityHttpClient',
-            function ($scope, authorityHttpClient) {
-                $scope.currentAuth = [];
-                authorityHttpClient.getCurrentAuthorities().$promise.then(
-                    function (result) {
-                        $scope.currentAuth = result;
-                    }
-                );
-
-                function hasAuth(key) {
-
-                    if ($scope.currentAuth !== undefined) {
-                        return $scope.currentAuth.indexOf(key) > -1;
-                    }
-                }
-
-//            SYSTEM
-                $scope.systemAuth = function () {
-                    return $scope.usersAuth() || $scope.authoritiesAuth();
-                };
-                $scope.usersAuth = function () {
-                    return hasAuth("AUTH_SYSTEM_USERS");
-                };
-                $scope.authoritiesAuth = function () {
-                    return hasAuth("AUTH_SYSTEM_AUTHORITIES");
-                };
-//            GRAFIK
-                $scope.scheduleAuth = function () {
-                    return $scope.roomsAuth() || $scope.instructorsAuth() || $scope.categoriesAuth() || $scope.stylesAuth() || $scope.coursesAuth();
-                };
-                $scope.roomsAuth = function () {
-                    return hasAuth("AUTH_SCHEDULE_ROOMS");
-                };
-                $scope.instructorsAuth = function () {
-                    return hasAuth("AUTH_SCHEDULE_INSTRUCTORS");
-                };
-                $scope.categoriesAuth = function () {
-                    return hasAuth("AUTH_SCHEDULE_CATEGORIES");
-                };
-                $scope.stylesAuth = function () {
-                    return hasAuth("AUTH_SCHEDULE_STYLES");
-                };
-                $scope.coursesAuth = function () {
-                    return hasAuth("AUTH_SCHEDULE_SCHEDULE");
-                };
-//            SEKRETARIAT
-                $scope.officeAuth = function () {
-                    return $scope.customerBaseAuth() || $scope.attendanceAuth();
-                };
-                $scope.customerBaseAuth = function () {
-                    return hasAuth("AUTH_CUSTOMERS_CUSTOMER_BASE");
-                };
-                $scope.attendanceAuth = function () {
-                    return hasAuth("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
-                };
             }
         ])
 
@@ -207,7 +128,64 @@ define([
                     });
                 };
                 $rootScope.toggleSidebar = function () {
-                    App.sidebar('toggle-sidebar');
+                    //App.sidebar('toggle-sidebar');
+                };
+            }
+        ])
+
+        .controller("menuController", ['$scope', 'authorityHttpClient',
+            function ($scope, authorityHttpClient) {
+                $scope.currentAuth = [];
+                authorityHttpClient.getCurrentAuthorities().$promise.then(
+                    function (result) {
+                        $scope.currentAuth = result;
+                    }
+                );
+
+                function hasAuth(key) {
+                    if ($scope.currentAuth !== undefined) {
+                        return $scope.currentAuth.indexOf(key) > -1;
+                    }
+                }
+
+//              SYSTEM
+                $scope.systemAuth = function () {
+                    return $scope.usersAuth() || $scope.authoritiesAuth();
+                };
+                $scope.usersAuth = function () {
+                    return hasAuth("AUTH_SYSTEM_USERS");
+                };
+                $scope.authoritiesAuth = function () {
+                    return hasAuth("AUTH_SYSTEM_AUTHORITIES");
+                };
+//              GRAFIK
+                $scope.scheduleAuth = function () {
+                    return $scope.roomsAuth() || $scope.instructorsAuth() || $scope.categoriesAuth() || $scope.stylesAuth() || $scope.coursesAuth();
+                };
+                $scope.roomsAuth = function () {
+                    return hasAuth("AUTH_SCHEDULE_ROOMS");
+                };
+                $scope.instructorsAuth = function () {
+                    return hasAuth("AUTH_SCHEDULE_INSTRUCTORS");
+                };
+                $scope.categoriesAuth = function () {
+                    return hasAuth("AUTH_SCHEDULE_CATEGORIES");
+                };
+                $scope.stylesAuth = function () {
+                    return hasAuth("AUTH_SCHEDULE_STYLES");
+                };
+                $scope.coursesAuth = function () {
+                    return hasAuth("AUTH_SCHEDULE_SCHEDULE");
+                };
+//              SEKRETARIAT
+                $scope.officeAuth = function () {
+                    return $scope.customerBaseAuth() || $scope.attendanceAuth();
+                };
+                $scope.customerBaseAuth = function () {
+                    return hasAuth("AUTH_CUSTOMERS_CUSTOMER_BASE");
+                };
+                $scope.attendanceAuth = function () {
+                    return hasAuth("AUTH_CUSTOMERS_CUSTOMER_PRESENCE");
                 };
             }
         ]);

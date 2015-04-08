@@ -1,6 +1,7 @@
 define([
-    'proUiPlugins'
-], function () {
+    'jquery'
+    //'proUiPlugins'
+], function ($) {
     "use strict";
     var App = function () {
 
@@ -35,7 +36,7 @@ define([
             scrollToTop();
 
             // Template Options, change features
-            templateOptions();
+            //templateOptions();
 
             // Resize #page-content to fill empty space if exists (also add it to resize and orientationchange events)
             resizePageContent();
@@ -56,16 +57,16 @@ define([
 //        chatUi();
 
             // Initialize tabs
-            $('[data-toggle="tabs"] a, .enable-tabs a').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            });
+            //$('[data-toggle="tabs"] a, .enable-tabs a').click(function (e) {
+            //    e.preventDefault();
+            //    $(this).tab('show');
+            //});
 
             // Initialize Tooltips
-            $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
+            //$('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
 
             // Initialize Popovers
-            $('[data-toggle="popover"], .enable-popover').popover({container: 'body', animation: true});
+            //$('[data-toggle="popover"], .enable-popover').popover({container: 'body', animation: true});
 
             // Initialize single image lightbox
 //        $('[data-toggle="lightbox-image"]').magnificPopup({type: 'image', image: {titleSrc: 'title'}});
@@ -120,15 +121,6 @@ define([
 
             // Initialize Placeholder
 //        $('input, textarea').placeholder();
-        };
-
-        /* Page Loading functionality */
-        var pageLoading = function () {
-            var pageWrapper = $('#page-wrapper');
-
-            if (pageWrapper.hasClass('page-loading')) {
-                pageWrapper.removeClass('page-loading');
-            }
         };
 
         /* Gets window width cross browser */
@@ -502,176 +494,12 @@ define([
             });
         };
 
-        /* Demo chat functionality (in sidebar) */
-        var chatUi = function () {
-            var chatUsers = $('.chat-users');
-            var chatTalk = $('.chat-talk');
-            var chatMessages = $('.chat-talk-messages');
-            var chatInput = $('#sidebar-chat-message');
-            var chatMsg = '';
-
-            // Initialize scrolling on chat talk list
-            $('.chat-talk-messages').slimScroll({ height: 210, color: '#fff', size: '3px', position: 'left', touchScrollStep: 100 });
-
-            // If a chat user is clicked show the chat talk
-            $('a', chatUsers).click(function () {
-                chatUsers.slideUp();
-                chatTalk.slideDown();
-                chatInput.focus();
-
-                return false;
-            });
-
-            // If chat talk close button is clicked show the chat user list
-            $('#chat-talk-close-btn').click(function () {
-                chatTalk.slideUp();
-                chatUsers.slideDown();
-
-                return false;
-            });
-
-            // When the chat message form is submitted
-            $('#sidebar-chat-form').submit(function (e) {
-                // Get text from message input
-                chatMsg = chatInput.val();
-
-                // If the user typed a message
-                if (chatMsg) {
-                    // Add it to the message list
-                    chatMessages.append('<li class="chat-talk-msg chat-talk-msg-highlight themed-border animation-slideLeft">' + $('<div />').text(chatMsg).html() + '</li>');
-
-                    // Scroll the message list to the bottom
-                    chatMessages.animate({ scrollTop: chatMessages[0].scrollHeight}, 500);
-
-                    // Reset the message input
-                    chatInput.val('');
-                }
-
-                // Don't submit the message form
-                e.preventDefault();
-            });
-        };
-
-        /* Template Options, change features functionality */
-        var templateOptions = function () {
-            /*
-             * Color Themes
-             */
-            var colorList = $('.sidebar-themes');
-            var themeLink = $('#theme-link');
-            var theme;
-
-            if (themeLink.length) {
-                theme = themeLink.attr('href');
-
-                $('li', colorList).removeClass('active');
-                $('a[data-theme="' + theme + '"]', colorList).parent('li').addClass('active');
-            }
-
-            $('a', colorList).click(function (e) {
-                // Get theme name
-                theme = $(this).data('theme');
-
-                $('li', colorList).removeClass('active');
-                $(this).parent('li').addClass('active');
-
-                if (theme === 'default') {
-                    if (themeLink.length) {
-                        themeLink.remove();
-                        themeLink = $('#theme-link');
-                    }
-                } else {
-                    if (themeLink.length) {
-                        themeLink.attr('href', theme);
-                    } else {
-                        $('link[href="css/themes.css"]').before('<link id="theme-link" rel="stylesheet" href="' + theme + '">');
-                        themeLink = $('#theme-link');
-                    }
-                }
-            });
-
-            // Prevent template options dropdown from closing on clicking options
-            $('.dropdown-options a').click(function (e) {
-                e.stopPropagation();
-            });
-
-            /* Page Style */
-            var optMainStyle = $('#options-main-style');
-            var optMainStyleAlt = $('#options-main-style-alt');
-
-            if (page.hasClass('style-alt')) {
-                optMainStyleAlt.addClass('active');
-            } else {
-                optMainStyle.addClass('active');
-            }
-
-            optMainStyle.click(function () {
-                page.removeClass('style-alt');
-                $(this).addClass('active');
-                optMainStyleAlt.removeClass('active');
-            });
-
-            optMainStyleAlt.click(function () {
-                page.addClass('style-alt');
-                $(this).addClass('active');
-                optMainStyle.removeClass('active');
-            });
-
-            /* Header options */
-            var optHeaderDefault = $('#options-header-default');
-            var optHeaderInverse = $('#options-header-inverse');
-
-            if (header.hasClass('navbar-default')) {
-                optHeaderDefault.addClass('active');
-            } else {
-                optHeaderInverse.addClass('active');
-            }
-
-            optHeaderDefault.click(function () {
-                header.removeClass('navbar-inverse').addClass('navbar-default');
-                $(this).addClass('active');
-                optHeaderInverse.removeClass('active');
-            });
-
-            optHeaderInverse.click(function () {
-                header.removeClass('navbar-default').addClass('navbar-inverse');
-                $(this).addClass('active');
-                optHeaderDefault.removeClass('active');
-            });
-        };
-
-        /* Datatables basic Bootstrap integration (pagination integration included under the Datatables plugin in plugins.js) */
-        var dtIntegration = function () {
-            $.extend(true, $.fn.dataTable.defaults, {
-                "sDom": "<'row'<'col-sm-6 col-xs-5'l><'col-sm-6 col-xs-7'f>r>t<'row'<'col-sm-5 hidden-xs'i><'col-sm-7 col-xs-12 clearfix'p>>",
-                "sPaginationType": "bootstrap",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_",
-                    "sSearch": "<div class=\"input-group\">_INPUT_<span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span></div>",
-                    "sInfo": "<strong>_START_</strong>-<strong>_END_</strong> of <strong>_TOTAL_</strong>",
-                    "oPaginate": {
-                        "sPrevious": "",
-                        "sNext": ""
-                    }
-                }
-            });
-            $.extend($.fn.dataTableExt.oStdClasses, {
-                "sWrapper": "dataTables_wrapper form-inline",
-                "sFilterInput": "form-control",
-                "sLengthSelect": "form-control"
-            });
-        };
-
         return {
             init: function () {
                 uiInit(); // Initialize UI Code
-                pageLoading(); // Initialize Page Loading
             },
             sidebar: function (mode, extra) {
                 handleSidebar(mode, extra); // Handle sidebars - access functionality from everywhere
-            },
-            datatables: function () {
-                dtIntegration(); // Datatables Bootstrap integration
             }
         };
     }();

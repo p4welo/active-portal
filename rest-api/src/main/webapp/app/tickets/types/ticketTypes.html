@@ -78,7 +78,7 @@
                             <i ng:class="sortIcon('periodAmount')"></i>
                         </a>
                     </th>
-                    <th>
+                    <th class="text-right">
                         <a href="javascript:void(0)" ng:click="toggleSort('price')">
                             Cena
                             <i ng:class="sortIcon('price')"></i>
@@ -95,7 +95,9 @@
                         <span ng:bind="type.periodAmount"></span>
                         <span>{{"PERIOD_" + type.periodType | translate}}</span>
                     </td>
-                    <td ng:bind="type.price"></td>
+                    <td class="text-right">
+                        {{ type.price | number: 2 }}
+                    </td>
                 </tr>
                 <tr class="table-content" ng:if="isEqual(selected, type)">
                     <td colspan="5">

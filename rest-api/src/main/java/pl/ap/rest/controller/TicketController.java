@@ -1,6 +1,7 @@
 package pl.ap.rest.controller;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,11 @@ public class TicketController {
         Ticket ticket = ticketService.getBySid(sid);
         Assert.notNull(ticket);
         return ticketService.deactivate(ticket);
+    }
+
+    public static void main(String[] args) {
+        DateTime time = new DateTime();
+        System.out.println(time.toString("yyyy-MM-dd hh:mm"));
     }
 
     @RequestMapping(value = TicketApiMappings.UPDATE, method = RequestMethod.PUT)

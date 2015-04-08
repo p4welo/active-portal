@@ -32,9 +32,18 @@
         </div>
     </div>
     <div class="col-sm-6 col-xs-12 pull-left">
-        <div class="block">
-            <div class="block-title">
-                <h4>Karnet {{ticketCode}}</h4>
+        <div class="row text-center" ng:if="ticketLoading">
+            <i class="fa fa-spin fa-spinner"></i>
+            <span>Ładowanie...</span>
+        </div>
+        <div class="widget" ng:if="!ticketLoading">
+            <div class="widget-extra themed-background-dark">
+                <h3 class="widget-content-light">
+                    <strong ng:bind="ticket.type.name"></strong>
+                </h3>
+            </div>
+            <div class="widget-extra">
+                {{ticket.purchaseDate | dateTime}}
             </div>
         </div>
         <a href="javascript:void(0)" class="widget widget-hover-effect1">

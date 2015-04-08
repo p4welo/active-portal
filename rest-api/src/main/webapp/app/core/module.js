@@ -4,7 +4,5 @@ define([
 ], function (angular) {
     "use strict";
 
-    return angular.module('activePortal.core', [
-        'ui.bootstrap'
-    ]);
+    return angular.module('activePortal.core', ['ui.bootstrap']);
 });
