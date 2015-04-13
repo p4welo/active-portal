@@ -64,9 +64,9 @@ define([
 
         /* Gets window width cross browser */
         var getWindowWidth = function () {
-            return window.innerWidth
-                || document.documentElement.clientWidth
-                || document.body.clientWidth;
+            return window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.body.clientWidth;
         };
 
         /* Sidebar Navigation functionality */
@@ -361,7 +361,6 @@ define([
             var headerH = header.outerHeight();
             var footerH = footer.outerHeight();
 
-            // If we have a fixed sidebar/header layout or each sidebars’ height < window height
             if (header.hasClass('navbar-fixed-top') || header.hasClass('navbar-fixed-bottom') || ((sidebarH < windowH) && (sidebarAltH < windowH))) {
                 if (page.hasClass('footer-fixed')) { // if footer is fixed don't remove its height
                     pageContent.css('min-height', windowH - headerH + 'px');
@@ -585,11 +584,5 @@ define([
             }
         };
     }();
-
-    /* Initialize app when page loads */
-    //$(function () {
-    //    App.init();
-    //});
-
     return App;
 });
