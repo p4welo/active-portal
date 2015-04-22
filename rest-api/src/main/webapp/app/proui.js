@@ -1,6 +1,5 @@
 define([
     'jquery'
-    //'proUiPlugins'
 ], function ($) {
     "use strict";
     var App = function () {
@@ -52,75 +51,6 @@ define([
             } else {
                 yearCopy.html('2014-' + d.getFullYear().toString().substr(2, 2));
             }
-
-            // Initialize chat demo functionality (in sidebar)
-//        chatUi();
-
-            // Initialize tabs
-            //$('[data-toggle="tabs"] a, .enable-tabs a').click(function (e) {
-            //    e.preventDefault();
-            //    $(this).tab('show');
-            //});
-
-            // Initialize Tooltips
-            //$('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
-
-            // Initialize Popovers
-            //$('[data-toggle="popover"], .enable-popover').popover({container: 'body', animation: true});
-
-            // Initialize single image lightbox
-//        $('[data-toggle="lightbox-image"]').magnificPopup({type: 'image', image: {titleSrc: 'title'}});
-
-            // Initialize image gallery lightbox
-//        $('[data-toggle="lightbox-gallery"]').magnificPopup({
-//            delegate: 'a.gallery-link',
-//            type: 'image',
-//            gallery: {
-//                enabled: true,
-//                navigateByImgClick: true,
-//                arrowMarkup: '<button type="button" class="mfp-arrow mfp-arrow-%dir%" title="%title%"></button>',
-//                tPrev: 'Previous',
-//                tNext: 'Next',
-//                tCounter: '<span class="mfp-counter">%curr% of %total%</span>'
-//            },
-//            image: {titleSrc: 'title'}
-//        });
-
-            // Initialize Editor
-//        $('.textarea-editor').wysihtml5();
-
-            // Initialize Chosen
-//        $('.select-chosen').chosen({width: "100%"});
-
-            // Initialize Select2
-//        $('.select-select2').select2();
-
-            // Initialize Slider for Bootstrap
-//        $('.input-slider').slider();
-
-            // Initialize Tags Input
-//        $('.input-tags').tagsInput({ width: 'auto', height: 'auto'});
-
-            // Initialize Datepicker
-//        $('.input-datepicker, .input-daterange').datepicker({weekStart: 1});
-//        $('.input-datepicker-close').datepicker({weekStart: 1}).on('changeDate', function(e){ $(this).datepicker('hide'); });
-
-            // Initialize Timepicker
-//        $('.input-timepicker').timepicker({minuteStep: 1,showSeconds: true,showMeridian: true});
-//        $('.input-timepicker24').timepicker({minuteStep: 1,showSeconds: true,showMeridian: false});
-
-            // Easy Pie Chart
-//        $('.pie-chart').easyPieChart({
-//            barColor: $(this).data('bar-color') ? $(this).data('bar-color') : '#777777',
-//            trackColor: $(this).data('track-color') ? $(this).data('track-color') : '#eeeeee',
-//            lineWidth: $(this).data('line-width') ? $(this).data('line-width') : 3,
-//            size: $(this).data('size') ? $(this).data('size') : '80',
-//            animate: 800,
-//            scaleColor: false
-//        });
-
-            // Initialize Placeholder
-//        $('input, textarea').placeholder();
         };
 
         /* Gets window width cross browser */
@@ -234,9 +164,6 @@ define([
                 handleSidebar('sidebar-scroll');
                 handleSidebar('sidebar-alt-scroll');
 
-                // Close the other sidebar if we hover over a partial one
-                // In smaller screens (the same applies to resized browsers) two visible sidebars
-                // could mess up our main content (not enough space), so we hide the other one :-)
                 $('.sidebar-partial #sidebar')
                     .mouseenter(function () {
                         handleSidebar('close-sidebar-alt');
