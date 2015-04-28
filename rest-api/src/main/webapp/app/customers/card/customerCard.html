@@ -3,8 +3,8 @@
         <div class="header-section">
             <h1>
                 <i class="gi gi-user"></i>
-                <span ng:bind="customer.firstName"></span>
-                <span ng:bind="customer.lastName"></span>
+                <span ng-bind="customer.firstName"></span>
+                <span ng-bind="customer.lastName"></span>
                 <br>
             </h1>
         </div>
@@ -32,14 +32,14 @@
         </div>
     </div>
     <div class="col-sm-6 col-xs-12 pull-left">
-        <div class="row text-center" ng:if="ticketLoading">
+        <div class="row text-center" ng-if="ticketLoading">
             <i class="fa fa-spin fa-spinner"></i>
             <span>Ładowanie...</span>
         </div>
-        <div class="widget" ng:if="!ticketLoading">
+        <div class="widget" ng-if="!ticketLoading">
             <div class="widget-extra themed-background-dark">
                 <h3 class="widget-content-light">
-                    <strong ng:bind="ticket.type.name"></strong>
+                    <strong ng-bind="ticket.type.name"></strong>
                 </h3>
             </div>
             <div class="widget-extra">
@@ -79,7 +79,7 @@
                 </h3>
             </div>
         </a>
-        <a href="javascript:void(0)" class="widget widget-hover-effect1" ng:click="customerProfile()">
+        <a href="javascript:void(0)" class="widget widget-hover-effect1" ng-click="customerProfile()">
             <div class="widget-simple">
                 <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
                     <i class="gi gi-picture"></i>

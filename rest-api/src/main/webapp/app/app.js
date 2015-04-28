@@ -98,8 +98,8 @@ define([
                                 else if (status == 403) {
                                     $location.path("/403");
                                 }
-                                else if (status == 500) {
-//                                notificationService.error('Internal server error');
+                                else {
+                                    notificationService.error('Błąd ' + status);
                                 }
                                 return $q.reject(rejection);
                             }

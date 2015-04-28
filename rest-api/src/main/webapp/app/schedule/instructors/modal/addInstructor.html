@@ -1,36 +1,36 @@
 <div class="modal-header">
-    <button type="button" class="close" ng:click="cancel()">
+    <button type="button" class="close" ng-click="cancel()">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
     <h4 class="modal-title" id="add-modal-label">Dodaj instruktora</h4>
 </div>
-<div class="modal-body" ng:init="focusInput('#newFirstName')">
+<div class="modal-body" ng-init="focusInput('#newFirstName')">
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label for="newFirstName" class="col-sm-3 control-label">Imię</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="newFirstName" placeholder="Imię" ng:model="instructor.firstName">
+                <input type="text" class="form-control" id="newFirstName" placeholder="Imię" ng-model="instructor.firstName">
             </div>
         </div>
         <div class="form-group">
             <label for="newLastName" class="col-sm-3 control-label">Nazwisko</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko" ng:model="instructor.lastName">
+                <input type="text" class="form-control" id="newLastName" placeholder="Nazwisko" ng-model="instructor.lastName">
             </div>
         </div>
         <div class="form-group">
             <label for="newNick" class="col-sm-3 control-label">Pseudonim</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="newNick" placeholder="Pseudonim" ng:model="instructor.nick">
+                <input type="text" class="form-control" id="newNick" placeholder="Pseudonim" ng-model="instructor.nick">
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-alt btn-default" ng:click="cancel()">Anuluj</button>
-    <button ng:click="save(instructor)" class="btn btn-alt btn-primary">Zapisz</button>
+    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save(instructor)" class="btn btn-alt btn-primary">Zapisz</button>
 </div>

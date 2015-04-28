@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <button type="button" class="close" ng:click="cancel()">
+    <button type="button" class="close" ng-click="cancel()">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
     <h4 class="modal-title" id="add-modal-label">Dodaj grupę docelową</h4>
 </div>
-<div class="modal-body" ng:init="focusInput('#name')">
+<div class="modal-body" ng-init="focusInput('#name')">
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">
@@ -14,12 +14,12 @@
             </label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="name" placeholder="Nazwa" ng:model="group.name">
+                <input type="text" class="form-control" id="name" placeholder="Nazwa" ng-model="group.name">
             </div>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-alt btn-default" ng:click="cancel()">Anuluj</button>
-    <button ng:click="save(group)" class="btn btn-alt btn-primary">Zapisz</button>
+    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save(group)" class="btn btn-alt btn-primary">Zapisz</button>
 </div>
