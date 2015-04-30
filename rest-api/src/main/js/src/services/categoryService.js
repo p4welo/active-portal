@@ -6,7 +6,7 @@ angular.module('activePortal.services')
         return $resource(null, null, {
 
             findAll: {
-                url: "rest/category/list",
+                url: "http://localhost:8080/ap/rest/category/list",
                 method: 'GET',
                 isArray: true
             },

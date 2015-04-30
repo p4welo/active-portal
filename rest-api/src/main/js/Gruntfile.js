@@ -84,10 +84,20 @@ module.exports = function (grunt) {
         /**
          * The directories to delete when `grunt clean` is executed.
          */
-        clean: [
-            '<%= build_dir %>',
-            '<%= compile_dir %>'
-        ],
+        clean: {
+            dist: {
+                src: [
+                    '<%= build_dir %>/*',
+                    '<%= compile_dir %>/*',
+                    '!<%= compile_dir %>/_old/**',
+                    '!<%= compile_dir %>/WEB-INF/**'
+                ]
+            },
+            options: {
+                'no-write': true,
+                force: true
+            }
+        },
 
         /**
          * The `copy` task just copies files from A to B. We use it here to copy
@@ -521,15 +531,15 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
         'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs',
-        'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build', 'karmaconfig', 'karma:continuous'
+        'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build'
     ]);
-
+    //'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build', 'karmaconfig', 'karma:continuous'
     /**
      * The `compile` task gets your app ready for deployment by concatenating and
      * minifying your code.
      */
     grunt.registerTask('compile', [
-        'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+        'clean', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
 
     /**

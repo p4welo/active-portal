@@ -10,8 +10,9 @@ angular.module('activePortal', [
     'ngAnimate',
     'ngTouch',
     'pascalprecht.translate',
-    'ui.router',
-    'angular-loading-bar'
+    'ui.router'
+    //,
+    //'angular-loading-bar'
 ])
 
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $httpProvider) {
@@ -107,11 +108,11 @@ angular.module('activePortal', [
 
     .controller("menuCtrl", function ($scope, authorityHttpClient) {
         $scope.currentAuth = [];
-        authorityHttpClient.getCurrentAuthorities().$promise.then(
-            function (result) {
-                $scope.currentAuth = result;
-            }
-        );
+        //authorityHttpClient.getCurrentAuthorities().$promise.then(
+        //    function (result) {
+        //        $scope.currentAuth = result;
+        //    }
+        //);
 
         function hasAuth(key) {
             if ($scope.currentAuth !== undefined) {
