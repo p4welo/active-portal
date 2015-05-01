@@ -1,65 +1,67 @@
 /* jshint -W024 */
 angular.module('activePortal.services')
 
-    .factory('customerHttpClient', function ($resource) {
+    .factory('customerHttpClient', function ($resource, serverConf) {
+        "use strict";
+        var url = serverConf.URL;
 
         return $resource(null, null, {
 
             findAll: {
-                url: "rest/customer/list",
+                url: url + "rest/customer/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: "rest/customer/create",
+                url: url + "rest/customer/create",
                 method: 'POST'
             },
             get: {
-                url: "rest/customer/:sid",
+                url: url + "rest/customer/:sid",
                 method: 'GET'
             },
             update: {
-                url: "rest/customer/:sid",
+                url: url + "rest/customer/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: "rest/customer/:sid",
+                url: url + "rest/customer/:sid",
                 method: 'DELETE'
             },
             presence: {
-                url: "rest/customer/:sid/presence",
+                url: url + "rest/customer/:sid/presence",
                 method: 'GET',
                 isArray: true
             },
             courses: {
-                url: "rest/customer/:sid/courses",
+                url: url + "rest/customer/:sid/courses",
                 method: 'GET',
                 isArray: true
             },
             coursesToJoin: {
-                url: "rest/customer/:sid/courses/canJoin",
+                url: url + "rest/customer/:sid/courses/canJoin",
                 method: 'GET',
                 isArray: true
             },
             coursesToRegister: {
-                url: "rest/customer/:sid/courses/canRegister",
+                url: url + "rest/customer/:sid/courses/canRegister",
                 method: 'GET',
                 isArray: true
             },
             join: {
-                url: "rest/customer/:sid/join",
+                url: url + "rest/customer/:sid/join",
                 method: 'PUT'
             },
             subscribe: {
-                url: "rest/customer/:sid/subscribe",
+                url: url + "rest/customer/:sid/subscribe",
                 method: 'PUT'
             },
             buyTicket: {
-                url: "rest/customer/:sid/ticket",
+                url: url + "rest/customer/:sid/ticket",
                 method: 'PUT'
             },
             findSimilar: {
-                url: "rest/customer/similar",
+                url: url + "rest/customer/similar",
                 method: 'POST'
             }
         });

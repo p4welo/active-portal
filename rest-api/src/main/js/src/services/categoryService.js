@@ -1,37 +1,39 @@
 /* jshint -W024 */
 angular.module('activePortal.services')
 
-    .factory('categoryHttpClient', function ($resource) {
+    .factory('categoryHttpClient', function ($resource, serverConf) {
+        "use strict";
+        var url = serverConf.URL;
 
         return $resource(null, null, {
 
             findAll: {
-                url: "http://localhost:8080/ap/rest/category/list",
+                url: url + "rest/category/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: "rest/category/create",
+                url: url + "rest/category/create",
                 method: 'POST'
             },
             get: {
-                url: "rest/category/:sid",
+                url: url + "rest/category/:sid",
                 method: 'GET'
             },
             activate: {
-                url: "rest/category/:sid/activate",
+                url: url + "rest/category/:sid/activate",
                 method: 'GET'
             },
             deactivate: {
-                url: "rest/category/:sid/deactivate",
+                url: url + "rest/category/:sid/deactivate",
                 method: 'GET'
             },
             update: {
-                url: "rest/category/:sid",
+                url: url + "rest/category/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: "rest/category/:sid",
+                url: url + "rest/category/:sid",
                 method: 'DELETE'
             }
         });

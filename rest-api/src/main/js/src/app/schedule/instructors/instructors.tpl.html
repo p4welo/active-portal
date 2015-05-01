@@ -1,4 +1,206 @@
 <div>
-    {{test}}
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-certificate"></i>Instruktorzy<br>
+            </h1>
+        </div>
+        <header class="navbar navbar-default">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav-custom visible-xs">
+                    <li>
+                        <a aria-expanded="false" class="collapsed" href="javascript:void(0)" data-toggle="collapse"
+                           data-target="#horizontal-menu-collapse">Menu</a>
+                    </li>
+                </ul>
+            </div>
+            <div style="height: 1px;" aria-expanded="false" id="horizontal-menu-collapse"
+                 class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="javascript:void(0)" ng-click="add()">
+                            <i class="fa fa-plus-circle"></i>
+                            Dodaj instruktora
+                        </a>
+                    </li>
+                    <li ng-class="{'disabled': selected == undefined}">
+                        <a href="javascript:void(0)" ng-click="delete(selected)">
+                            <i class="fa fa-trash"></i>
+                            Usuń
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </div>
 
+    <div class="block col-xs-12">
+        <div class="table-options clearfix">
+            <div class="input-group">
+                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control"/>
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+            </div>
+        </div>
+        <div loading-indicator ng-loading="instructorLoading">
+            <table class="table table-editable table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('firstName')">
+                            Imię
+                            <i ng-class="sortIcon('firstName')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('lastName')">
+                            Nazwisko
+                            <i ng-class="sortIcon('lastName')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('nick')">
+                            Pseudonim
+                            <i ng-class="sortIcon('nick')"></i>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="instructor in instructors | filter: filterName | orderBy:sort.column:sort.descending">
+                <tr ng-click="select(instructor)" ng-class="{'selected': isEqual(selected, instructor)}">
+                    <td ng-bind="instructor.firstName"></td>
+                    <td ng-bind="instructor.lastName"></td>
+                    <td ng-bind="instructor.nick"></td>
+                </tr>
+                <tr class="table-content" ng-if="isEqual(selected, instructor)">
+                    <td colspan="4">
+                        <div class="block">
+                            <div class="col-sm-6">
+                                <div class="form-horizontal" method="post">
+
+                                    <form class="form-group">
+                                        <label for="firstName" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'firstName')">Imię</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.firstName.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-bind="selected.firstName.value"
+                                                      ng-click="edit(selected, 'firstName')"></span>
+                                                <i class="fa fa-edit" ng-show="selected.firstName.hover"></i>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.firstName.edit">
+                                            <input type="text" placeholder="Imię" class="form-control" id="firstName"
+                                                   ng-model="selected.firstName.value"/>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.firstName.edit">
+                                            <div class="btn" ng-if="selected.firstName.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.firstName.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'firstName')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'firstName')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="lastName" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'lastName')">Nazwisko</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.lastName.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-bind="selected.lastName.value"
+                                                      ng-click="edit(selected, 'lastName')"></span>
+                                                <i class="fa fa-edit" ng-show="selected.lastName.hover"></i>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.lastName.edit">
+                                            <input type="text" placeholder="Nazwisko" class="form-control" id="lastName"
+                                                   ng-model="selected.lastName.value"/>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.lastName.edit">
+                                            <div class="btn" ng-if="selected.lastName.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.lastName.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'lastName')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'lastName')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="nick" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'nick')">Pseudonim</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.nick.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-bind="selected.nick.value"
+                                                      ng-click="edit(selected, 'nick')"></span>
+                                                <i class="fa fa-edit" ng-show="selected.nick.hover"></i>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.nick.edit">
+                                            <input type="text" placeholder="Pseudonim" class="form-control" id="nick"
+                                                   ng-model="selected.nick.value"/>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.nick.edit">
+                                            <div class="btn" ng-if="selected.nick.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.nick.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'nick')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'nick')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>Kursy</h5>
+
+                                <div loading-indicator ng-loading="courseLoading">
+                                    <p ng-if="selectedCourses.length == 0">Brak wyników spełniających kryteria.</p>
+                                    <table class="table table-vcenter table-bordered table-condensed"
+                                           id="general-table">
+                                        <tbody>
+                                        <tr ng-repeat="c in selectedCourses">
+                                            <td>
+                                                {{c.day | translate}}
+                                            </td>
+                                            <td ng-bind="c.startTime"></td>
+                                            <td ng-bind="c.style.name"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p ng-if="instructors.length == 0">Brak wyników spełniających kryteria.</p>
+        </div>
+    </div>
 </div>

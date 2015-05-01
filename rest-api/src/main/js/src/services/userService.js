@@ -1,37 +1,39 @@
 /* jshint -W024 */
 angular.module('activePortal.services')
 
-    .factory('userHttpClient', function ($resource) {
+    .factory('userHttpClient', function ($resource, serverConf) {
+        "use strict";
+        var url = serverConf.URL;
 
         return $resource(null, null, {
 
             findAll: {
-                url: "rest/user/list",
+                url: url + "rest/user/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: "rest/user/create",
+                url: url + "rest/user/create",
                 method: 'POST'
             },
             get: {
-                url: "rest/user/:sid",
+                url: url + "rest/user/:sid",
                 method: 'GET'
             },
             activate: {
-                url: "rest/user/:sid/activate",
+                url: url + "rest/user/:sid/activate",
                 method: 'GET'
             },
             deactivate: {
-                url: "rest/user/:sid/deactivate",
+                url: url + "rest/user/:sid/deactivate",
                 method: 'GET'
             },
             update: {
-                url: "rest/user/:sid",
+                url: url + "rest/user/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: "rest/user/:sid",
+                url: url + "rest/user/:sid",
                 method: 'DELETE'
             }
         });

@@ -108,11 +108,11 @@ angular.module('activePortal', [
 
     .controller("menuCtrl", function ($scope, authorityHttpClient) {
         $scope.currentAuth = [];
-        //authorityHttpClient.getCurrentAuthorities().$promise.then(
-        //    function (result) {
-        //        $scope.currentAuth = result;
-        //    }
-        //);
+        authorityHttpClient.getCurrentAuthorities().$promise.then(
+            function (result) {
+                $scope.currentAuth = result;
+            }
+        );
 
         function hasAuth(key) {
             if ($scope.currentAuth !== undefined) {

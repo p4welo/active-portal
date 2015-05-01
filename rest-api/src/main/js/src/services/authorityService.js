@@ -1,34 +1,36 @@
 /* jshint -W024 */
 angular.module('activePortal.services')
 
-    .factory('authorityHttpClient', function ($resource) {
+    .factory('authorityHttpClient', function ($resource, serverConf) {
         "use strict";
+        var url = serverConf.URL;
+
         return $resource(null, null, {
             findRoles: {
-                url: "rest/role/list",
+                url: url + "rest/role/list",
                 method: 'GET',
                 isArray: true
             },
             findAll: {
-                url: "rest/authority/list",
+                url: url + "rest/authority/list",
                 method: 'GET',
                 isArray: true
             },
             findByRole: {
-                url: "rest/role/:sid/authority/list",
+                url: url + "rest/role/:sid/authority/list",
                 method: 'GET',
                 isArray: true
             },
             check: {
-                url: "rest/role/:sid/authority/check",
+                url: url + "rest/role/:sid/authority/check",
                 method: 'PUT'
             },
             uncheck: {
-                url: "rest/role/:sid/authority/uncheck",
+                url: url + "rest/role/:sid/authority/uncheck",
                 method: 'PUT'
             },
             getCurrentAuthorities: {
-                url: "rest/authority/current/list",
+                url: url + "rest/authority/current/list",
                 method: 'GET',
                 isArray: true
             }

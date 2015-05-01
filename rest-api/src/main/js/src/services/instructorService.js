@@ -1,41 +1,43 @@
 /* jshint -W024 */
 angular.module('activePortal.services')
 
-    .factory('instructorHttpClient', function ($resource) {
+    .factory('instructorHttpClient', function ($resource, serverConf) {
+        "use strict";
+        var url = serverConf.URL;
 
         return $resource(null, null, {
 
             findAll: {
-                url: "rest/instructor/list",
+                url: url + "rest/instructor/list",
                 method: 'GET',
                 isArray: true
             },
             create: {
-                url: "rest/instructor/create",
+                url: url + "rest/instructor/create",
                 method: 'POST'
             },
             get: {
-                url: "rest/instructor/:sid",
+                url: url + "rest/instructor/:sid",
                 method: 'GET'
             },
             activate: {
-                url: "rest/instructor/:sid/activate",
+                url: url + "rest/instructor/:sid/activate",
                 method: 'GET'
             },
             deactivate: {
-                url: "rest/instructor/:sid/deactivate",
+                url: url + "rest/instructor/:sid/deactivate",
                 method: 'GET'
             },
             update: {
-                url: "rest/instructor/:sid",
+                url: url + "rest/instructor/:sid",
                 method: 'PUT'
             },
             delete: {
-                url: "rest/instructor/:sid",
+                url: url + "rest/instructor/:sid",
                 method: 'DELETE'
             },
             courses: {
-                url: "rest/instructor/:sid/courses",
+                url: url + "rest/instructor/:sid/courses",
                 method: "GET",
                 isArray: true
             }
