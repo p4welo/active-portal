@@ -13,3 +13,4 @@ vendor
 rest-api/src/main/webapp/*.html
 style.min.css
 node
+webapp
