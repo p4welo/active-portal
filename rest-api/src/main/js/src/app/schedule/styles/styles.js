@@ -49,8 +49,8 @@ angular.module('activePortal.schedule')
         // =======================================
         $scope.add = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'dist/app/schedule/styles/modal/addStyle.html',
-                controller: "addStyleController"
+                templateUrl: 'schedule/styles/modal/addStyle.tpl.html',
+                controller: "addStyleCtrl"
             });
 
             modalInstance.result.then(function () {
@@ -64,8 +64,8 @@ angular.module('activePortal.schedule')
         $scope.delete = function (style) {
             if (style !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'dist/app/schedule/styles/modal/deleteStyle.html',
-                    controller: "deleteStyleController",
+                    templateUrl: 'schedule/styles/modal/deleteStyle.tpl.html',
+                    controller: "deleteStyleCtrl",
                     resolve: {
                         courses: function () {
                             return style.courses;
