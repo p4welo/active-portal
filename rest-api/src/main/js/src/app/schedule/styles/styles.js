@@ -11,6 +11,7 @@ angular.module('activePortal.schedule')
     .controller('stylesCtrl', function ($scope, $modal, styleHttpClient, categoryHttpClient, notificationService) {
         var CATEGORY_KEY = "category";
         var NAME_KEY = "name";
+
         var OBJECT_PROPERTIES = [CATEGORY_KEY, NAME_KEY];
 
         // =======================================

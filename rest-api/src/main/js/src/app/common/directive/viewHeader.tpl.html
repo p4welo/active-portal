@@ -1,0 +1,20 @@
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i ng-class="iconClass"></i>{{headerLabel}}<br>
+        </h1>
+    </div>
+    <header class="navbar navbar-default">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav-custom visible-xs">
+                <li>
+                    <a aria-expanded="false" class="collapsed" href="javascript:void(0)" data-toggle="collapse"
+                       data-target="#horizontal-menu-collapse">Menu</a>
+                </li>
+            </ul>
+        </div>
+        <div style="height: 1px;" aria-expanded="false" id="horizontal-menu-collapse" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" ng-transclude></ul>
+        </div>
+    </header>
+</div>

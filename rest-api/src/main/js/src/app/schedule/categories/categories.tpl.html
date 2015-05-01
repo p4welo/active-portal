@@ -1,38 +1,18 @@
 <div>
-    <div class="content-header">
-        <div class="header-section">
-            <h1>
-                <i class="gi gi-folder_open"></i>Kategorie zajęć<br>
-            </h1>
-        </div>
-        <header class="navbar navbar-default">
-            <div class="navbar-header">
-                <ul class="nav navbar-nav-custom visible-xs">
-                    <li>
-                        <a aria-expanded="false" class="collapsed" href="javascript:void(0)" data-toggle="collapse"
-                           data-target="#horizontal-menu-collapse">Menu</a>
-                    </li>
-                </ul>
-            </div>
-            <div style="height: 1px;" aria-expanded="false" id="horizontal-menu-collapse"
-                 class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="javascript:void(0)" ng-click="add()">
-                            <i class="fa fa-plus-circle"></i>
-                            Dodaj kategorię
-                        </a>
-                    </li>
-                    <li ng-class="{'disabled': selected == undefined}">
-                        <a href="javascript:void(0)" ng-click="delete(selected)">
-                            <i class="fa fa-trash"></i>
-                            Usuń
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </header>
-    </div>
+    <view-header icon-class="gi gi-gi-folder_open" header-label="Kategorie zajęć">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj kategorię
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
 
     <div class="block col-xs-12">
         <div class="table-options clearfix">
