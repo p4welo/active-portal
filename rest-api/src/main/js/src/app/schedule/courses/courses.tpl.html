@@ -1,5 +1,387 @@
 <div>
-    {{test}}
-<hr />
-    DUPSKO! 123
+    <view-header icon-class="gi gi-table" header-label="Grafik zajęć">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i> Dodaj zajęcia
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined || isActive(selected)}">
+            <a href="javascript:void(0)" ng-click="publish(selected)">
+                <i class="fa fa-eye"></i>
+                Publikuj
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined || !isActive(selected)}">
+            <a href="javascript:void(0)" ng-click="deactivate(selected)">
+                <i class="fa fa-eye-slash"></i>
+                Ukryj
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
+
+    <div class="col-xs-12">
+        <div class="block">
+            <div>
+                <ul class="nav nav-pills day-select">
+                    <li ng-class="{'active' : day=='PN'}">
+                        <a ng-click="setDay('PN')">Poniedziałek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='WT'}">
+                        <a ng-click="setDay('WT')">Wtorek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SR'}">
+                        <a ng-click="setDay('SR')">Środa</a>
+                    </li>
+                    <li ng-class="{'active' : day=='CZ'}">
+                        <a ng-click="setDay('CZ')">Czwartek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='PT'}">
+                        <a ng-click="setDay('PT')">Piątek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SB'}">
+                        <a ng-click="setDay('SB')">Sobota</a>
+                    </li>
+                    <li ng-class="{'active' : day=='ND'}">
+                        <a ng-click="setDay('ND')">Niedziela</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row text-center" ng-if="courseLoading">
+                <i class="fa fa-spin fa-spinner"></i>
+                <span>Ładowanie...</span>
+            </div>
+
+            <table class="table table-editable table-hover" ng-if="!courseLoading">
+                <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('startTime')">
+                            Godziny
+                            <i ng-class="sortIcon('startTime')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('style.name')">
+                            Nazwa
+                            <i ng-class="sortIcon('style.name')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('level')">
+                            Poziom
+                            <i ng-class="sortIcon('level')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('room.name')">
+                            Sala
+                            <i ng-class="sortIcon('room.name')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('instructor.firstName')">
+                            Instruktor
+                            <i ng-class="sortIcon('instructor.firstName')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        Dostępność
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('objectState')">
+                            Status
+                            <i ng-class="sortIcon('objectState')"></i>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="course in classes | filter: { day : day} | orderBy:sort.column:sort.descending">
+                <tr ng-click="select(course)" ng-class="{'selected': isEqual(selected, course)}">
+                    <td>{{course.startTime}} - {{course.endTime}}</td>
+                    <td ng-bind="course.style.name"></td>
+                    <td>{{course.level | translate}}</td>
+                    <td>{{course.room.name | translate}}</td>
+                    <td>
+        <span ng-repeat="instructor in course.instructors">
+            <span ng-if="$index > 0">, </span>
+            {{instructor.firstName}} {{instructor.lastName}}
+        </span>
+                    </td>
+                    <td>
+                        <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
+                        <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
+                        <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+                    </td>
+                    <td class="text-center object-state">
+                        <div class="themed-border-spring themed-background-spring text-center" ng-if="isActive(course)">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="themed-border-fire themed-background-fire text-center" ng-if="!isActive(course)">
+                            <i class="fa fa-remove"></i>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="table-content" ng-if="isEqual(selected, course)">
+                    <td colspan="7">
+                        <div class="block">
+                            <div class="col-sm-6">
+                                <div class="form-horizontal">
+                                    <form class="form-group">
+                                        <label for="style" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'style')">Nazwa</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.style.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-bind="selected.style.value.name"
+                                                      ng-click="edit(selected, 'style')"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.style.edit">
+                                            <select id="style" ng-model="selected.style.value"
+                                                    ng-options="s.name for s in styles |orderBy: 'name' track by s.sid"
+                                                    class="form-control"
+                                                    ng-disabled="selected.style.saving"></select>
+
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.style.edit">
+                                            <div class="btn" ng-if="selected.style.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.style.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'style')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'style')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="level" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'level')">Poziom</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.level.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-click="edit(selected, 'level')">
+                                                    {{selected.level.value | translate}}
+                                                      </span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.level.edit">
+                                            <select id="level" ng-model="selected.level.value"
+                                                    ng-options="l | translate for l in levels"
+                                                    class="form-control"
+                                                    ng-disabled="selected.level.saving"></select>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.level.edit">
+                                            <div class="btn" ng-if="selected.level.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.level.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'level')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'level')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="day" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'day')">Dzień</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.day.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-click="edit(selected, 'day')">
+                                                    {{selected.day.value | translate}}
+                                                      </span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.day.edit">
+                                            <select id="day" ng-model="selected.day.value"
+                                                    ng-options="d | translate for d in days"
+                                                    class="form-control"
+                                                    ng-disabled="selected.day.saving"></select>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.day.edit">
+                                            <div class="btn" ng-if="selected.day.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.day.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'day')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'day')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="startTime" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'startTime')">Start</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.startTime.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-click="edit(selected, 'startTime')" ng-bind="selected.startTime.value"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.startTime.edit">
+                                            <select id="startTime" ng-model="selected.startTime.value.hours"
+                                                    ng-options="h for h in hours"
+                                                    class="form-control"
+                                                    ng-disabled="selected.startTime.saving"></select>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.startTime.edit">
+                                            <select id="startTime2" ng-model="selected.startTime.value.minutes"
+                                                    ng-options="m for m in minutes"
+                                                    class="form-control"
+                                                    ng-disabled="selected.startTime.saving"></select>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.startTime.edit">
+                                            <div class="btn" ng-if="selected.startTime.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.startTime.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'startTime')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'startTime')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="endTime" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'endTime')">Koniec</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.endTime.edit">
+                                            <p class="form-control-static">
+                        <span class="btn-link" ng-click="edit(selected, 'endTime')"
+                              ng-bind="selected.endTime.value"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.endTime.edit">
+                                            <select id="endTime" ng-model="selected.endTime.value.hours"
+                                                    ng-options="h for h in hours" class="form-control"
+                                                    ng-disabled="selected.endTime.saving"></select>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.endTime.edit">
+                                            <select id="endTime2" ng-model="selected.endTime.value.minutes"
+                                                    ng-options="m for m in minutes"
+                                                    class="form-control" ng-disabled="selected.endTime.saving"></select>
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.endTime.edit">
+                                            <div class="btn" ng-if="selected.endTime.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.endTime.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'endTime')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'endTime')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form class="form-group">
+                                        <label for="room" class="col-sm-3 control-label"
+                                               ng-click="edit(selected, 'room')">Sala</label>
+
+                                        <div class="col-sm-9" ng-if="!selected.room.edit">
+                                            <p class="form-control-static">
+                                                <span class="btn-link" ng-bind="selected.room.value.name"
+                                                      ng-click="edit(selected, 'room')"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6" ng-if="selected.room.edit">
+                                            <select id="room" ng-model="selected.room.value"
+                                                    ng-options="r.name for r in rooms track by r.sid"
+                                                    class="form-control"
+                                                    ng-disabled="selected.room.saving"></select>
+
+                                        </div>
+                                        <div class="col-sm-3" ng-if="selected.room.edit">
+                                            <div class="btn" ng-if="selected.room.saving">
+                                                <i class="fa fa-spin fa-spinner"></i>
+                                            </div>
+                                            <div ng-if="!selected.room.saving">
+                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                   ng-click="cancel(selected, 'room')">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                                <button class="btn btn-alt btn-primary"
+                                                        ng-click="save(selected, 'room')">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>
+                                    Instruktorzy
+                                    <button class="pull-right btn-link" ng-click="edit(selected, 'instructors')">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </h5>
+                                <p ng-if="selected.instructors.length == 0">Brak wyników spełniających kryteria.</p>
+
+                                <table class="table table-condensed" id="general-table">
+                                    <tbody>
+                                    <tr ng-repeat="i in selected.instructors.value">
+                                        <td>
+                                            {{i.firstName}}
+                                        </td>
+                                        <td>
+                                            {{i.lastName}}
+                                        </td>
+                                        <td>
+                                            {{i.nick}}
+                                        </td>
+                                        <td ng-if="selected.instructors.edit">
+                                            <button class="btn-link pull-right">
+                                                <i class="fa fa-remove"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p ng-if="!courseLoading && classes.length == 0">Brak wyników spełniających kryteria.</p>
+        </div>
+    </div>
+</div>
 </div>

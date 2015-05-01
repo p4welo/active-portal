@@ -47,23 +47,12 @@
                     <td ng-bind="room.name"></td>
                 </tr>
                 <tr class="table-content" ng-if="isEqual(selected, room)">
-                    <td colspan="3">
+                    <td colspan="2">
                         <div class="block">
                             <div class="col-sm-6">
                                 <div class="form-horizontal" method="post">
-
-                                    <div class="form-group">
-                                        <label for="code" class="col-sm-3 control-label">Kod</label>
-
-                                        <div class="col-sm-9" ng-if="selected.edit">
-                                            <input type="text" placeholder="Kod" class="form-control" id="code"
-                                                   ng-model="selected.code"/>
-                                        </div>
-                                        <div class="col-sm-9" ng-if="!selected.edit">
-                                            <p class="form-control-static" ng-bind="selected.code"></p>
-                                        </div>
-                                    </div>
-
+                                    <form-label ng-model="selected.code" label="Kodxc"></form-label>
+                                    <!--<form-text-field ng-model="selected.name" field="name" label="Nazwa" on-save="onSave()"></form-text-field>-->
                                     <form class="form-group">
                                         <label for="name" class="col-sm-3 control-label"
                                                ng-click="edit(selected, 'name')">Nazwa</label>
@@ -72,7 +61,6 @@
                                             <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.name.value"
                                                       ng-click="edit(selected, 'name')"></span>
-                                                <i class="fa fa-edit" ng-show="selected.name.hover"></i>
                                             </p>
                                         </div>
                                         <div class="col-sm-6" ng-if="selected.name.edit">
