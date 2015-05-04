@@ -10,7 +10,7 @@ angular.module('activePortal.schedule')
 
     .controller('roomsCtrl', function ($scope, roomHttpClient, $modal, notificationService) {
         var NAME_KEY = "name";
-        var OBJECT_PROPERTIES = [NAME_KEY];
+        var OBJECT_PROPERTIES = [];
 
         // =======================================
         $scope.roomLoading = true;
@@ -64,15 +64,14 @@ angular.module('activePortal.schedule')
                 return;
             }
             $scope.selected = angular.copy(room);
-
-            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
-                $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: room[OBJECT_PROPERTIES[i]],
+            OBJECT_PROPERTIES.forEach(function (property) {
+                $scope.selected[property] = {
+                    value: room[property],
                     edit: false,
                     saving: false,
                     oldVal: {}
                 };
-            }
+            });
         };
         $scope.edit = function (object, property) {
             object[property].edit = true;

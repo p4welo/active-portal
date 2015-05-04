@@ -51,8 +51,9 @@
                         <div class="block">
                             <div class="col-sm-6">
                                 <div class="form-horizontal" method="post">
-                                    <form-label ng-model="selected.code" label="Kodxc"></form-label>
-                                    <!--<form-text-field ng-model="selected.name" field="name" label="Nazwa" on-save="onSave()"></form-text-field>-->
+                                    <form-label ng-model="selected.code" label="Kod"></form-label>
+                                    <!--<form-text-field ng-model="selected" field="name" label="Nazwa" on-save="save(selected, 'name')"></form-text-field>-->
+                                    <!--<form-text-field value="selected.name.value" label="Nazwa" editing="selected.name.edit" saving="selected.name.saving" on-save="save(selected, 'name')"></form-text-field>-->
                                     <form class="form-group">
                                         <label for="name" class="col-sm-3 control-label"
                                                ng-click="edit(selected, 'name')">Nazwa</label>

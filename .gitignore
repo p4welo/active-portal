@@ -10,6 +10,7 @@ target-grunt
 dist
 .version
 vendor
+npm-debug.log
 rest-api/src/main/webapp/*.html
 style.min.css
 node

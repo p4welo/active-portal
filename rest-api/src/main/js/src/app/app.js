@@ -67,7 +67,7 @@ angular.module('activePortal', [
         });
         $translateProvider.preferredLanguage('pl');
 
-        $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
+        $httpProvider.interceptors.push(function ($q, $location, notificationService) {
                 return {
                     'responseError': function (rejection) {
                         var status = rejection.status;
@@ -78,7 +78,7 @@ angular.module('activePortal', [
                             $location.path("/403");
                         }
                         else {
-                            //notificationService.error('Błąd ' + status);
+                            notificationService.error('Błąd ' + status);
                         }
                         return $q.reject(rejection);
                     }
