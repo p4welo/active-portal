@@ -1,2 +1,2 @@
 @echo off
-grunt --gruntfile rest-api\src\main\js\Gruntfile.js build
+grunt --gruntfile web\src\main\js\Gruntfile.js build

@@ -11,7 +11,7 @@ dist
 .version
 vendor
 npm-debug.log
-rest-api/src/main/webapp/*.html
+web/src/main/webapp/*.html
 style.min.css
 node
 webapp

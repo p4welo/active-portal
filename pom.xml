@@ -13,8 +13,7 @@
     <modules>
         <module>domain</module>
         <module>service</module>
-        <module>rest-api</module>
-        <!--<module>web</module>-->
+        <module>web</module>
         <module>public-api</module>
     </modules>
 
@@ -71,7 +70,7 @@
             </dependency>
             <dependency>
                 <groupId>pl.ap</groupId>
-                <artifactId>rest-api</artifactId>
+                <artifactId>web</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
             <!--<dependency>-->
