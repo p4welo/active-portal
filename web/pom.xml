@@ -16,7 +16,7 @@
     <name>Rest Server Web Module</name>
 
     <properties>
-        <grunt>compile</grunt>
+        <grunt>build</grunt>
     </properties>
 
 

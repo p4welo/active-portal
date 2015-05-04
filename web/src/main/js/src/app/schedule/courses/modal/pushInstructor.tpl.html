@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title" id="add-modal-label">Dodaj instruktora</h4>
+</div>
+<div class="modal-body" ng-init="focusInput('#code')">
+    <div loading-indicator ng-loading="instructorLoading">
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item" ng-repeat="i in instructors">
+            {{ ::i.firstName }}
+            {{ ::i.lastName }}
+        </a>
+    </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save(category)" class="btn btn-alt btn-primary">Zapisz</button>
+</div>

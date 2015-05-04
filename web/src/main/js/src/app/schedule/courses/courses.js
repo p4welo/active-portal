@@ -76,8 +76,8 @@ angular.module('activePortal.schedule')
         $scope.add = function () {
             var modalInstance = $modal.open(
                 {
-                    templateUrl: 'dist/app/schedule/courses/modal/addCourse.html',
-                    controller: "addCourseController"
+                    templateUrl: 'schedule/courses/modal/addCourse.tpl.html',
+                    controller: "addCourseCtrl"
                 });
 
             modalInstance.result.then(function () {
@@ -114,6 +114,21 @@ angular.module('activePortal.schedule')
                     });
             }
         };
+        $scope.pushInstructor = function (course) {
+            if (course !== undefined) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'schedule/courses/modal/pushInstructor.tpl.html',
+                    controller: "pushInstructorCtrl"
+                });
+
+                modalInstance.result.then(function () {
+                    courseHttpClient.findAll().$promise.then(
+                        function (result) {
+                            $scope.classes = result;
+                        });
+                });
+            }
+        }
 
         $scope.setDay = function (day) {
             $scope.selected = undefined;
@@ -123,8 +138,8 @@ angular.module('activePortal.schedule')
         $scope.delete = function (course) {
             if (course !== undefined) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'dist/app/core/modal/deleteConfirm.html',
-                    controller: "deleteConfirmDialogController"
+                    templateUrl: 'common/modal/deleteConfirm.tpl.html',
+                    controller: "deleteConfirmDialogCtrl"
                 });
 
                 modalInstance.result.then(function () {
