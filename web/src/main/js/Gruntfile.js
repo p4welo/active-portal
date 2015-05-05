@@ -16,6 +16,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks("grunt-bower-install-simple");
 
     /**
      * Load in our build configuration file.
@@ -96,6 +97,17 @@ module.exports = function (grunt) {
             options: {
                 'no-write': true,
                 force: true
+            }
+        },
+
+        "bower-install-simple": {
+            options: {
+                color: true
+            },
+            "prod": {
+                options: {
+                    production: true
+                }
             }
         },
 
@@ -529,7 +541,7 @@ module.exports = function (grunt) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build', [
-        'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
+        'clean', 'bower-install-simple', 'html2js', 'jshint', 'less:build', 'concat:build_css',
         'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs',
         'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build'
     ]);
@@ -539,7 +551,7 @@ module.exports = function (grunt) {
      * minifying your code.
      */
     grunt.registerTask('compile', [
-        'clean', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+        'clean', 'bower-install-simple', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
 
     /**
