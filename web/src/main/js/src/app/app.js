@@ -11,8 +11,8 @@ angular.module('activePortal', [
     'ngTouch',
     'pascalprecht.translate',
     'ui.router'
-    //,
-    //'angular-loading-bar'
+    ,
+    'angular-loading-bar'
 ])
 
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $httpProvider) {
@@ -87,7 +87,7 @@ angular.module('activePortal', [
         );
     })
 
-    .run(function ($rootScope, $location, $modal) {
+    .run(function ($rootScope, $location, $modal, $log) {
         $rootScope.isActive = function (obj) {
             return obj.objectState == 'ACTIVE';
         };
@@ -104,6 +104,9 @@ angular.module('activePortal', [
                 size: 'sm'
             });
         };
+        $rootScope.log = function (message) {
+            $log.debug(message);
+        }
     })
 
     .controller("menuCtrl", function ($scope, authorityHttpClient) {

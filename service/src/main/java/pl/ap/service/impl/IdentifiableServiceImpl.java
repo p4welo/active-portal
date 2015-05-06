@@ -10,6 +10,8 @@ import pl.ap.exception.PropertyUpdateServiceException;
 import pl.ap.service.IIdentifiableService;
 import pl.ap.service.util.SidUtils;
 
+import java.util.List;
+
 /**
  * Created by parado on 2014-10-15.
  */
@@ -45,6 +47,12 @@ public abstract class IdentifiableServiceImpl<T extends IdentifiableEntity> exte
     public T deactivate(T obj) {
         obj.setObjectState(ObjectStateEnum.INACTIVE);
         return getDao().update(obj);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<T> findBySids(List<String> sids) {
+        return getDao().findBySids(sids);
     }
 
     @Override

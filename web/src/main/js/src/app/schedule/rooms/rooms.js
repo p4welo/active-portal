@@ -10,7 +10,7 @@ angular.module('activePortal.schedule')
 
     .controller('roomsCtrl', function ($scope, roomHttpClient, $modal, notificationService) {
         var NAME_KEY = "name";
-        var OBJECT_PROPERTIES = [];
+        var OBJECT_PROPERTIES = [NAME_KEY];
 
         // =======================================
         $scope.roomLoading = true;

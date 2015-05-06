@@ -8,7 +8,7 @@ angular.module('activePortal.schedule')
         });
     })
 
-    .controller('coursesCtrl', function ($scope, courseHttpClient, notificationService, $modal, styleHttpClient, instructorHttpClient, roomHttpClient) {
+    .controller('coursesCtrl', function ($scope, $rootScope, courseHttpClient, notificationService, $modal, styleHttpClient, instructorHttpClient, roomHttpClient) {
         var STYLE_KEY = "style";
         var LEVEL_KEY = "level";
         var DAY_KEY = "day";
@@ -23,12 +23,23 @@ angular.module('activePortal.schedule')
             function (result) {
                 $scope.classes = result;
                 $scope.courseLoading = false;
+                return styleHttpClient.findAll().$promise;
+            }
+        ).then(
+            function (result) {
+                $scope.styles = result;
+                return instructorHttpClient.findAll().$promise;
+            }
+        ).then(
+            function (result) {
+                $scope.instructors = result;
+                return roomHttpClient.findAll().$promise;
+            }
+        ).then(
+            function (result) {
+                $scope.rooms = result;
             }
         );
-
-        $scope.styles = styleHttpClient.findAll();
-        $scope.rooms = roomHttpClient.findAll();
-        $scope.instructors = instructorHttpClient.findAll();
 
         $scope.day = 'PN';
         $scope.days = [
@@ -74,61 +85,79 @@ angular.module('activePortal.schedule')
 
         // =======================================
         $scope.add = function () {
-            var modalInstance = $modal.open(
+            $modal.open(
                 {
                     templateUrl: 'schedule/courses/modal/addCourse.tpl.html',
-                    controller: "addCourseCtrl"
-                });
-
-            modalInstance.result.then(function () {
-                courseHttpClient.findAll().$promise.then(
-                    function (result) {
-                        $scope.classes = result;
-                    });
-                notificationService.success("Pomyślnie zapisano");
-            });
-        };
-        $scope.update = function (course) {
-            delete course.edit;
-            courseHttpClient.update({ sid: course.sid }, course).$promise.then(
+                    controller: "addCourseCtrl",
+                    resolve: {
+                        styles: function () {
+                            return $scope.styles;
+                        },
+                        instructors: function () {
+                            return $scope.instructors;
+                        },
+                        rooms: function () {
+                            return $scope.rooms;
+                        }
+                    }
+                }
+            ).result.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    courseHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.classes = result;
-                        }
-                    );
-                });
+                    return courseHttpClient.findAll().$promise;
+                }
+            ).then(
+                function (result) {
+                    $scope.classes = result;
+                }
+            );
         };
 
         $scope.publish = function (course) {
-            if (course !== undefined) {
-                courseHttpClient.publish({ sid: course.sid }).$promise.then(
+            if (angular.isObject(course)) {
+                courseHttpClient.publish({sid: course.sid}).$promise.then(
                     function (result) {
                         course.objectState = result.objectState;
-                        courseHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.classes = result;
-                            });
-                        notificationService.success("Pomyślnie zapisano");
-                    });
+                        notificationService.success("Pomyślnie zapisano 123");
+
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
         };
-        $scope.pushInstructor = function (course) {
-            if (course !== undefined) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'schedule/courses/modal/pushInstructor.tpl.html',
-                    controller: "pushInstructorCtrl"
-                });
+        $scope.reassignInstructors = function (course) {
+            if (angular.isObject(course)) {
 
-                modalInstance.result.then(function () {
-                    courseHttpClient.findAll().$promise.then(
-                        function (result) {
-                            $scope.classes = result;
-                        });
-                });
+                $modal.open(
+                    {
+                        templateUrl: 'schedule/courses/modal/editCourseInstructors.tpl.html',
+                        controller: "editCourseInstructorsCtrl",
+                        resolve: {
+                            courseInstructors: function () {
+                                return course.instructors.value;
+                            },
+                            allInstructors: function () {
+                                return $scope.instructors;
+                            },
+                            course: function () {
+                                return course;
+                            }
+                        }
+                    }
+                ).result.then(function () {
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
-        }
+        };
 
         $scope.setDay = function (day) {
             $scope.selected = undefined;
@@ -136,38 +165,45 @@ angular.module('activePortal.schedule')
         };
 
         $scope.delete = function (course) {
-            if (course !== undefined) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                    controller: "deleteConfirmDialogCtrl"
-                });
+            if (angular.isObject(course)) {
 
-                modalInstance.result.then(function () {
-                    $scope.selected = undefined;
-                    courseHttpClient.delete({sid: course.sid}).$promise.then(
-                        function () {
-                            notificationService.success("Pomyślnie usunięto");
-                            courseHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.classes = result;
-                                });
-                        }
-                    );
-                });
+                $modal.open(
+                    {
+                        templateUrl: 'common/modal/deleteConfirm.tpl.html',
+                        controller: "deleteConfirmDialogCtrl"
+                    }
+                ).result.then(
+                    function () {
+                        $scope.selected = undefined;
+                        return courseHttpClient.delete({sid: course.sid}).$promise;
+                    }
+                ).then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
         };
 
         $scope.deactivate = function (course) {
-            if (course !== undefined) {
-                courseHttpClient.deactivate({ sid: course.sid }).$promise.then(
+            if (angular.isObject(course)) {
+                courseHttpClient.deactivate({sid: course.sid}).$promise.then(
                     function (result) {
                         course.objectState = result.objectState;
-                        courseHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.classes = result;
-                            });
-                        notificationService.success("Pomyślnie zapisano");
-                    });
+
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
         };
 
@@ -212,24 +248,30 @@ angular.module('activePortal.schedule')
                     function () {
                         course[property].edit = false;
                         course[property].saving = false;
-                        courseHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.classes = result;
-                            });
                         notificationService.success("Pomyślnie zapisano");
-                    });
+
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
             else if (property == ROOM_KEY) {
                 courseHttpClient.setRoom({sid: course.sid}, course.room.value).$promise.then(
                     function () {
                         course[property].edit = false;
                         course[property].saving = false;
-                        courseHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.classes = result;
-                            });
                         notificationService.success("Pomyślnie zapisano");
-                    });
+
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
             else {
                 var obj = _.findWhere($scope.classes, {sid: course.sid});
@@ -242,16 +284,19 @@ angular.module('activePortal.schedule')
                     else {
                         obj[property] = newVal;
                     }
-                    courseHttpClient.update({ sid: obj.sid }, obj).$promise.then(
+                    courseHttpClient.update({sid: obj.sid}, obj).$promise.then(
                         function () {
                             course[property].edit = false;
                             course[property].saving = false;
-                            courseHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.classes = result;
-                                });
                             notificationService.success("Pomyślnie zapisano");
-                        });
+
+                            return courseHttpClient.findAll().$promise;
+                        }
+                    ).then(
+                        function (result) {
+                            $scope.classes = result;
+                        }
+                    );
                 }
             }
         };

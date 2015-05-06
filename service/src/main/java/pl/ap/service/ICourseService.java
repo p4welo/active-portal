@@ -1,5 +1,6 @@
 package pl.ap.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.domain.Course;
 import pl.ap.domain.CourseStyle;
 import pl.ap.domain.Instructor;
@@ -29,4 +30,8 @@ public interface ICourseService extends IIdentifiableService<Course> {
     Course setState(Course course, CourseStateEnum state);
 
     Course setStyle(Course course, CourseStyle style);
+
+    Course cleanInstructors(Course course);
+
+    Course reassignInstructors(Course course, List<Instructor> instructors);
 }

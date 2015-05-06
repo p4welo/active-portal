@@ -54,6 +54,10 @@ angular.module('activePortal.services')
                 url: url + "rest/course/:sid/instructor",
                 method: "PUT"
             },
+            reassignInstructors: {
+                url: url + "rest/course/:sid/instructors/reassign",
+                method: "PUT"
+            },
             setRoom: {
                 url: url + "rest/course/:sid/room",
                 method: "PUT"

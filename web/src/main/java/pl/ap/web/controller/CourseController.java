@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.*;
 import pl.ap.web.api.ApiKeys;
 import pl.ap.web.api.CourseApiMappings;
+import pl.ap.web.dto.SidListDto;
 import pl.ap.web.dto.CourseStateDto;
 import pl.ap.web.dto.presence.CoursePresenceDto;
 import pl.ap.service.*;
@@ -24,6 +25,9 @@ public class CourseController {
 
     @Resource
     private ICourseService courseService;
+
+    @Resource
+    private IInstructorService instructorService;
 
     @Resource
     private ICustomerPresenceService customerPresenceService;
@@ -141,6 +145,23 @@ public class CourseController {
         Assert.notNull(instructor);
 
         return courseService.setInstructor(course, instructor);
+    }
+
+    @RequestMapping(value = CourseApiMappings.REASSIGN_INSTRUCTORS, method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Course reassignInstructors(@RequestBody SidListDto instructorSidsDto, @PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("reassignInstructors()");
+
+        Course course = courseService.getBySid(sid);
+        Assert.notNull(course);
+        Assert.notNull(instructorSidsDto);
+        Assert.notNull(instructorSidsDto.getSids());
+
+        List<Instructor> instructors = instructorService.findBySids(instructorSidsDto.getSids());
+        Assert.notEmpty(instructors);
+
+        course = courseService.cleanInstructors(course);
+        return courseService.reassignInstructors(course, instructors);
     }
 
     @RequestMapping(value = CourseApiMappings.SET_STYLE, method = RequestMethod.PUT)

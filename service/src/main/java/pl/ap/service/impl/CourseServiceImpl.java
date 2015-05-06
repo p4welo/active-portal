@@ -3,6 +3,7 @@ package pl.ap.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.ICourseDao;
+import pl.ap.dao.ICourseInstructorRelationDao;
 import pl.ap.dao.IIdentifiableDao;
 import pl.ap.domain.Course;
 import pl.ap.domain.CourseStyle;
@@ -28,6 +29,9 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
 
     @Resource
     private ICourseDao courseDao;
+
+    @Resource
+    private ICourseInstructorRelationDao courseInstructorRelationDao;
 
     @Resource
     private IInstructorService instructorService;
@@ -92,6 +96,7 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
                 Course.FIELD_OBJECT_STATE,
                 Course.FIELD_STYLE,
                 Course.FIELD_INSTRUCTOR,
+                Course.FIELD_INSTRUCTORS,
                 Course.FIELD_DAY,
                 Course.FIELD_START_TIME,
                 Course.FIELD_END_TIME,
@@ -146,6 +151,20 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
     public Course setStyle(Course course, CourseStyle style) {
         style = styleService.getBySid(style.getSid());
         course.setStyle(style);
+        return super.update(course);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Course cleanInstructors(Course course) {
+        course.setInstructors(null);
+        return super.update(course);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Course reassignInstructors(Course course, List<Instructor> instructors) {
+        course.setInstructors(instructors);
         return super.update(course);
     }
 

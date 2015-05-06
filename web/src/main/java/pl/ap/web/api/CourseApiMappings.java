@@ -28,6 +28,8 @@ public interface CourseApiMappings {
 
     public static final String SET_INSTRUCTOR = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/instructor";
 
+    public static final String REASSIGN_INSTRUCTORS = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/instructors/reassign";
+
     public static final String SET_ROOM = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/room";
 
     public static final String SET_STYLE = COURSE_PREFIX + CommonApiMappings.SID_SUFFIX + "/style";

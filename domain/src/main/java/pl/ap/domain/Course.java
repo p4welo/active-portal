@@ -22,6 +22,8 @@ public class Course extends IdentifiableEntity {
 
     public static final String FIELD_INSTRUCTOR = "instructor";
 
+    public static final String FIELD_INSTRUCTORS = "instructors";
+
     public static final String FIELD_DAY = "day";
 
     public static final String FIELD_START_TIME = "startTime";
