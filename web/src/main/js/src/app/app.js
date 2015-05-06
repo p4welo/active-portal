@@ -5,6 +5,7 @@ angular.module('activePortal', [
     'activePortal.dashboard',
     'activePortal.schedule',
     'activePortal.customers',
+    'activePortal.tickets',
     'activePortal.services',
 
     'ngAnimate',

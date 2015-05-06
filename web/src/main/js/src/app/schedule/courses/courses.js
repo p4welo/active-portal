@@ -149,6 +149,7 @@ angular.module('activePortal.schedule')
                         }
                     }
                 ).result.then(function () {
+                        notificationService.success("Pomyślnie zapisano");
                         return courseHttpClient.findAll().$promise;
                     }
                 ).then(
