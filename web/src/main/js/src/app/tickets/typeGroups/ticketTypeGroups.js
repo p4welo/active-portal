@@ -74,7 +74,6 @@ angular.module('activePortal.schedule')
                     value: group[OBJECT_PROPERTIES[i]],
                     edit: false,
                     saving: false,
-                    hover: false,
                     oldVal: {}
                 };
             }
@@ -86,13 +85,6 @@ angular.module('activePortal.schedule')
         $scope.cancel = function (object, property) {
             object[property].value = object[property].oldVal;
             object[property].edit = false;
-            object[property].hover = false;
-        };
-        $scope.hover = function (object, property) {
-            object[property].hover = true;
-        };
-        $scope.leave = function (object, property) {
-            object[property].hover = false;
         };
         $scope.save = function (object, property) {
             object[property].saving = true;
@@ -104,7 +96,6 @@ angular.module('activePortal.schedule')
                         function () {
                             object[property].edit = false;
                             object[property].saving = false;
-                            object[property].hover = false;
 
                             notificationService.success("Pomyślnie zapisano");
                             return ticketTypeGroupHttpClient.findAll().$promise;

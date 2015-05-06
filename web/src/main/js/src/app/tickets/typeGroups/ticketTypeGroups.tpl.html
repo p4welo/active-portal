@@ -53,16 +53,12 @@
                                 <div class="form-horizontal" method="post">
                                     <form class="form-group">
                                         <label for="name" class="col-sm-3 control-label"
-                                               ng-click="edit(selected, 'name')"
-                                               ng-mouseover="hover(selected, 'name')"
-                                               ng-mouseleave="leave(selected, 'name')">Nazwa</label>
+                                               ng-click="edit(selected, 'name')">Nazwa</label>
 
                                         <div class="col-sm-9" ng-if="!selected.name.edit">
                                             <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.name.value"
-                                                      ng-click="edit(selected, 'name')"
-                                                      ng-mouseover="hover(selected, 'name')"
-                                                      ng-mouseleave="leave(selected, 'name')"></span>
+                                                      ng-click="edit(selected, 'name')"></span>
                                                 &nbsp;
                                                 <i class="fa fa-edit" ng-show="selected.name.hover"></i>
                                             </p>
@@ -89,16 +85,12 @@
                                     </form>
                                     <form class="form-group">
                                         <label for="name" class="col-sm-3 control-label"
-                                               ng-click="edit(selected, 'description')"
-                                               ng-mouseover="hover(selected, 'description')"
-                                               ng-mouseleave="leave(selected, 'description')">Uwagi</label>
+                                               ng-click="edit(selected, 'description')">Uwagi</label>
 
                                         <div class="col-sm-9" ng-if="!selected.description.edit">
                                             <p class="form-control-static">
                                                 <span class="btn-link" ng-bind="selected.description.value"
-                                                      ng-click="edit(selected, 'description')"
-                                                      ng-mouseover="hover(selected, 'description')"
-                                                      ng-mouseleave="leave(selected, 'description')"></span>
+                                                      ng-click="edit(selected, 'description')"></span>
                                                 &nbsp;
                                                 <i class="fa fa-edit" ng-show="selected.description.hover"></i>
                                             </p>
