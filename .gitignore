@@ -11,7 +11,8 @@ dist
 .version
 vendor
 npm-debug.log
-web/src/main/webapp/*.html
+#web/src/main/webapp/*.html
 style.min.css
 node
-webapp
+web/src/main/webapp/*
+!web/src/main/webapp/WEB-INF
