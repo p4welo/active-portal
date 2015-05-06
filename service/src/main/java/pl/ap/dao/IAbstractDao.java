@@ -16,6 +16,8 @@ public interface IAbstractDao<T extends DataEntity> {
 
     T update(T entity);
 
+    T merge(T entity);
+
     void delete(T entity);
 
     void delete(List<T> entities);

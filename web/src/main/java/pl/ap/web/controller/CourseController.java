@@ -160,7 +160,7 @@ public class CourseController {
         List<Instructor> instructors = instructorService.findBySids(instructorSidsDto.getSids());
         Assert.notEmpty(instructors);
 
-        course = courseService.cleanInstructors(course);
+//        course = courseService.cleanInstructors(course);
         return courseService.reassignInstructors(course, instructors);
     }
 

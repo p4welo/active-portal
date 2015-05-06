@@ -1,5 +1,6 @@
 package pl.ap.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.common.IdentifiableEntity;
 
@@ -17,4 +18,6 @@ public interface IIdentifiableService<T extends IdentifiableEntity> extends IAbs
     T deactivate(T obj);
 
     List<T> findBySids(List<String> sids);
+
+    T merge(T entity);
 }

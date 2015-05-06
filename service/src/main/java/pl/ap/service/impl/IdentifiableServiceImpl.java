@@ -61,7 +61,16 @@ public abstract class IdentifiableServiceImpl<T extends IdentifiableEntity> exte
         T oldInstance = getBySid(entity.getSid());
         assertEntityNotNull(oldInstance);
         updateFields(oldInstance, entity, getUpdateFields());
-        return getDao().update(oldInstance);
+        return getDao().merge(oldInstance);
+    }
+
+    @Override
+    @Transactional
+    public T merge(T entity) {
+        T oldInstance = getBySid(entity.getSid());
+        assertEntityNotNull(oldInstance);
+        updateFields(oldInstance, entity, getUpdateFields());
+        return getDao().merge(oldInstance);
     }
 
     protected abstract String[] getUpdateFields();

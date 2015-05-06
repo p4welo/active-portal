@@ -348,16 +348,13 @@
                                 <div class="col-sm-6">
                                     <h5 class="btn-link" ng-click="reassignInstructors(selected)">
                                         Instruktorzy
-                                        <!--<button class="btn-link btn-small">-->
-                                        <!--<i class="fa fa-edit"></i>-->
-                                        <!--</button>-->
                                     </h5>
 
                                     <p ng-if="selected.instructors.length == 0">Brak wyników spełniających kryteria.</p>
 
                                     <table class="table table-condensed" id="general-table">
                                         <tbody>
-                                        <tr ng-repeat="i in selected.instructors.value">
+                                        <tr ng-repeat="i in selected.instructors">
                                             <td>
                                                 {{i.firstName}}
                                             </td>

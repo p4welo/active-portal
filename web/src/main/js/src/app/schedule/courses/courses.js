@@ -16,7 +16,7 @@ angular.module('activePortal.schedule')
         var END_TIME_KEY = "endTime";
         var ROOM_KEY = "room";
         var INSTRUCTORS_KEY = "instructors";
-        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY, INSTRUCTORS_KEY];
+        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY];
 
         $scope.courseLoading = true;
         courseHttpClient.findAll().$promise.then(
@@ -118,7 +118,7 @@ angular.module('activePortal.schedule')
                 courseHttpClient.publish({sid: course.sid}).$promise.then(
                     function (result) {
                         course.objectState = result.objectState;
-                        notificationService.success("Pomyślnie zapisano 123");
+                        notificationService.success("Pomyślnie zapisano");
 
                         return courseHttpClient.findAll().$promise;
                     }
@@ -138,7 +138,7 @@ angular.module('activePortal.schedule')
                         controller: "editCourseInstructorsCtrl",
                         resolve: {
                             courseInstructors: function () {
-                                return course.instructors.value;
+                                return course.instructors;
                             },
                             allInstructors: function () {
                                 return $scope.instructors;
@@ -154,6 +154,7 @@ angular.module('activePortal.schedule')
                 ).then(
                     function (result) {
                         $scope.classes = result;
+                        course.instructors = _.findWhere(result, {sid: course.sid}).instructors;
                     }
                 );
             }
@@ -179,8 +180,7 @@ angular.module('activePortal.schedule')
                     }
                 ).then(
                     function () {
-                        notificationService.success("Pomyślnie usunięto");
-
+                        notificationService.success("Pomyślnie zapisano");
                         return courseHttpClient.findAll().$promise;
                     }
                 ).then(
@@ -196,7 +196,7 @@ angular.module('activePortal.schedule')
                 courseHttpClient.deactivate({sid: course.sid}).$promise.then(
                     function (result) {
                         course.objectState = result.objectState;
-
+                        notificationService.success("Pomyślnie usunięto");
                         return courseHttpClient.findAll().$promise;
                     }
                 ).then(

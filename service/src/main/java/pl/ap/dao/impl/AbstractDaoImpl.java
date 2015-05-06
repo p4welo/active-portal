@@ -71,6 +71,10 @@ public abstract class AbstractDaoImpl<T extends DataEntity> implements IAbstract
         return entity;
     }
 
+    public T merge(T entity) {
+        return (T) getSessionFactory().getCurrentSession().merge(entity);
+    }
+
     public T update(T entity) {
         getSessionFactory().getCurrentSession().update(entity);
         return entity;
