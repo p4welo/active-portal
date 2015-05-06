@@ -6,10 +6,10 @@ bower
 .settings
 .project
 node_modules
-target-grunt
 dist
 .version
-vendor
+web/src/main/js/vendor/*
+!web/src/main/js/vendor/proui
 npm-debug.log
 #web/src/main/webapp/*.html
 style.min.css

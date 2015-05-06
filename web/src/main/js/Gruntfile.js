@@ -541,7 +541,7 @@ module.exports = function (grunt) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build', [
-        'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
+        'clean', 'bower-install-simple', 'html2js', 'jshint', 'less:build', 'concat:build_css',
         'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs',
         'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build'
     ]);
@@ -551,7 +551,7 @@ module.exports = function (grunt) {
      * minifying your code.
      */
     grunt.registerTask('compile', [
-        'bower-install-simple', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+        'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
 
     /**
