@@ -1,17 +1,12 @@
 .idea
-.svn
 *.iml
 target
 bower
-.settings
-.project
 node_modules
 dist
-.version
 #web/src/main/js/vendor/*
 #!web/src/main/js/vendor/proui
 npm-debug.log
-style.min.css
 node
 web/src/main/webapp/*
 !web/src/main/webapp/WEB-INF

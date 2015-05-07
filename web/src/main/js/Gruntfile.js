@@ -184,14 +184,6 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            build_webxml: {
-                files: [
-                    {
-                        src: './WEB-INF/web.xml',
-                        dest: '<%= build_dir %>/WEB-INF/web.xml'
-                    }
-                ]
-            },
             compile_assets: {
                 files: [
                     {
@@ -535,15 +527,15 @@ module.exports = function (grunt) {
     /**
      * The default task is to build and compile.
      */
-    grunt.registerTask('default', ['build', 'compile']);
+    grunt.registerTask('default', ['bower-install-simple', 'build', 'compile']);
 
     /**
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build', [
-        'clean', 'bower-install-simple', 'html2js', 'jshint', 'less:build', 'concat:build_css',
+        'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
         'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs',
-        'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build'
+        'copy:build_vendorcss', 'copy:build_vendorfonts', 'index:build'
     ]);
     //'copy:build_vendorcss', 'copy:build_vendorfonts', 'copy:build_webxml', 'index:build', 'karmaconfig', 'karma:continuous'
     /**

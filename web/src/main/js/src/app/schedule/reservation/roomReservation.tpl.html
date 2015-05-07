@@ -1,0 +1,97 @@
+<div>
+    <view-header icon-class="fa fa-plane" header-label="Rezerwacje sali">
+        <li>
+            <a href="javascript:void(0)">
+                <i class="fa fa-plus-circle"></i> Dodaj rezerwację
+            </a>
+        </li>
+
+    </view-header>
+    <div style="margin-bottom: 40px">
+        <div class="col-md-offset-4 col-md-4 col-xs-12 col-sm-offset-3 col-sm-6">
+            <p class="input-group">
+                <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened"
+                       min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+
+    </div>
+    <div class="col-xs-12">
+        <div class="block" ng-repeat="d in days">
+            <div class="block-title">
+                <h2 class="widget-content-light">
+                    {{ ::d | translate }}
+                    <small>4.05.2015</small>
+                </h2>
+            </div>
+            <div class="row">
+                <div loading-indicator ng-loading="loading">
+                    <div class="col-xs-12 col-md-6" ng-repeat="room in roomList">
+                        <h4 class="sub-header">{{ ::room.name }}</h4>
+
+                        <div class="list-group">
+                                <span class="list-group-item"
+                                      ng-repeat="reservation in reservationList | filter: {day: d} | filter: {roomSid: room.sid} | orderBy: 'startTime'">
+                                    {{ ::reservation.description }}
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="widget ng-scope">-->
+            <!--<div class="widget-extra themed-background-dark">-->
+
+                <!--<h3 class="widget-content-light">-->
+                    <!--Poniedziałek-->
+                    <!--<small>4.05.2015</small>-->
+                <!--</h3>-->
+            <!--</div>-->
+            <!--<div class="widget-extra">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 col-md-6">-->
+                        <!--<h4 class="sub-header">Duża</h4>-->
+
+                        <!--<div class="block">-->
+                            <!--<div class="list-group">-->
+                                <!--<a href="#"-->
+                                   <!--class="list-group-item themed-border-spring themed-background-spring active">-->
+                                    <!--<strong class="list-group-item-heading">6:00 - 14:00</strong>-->
+                                <!--</a>-->
+                                <!--<span class="list-group-item">Dapibus ac facilisis in</span>-->
+                                <!--<span href="#" class="list-group-item">Morbi leo risus</span>-->
+                                <!--<span href="#" class="list-group-item">Porta ac consectetur ac</span>-->
+                                <!--<span href="#" class="list-group-item">Vestibulum at eros</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-12 col-md-6">-->
+                        <!--<h4 class="sub-header">Mała</h4>-->
+
+                        <!--<div class="block">-->
+                            <!--<div class="list-group">-->
+                                <!--<a href="#"-->
+                                   <!--class="list-group-item themed-border-spring themed-background-spring active">-->
+                                    <!--<h4 class="list-group-item-heading">6:00 - 14:00</h4>-->
+
+                                    <!--<p class="list-group-item-text">8h</p>-->
+                                <!--</a>-->
+                                <!--<span class="list-group-item">Dapibus ac facilisis in</span>-->
+                                <!--<span href="#" class="list-group-item">Morbi leo risus</span>-->
+                                <!--<span href="#" class="list-group-item">Porta ac consectetur ac</span>-->
+                                <!--<span href="#" class="list-group-item">Vestibulum at eros</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
