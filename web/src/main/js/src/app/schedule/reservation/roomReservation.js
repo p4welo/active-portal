@@ -8,8 +8,14 @@ angular.module('activePortal.schedule')
         });
     })
 
-    .controller('roomReservationCtrl', function ($scope, $modal, notificationService, coreHttpClient) {
+    .controller('roomReservationCtrl', function ($scope, $modal, notificationService, coreHttpClient, $compile) {
         $scope.loading = true;
+
+        $scope.days = [
+            "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
+        ];
+        $scope.events = [];
+        $scope.reservationList = [];
         coreHttpClient.findAll({type: "room"}).$promise.then(
             function (result) {
                 $scope.roomList = result;
@@ -18,81 +24,90 @@ angular.module('activePortal.schedule')
         ).then(
             function (result) {
                 $scope.reservationList = result;
+                resolveEventList(result, $scope.events);
                 $scope.loading = false;
             }
         );
-        $scope.days = [
-            "PN", "WT", "SR", "CZ", "PT", "SB", "ND"
-        ];
 
+        function resolveEventList(from, to) {
+            from.forEach(function (event) {
+                to.push({
+                    title: event.description,
+                    allDay: false,
+                    start: getStartDate(event),
+                    end: getEndDate(event),
+                    className: ['themed-color-dark-flatie themed-border-dark-amethyst themed-background-flatie']
+                });
+            });
+        }
 
+        function getStartDate(event) {
+            var year = event.date.values[0];
+            var month = event.date.values[1] - 1;
+            var day = event.date.values[2];
 
+            var hour = event.startHour;
+            var minute = event.startMinute;
 
+            return new Date(year, month, day, hour, minute, 0, 0);
+        }
 
-        $scope.today = function() {
-            $scope.dt = new Date();
+        function getEndDate(event) {
+            var year = event.date.values[0];
+            var month = event.date.values[1] - 1;
+            var day = event.date.values[2];
+
+            var hour = event.endHour;
+            var minute = event.endMinute;
+
+            return new Date(year, month, day, hour, minute, 0, 0);
+        }
+
+        $scope.eventsF = function (start, end, timezone, callback) {
+            var events = [];
+            resolveEventList($scope.reservationList, events);
+            callback(events);
         };
-        $scope.today();
 
-        $scope.clear = function () {
-            $scope.dt = null;
+        $scope.alertOnEventClick = function (date, jsEvent, view) {
         };
-
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        $scope.alertOnDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
         };
-
-        $scope.toggleMin = function() {
-            $scope.minDate = $scope.minDate ? null : new Date();
+        $scope.alertOnResize = function (event, delta, revertFunc, jsEvent, ui, view) {
         };
-        $scope.toggleMin();
-
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        var afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 2);
-        $scope.events =
-            [
-                {
-                    date: tomorrow,
-                    status: 'full'
+        $scope.uiConfig = {
+            calendar: {
+                defaultView: "agendaWeek",
+                axisFormat: 'H:mm',
+                allDaySlot: false,
+                slotDuration: "00:15:00",
+                minTime: "10:00:00",
+                firstDay: 1,
+                maxTime: "23:00:00",
+                height: 'auto',
+                timeFormat: 'H:mm',
+                columnFormat: {
+                    week: 'dddd'
                 },
-                {
-                    date: afterTomorrow,
-                    status: 'partially'
-                }
-            ];
-
-        $scope.getDayClass = function(date, mode) {
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-                for (var i=0;i<$scope.events.length;i++){
-                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
+                editable: false,
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'today prev,next'
+                },
+                eventClick: $scope.alertOnEventClick,
+                eventDrop: $scope.alertOnDrop,
+                eventResize: $scope.alertOnResize,
+                eventRender: $scope.eventRender
             }
-
-            return '';
         };
+
+        $scope.eventRender = function (event, element, view) {
+            $compile(element)($scope);
+        };
+
+        /* event sources array*/
+        $scope.eventSources = [$scope.eventsF, $scope.events];
+
     })
 ;

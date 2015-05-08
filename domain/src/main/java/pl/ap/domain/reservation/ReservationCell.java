@@ -1,6 +1,7 @@
 package pl.ap.domain.reservation;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -20,6 +21,8 @@ public class ReservationCell {
 
     private DayEnum day;
 
+    private LocalDate date;
+
     private String roomSid;
 
     private String person;
@@ -38,9 +41,15 @@ public class ReservationCell {
 
     private String description;
 
+//    public static void main(String[] args) {
+//        System.out.println(DayEnum.PN.ordinal());
+//        System.out.println();
+//    }
+
     public ReservationCell(Course course) {
         this.type = ReservationTypeEnum.COURSE;
         this.day = course.getDay();
+        this.date = new LocalDate().withDayOfWeek(course.getDay().ordinal() + 1);
         if (course.getRoom() != null) {
             this.roomSid = course.getRoom().getSid();
         }
@@ -182,5 +191,13 @@ public class ReservationCell {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

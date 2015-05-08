@@ -1,4 +1,5 @@
 angular.module( 'activePortal.schedule', [
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.calendar'
 ]);

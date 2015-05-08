@@ -19,5 +19,8 @@
     "moment": "2.8.3",
     "lodash": "~3.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular-ui-calendar": "~0.8.1",
+    "fullcalendar": "~2.3.1"
+  }
 }

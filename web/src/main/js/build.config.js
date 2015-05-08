@@ -64,6 +64,7 @@ module.exports = {
             'vendor/proui/js/vendor/jquery-1.11.2.min.js',
 
             'vendor/angular/angular.js',
+            'vendor/angular-locale/angular-locale_pl-pl.js',
             'vendor/angular-sanitize/angular-sanitize.js',
             'vendor/angular-resource/angular-resource.js',
             'vendor/angular-animate/angular-animate.js',
@@ -74,6 +75,9 @@ module.exports = {
             'vendor/angular-loading-bar/build/loading-bar.min.js',
             'vendor/angular-ui-utils/modules/route/route.js',
 
+            'vendor/moment/min/moment.min.js',
+            'vendor/fullcalendar/dist/fullcalendar.js',
+            'vendor/angular-ui-calendar/src/calendar.js',
             'vendor/lodash/lodash.min.js',
             'vendor/pnotify/pnotify.core.js',
 
