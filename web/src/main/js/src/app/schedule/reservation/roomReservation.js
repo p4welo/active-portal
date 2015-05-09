@@ -16,6 +16,7 @@ angular.module('activePortal.schedule')
         ];
         $scope.events = [];
         $scope.reservationList = [];
+        $scope.roomList = [];
         coreHttpClient.findAll({type: "room"}).$promise.then(
             function (result) {
                 $scope.roomList = result;
@@ -29,6 +30,19 @@ angular.module('activePortal.schedule')
             }
         );
 
+        function resolveClassName(event) {
+            var colors = [
+                ['themed-color-dark-flatie themed-border-dark-amethyst themed-background-flatie'],
+                ['themed-border-fire themed-background-coral']
+            ]
+            for (var i = 0; i < $scope.roomList.length; i++) {
+                if ($scope.roomList[i].sid === event.roomSid) {
+                    return colors[i];
+                }
+            }
+            return ['themed-border-fire themed-background-autumn'];
+        }
+
         function resolveEventList(from, to) {
             from.forEach(function (event) {
                 to.push({
@@ -36,7 +50,7 @@ angular.module('activePortal.schedule')
                     allDay: false,
                     start: getStartDate(event),
                     end: getEndDate(event),
-                    className: ['themed-color-dark-flatie themed-border-dark-amethyst themed-background-flatie']
+                    className: resolveClassName(event)
                 });
             });
         }
