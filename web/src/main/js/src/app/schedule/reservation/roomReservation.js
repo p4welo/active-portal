@@ -78,9 +78,16 @@ angular.module('activePortal.schedule')
         }
 
         $scope.eventsF = function (start, end, timezone, callback) {
+            $scope.loading = true;
             var events = [];
-            resolveEventList($scope.reservationList, events);
-            callback(events);
+            coreHttpClient.findAll({type: "reservation"}).$promise.then(
+                function (result) {
+                    $scope.reservationList = result;
+                    resolveEventList(result, events);
+                    callback(events);
+                    $scope.loading = false;
+                }
+            );
         };
 
         $scope.alertOnEventClick = function (date, jsEvent, view) {

@@ -11,8 +11,10 @@ angular.module('activePortal.common')
             transclude: true,
             template:
             '<div ng-if="ngLoading" class="row text-center">' +
+            '<div>' +
             '<i class="fa fa-spin fa-spinner"></i>' +
             '<span style="margin-left: 10px;">Ładowanie...</span>' +
+            '</div>' +
             '</div>' +
             '<div ng-transclude class="{{ngContentClass}}" ng-show="!ngLoading"></div>'
         };

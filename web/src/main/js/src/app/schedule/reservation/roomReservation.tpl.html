@@ -7,9 +7,9 @@
         </li>
 
     </view-header>
-    <div loading-indicator ng-loading="{{true}}">
-        </div>
+
     <div class="block col-xs-12">
+        <div class="loading-overlap" loading-indicator ng-loading="loading"></div>
     <!--<div class="block col-xs-12" loading-indicator ng-loading="loading">-->
         <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
     </div>
