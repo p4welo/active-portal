@@ -20,13 +20,6 @@ angular.module('activePortal.schedule')
         coreHttpClient.findAll({type: "room"}).$promise.then(
             function (result) {
                 $scope.roomList = result;
-                return coreHttpClient.findAll({type: "reservation"}).$promise;
-            }
-        ).then(
-            function (result) {
-                $scope.reservationList = result;
-                resolveEventList(result, $scope.events);
-                $scope.loading = false;
             }
         );
 
@@ -127,8 +120,7 @@ angular.module('activePortal.schedule')
             $compile(element)($scope);
         };
 
-        /* event sources array*/
-        $scope.eventSources = [$scope.eventsF, $scope.events];
+        $scope.eventSources = [$scope.eventsF];
 
     })
 ;
