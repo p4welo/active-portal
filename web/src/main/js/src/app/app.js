@@ -32,7 +32,26 @@ angular.module('activePortal', [
         };
     })
 
+    .factory("httpErrorInterceptor", function ($q, $location, notificationService) {
+        return {
+            'responseError': function (rejection) {
+                var status = rejection.status;
+                if (status == 401) {
+                    window.location.reload();
+                }
+                else if (status == 403) {
+                    $location.path("/403");
+                }
+                else {
+                    notificationService.error('Błąd ' + status);
+                }
+                return $q.reject(rejection);
+            }
+        };
+    })
+
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $httpProvider) {
+
         $urlRouterProvider.otherwise('/dashboard');
 
         $translateProvider.translations('pl', {
@@ -88,29 +107,12 @@ angular.module('activePortal', [
         });
         $translateProvider.preferredLanguage('pl');
 
-        $httpProvider.interceptors.push(function ($q, $location, notificationService) {
-                return {
-                    'responseError': function (rejection) {
-                        var status = rejection.status;
-                        if (status == 401) {
-                            window.location.reload();
-                        }
-                        else if (status == 403) {
-                            $location.path("/403");
-                        }
-                        else {
-                            notificationService.error('Błąd ' + status);
-                        }
-                        return $q.reject(rejection);
-                    }
-                };
-            }
-        );
         $httpProvider.interceptors.push("httpAuthInterceptor");
+        $httpProvider.interceptors.push("httpErrorInterceptor");
+
         if (!$httpProvider.defaults.headers.get) {
             $httpProvider.defaults.headers.get = {};
         }
-
         //disable IE ajax request caching
         $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
         $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
