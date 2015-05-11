@@ -41,6 +41,10 @@ angular.module('activePortal', [
             TYPE_OPEN: "Można dołączyć",
             TYPE_CLOSED: "Nie można dołączyć",
 
+            INDIVIDUAL_LESSON: "Lekcja indywidualna",
+            WORKSHOPS: "Warsztaty",
+            EXTERNAL: "Wynajem sali",
+
             ACTIVE: "Aktywny",
             INACTIVE: "Nieaktywny",
             DELETED: "Usunięty",

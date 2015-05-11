@@ -1,4 +1,5 @@
 package pl.ap.service;
+import pl.ap.domain.Event;
 import pl.ap.domain.reservation.ReservationCell;
 import java.util.List;
 
@@ -8,4 +9,6 @@ import java.util.List;
 public interface IReservationService {
 
     List<ReservationCell> findWeekReservationList();
+
+    ReservationCell create(Event event);
 }

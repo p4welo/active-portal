@@ -512,3 +512,25 @@ CREATE TABLE ticket (
 ALTER TABLE ticket ADD INDEX ticket_customer_idx (customer_id);
 ALTER TABLE ticket ADD INDEX ticket_type_idx (type_id);
 ALTER TABLE ticket ADD INDEX ticket_sid_idx (sid);
+
+--changeset pawel:43
+CREATE TABLE event (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  object_state INT(4) NOT NULL,
+  sid VARCHAR(32) NOT NULL,
+  date DATE NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  type INT(4) NOT NULL,
+  person VARCHAR(128) NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  created_by VARCHAR(128) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  room_id INT(11) NOT NULL,
+  FOREIGN KEY room_fk (room_id) REFERENCES room(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE event ADD INDEX event_sid_idx (sid);
+ALTER TABLE event ADD INDEX event_room_idx (room_id);
+
+--changeset pawel:44
+ALTER TABLE event ADD INDEX event_date_idx (date);

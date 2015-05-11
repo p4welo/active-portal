@@ -23,6 +23,22 @@ angular.module('activePortal.schedule')
             }
         );
 
+        $scope.add = function () {
+            $modal.open({
+                templateUrl: 'schedule/reservation/modal/addReservation.tpl.html',
+                controller: "addReservationCtrl",
+                resolve: {
+                    rooms: function () {
+                        return $scope.roomList;
+                    }
+                }
+            }).result.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                }
+            );
+        };
+
         function resolveClassName(event) {
             var colors = [
                 ['themed-color-dark-flatie themed-border-dark-amethyst themed-background-flatie'],
