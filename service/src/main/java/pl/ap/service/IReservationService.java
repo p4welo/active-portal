@@ -1,6 +1,9 @@
 package pl.ap.service;
+
+import org.joda.time.LocalDate;
 import pl.ap.domain.Event;
 import pl.ap.domain.reservation.ReservationCell;
+
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
  */
 public interface IReservationService {
 
-    List<ReservationCell> findWeekReservationList();
+    List<ReservationCell> findByDateRange(LocalDate start, LocalDate end);
 
     ReservationCell create(Event event);
 }

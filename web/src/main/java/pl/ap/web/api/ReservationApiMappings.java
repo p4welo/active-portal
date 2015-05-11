@@ -6,7 +6,7 @@ package pl.ap.web.api;
 public interface ReservationApiMappings {
     public static final String RESERVATION_PREFIX = "/reservation";
 
-    public static final String FIND_WEEK_RESERVATION_LIST = RESERVATION_PREFIX + CommonApiMappings.FIND_ALL_SUFFIX;
+    public static final String FIND_BY_DATE_RANGE = RESERVATION_PREFIX + "/findByDateRange";
 
     public static final String CREATE = RESERVATION_PREFIX + CommonApiMappings.CREATE_SUFFIX;
 }

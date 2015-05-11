@@ -41,15 +41,10 @@ public class ReservationCell {
 
     private String description;
 
-//    public static void main(String[] args) {
-//        System.out.println(DayEnum.PN.ordinal());
-//        System.out.println();
-//    }
-
-    public ReservationCell(Course course) {
+    public ReservationCell(Course course, LocalDate weekStartDate) {
         this.type = ReservationTypeEnum.COURSE;
         this.day = course.getDay();
-        this.date = new LocalDate().withDayOfWeek(course.getDay().ordinal() + 1);
+        this.date = weekStartDate.withDayOfWeek(course.getDay().ordinal() + 1);
         if (course.getRoom() != null) {
             this.roomSid = course.getRoom().getSid();
         }
@@ -88,6 +83,7 @@ public class ReservationCell {
         this.type = ReservationTypeEnum.EVENT;
         int dayIdx = event.getDate().getDayOfWeek();
         this.day = DayEnum.values()[dayIdx - 1];
+        this.date = event.getDate();
         this.roomSid = event.getRoom().getSid();
         this.person = event.getPerson();
 

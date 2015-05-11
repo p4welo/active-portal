@@ -1,20 +1,17 @@
 package pl.ap.web.controller;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Event;
-import pl.ap.domain.enums.EventTypeEnum;
-import pl.ap.domain.enums.ObjectStateEnum;
 import pl.ap.domain.reservation.ReservationCell;
 import pl.ap.service.IReservationService;
-import pl.ap.service.IRoomService;
-import pl.ap.service.util.SidUtils;
 import pl.ap.web.api.ReservationApiMappings;
 import pl.ap.web.dto.EventDto;
+import pl.ap.web.dto.ReservationSearchDto;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,11 +27,18 @@ public class ReservationController {
     @Resource
     private IReservationService reservationService;
 
-    @RequestMapping(value = ReservationApiMappings.FIND_WEEK_RESERVATION_LIST, method = RequestMethod.GET)
+    @RequestMapping(value = ReservationApiMappings.FIND_BY_DATE_RANGE, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public List<ReservationCell> findWeekReservationList() {
-        LOGGER.info("findWeekReservationList()");
-        return reservationService.findWeekReservationList();
+    public List<ReservationCell> findByDateRange(@RequestBody ReservationSearchDto dto) {
+        LOGGER.info("findByDateRange()");
+        Assert.notNull(dto);
+        Assert.notNull(dto.getStart());
+        Assert.notNull(dto.getEnd());
+        DateTime start = DateTime.parse(dto.getStart());
+        DateTime end = DateTime.parse(dto.getEnd());
+        LocalDate startDate = new LocalDate(start.getYear(), start.getMonthOfYear(), start.getDayOfMonth());
+        LocalDate endDate = new LocalDate(end.getYear(), end.getMonthOfYear(), end.getDayOfMonth());
+        return reservationService.findByDateRange(startDate, endDate);
     }
 
     @RequestMapping(value = ReservationApiMappings.CREATE, method = RequestMethod.POST)

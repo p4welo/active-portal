@@ -1,6 +1,8 @@
 package pl.ap.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.dao.IEventDao;
@@ -9,6 +11,7 @@ import pl.ap.domain.Event;
 import pl.ap.service.IEventService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by parado on 2015-05-11.
@@ -45,5 +48,13 @@ public class EventServiceImpl extends IdentifiableServiceImpl<Event> implements 
                 Event.FIELD_ROOM,
                 Event.FIELD_TYPE
         };
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Event> findByDateRange(LocalDate start, LocalDate end) {
+//        LocalDate startDate = new LocalDate(start.getYear(), start.getMonthOfYear(), start.getDayOfMonth());
+//        LocalDate endDate = new LocalDate(end.getYear(), end.getMonthOfYear(), end.getDayOfMonth());
+        return eventDao.findByDateRange(start, end);
     }
 }

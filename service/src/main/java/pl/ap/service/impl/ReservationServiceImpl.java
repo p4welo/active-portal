@@ -1,10 +1,11 @@
 package pl.ap.service.impl;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ap.domain.Course;
 import pl.ap.domain.Event;
-import pl.ap.domain.Room;
 import pl.ap.domain.reservation.ReservationCell;
 import pl.ap.service.ICourseService;
 import pl.ap.service.IEventService;
@@ -34,12 +35,18 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReservationCell> findWeekReservationList() {
+    public List<ReservationCell> findByDateRange(LocalDate start, LocalDate end) {
 
         List<ReservationCell> result = new ArrayList<>();
+
         List<Course> courses = courseService.findForSchedule();
         for (Course c : courses) {
-            result.add(new ReservationCell(c));
+            result.add(new ReservationCell(c, start));
+        }
+
+        List<Event> events = eventService.findByDateRange(start, end);
+        for (Event e : events) {
+            result.add(new ReservationCell(e));
         }
         return result;
     }

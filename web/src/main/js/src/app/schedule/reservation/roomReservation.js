@@ -8,7 +8,7 @@ angular.module('activePortal.schedule')
         });
     })
 
-    .controller('roomReservationCtrl', function ($scope, $modal, notificationService, coreHttpClient, $compile) {
+    .controller('roomReservationCtrl', function ($scope, $modal, notificationService, coreHttpClient, reservationHttpClient, $compile) {
         $scope.loading = true;
 
         $scope.days = [
@@ -35,6 +35,7 @@ angular.module('activePortal.schedule')
             }).result.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
+                    $("#calendar").fullCalendar( 'refetchEvents' );
                 }
             );
         };
@@ -89,7 +90,7 @@ angular.module('activePortal.schedule')
         $scope.eventsF = function (start, end, timezone, callback) {
             $scope.loading = true;
             var events = [];
-            coreHttpClient.findAll({type: "reservation"}).$promise.then(
+            reservationHttpClient.findByDateRange({start: start, end: end}).$promise.then(
                 function (result) {
                     $scope.reservationList = result;
                     resolveEventList(result, events);
@@ -111,7 +112,7 @@ angular.module('activePortal.schedule')
                 axisFormat: 'H:mm',
                 allDaySlot: false,
                 slotDuration: "00:15:00",
-                minTime: "10:00:00",
+                minTime: "07:00:00",
                 firstDay: 1,
                 maxTime: "23:00:00",
                 height: 'auto',
