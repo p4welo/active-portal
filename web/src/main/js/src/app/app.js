@@ -15,6 +15,22 @@ angular.module('activePortal', [
     ,
     'angular-loading-bar'
 ])
+    .factory("httpAuthInterceptor", function ($q, $window) {
+        return {
+            "response": function (response) {
+                var responseHeaders;
+                responseHeaders = response.headers();
+                if (responseHeaders["content-type"] &&
+                    responseHeaders["content-type"].indexOf("text/html") !== -1 &&
+                    response.data &&
+                    response.data.indexOf('<meta name="unauthorized" content="true">') !== -1) {
+                    $window.location.reload();
+                    return $q.reject(response);
+                }
+                return response;
+            }
+        };
+    })
 
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/dashboard');
@@ -90,6 +106,15 @@ angular.module('activePortal', [
                 };
             }
         );
+        $httpProvider.interceptors.push("httpAuthInterceptor");
+        if (!$httpProvider.defaults.headers.get) {
+            $httpProvider.defaults.headers.get = {};
+        }
+
+        //disable IE ajax request caching
+        $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+        $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+        $httpProvider.defaults.headers.get.Pragma = 'no-cache';
     })
 
     .run(function ($rootScope, $location, $modal, $log) {
