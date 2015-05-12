@@ -8,6 +8,7 @@ import org.joda.time.format.DateTimeFormatter;
 import pl.ap.domain.Course;
 import pl.ap.domain.Event;
 import pl.ap.domain.Instructor;
+import pl.ap.domain.Room;
 import pl.ap.domain.enums.DayEnum;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class ReservationCell {
 
     private LocalDate date;
 
-    private String roomSid;
+    private Room room;
 
     private String person;
 
@@ -45,9 +46,7 @@ public class ReservationCell {
         this.type = ReservationTypeEnum.COURSE;
         this.day = course.getDay();
         this.date = weekStartDate.withDayOfWeek(course.getDay().ordinal() + 1);
-        if (course.getRoom() != null) {
-            this.roomSid = course.getRoom().getSid();
-        }
+        this.room = course.getRoom();
 
         List<Instructor> instructors = course.getInstructors();
         this.person = StringUtils.EMPTY;
@@ -84,7 +83,7 @@ public class ReservationCell {
         int dayIdx = event.getDate().getDayOfWeek();
         this.day = DayEnum.values()[dayIdx - 1];
         this.date = event.getDate();
-        this.roomSid = event.getRoom().getSid();
+        this.room = event.getRoom();
         this.person = event.getPerson();
 
         DateTimeFormatter formatter = DateTimeFormat.forPattern("H:mm");
@@ -115,14 +114,6 @@ public class ReservationCell {
 
     public void setDay(DayEnum day) {
         this.day = day;
-    }
-
-    public String getRoomSid() {
-        return roomSid;
-    }
-
-    public void setRoomSid(String roomSid) {
-        this.roomSid = roomSid;
     }
 
     public String getPerson() {
@@ -195,5 +186,13 @@ public class ReservationCell {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

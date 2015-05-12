@@ -46,7 +46,7 @@ angular.module('activePortal.schedule')
                 ['themed-border-fire themed-background-coral']
             ]
             for (var i = 0; i < $scope.roomList.length; i++) {
-                if ($scope.roomList[i].sid === event.roomSid) {
+                if ($scope.roomList[i] === event.room) {
                     return colors[i];
                 }
             }

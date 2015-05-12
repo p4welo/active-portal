@@ -705,10 +705,27 @@ var App = function() {
         page.prop('class', pageCls);
     };
 
+    function handleSubnavOnScrollTransition() {
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+
+
+            if (scroll >= 145) {
+                //clearHeader, not clearheader - caps H
+                $(".content-header .navbar").addClass("subnav-fixed");
+            }
+            else {
+                $(".content-header .navbar").removeClass("subnav-fixed");
+            }
+
+        });
+    }
+
     return {
         init: function() {
             uiInit(); // Initialize UI Code
             pageLoading(); // Initialize Page Loading
+            handleSubnavOnScrollTransition();
         },
         sidebar: function(mode, extra) {
             handleSidebar(mode, extra); // Handle sidebars - access functionality from everywhere
