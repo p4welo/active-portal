@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import pl.ap.domain.annotations.Unique;
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.domain.enums.CourseLevelEnum;
+import pl.ap.domain.enums.CourseStateEnum;
 import pl.ap.domain.enums.DayEnum;
 
 import javax.persistence.*;
@@ -41,6 +42,8 @@ public class Course extends IdentifiableEntity {
     public static final String FIELD_ROOM = "room";
 
     public static final String FIELD_COMMENT = "comment";
+
+    public static final String FIELD_COURSE_STATE = "courseState";
 
     @Id
     @GeneratedValue
@@ -99,6 +102,19 @@ public class Course extends IdentifiableEntity {
             joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "instructor_id")})
     private List<Instructor> instructors;
+
+    @Column(name = "course_state", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    @NotNull
+    private CourseStateEnum courseState;
+
+    public CourseStateEnum getCourseState() {
+        return courseState;
+    }
+
+    public void setCourseState(CourseStateEnum courseState) {
+        this.courseState = courseState;
+    }
 
     public Boolean getCanJoin() {
         return canJoin;

@@ -534,3 +534,6 @@ ALTER TABLE event ADD INDEX event_room_idx (room_id);
 
 --changeset pawel:44
 ALTER TABLE event ADD INDEX event_date_idx (date);
+
+--changeset pawel:45
+ALTER TABLE course ADD COLUMN course_state INT(4) NOT NULL DEFAULT 0;

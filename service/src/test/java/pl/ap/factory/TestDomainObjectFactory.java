@@ -133,6 +133,7 @@ public class TestDomainObjectFactory extends CommonTestDomainObjectFactory {
         course.setInProgress(true);
         course.setComment(buildLongString(16));
         course.setLevel(CourseLevelEnum.BEGINNER);
+        course.setCourseState(CourseStateEnum.NO_PLACE);
         course.setDay(DayEnum.CZ);
         return course;
     }

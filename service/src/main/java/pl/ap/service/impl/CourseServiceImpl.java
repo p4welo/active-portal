@@ -105,7 +105,8 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
                 Course.FIELD_IN_PROGRESS,
                 Course.FIELD_LEVEL,
                 Course.FIELD_ROOM,
-                Course.FIELD_COMMENT
+                Course.FIELD_COMMENT,
+                Course.FIELD_COURSE_STATE
         };
     }
 
