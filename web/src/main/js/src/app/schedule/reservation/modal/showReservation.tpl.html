@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title" id="add-modal-label">Szczegóły rezerwacji</h4>
+</div>
+<div class="modal-body">
+    <div class="form-horizontal">
+        <form class="form-group">
+            <label class="col-sm-3 control-label">Nazwa</label>
+
+            <div class="col-sm-9">
+                <p class="form-control-static" ng-bind="name"></p>
+            </div>
+        </form>
+        <form class="form-group">
+            <label class="col-sm-3 control-label">Osoba</label>
+            <div class="col-sm-9">
+                <p class="form-control-static" ng-bind="event.person"></p>
+            </div>
+        </form>
+        <form class="form-group">
+            <label class="col-sm-3 control-label">Data</label>
+
+            <div class="col-sm-9">
+                <p class="form-control-static">
+                    {{date }}
+                </p>
+            </div>
+        </form>
+        <form class="form-group">
+            <label class="col-sm-3 control-label">Godzina</label>
+
+            <div class="col-sm-9">
+                <p class="form-control-static">
+                    <span ng-bind="event.startTime"></span>
+                    -
+                    <span ng-bind="event.endTime"></span>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-click="delete()" ng-if="isEvent(event)" class="btn btn-alt btn-default pull-left">Usuń</button>
+    <button ng-click="cancel()" class="btn btn-alt btn-primary">Ok</button>
+</div>

@@ -8,7 +8,7 @@ angular.module('activePortal.schedule')
         });
     })
 
-    .controller('roomReservationCtrl', function ($scope, $modal, notificationService, coreHttpClient, reservationHttpClient, $compile) {
+    .controller('roomReservationCtrl', function ($scope, $modal, notificationService, coreHttpClient, reservationHttpClient, $filter) {
         $scope.loading = true;
 
         $scope.days = [
@@ -46,21 +46,34 @@ angular.module('activePortal.schedule')
                 ['themed-border-fire themed-background-coral']
             ]
             for (var i = 0; i < $scope.roomList.length; i++) {
-                if ($scope.roomList[i] === event.room) {
+                if (event.room && $scope.roomList[i].sid === event.room.sid) {
                     return colors[i];
                 }
             }
             return ['themed-border-fire themed-background-autumn'];
         }
 
+        function resolveEventTitle(event) {
+            var $translate = $filter('translate');
+            var result = "";
+            if (event.type == "COURSE") {
+                result = event.description;
+            }
+            else {
+                result = $translate(event.eventType);
+            }
+            return result;
+        }
+
         function resolveEventList(from, to) {
             from.forEach(function (event) {
                 to.push({
-                    title: event.description,
+                    title: resolveEventTitle(event),
                     allDay: false,
                     start: getStartDate(event),
                     end: getEndDate(event),
-                    className: resolveClassName(event)
+                    className: resolveClassName(event),
+                    event: event
                 });
             });
         }
@@ -87,7 +100,7 @@ angular.module('activePortal.schedule')
             return new Date(year, month, day, hour, minute, 0, 0);
         }
 
-        $scope.eventsF = function (start, end, timezone, callback) {
+        $scope.eventsFunction = function (start, end, timezone, callback) {
             $scope.loading = true;
             var events = [];
             reservationHttpClient.findByDateRange({start: start, end: end}).$promise.then(
@@ -100,11 +113,20 @@ angular.module('activePortal.schedule')
             );
         };
 
-        $scope.alertOnEventClick = function (date, jsEvent, view) {
-        };
-        $scope.alertOnDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
-        };
-        $scope.alertOnResize = function (event, delta, revertFunc, jsEvent, ui, view) {
+        $scope.alertOnEventClick = function (cell) {
+            $modal.open({
+                templateUrl: 'schedule/reservation/modal/showReservation.tpl.html',
+                controller: "showReservationCtrl",
+                resolve: {
+                    event: function () {
+                        return cell.event;
+                    }
+                }
+            }).result.then(
+                function () {
+
+                }
+            );
         };
         $scope.uiConfig = {
             calendar: {
@@ -126,18 +148,10 @@ angular.module('activePortal.schedule')
                     center: '',
                     right: 'today prev,next'
                 },
-                eventClick: $scope.alertOnEventClick,
-                eventDrop: $scope.alertOnDrop,
-                eventResize: $scope.alertOnResize,
-                eventRender: $scope.eventRender
+                eventClick: $scope.alertOnEventClick
             }
         };
 
-        $scope.eventRender = function (event, element, view) {
-            $compile(element)($scope);
-        };
-
-        $scope.eventSources = [$scope.eventsF];
-
+        $scope.eventSources = [$scope.eventsFunction];
     })
 ;

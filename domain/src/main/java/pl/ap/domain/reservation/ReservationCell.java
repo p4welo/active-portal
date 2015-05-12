@@ -10,6 +10,7 @@ import pl.ap.domain.Event;
 import pl.ap.domain.Instructor;
 import pl.ap.domain.Room;
 import pl.ap.domain.enums.DayEnum;
+import pl.ap.domain.enums.EventTypeEnum;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public class ReservationCell {
 
     private ReservationTypeEnum type;
+
+    private EventTypeEnum eventType;
 
     private DayEnum day;
 
@@ -80,6 +83,7 @@ public class ReservationCell {
 
     public ReservationCell(Event event) {
         this.type = ReservationTypeEnum.EVENT;
+        this.eventType = event.getType();
         int dayIdx = event.getDate().getDayOfWeek();
         this.day = DayEnum.values()[dayIdx - 1];
         this.date = event.getDate();
@@ -98,6 +102,14 @@ public class ReservationCell {
         this.endMinute = endTime.getMinuteOfHour();
 
         this.description = event.getDescription();
+    }
+
+    public EventTypeEnum getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EventTypeEnum eventType) {
+        this.eventType = eventType;
     }
 
     public ReservationTypeEnum getType() {
