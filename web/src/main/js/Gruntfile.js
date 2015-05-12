@@ -527,7 +527,7 @@ module.exports = function (grunt) {
     /**
      * The default task is to build and compile.
      */
-    grunt.registerTask('default', ['bower-install-simple', 'build', 'compile']);
+    grunt.registerTask('default', ['bump', 'bower-install-simple', 'build', 'compile']);
 
     /**
      * The `build` task gets your app ready to run for development and testing.

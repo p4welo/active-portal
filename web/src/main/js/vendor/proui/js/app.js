@@ -713,9 +713,11 @@ var App = function() {
             if (scroll >= 145) {
                 //clearHeader, not clearheader - caps H
                 $(".content-header .navbar").addClass("subnav-fixed");
+                $(".content-header").addClass("content-header-fixed");
             }
             else {
                 $(".content-header .navbar").removeClass("subnav-fixed");
+                $(".content-header").removeClass("content-header-fixed");
             }
 
         });
