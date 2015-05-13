@@ -25,5 +25,6 @@
     <security:global-method-security secured-annotations="enabled"/>
 
     <context:component-scan base-package="pl.ap.web.controller" />
+    <context:component-scan base-package="pl.ap.web.exceptions" />
 
 </beans:beans>

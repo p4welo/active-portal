@@ -44,22 +44,25 @@ angular.module('activePortal.schedule')
 
         // =======================================
         $scope.add = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'schedule/rooms/modal/addRoom.tpl.html',
-                controller: "addRoomCtrl"
-            });
-
-            modalInstance.result.then(function () {
-                notificationService.success("Pomyślnie zapisano");
-                roomHttpClient.findAll().$promise.then(
-                    function (result) {
-                        $scope.rooms = result;
-                    });
-            });
+            $modal.open(
+                {
+                    templateUrl: 'schedule/rooms/modal/addRoom.tpl.html',
+                    controller: "addRoomCtrl"
+                }
+            ).result.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    return roomHttpClient.findAll().$promise;
+                }
+            ).then(
+                function (result) {
+                    $scope.rooms = result;
+                }
+            );
         };
         // =======================================
         $scope.select = function (room) {
-            if ($scope.selected !== undefined && $scope.selected.sid == room.sid) {
+            if (angular.isObject($scope.selected) && $scope.selected.sid == room.sid) {
                 $scope.selected = undefined;
                 return;
             }
@@ -87,7 +90,7 @@ angular.module('activePortal.schedule')
                 var obj = _.findWhere($scope.rooms, {sid: object.sid});
                 obj[NAME_KEY] = object[NAME_KEY].value;
                 if (obj !== undefined) {
-                    roomHttpClient.update({ sid: object.sid }, obj).$promise.then(
+                    roomHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
                             object[property].edit = false;
                             object[property].saving = false;
@@ -104,24 +107,27 @@ angular.module('activePortal.schedule')
 
         // =======================================
         $scope.delete = function (room) {
-            if (room !== undefined) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                    controller: "deleteConfirmDialogCtrl"
-                });
-
-                modalInstance.result.then(function () {
-                    $scope.selected = undefined;
-                    roomHttpClient.delete({sid: room.sid}).$promise.then(
-                        function () {
-                            notificationService.success("Pomyślnie usunięto");
-                            roomHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.rooms = result;
-                                });
-                        }
-                    );
-                });
+            if (angular.isObject(room)) {
+                $modal.open(
+                    {
+                        templateUrl: 'common/modal/deleteConfirm.tpl.html',
+                        controller: "deleteConfirmDialogCtrl"
+                    }
+                ).result.then(
+                    function () {
+                        $scope.selected = undefined;
+                        return roomHttpClient.delete({sid: room.sid}).$promise;
+                    }
+                ).then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        return roomHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.rooms = result;
+                    }
+                );
             }
         };
     })

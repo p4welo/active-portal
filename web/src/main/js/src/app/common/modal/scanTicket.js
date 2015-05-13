@@ -11,7 +11,7 @@ angular.module('activePortal.common')
             if (code !== undefined) {
                 ticketHttpClient.findCustomerByCode({code: code}).$promise.then(
                     function (result) {
-                        if (result !== undefined && result.hasOwnProperty("sid")) {
+                        if (angular.isObject(result) && result.hasOwnProperty("sid")) {
                             customerFactory.setCustomer(result);
                             $state.go("customerCard", {sid: result.sid, code: code});
                         }

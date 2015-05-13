@@ -11,7 +11,8 @@ angular.module('activePortal.schedule')
             categoryHttpClient.create(category).$promise.then(
                 function () {
                     $modalInstance.close();
-                });
+                }
+            );
         };
         $scope.focusInput = function (id) {
             $timeout(function () {

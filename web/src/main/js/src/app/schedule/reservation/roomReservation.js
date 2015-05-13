@@ -24,15 +24,17 @@ angular.module('activePortal.schedule')
         );
 
         $scope.add = function () {
-            $modal.open({
-                templateUrl: 'schedule/reservation/modal/addReservation.tpl.html',
-                controller: "addReservationCtrl",
-                resolve: {
-                    rooms: function () {
-                        return $scope.roomList;
+            $modal.open(
+                {
+                    templateUrl: 'schedule/reservation/modal/addReservation.tpl.html',
+                    controller: "addReservationCtrl",
+                    resolve: {
+                        rooms: function () {
+                            return $scope.roomList;
+                        }
                     }
                 }
-            }).result.then(
+            ).result.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
                     $("#calendar").fullCalendar( 'refetchEvents' );
@@ -114,15 +116,17 @@ angular.module('activePortal.schedule')
         };
 
         $scope.alertOnEventClick = function (cell) {
-            $modal.open({
-                templateUrl: 'schedule/reservation/modal/showReservation.tpl.html',
-                controller: "showReservationCtrl",
-                resolve: {
-                    event: function () {
-                        return cell.event;
+            $modal.open(
+                {
+                    templateUrl: 'schedule/reservation/modal/showReservation.tpl.html',
+                    controller: "showReservationCtrl",
+                    resolve: {
+                        event: function () {
+                            return cell.event;
+                        }
                     }
                 }
-            }).result.then(
+            ).result.then(
                 function () {
 
                 }

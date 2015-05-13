@@ -48,23 +48,26 @@ angular.module('activePortal.schedule')
         // =======================================
         $scope.selectedCourses = [];
         $scope.add = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'schedule/instructors/modal/addInstructor.tpl.html',
-                controller: "addInstructorCtrl"
-            });
-
-            modalInstance.result.then(function () {
-                instructorHttpClient.findAll().$promise.then(
-                    function (result) {
-                        $scope.instructors = result;
-                    });
-                notificationService.success("Pomyślnie zapisano");
-            });
+            $modal.open(
+                {
+                    templateUrl: 'schedule/instructors/modal/addInstructor.tpl.html',
+                    controller: "addInstructorCtrl"
+                }
+            ).result.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    return instructorHttpClient.findAll().$promise;
+                }
+            ).then(
+                function (result) {
+                    $scope.instructors = result;
+                }
+            );
         };
 
         // =======================================
         $scope.select = function (instructor) {
-            if ($scope.selected !== undefined && $scope.selected.sid == instructor.sid) {
+            if (angular.isObject($scope.selected) && $scope.selected.sid == instructor.sid) {
                 $scope.selected = undefined;
                 return;
             }
@@ -85,7 +88,8 @@ angular.module('activePortal.schedule')
                 function (value) {
                     $scope.courseLoading = false;
                     $scope.selectedCourses = value;
-                });
+                }
+            );
         };
         $scope.edit = function (object, property) {
             object[property].edit = true;
@@ -100,40 +104,45 @@ angular.module('activePortal.schedule')
             var obj = _.findWhere($scope.instructors, {sid: object.sid});
             obj[property] = object[property].value;
             if (obj !== undefined) {
-                instructorHttpClient.update({ sid: object.sid }, obj).$promise.then(
+                instructorHttpClient.update({sid: object.sid}, obj).$promise.then(
                     function () {
                         object[property].edit = false;
                         object[property].saving = false;
 
                         notificationService.success("Pomyślnie zapisano");
-                        instructorHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.rooms = result;
-                            });
-                    });
+                        return instructorHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.rooms = result;
+                    }
+                );
             }
         };
 
         // =======================================
         $scope.delete = function (instructor) {
             if (instructor !== undefined) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                    controller: "deleteConfirmDialogCtrl"
-                });
-
-                modalInstance.result.then(function () {
-                    $scope.selected = undefined;
-                    instructorHttpClient.delete({sid: instructor.sid}).$promise.then(
-                        function () {
-                            notificationService.success("Pomyślnie usunięto");
-                            instructorHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.instructors = result;
-                                });
-                        }
-                    );
-                });
+                $modal.open(
+                    {
+                        templateUrl: 'common/modal/deleteConfirm.tpl.html',
+                        controller: "deleteConfirmDialogCtrl"
+                    }
+                ).result.then(
+                    function () {
+                        $scope.selected = undefined;
+                        return instructorHttpClient.delete({sid: instructor.sid}).$promise;
+                    }
+                ).then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        return instructorHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.instructors = result;
+                    }
+                );
             }
         };
     })

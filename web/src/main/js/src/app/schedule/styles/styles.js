@@ -20,9 +20,13 @@ angular.module('activePortal.schedule')
             function (result) {
                 $scope.styles = result;
                 $scope.styleLoading = false;
+                return categoryHttpClient.findAll().$promise;
+            }
+        ).then(
+            function (result) {
+                $scope.categories = result;
             }
         );
-        $scope.categories = categoryHttpClient.findAll();
 
         // =======================================
         $scope.sort = {
@@ -48,47 +52,54 @@ angular.module('activePortal.schedule')
 
         // =======================================
         $scope.add = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'schedule/styles/modal/addStyle.tpl.html',
-                controller: "addStyleCtrl"
-            });
+            $modal.open(
+                {
+                    templateUrl: 'schedule/styles/modal/addStyle.tpl.html',
+                    controller: "addStyleCtrl"
+                }
+            ).result.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    return styleHttpClient.findAll().$promise;
 
-            modalInstance.result.then(function () {
-                styleHttpClient.findAll().$promise.then(
-                    function (result) {
-                        $scope.styles = result;
-                    });
-                notificationService.success("Pomyślnie zapisano");
-            });
+                }
+            ).then(
+                function (result) {
+                    $scope.styles = result;
+                }
+            );
         };
         $scope.delete = function (style) {
-            if (style !== undefined) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'schedule/styles/modal/deleteStyle.tpl.html',
-                    controller: "deleteStyleCtrl",
-                    resolve: {
-                        courses: function () {
-                            return style.courses;
+            if (angular.isObject(style)) {
+                $modal.open(
+                    {
+                        templateUrl: 'schedule/styles/modal/deleteStyle.tpl.html',
+                        controller: "deleteStyleCtrl",
+                        resolve: {
+                            courses: function () {
+                                return style.courses;
+                            }
                         }
                     }
-                });
-
-                modalInstance.result.then(function () {
-                    styleHttpClient.delete({sid: style.sid}).$promise.then(
-                        function () {
-                            notificationService.success("Pomyślnie usunięto");
-                            styleHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.styles = result;
-                                });
-                        }
-                    );
-                });
+                ).result.then(
+                    function () {
+                        return styleHttpClient.delete({sid: style.sid}).$promise;
+                    }
+                ).then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        return styleHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.styles = result;
+                    }
+                );
             }
         };
         // =======================================
         $scope.select = function (object) {
-            if ($scope.selected !== undefined && $scope.selected.sid == object.sid) {
+            if (angular.isObject($scope.selected) && $scope.selected.sid == object.sid) {
                 $scope.selected = undefined;
                 return;
             }
@@ -127,27 +138,31 @@ angular.module('activePortal.schedule')
                         object[property].saving = false;
 
                         notificationService.success("Pomyślnie zapisano");
-                        styleHttpClient.findAll().$promise.then(
-                            function (result) {
-                                $scope.styles = result;
-                            });
-                    });
+                        return styleHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.styles = result;
+                    }
+                );
             }
             else if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.styles, {sid: object.sid});
                 obj.name = object.name.value;
-                if (obj !== undefined) {
-                    styleHttpClient.update({ sid: object.sid }, obj).$promise.then(
+                if (angular.isObject(obj)) {
+                    styleHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
                             object[property].edit = false;
                             object[property].saving = false;
 
                             notificationService.success("Pomyślnie zapisano");
-                            styleHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.styles = result;
-                                });
-                        });
+                            return styleHttpClient.findAll().$promise;
+                        }
+                    ).then(
+                        function (result) {
+                            $scope.styles = result;
+                        }
+                    );
                 }
             }
         };

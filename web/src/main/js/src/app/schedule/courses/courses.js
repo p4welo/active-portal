@@ -15,7 +15,6 @@ angular.module('activePortal.schedule')
         var START_TIME_KEY = "startTime";
         var END_TIME_KEY = "endTime";
         var ROOM_KEY = "room";
-        var INSTRUCTORS_KEY = "instructors";
         var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY];
 
         $scope.courseLoading = true;
@@ -148,7 +147,8 @@ angular.module('activePortal.schedule')
                             }
                         }
                     }
-                ).result.then(function () {
+                ).result.then(
+                    function () {
                         notificationService.success("Pomyślnie zapisano");
                         return courseHttpClient.findAll().$promise;
                     }
@@ -209,7 +209,7 @@ angular.module('activePortal.schedule')
         };
 
         $scope.select = function (course) {
-            if ($scope.selected !== undefined && $scope.selected.sid == course.sid) {
+            if (angular.isObject($scope.selected) && $scope.selected.sid == course.sid) {
                 $scope.selected = undefined;
                 $scope.lessons = [];
                 return;
@@ -276,7 +276,7 @@ angular.module('activePortal.schedule')
             }
             else {
                 var obj = _.findWhere($scope.classes, {sid: course.sid});
-                if (obj !== undefined) {
+                if (angular.isObject(obj)) {
                     var newVal = course[property].value;
                     if (property == START_TIME_KEY || property == END_TIME_KEY) {
                         obj[property] = newVal.hours + ":" + newVal.minutes;

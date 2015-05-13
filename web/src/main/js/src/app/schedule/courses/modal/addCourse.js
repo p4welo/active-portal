@@ -1,6 +1,6 @@
 angular.module('activePortal.schedule')
 
-    .controller('addCourseCtrl', function (styles, instructors, rooms, $scope, $modalInstance, $timeout, courseHttpClient, $rootScope) {
+    .controller('addCourseCtrl', function (styles, instructors, rooms, $scope, $modalInstance, $timeout, courseHttpClient) {
         $scope.styles = styles;
         $scope.instructors = instructors;
         $scope.rooms = rooms;
@@ -66,7 +66,8 @@ angular.module('activePortal.schedule')
             courseHttpClient.create(course).$promise.then(
                 function () {
                     $modalInstance.close();
-                });
+                }
+            );
         };
         $scope.focusInput = function (id) {
             $timeout(function () {

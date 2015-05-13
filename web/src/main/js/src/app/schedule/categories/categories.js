@@ -9,7 +9,6 @@ angular.module('activePortal.schedule')
     })
 
     .controller('categoriesCtrl', function ($scope, $modal, categoryHttpClient, notificationService) {
-        $scope.test = "dupa";
 
         var NAME_KEY = "name";
         var OBJECT_PROPERTIES = [NAME_KEY];
@@ -45,18 +44,21 @@ angular.module('activePortal.schedule')
         };
         // =======================================
         $scope.add = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'schedule/categories/modal/addCategory.tpl.html',
-                controller: "addCategoryCtrl"
-            });
-
-            modalInstance.result.then(function () {
-                notificationService.success("Pomyślnie zapisano");
-                categoryHttpClient.findAll().$promise.then(
-                    function (result) {
-                        $scope.categories = result;
-                    });
-            });
+            $modal.open(
+                {
+                    templateUrl: 'schedule/categories/modal/addCategory.tpl.html',
+                    controller: "addCategoryCtrl"
+                }
+            ).result.then(
+                function () {
+                    notificationService.success("Pomyślnie zapisano");
+                    return categoryHttpClient.findAll().$promise;
+                }
+            ).then(
+                function (result) {
+                    $scope.categories = result;
+                }
+            );
         };
         // =======================================
         $scope.select = function (category) {
@@ -88,41 +90,46 @@ angular.module('activePortal.schedule')
             if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.categories, {sid: object.sid});
                 obj[NAME_KEY] = object[NAME_KEY].value;
-                if (obj !== undefined) {
-                    categoryHttpClient.update({ sid: object.sid }, obj).$promise.then(
+                if (angular.isObject(obj)) {
+                    categoryHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
                             object[property].edit = false;
                             object[property].saving = false;
 
                             notificationService.success("Pomyślnie zapisano");
-                            categoryHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.categories = result;
-                                });
-                        });
+                            return categoryHttpClient.findAll().$promise;
+                        }
+                    ).then(
+                        function (result) {
+                            $scope.categories = result;
+                        }
+                    );
                 }
             }
         };
         // =======================================
         $scope.delete = function (category) {
-            if (category !== undefined) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                    controller: "deleteConfirmDialogCtrl"
-                });
-
-                modalInstance.result.then(function () {
-                    $scope.selected = undefined;
-                    categoryHttpClient.delete({sid: category.sid}).$promise.then(
-                        function () {
-                            notificationService.success("Pomyślnie usunięto");
-                            categoryHttpClient.findAll().$promise.then(
-                                function (result) {
-                                    $scope.categories = result;
-                                });
-                        }
-                    );
-                });
+            if (angular.isObject(category)) {
+                $modal.open(
+                    {
+                        templateUrl: 'common/modal/deleteConfirm.tpl.html',
+                        controller: "deleteConfirmDialogCtrl"
+                    }
+                ).result.then(
+                    function () {
+                        $scope.selected = undefined;
+                        return categoryHttpClient.delete({sid: category.sid}).$promise;
+                    }
+                ).then(
+                    function () {
+                        notificationService.success("Pomyślnie usunięto");
+                        return categoryHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.categories = result;
+                    }
+                );
             }
         };
     })

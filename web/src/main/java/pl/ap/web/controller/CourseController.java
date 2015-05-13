@@ -11,6 +11,7 @@ import pl.ap.web.dto.SidListDto;
 import pl.ap.web.dto.CourseStateDto;
 import pl.ap.web.dto.presence.CoursePresenceDto;
 import pl.ap.service.*;
+import pl.ap.web.exceptions.NotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -104,9 +105,13 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course update(@RequestBody Course course, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
-        Assert.notNull(courseService.getBySid(sid));
+        if (courseService.getBySid(sid) == null) {
+            throw new NotFoundException("sid.not.found");
+        }
         Assert.notNull(course);
+        if (!sid.equals(course.getSid())) {
+            throw new IllegalArgumentException();
+        }
         Assert.isTrue(sid.equals(course.getSid()));
 
         return courseService.update(course);
