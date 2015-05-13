@@ -8,10 +8,13 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.Event;
 import pl.ap.domain.reservation.ReservationCell;
+import pl.ap.service.IEventService;
 import pl.ap.service.IReservationService;
+import pl.ap.web.api.ApiKeys;
 import pl.ap.web.api.ReservationApiMappings;
 import pl.ap.web.dto.EventDto;
 import pl.ap.web.dto.ReservationSearchDto;
+import pl.ap.web.exceptions.SidNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,6 +29,9 @@ public class ReservationController {
 
     @Resource
     private IReservationService reservationService;
+
+    @Resource
+    private IEventService eventService;
 
     @RequestMapping(value = ReservationApiMappings.FIND_BY_DATE_RANGE, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
@@ -49,5 +55,18 @@ public class ReservationController {
         Event event = dto.getEvent();
         Assert.notNull(event.getRoom());
         return reservationService.create(event);
+    }
+
+    @RequestMapping(value = ReservationApiMappings.DELETE_EVENT, method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteEvent(@PathVariable(ApiKeys.SID) String sid) {
+        LOGGER.info("delete()");
+
+        Event event = eventService.getBySid(sid);
+        if (event == null) {
+            throw new SidNotFoundException();
+        }
+
+        eventService.delete(event);
     }
 }

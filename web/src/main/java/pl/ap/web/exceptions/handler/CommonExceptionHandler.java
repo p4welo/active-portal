@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import pl.ap.web.exceptions.InvalidParameterException;
 import pl.ap.web.exceptions.NotFoundException;
 
 /**
@@ -30,15 +31,15 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({
-            IllegalArgumentException.class
+            InvalidParameterException.class
     })
-    protected ResponseEntity<Object> handleIllegalArgumentRequest(RuntimeException e, WebRequest request) {
-        IllegalArgumentException ex = (IllegalArgumentException) e;
-        ErrorResource error = new ErrorResource("400", ex.getMessage());
+    protected ResponseEntity<Object> handleInvalidParameterException(RuntimeException e, WebRequest request) {
+        InvalidParameterException ex = (InvalidParameterException) e;
+        ErrorResource error = new ErrorResource(ex.getMessage(), ex.getField());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        return handleExceptionInternal(e, error, headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(e, error, headers, HttpStatus.NOT_ACCEPTABLE, request);
     }
 }

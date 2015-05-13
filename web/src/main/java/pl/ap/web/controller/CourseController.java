@@ -5,13 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.*;
+import pl.ap.service.*;
 import pl.ap.web.api.ApiKeys;
 import pl.ap.web.api.CourseApiMappings;
-import pl.ap.web.dto.SidListDto;
 import pl.ap.web.dto.CourseStateDto;
+import pl.ap.web.dto.SidListDto;
 import pl.ap.web.dto.presence.CoursePresenceDto;
-import pl.ap.service.*;
-import pl.ap.web.exceptions.NotFoundException;
+import pl.ap.web.exceptions.InvalidParameterException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by parado on 2014-08-24.
  */
 @RestController
-public class CourseController {
+public class CourseController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(CourseController.class);
 
     @Resource
@@ -65,9 +65,9 @@ public class CourseController {
     public Course create(@RequestBody Course course) {
         LOGGER.info("create()");
 
-        Assert.notNull(course);
-        Assert.notNull(course.getStyle());
-        Assert.notNull(course.getRoom());
+        assertNotNull(course, "course");
+        assertNotNull(course.getStyle(), "style");
+        assertNotNull(course.getRoom(), "room");
 
         return courseService.save(course);
     }
@@ -76,7 +76,9 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course get(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("get()");
-        return courseService.getBySid(sid);
+        Course course = courseService.getBySid(sid);
+        assertSidObject(course);
+        return course;
     }
 
     @RequestMapping(value = CourseApiMappings.PUBLISH, method = RequestMethod.GET)
@@ -85,7 +87,7 @@ public class CourseController {
         LOGGER.info("publish()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
+        assertSidObject(course);
 
         return courseService.publish(course);
     }
@@ -96,7 +98,7 @@ public class CourseController {
         LOGGER.info("deactivate()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
+        assertSidObject(course);
 
         return courseService.deactivate(course);
     }
@@ -105,17 +107,15 @@ public class CourseController {
     @ResponseStatus(value = HttpStatus.OK)
     public Course update(@RequestBody Course course, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-        if (courseService.getBySid(sid) == null) {
-            throw new NotFoundException("sid.not.found");
-        }
-        Assert.notNull(course);
-        if (!sid.equals(course.getSid())) {
-            throw new IllegalArgumentException();
-        }
-        Assert.isTrue(sid.equals(course.getSid()));
+
+        assertSidObject(courseService.getBySid(sid));
+        assertNotNull(course, "course");
+        assertSidIntegrity(course, sid);
 
         return courseService.update(course);
     }
+
+
 
     @RequestMapping(value = CourseApiMappings.DELETE, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -123,8 +123,7 @@ public class CourseController {
         LOGGER.info("delete()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
-
+        assertSidObject(course);
         courseService.delete(course);
     }
 
@@ -134,8 +133,8 @@ public class CourseController {
         LOGGER.info("setState()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
-        Assert.notNull(stateDto);
+        assertSidObject(course);
+        assertNotNull(stateDto, "dto");
 
         return courseService.setState(course, stateDto.getState());
     }
@@ -146,8 +145,8 @@ public class CourseController {
         LOGGER.info("setInstructor()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
-        Assert.notNull(instructor);
+        assertSidObject(course);
+        assertNotNull(instructor, "instructor");
 
         return courseService.setInstructor(course, instructor);
     }
@@ -158,14 +157,13 @@ public class CourseController {
         LOGGER.info("reassignInstructors()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
-        Assert.notNull(instructorSidsDto);
-        Assert.notNull(instructorSidsDto.getSids());
+        assertSidObject(course);
+        assertNotNull(instructorSidsDto, "dto");
+        assertNotNull(instructorSidsDto.getSids(), "instructors");
 
         List<Instructor> instructors = instructorService.findBySids(instructorSidsDto.getSids());
         Assert.notEmpty(instructors);
 
-//        course = courseService.cleanInstructors(course);
         return courseService.reassignInstructors(course, instructors);
     }
 
@@ -175,8 +173,8 @@ public class CourseController {
         LOGGER.info("setCategory()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
-        Assert.notNull(style);
+        assertSidObject(course);
+        assertNotNull(style, "style");
 
         return courseService.setStyle(course, style);
     }
@@ -188,8 +186,8 @@ public class CourseController {
 
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
-        Assert.notNull(room);
+        assertSidObject(course);
+        assertNotNull(room, "room");
 
         return courseService.setRoom(course, room);
     }
@@ -200,7 +198,7 @@ public class CourseController {
         LOGGER.info("findCoursePresence()");
 
         Course course = new Course();//courseService.getBySid(sid);
-        Assert.notNull(course);
+        assertSidObject(course);
 
         Map<Customer, List<CustomerPresence>> presences = customerPresenceService.findLastByCourse(course, 10);
 
@@ -213,7 +211,7 @@ public class CourseController {
         LOGGER.info("findLessons()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
+        assertSidObject(course);
 
         return courseUnitService.findBy(CourseLesson.FIELD_COURSE, course);
     }
@@ -224,7 +222,7 @@ public class CourseController {
         LOGGER.info("findCustomers()");
 
         Course course = courseService.getBySid(sid);
-        Assert.notNull(course);
+        assertSidObject(course);
 
         return customerService.findByCourse(course);
     }

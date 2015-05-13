@@ -51,7 +51,10 @@ angular.module('activePortal')
             PASS_CHILD: "DZIECI",
 
             PERIOD_MONTH: "Miesięcy",
-            PERIOD_DAY: "Dni"
+            PERIOD_DAY: "Dni",
+
+            "sid.not.found": "Nie znaleziono obiektu",
+            "invalid.parameter": "Nieprawidłowy parametr"
         });
         $translateProvider.preferredLanguage('pl');
     });

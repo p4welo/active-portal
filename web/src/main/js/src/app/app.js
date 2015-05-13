@@ -31,7 +31,7 @@ angular.module('activePortal', [
         };
     })
 
-    .factory("httpErrorInterceptor", function ($q, $location, notificationService) {
+    .factory("httpErrorInterceptor", function ($q, $location, notificationService, $filter) {
         return {
             'responseError': function (rejection) {
                 var status = rejection.status;
@@ -41,8 +41,17 @@ angular.module('activePortal', [
                 else if (status == 403) {
                     $location.path("/403");
                 }
+                else if (rejection.data && rejection.data.message) {
+                    console.table(rejection.data);
+                    var $translate = $filter('translate');
+                    var result = $translate(rejection.data.message);
+                    if (rejection.data.field) {
+                        result += ": " + rejection.data.field;
+                    }
+                    notificationService.error(result);
+                }
                 else {
-                    notificationService.error('Błąd ' + status);
+                    notificationService.error("Błąd " + status);
                 }
                 return $q.reject(rejection);
             }
