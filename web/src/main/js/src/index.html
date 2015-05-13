@@ -23,8 +23,6 @@
     <link rel="apple-touch-icon" href="assets/icon152.png" sizes="152x152">
     <link rel="apple-touch-icon" href="assets/icon180.png" sizes="180x180">
 
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>"/>
     <% }); %>
@@ -46,7 +44,7 @@
                     <a href="index.html" class="sidebar-brand">
                         <strong>ACTIVE</strong>PORTAL
                     </a>
-                    <ul class="sidebar-nav" ng-controller="menuCtrl">
+                    <ul class="sidebar-nav">
                         <li>
                             <a href ui-sref="dashboard" ui-sref-active="active open">
                                 <i class="fa fa-tachometer sidebar-nav-icon"></i>
