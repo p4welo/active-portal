@@ -70,15 +70,20 @@ public class CourseController extends AbstractController {
         assertNotNull(course.getStyle(), "style");
         assertNotNull(course.getRoom(), "room");
 
-//        if (course.getCanRegister()) {
-//            course.setCourseState(CourseStateEnum.REGISTRATION);
-//        }
-//        else if (course.getCanJoin()) {
-//            course.setCourseState(CourseStateEnum.CAN_JOIN);
-//        }
-//        else {
-//            course.setCourseState(CourseStateEnum.NO_PLACE);
-//        }
+        if (course.getCourseState() == CourseStateEnum.REGISTRATION) {
+            course.setCanRegister(true);
+            course.setCanJoin(false);
+            course.setInProgress(false);
+        } else if (course.getCourseState() == CourseStateEnum.CAN_JOIN) {
+            course.setCanRegister(false);
+            course.setCanJoin(true);
+            course.setInProgress(true);
+        }
+        else {
+            course.setCanRegister(false);
+            course.setCanJoin(false);
+            course.setInProgress(true);
+        }
 
         return courseService.save(course);
     }
