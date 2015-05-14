@@ -30,10 +30,10 @@ module.exports = {
             'src/index.html'
         ],
         login_html: [
-            '<%= build_dir %>/login.html'
+            '<%= compile_dir %>/login.html'
         ],
         index_html: [
-            '<%= build_dir %>/index.html'
+            '<%= compile_dir %>/index.html'
         ],
         less: 'src/less/main.less'
     },

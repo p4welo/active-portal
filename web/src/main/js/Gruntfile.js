@@ -419,8 +419,8 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    '<%= app_files.login_html %>': '<%= app_files.login_html %>',
-                    '<%= app_files.index_html %>': '<%= app_files.index_html %>'
+                    '<%= compile_dir %>/index.html': '<%= compile_dir %>/index.html',
+                    '<%= compile_dir %>/login.html': '<%= compile_dir %>/login.html'
                 }
             }
         },
