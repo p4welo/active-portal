@@ -37,7 +37,7 @@ angular.module('activePortal.schedule')
             ).result.then(
                 function () {
                     notificationService.success("Pomyślnie zapisano");
-                    $("#calendar").fullCalendar( 'refetchEvents' );
+                    $("#calendar").fullCalendar('refetchEvents');
                 }
             );
         };
@@ -115,7 +115,7 @@ angular.module('activePortal.schedule')
             );
         };
 
-        $scope.alertOnEventClick = function (cell) {
+        $scope.onEventClick = function (cell) {
             $modal.open(
                 {
                     templateUrl: 'schedule/reservation/modal/showReservation.tpl.html',
@@ -152,7 +152,7 @@ angular.module('activePortal.schedule')
                     center: '',
                     right: 'today prev,next'
                 },
-                eventClick: $scope.alertOnEventClick
+                eventClick: $scope.onEventClick
             }
         };
 

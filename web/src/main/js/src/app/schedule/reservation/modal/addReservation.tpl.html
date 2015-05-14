@@ -14,21 +14,39 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="type" ng-model="reservation.type" ng-options="t | translate for t in types" class="form-control" required></select>
+                <select id="type" ng-model="reservation.type" ng-options="t | translate for t in types"
+                        class="form-control" required></select>
             </div>
         </div>
         <div class="form-group">
             <label for="person" class="col-sm-3 control-label">Osoba</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="person" placeholder="Osoba odpowiedzialna" ng-model="reservation.person">
+                <input type="text" class="form-control" id="person" placeholder="Osoba odpowiedzialna"
+                       ng-model="reservation.person">
             </div>
         </div>
         <div class="form-group">
             <label for="description" class="col-sm-3 control-label">Opis</label>
 
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="description" placeholder="Opis" ng-model="reservation.description">
+                <input type="text" class="form-control" id="description" placeholder="Opis"
+                       ng-model="reservation.description">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="date" class="col-sm-3 control-label">Data</label>
+
+            <div class="col-sm-9">
+                <p class="input-group">
+                    <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened"
+                           datepicker-options="dateOptions"
+                           date-disabled="disabled(date, mode)" ng-required="true" show-button-bar="false"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="gi gi-calendar"></i></button>
+              </span>
+                </p>
             </div>
         </div>
         <div class="form-group">
@@ -45,9 +63,11 @@
             </label>
 
             <div class="col-xs-4">
-                <select id="startTime" ng-model="start.hours" ng-options="h for h in hours" ng-change="onStartHoursChange(start.hours)" class="form-control" required></select>
+                <select id="startTime" ng-model="start.hours" ng-options="h for h in hours"
+                        ng-change="onStartHoursChange(start.hours)" class="form-control" required></select>
             </div>
             <p class="form-control-static col-xs-1">:</p>
+
             <div class="col-xs-4">
                 <select ng-model="start.minutes" ng-options="m for m in minutes" class="form-control" required></select>
             </div>
@@ -59,9 +79,11 @@
             </label>
 
             <div class="col-xs-4">
-                <select id="endTime" ng-model="end.hours" ng-options="h for h in hours" class="form-control" required></select>
+                <select id="endTime" ng-model="end.hours" ng-options="h for h in hours" class="form-control"
+                        required></select>
             </div>
             <p class="form-control-static col-xs-1">:</p>
+
             <div class="col-xs-4">
                 <select ng-model="end.minutes" ng-options="m for m in minutes" class="form-control" required></select>
             </div>
@@ -73,7 +95,8 @@
             </label>
 
             <div class="col-sm-9">
-                <select id="room" ng-model="reservation.room" ng-options="r.name for r in rooms | orderBy: 'name'" class="form-control" required></select>
+                <select id="room" ng-model="reservation.room" ng-options="r.name for r in rooms | orderBy: 'name'"
+                        class="form-control" required></select>
             </div>
         </div>
     </form>

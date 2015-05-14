@@ -3484,9 +3484,9 @@ angular.module("template/datepicker/datepicker.html", []).run(["$templateCache",
     "<table>\n" +
     "  <thead>\n" +
     "    <tr>\n" +
-    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" +
+    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\"><i class=\"gi gi-chevron-left\"></i></button></th>\n" +
     "      <th colspan=\"{{rows[0].length - 2 + showWeekNumbers}}\"><button type=\"button\" class=\"btn btn-default btn-sm btn-block\" ng-click=\"toggleMode()\"><strong>{{title}}</strong></button></th>\n" +
-    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" +
+    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\"><i class=\"gi gi-chevron-right\"></i></button></th>\n" +
     "    </tr>\n" +
     "    <tr ng-show=\"labels.length > 0\" class=\"h6\">\n" +
     "      <th ng-show=\"showWeekNumbers\" class=\"text-center\">#</th>\n" +
@@ -3602,7 +3602,7 @@ angular.module("template/progressbar/progressbar.html", []).run(["$templateCache
 angular.module("template/rating/rating.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/rating/rating.html",
     "<span ng-mouseleave=\"reset()\">\n" +
-    "    <i ng-repeat=\"r in range\" ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" class=\"glyphicon\" ng-class=\"$index < val && (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')\"></i>\n" +
+    "    <i ng-repeat=\"r in range\" ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" class=\"gi\" ng-class=\"$index < val && (r.stateOn || 'gi-star') || (r.stateOff || 'gi-star-empty')\"></i>\n" +
     "</span>");
 }]);
 
@@ -3642,9 +3642,9 @@ angular.module("template/timepicker/timepicker.html", []).run(["$templateCache",
     "<table>\n" +
     "	<tbody>\n" +
     "		<tr class=\"text-center\">\n" +
-    "			<td><a ng-click=\"incrementHours()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n" +
+    "			<td><a ng-click=\"incrementHours()\" class=\"btn btn-link\"><span class=\"gi gi-chevron-up\"></span></a></td>\n" +
     "			<td>&nbsp;</td>\n" +
-    "			<td><a ng-click=\"incrementMinutes()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n" +
+    "			<td><a ng-click=\"incrementMinutes()\" class=\"btn btn-link\"><span class=\"gi gi-chevron-up\"></span></a></td>\n" +
     "			<td ng-show=\"showMeridian\"></td>\n" +
     "		</tr>\n" +
     "		<tr>\n" +
@@ -3658,9 +3658,9 @@ angular.module("template/timepicker/timepicker.html", []).run(["$templateCache",
     "			<td ng-show=\"showMeridian\"><button type=\"button\" class=\"btn btn-default text-center\" ng-click=\"toggleMeridian()\">{{meridian}}</button></td>\n" +
     "		</tr>\n" +
     "		<tr class=\"text-center\">\n" +
-    "			<td><a ng-click=\"decrementHours()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n" +
+    "			<td><a ng-click=\"decrementHours()\" class=\"btn btn-link\"><span class=\"gi gi-chevron-down\"></span></a></td>\n" +
     "			<td>&nbsp;</td>\n" +
-    "			<td><a ng-click=\"decrementMinutes()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n" +
+    "			<td><a ng-click=\"decrementMinutes()\" class=\"btn btn-link\"><span class=\"gi gi-chevron-down\"></span></a></td>\n" +
     "			<td ng-show=\"showMeridian\"></td>\n" +
     "		</tr>\n" +
     "	</tbody>\n" +

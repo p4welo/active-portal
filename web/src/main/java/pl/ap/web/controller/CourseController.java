@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.*;
+import pl.ap.domain.enums.CourseStateEnum;
 import pl.ap.service.*;
 import pl.ap.web.api.ApiKeys;
 import pl.ap.web.api.CourseApiMappings;
@@ -68,6 +69,16 @@ public class CourseController extends AbstractController {
         assertNotNull(course, "course");
         assertNotNull(course.getStyle(), "style");
         assertNotNull(course.getRoom(), "room");
+
+        if (course.getCanRegister()) {
+            course.setCourseState(CourseStateEnum.REGISTRATION);
+        }
+        else if (course.getCanJoin()) {
+            course.setCourseState(CourseStateEnum.CAN_JOIN);
+        }
+        else {
+            course.setCourseState(CourseStateEnum.NO_PLACE);
+        }
 
         return courseService.save(course);
     }
