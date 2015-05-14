@@ -24,6 +24,10 @@ angular.module('activePortal')
             TYPE_OPEN: "Można dołączyć",
             TYPE_CLOSED: "Nie można dołączyć",
 
+            REGISTRATION: "Grupa na zapisy",
+            CAN_JOIN: "Można dołączyć",
+            NO_PLACE: "Nie można dołączyć",
+
             INDIVIDUAL_LESSON: "Lekcja indywidualna",
             WORKSHOPS: "Warsztaty",
             EXTERNAL: "Wynajem sali",

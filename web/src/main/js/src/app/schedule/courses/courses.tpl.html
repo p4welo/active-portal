@@ -200,6 +200,40 @@
                                         </form>
 
                                         <form class="form-group">
+                                            <label for="state" class="col-sm-3 control-label"
+                                                   ng-click="edit(selected, 'level')">Status</label>
+
+                                            <div class="col-sm-9" ng-if="!selected.courseState.edit">
+                                                <p class="form-control-static">
+                                                <span class="btn-link" ng-click="edit(selected, 'courseState')">
+                                                    {{selected.courseState.value | translate}}
+                                                      </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6" ng-if="selected.courseState.edit">
+                                                <select id="state" ng-model="selected.courseState.value"
+                                                        ng-options="s | translate for s in states"
+                                                        class="form-control"
+                                                        ng-disabled="selected.courseState.saving"></select>
+                                            </div>
+                                            <div class="col-sm-3" ng-if="selected.courseState.edit">
+                                                <div class="btn" ng-if="selected.courseState.saving">
+                                                    <i class="fa fa-spin fa-spinner"></i>
+                                                </div>
+                                                <div ng-if="!selected.courseState.saving">
+                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
+                                                       ng-click="cancel(selected, 'courseState')">
+                                                        <i class="fa fa-remove"></i>
+                                                    </a>
+                                                    <button class="btn btn-alt btn-primary"
+                                                            ng-click="save(selected, 'courseState')">
+                                                        <i class="fa fa-check"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <form class="form-group">
                                             <label for="day" class="col-sm-3 control-label"
                                                    ng-click="edit(selected, 'day')">Dzień</label>
 

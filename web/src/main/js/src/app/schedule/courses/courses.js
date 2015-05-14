@@ -11,11 +11,12 @@ angular.module('activePortal.schedule')
     .controller('coursesCtrl', function ($scope, $rootScope, courseHttpClient, notificationService, $modal, styleHttpClient, instructorHttpClient, roomHttpClient) {
         var STYLE_KEY = "style";
         var LEVEL_KEY = "level";
+        var STATE_KEY = "courseState";
         var DAY_KEY = "day";
         var START_TIME_KEY = "startTime";
         var END_TIME_KEY = "endTime";
         var ROOM_KEY = "room";
-        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY];
+        var OBJECT_PROPERTIES = [STYLE_KEY, LEVEL_KEY, STATE_KEY, DAY_KEY, START_TIME_KEY, END_TIME_KEY, ROOM_KEY];
 
         $scope.courseLoading = true;
         courseHttpClient.findAll().$promise.then(
@@ -46,6 +47,11 @@ angular.module('activePortal.schedule')
         ];
         $scope.levels = [
             "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
+        ];
+        $scope.states = [
+            "REGISTRATION",
+            "CAN_JOIN",
+            "NO_PLACE"
         ];
         $scope.hours = [];
         $scope.minutes = [];

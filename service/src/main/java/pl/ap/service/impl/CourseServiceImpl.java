@@ -87,6 +87,7 @@ public class CourseServiceImpl extends IdentifiableServiceImpl<Course> implement
         course.setStartTime(c.getStartTime());
         course.setEndTime(c.getEndTime());
         course.setLevel(c.getLevel());
+        course.setCourseState(c.getCourseState());
         return super.update(course);
     }
 
