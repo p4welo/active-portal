@@ -30,11 +30,11 @@ angular.module('activePortal.schedule')
                     $modalInstance.close();
                 }
             );
-        }
+        };
 
         $scope.isEvent = function (event) {
             return event.type == "EVENT";
-        }
+        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

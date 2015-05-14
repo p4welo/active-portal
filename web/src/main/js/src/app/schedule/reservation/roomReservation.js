@@ -46,7 +46,7 @@ angular.module('activePortal.schedule')
             var colors = [
                 ['themed-color-dark-flatie themed-border-dark-amethyst themed-background-flatie'],
                 ['themed-border-fire themed-background-coral']
-            ]
+            ];
             for (var i = 0; i < $scope.roomList.length; i++) {
                 if (event.room && $scope.roomList[i].sid === event.room.sid) {
                     return colors[i];

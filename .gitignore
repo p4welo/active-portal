@@ -10,3 +10,4 @@ npm-debug.log
 node
 web/src/main/webapp/*
 !web/src/main/webapp/WEB-INF
+.version

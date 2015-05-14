@@ -18,8 +18,10 @@ angular.module('activePortal.schedule')
         };
         $scope.hours = [];
         $scope.minutes = [];
-        for (var i = 7; i < 24; i++) {$scope.hours.push("" + i);}
-        for (i = 0; i < 60; i+=5) {
+        for (var i = 7; i < 24; i++) {
+            $scope.hours.push("" + i);
+        }
+        for (i = 0; i < 60; i += 5) {
             var j = i;
             if (j < 10) {
                 j = "0" + j;
@@ -28,7 +30,7 @@ angular.module('activePortal.schedule')
         }
 
         $scope.onStartHoursChange = function (newValue) {
-            $scope.end.hours = (parseInt(newValue) + 1) + "";
+            $scope.end.hours = (parseInt(newValue, 10) + 1) + "";
         };
 
         $scope.cancel = function () {
@@ -51,7 +53,7 @@ angular.module('activePortal.schedule')
 
 
         //=========================
-        $scope.today = function() {
+        $scope.today = function () {
             $scope.dt = new Date();
         };
         $scope.today();
@@ -61,16 +63,16 @@ angular.module('activePortal.schedule')
         };
 
         // Disable weekend selection
-        $scope.disabled = function(date, mode) {
+        $scope.disabled = function (date, mode) {
             return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
         };
 
-        $scope.toggleMin = function() {
+        $scope.toggleMin = function () {
             $scope.minDate = $scope.minDate ? null : new Date();
         };
         $scope.toggleMin();
 
-        $scope.open = function($event) {
+        $scope.open = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
@@ -101,12 +103,12 @@ angular.module('activePortal.schedule')
                 }
             ];
 
-        $scope.getDayClass = function(date, mode) {
+        $scope.getDayClass = function (date, mode) {
             if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0,0,0,0);
+                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
 
-                for (var i=0;i<$scope.events.length;i++){
-                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
 
                     if (dayToCheck === currentDay) {
                         return $scope.events[i].status;

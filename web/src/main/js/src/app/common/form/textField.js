@@ -23,7 +23,7 @@ angular.module('activePortal.common')
                 };
                 $scope.save = function () {
                     //$scope.onSave();
-                }
+                };
             }
         };
     })

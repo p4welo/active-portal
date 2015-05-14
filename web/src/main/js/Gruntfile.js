@@ -10,6 +10,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-conventional-changelog');
     grunt.loadNpmTasks('grunt-bump');
@@ -22,6 +23,14 @@ module.exports = function (grunt) {
      * Load in our build configuration file.
      */
     var userConfig = require('./build.config.js');
+
+    var version = generateAndSaveNewVersion('.version');
+
+    function generateAndSaveNewVersion(path) {
+        var version = new Date().getTime();
+        grunt.file.write(path, version);
+        return version;
+    }
 
     /**
      * This is the configuration object Grunt uses to give each plugin its
@@ -68,11 +77,12 @@ module.exports = function (grunt) {
                     "package.json",
                     "bower.json"
                 ],
+                updateConfigs: ['pkg'],
                 commit: false,
                 commitMessage: 'chore(release): v%VERSION%',
                 commitFiles: [
                     "package.json",
-                    "client/bower.json"
+                    "bower.json"
                 ],
                 createTag: false,
                 tagName: 'v%VERSION%',
@@ -217,11 +227,17 @@ module.exports = function (grunt) {
              * together.
              */
             build_css: {
+                options: {
+                    banner: '<%= meta.banner %>',
+                    stripBanners: {
+                        block: true
+                    }
+                },
                 src: [
                     '<%= vendor_files.css %>',
                     '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
                 ],
-                dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+                dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>-' + version + '.css'
             },
             /**
              * The `compile_js` target is the concatenation of our application source
@@ -238,7 +254,7 @@ module.exports = function (grunt) {
                     '<%= html2js.app.dest %>',
                     'module.suffix'
                 ],
-                dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
+                dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>-' + version + '.js'
             }
         },
 
@@ -305,7 +321,7 @@ module.exports = function (grunt) {
          */
         jshint: {
             src: [
-                //'<%= app_files.js %>'
+                '<%= app_files.js %>'
             ],
             test: [
                 '<%= app_files.jsunit %>'
@@ -315,12 +331,10 @@ module.exports = function (grunt) {
             ],
             options: {
                 curly: true,
-                immed: true,
-                newcap: true,
-                noarg: true,
                 sub: true,
                 boss: true,
-                eqnull: true
+                eqnull: true,
+                es5: true
             },
             globals: {}
         },
@@ -393,9 +407,21 @@ module.exports = function (grunt) {
                 dir: '<%= compile_dir %>',
                 src: [
                     '<%= concat.compile_js.dest %>',
-                    '<%= vendor_files.css %>',
-                    '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+                    '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>-' + version + '.css'
                 ]
+            }
+        },
+
+        htmlmin: {
+            compile: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    '<%= app_files.login_html %>': '<%= app_files.login_html %>',
+                    '<%= app_files.index_html %>': '<%= app_files.index_html %>'
+                }
             }
         },
 
@@ -533,7 +559,7 @@ module.exports = function (grunt) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build', [
-        'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
+        'clean', 'html2js', 'jshint', 'less:build',
         'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_appjs', 'copy:build_vendorjs',
         'copy:build_vendorcss', 'copy:build_vendorfonts', 'index:build'
     ]);
@@ -543,7 +569,8 @@ module.exports = function (grunt) {
      * minifying your code.
      */
     grunt.registerTask('compile', [
-        'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+        'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'concat:build_css', 'index:compile',
+        'htmlmin:compile'
     ]);
 
     /**

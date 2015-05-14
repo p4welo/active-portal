@@ -29,6 +29,12 @@ module.exports = {
         html: [
             'src/index.html'
         ],
+        login_html: [
+            '<%= build_dir %>/login.html'
+        ],
+        index_html: [
+            '<%= build_dir %>/index.html'
+        ],
         less: 'src/less/main.less'
     },
 

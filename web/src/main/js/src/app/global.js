@@ -18,5 +18,5 @@ angular.module('activePortal')
         };
         $rootScope.log = function (message) {
             $log.debug(message);
-        }
+        };
     });

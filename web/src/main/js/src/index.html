@@ -14,7 +14,6 @@
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
     <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
     <meta http-equiv="Pragma" content="no-cache"/>
-    <!--<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">-->
 
     <link rel="shortcut icon" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/icon57.png" sizes="57x57">
@@ -26,10 +25,9 @@
     <link rel="apple-touch-icon" href="assets/icon152.png" sizes="152x152">
     <link rel="apple-touch-icon" href="assets/icon180.png" sizes="180x180">
 
-    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>"/>
     <% }); %>
-
     <!--<script src="http://localhost:35729/livereload.js"></script>-->
 </head>
 <body ng-app="activePortal">
@@ -187,10 +185,9 @@
         </div>
     </div>
 </div>
-
 <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
 
-<!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+<% scripts.forEach( function ( file ) { %>
 <script type="text/javascript" src="<%= file %>"></script>
 <% }); %>
 </body>

@@ -36,8 +36,8 @@ angular.module('activePortal.schedule')
         }
 
         $scope.onStartHoursChange = function (newValue) {
-            $scope.end.hours = (parseInt(newValue) + 1) + "";
-        }
+            $scope.end.hours = (parseInt(newValue, 10) + 1) + "";
+        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
