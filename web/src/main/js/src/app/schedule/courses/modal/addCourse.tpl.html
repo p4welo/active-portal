@@ -89,13 +89,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="type" class="col-sm-3 control-label">
-                Typ
+            <label for="state" class="col-sm-3 control-label">
+                Status
                 <span class="text-danger">*</span>
             </label>
 
             <div class="col-sm-9">
-                <select id="type" ng-model="course.type" ng-options="t | translate for t in types" class="form-control"
+                <select id="state" ng-model="course.courseState" ng-options="s | translate for s in states" class="form-control"
                         required></select>
             </div>
         </div>

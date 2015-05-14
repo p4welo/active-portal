@@ -26,7 +26,7 @@ angular.module('activePortal')
 
             REGISTRATION: "Grupa na zapisy",
             CAN_JOIN: "Można dołączyć",
-            NO_PLACE: "Nie można dołączyć",
+            NO_PLACE: "Brak miejsc",
 
             INDIVIDUAL_LESSON: "Lekcja indywidualna",
             WORKSHOPS: "Warsztaty",

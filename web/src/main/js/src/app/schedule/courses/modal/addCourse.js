@@ -21,8 +21,10 @@ angular.module('activePortal.schedule')
         $scope.levels = [
             "OPEN", "BEGINNER", "INTERMEDIATE", "ADVANCED"
         ];
-        $scope.types = [
-            "TYPE_REGISTRATION", "TYPE_OPEN", "TYPE_CLOSED"
+        $scope.states = [
+            "REGISTRATION",
+            "CAN_JOIN",
+            "NO_PLACE"
         ];
         $scope.hours = [];
         $scope.minutes = [];
@@ -46,23 +48,23 @@ angular.module('activePortal.schedule')
         $scope.save = function (course) {
             course.startTime = $scope.start.hours + ":" + $scope.start.minutes;
             course.endTime = $scope.end.hours + ":" + $scope.end.minutes;
-            if (course.type == 'TYPE_REGISTRATION') {
-                course.canRegister = true;
-                course.canJoin = false;
-                course.inProgress = false;
-            }
-            else if (course.type == 'TYPE_OPEN') {
-                course.canRegister = false;
-                course.canJoin = true;
-                course.inProgress = true;
-            }
-            else if (course.type == 'TYPE_CLOSED') {
-                course.canRegister = false;
-                course.canJoin = false;
-                course.inProgress = true;
-            }
+            //if (course.type == 'TYPE_REGISTRATION') {
+            //    course.canRegister = true;
+            //    course.canJoin = false;
+            //    course.inProgress = false;
+            //}
+            //else if (course.type == 'TYPE_OPEN') {
+            //    course.canRegister = false;
+            //    course.canJoin = true;
+            //    course.inProgress = true;
+            //}
+            //else if (course.type == 'TYPE_CLOSED') {
+            //    course.canRegister = false;
+            //    course.canJoin = false;
+            //    course.inProgress = true;
+            //}
 
-            delete course.type;
+            //delete course.type;
             courseHttpClient.create(course).$promise.then(
                 function () {
                     $modalInstance.close();

@@ -111,9 +111,7 @@
         </span>
                         </td>
                         <td>
-                            <span ng-if="!course.inProgress && course.canRegister">Zapisy</span>
-                            <span ng-if="course.inProgress && !course.canJoin">Brak miejsc</span>
-                            <span ng-if="course.inProgress && course.canJoin">Można dołączyć</span>
+                            {{ course.courseState | translate }}
                         </td>
                         <td class="text-center object-state">
                             <div class="themed-border-spring themed-background-spring text-center"
