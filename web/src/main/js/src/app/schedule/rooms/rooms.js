@@ -47,7 +47,8 @@ angular.module('activePortal.schedule')
             $modal.open(
                 {
                     templateUrl: 'schedule/rooms/modal/addRoom.tpl.html',
-                    controller: "addRoomCtrl"
+                    controller: "addRoomCtrl",
+                    backdrop: 'static'
                 }
             ).result.then(
                 function () {
@@ -111,7 +112,8 @@ angular.module('activePortal.schedule')
                 $modal.open(
                     {
                         templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                        controller: "deleteConfirmDialogCtrl"
+                        controller: "deleteConfirmDialogCtrl",
+                        backdrop: 'static'
                     }
                 ).result.then(
                     function () {

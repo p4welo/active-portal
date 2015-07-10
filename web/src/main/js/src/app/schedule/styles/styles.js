@@ -55,7 +55,8 @@ angular.module('activePortal.schedule')
             $modal.open(
                 {
                     templateUrl: 'schedule/styles/modal/addStyle.tpl.html',
-                    controller: "addStyleCtrl"
+                    controller: "addStyleCtrl",
+                    backdrop: 'static'
                 }
             ).result.then(
                 function () {
@@ -79,7 +80,8 @@ angular.module('activePortal.schedule')
                             courses: function () {
                                 return style.courses;
                             }
-                        }
+                        },
+                        backdrop: 'static'
                     }
                 ).result.then(
                     function () {

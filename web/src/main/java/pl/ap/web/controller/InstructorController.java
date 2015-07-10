@@ -17,7 +17,7 @@ import java.util.List;
  * Created by parado on 2014-08-24.
  */
 @RestController
-public class InstructorController {
+public class InstructorController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(InstructorController.class);
 
     @Resource
@@ -41,17 +41,17 @@ public class InstructorController {
     @ResponseStatus(value = HttpStatus.OK)
     public Instructor get(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("get()");
-        return instructorService.getBySid(sid);
+        Instructor instructor = instructorService.getBySid(sid);
+        assertSidObject(instructor);
+        return instructor;
     }
 
     @RequestMapping(value = InstructorApiMappings.ACTIVATE, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Instructor activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
-
         Instructor instructor = instructorService.getBySid(sid);
-        Assert.notNull(instructor);
-
+        assertSidObject(instructor);
         return instructorService.activate(instructor);
     }
 
@@ -59,10 +59,8 @@ public class InstructorController {
     @ResponseStatus(value = HttpStatus.OK)
     public Instructor deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
-
         Instructor instructor = instructorService.getBySid(sid);
-        Assert.notNull(instructor);
-
+        assertSidObject(instructor);
         return instructorService.deactivate(instructor);
     }
 
@@ -70,11 +68,9 @@ public class InstructorController {
     @ResponseStatus(value = HttpStatus.OK)
     public Instructor update(@RequestBody Instructor instructor, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
-        Assert.notNull(instructorService.getBySid(sid));
-        Assert.notNull(instructor);
-        Assert.isTrue(sid.equals(instructor.getSid()));
-
+        assertSidObject(instructorService.getBySid(sid));
+        assertNotNull(instructor, "instructor");
+        assertSidIntegrity(instructor, sid);
         return instructorService.update(instructor);
     }
 
@@ -82,10 +78,8 @@ public class InstructorController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         Instructor instructor = instructorService.getBySid(sid);
-        Assert.notNull(instructor);
-
+        assertSidObject(instructor);
         instructorService.delete(instructor);
     }
 
@@ -93,10 +87,8 @@ public class InstructorController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> findCourses(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("findCourses()");
-
         Instructor instructor = instructorService.getBySid(sid);
-        Assert.notNull(instructor);
-
+        assertSidObject(instructor);
         return instructorService.findCourses(instructor);
     }
 }

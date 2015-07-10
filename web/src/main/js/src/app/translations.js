@@ -58,7 +58,8 @@ angular.module('activePortal')
             PERIOD_DAY: "Dni",
 
             "sid.not.found": "Nie znaleziono obiektu",
-            "invalid.parameter": "Nieprawidłowy parametr"
+            "invalid.parameter": "Nieprawidłowy parametr ",
+            "not.null.parameter": "Parametr pusty: "
         });
         $translateProvider.preferredLanguage('pl');
     });

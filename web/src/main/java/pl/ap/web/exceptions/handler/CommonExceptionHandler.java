@@ -38,7 +38,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResource error = new ErrorResource(ex.getMessage(), ex.getField());
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+         headers.setContentType(MediaType.APPLICATION_JSON);
 
         return handleExceptionInternal(e, error, headers, HttpStatus.NOT_ACCEPTABLE, request);
     }

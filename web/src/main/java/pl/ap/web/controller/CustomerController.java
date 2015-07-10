@@ -5,12 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import pl.ap.domain.*;
-import pl.ap.web.api.ApiKeys;
-import pl.ap.web.api.CustomerApiMappings;
-import pl.ap.web.dto.CustomerDto;
 import pl.ap.service.ICustomerService;
 import pl.ap.service.ITicketService;
 import pl.ap.service.ITicketTypeService;
+import pl.ap.web.api.ApiKeys;
+import pl.ap.web.api.CustomerApiMappings;
+import pl.ap.web.dto.CustomerDto;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by parado on 2014-10-15.
  */
 @RestController
-public class CustomerController {
+public class CustomerController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(CustomerController.class);
 
     @Resource
@@ -43,9 +43,9 @@ public class CustomerController {
     public Customer create(@RequestBody CustomerDto dto) {
         LOGGER.info("create()");
 
-        Assert.notNull(dto);
-        Assert.notNull(dto.getCustomer());
-        Assert.notNull(dto.getCourses());
+        assertNotNull(dto, "dto");
+        assertNotNull(dto.getCustomer(), "customer");
+        assertNotNull(dto.getCourses(), "courses");
 
         Customer customer = customerService.save(dto.getCustomer());
         for (Course course : dto.getCourses()) {
@@ -58,7 +58,9 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public Customer get(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("get()");
-        return customerService.getBySid(sid);
+        Customer customer = customerService.getBySid(sid);
+        assertSidObject(customer);
+        return customer;
     }
 
     @RequestMapping(value = CustomerApiMappings.UPDATE, method = RequestMethod.PUT)
@@ -66,9 +68,9 @@ public class CustomerController {
     public Customer update(@RequestBody Customer customer, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
 
-        Assert.notNull(customerService.getBySid(sid));
-        Assert.notNull(customer);
-        Assert.isTrue(sid.equals(customer.getSid()));
+        assertSidObject(customerService.getBySid(sid));
+        assertNotNull(customer, "customer");
+        assertSidIntegrity(customer, sid);
 
         return customerService.update(customer);
     }
@@ -77,10 +79,8 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-
+        assertSidObject(customer);
         customerService.delete(customer);
     }
 
@@ -88,10 +88,8 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<CustomerPresence> presence(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("presence()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-
+        assertSidObject(customer);
         return customerService.findPresence(customer);
     }
 
@@ -99,10 +97,8 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> courses(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("courses()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-
+        assertSidObject(customer);
         return customerService.findCourses(customer);
     }
 
@@ -110,10 +106,8 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> coursesToJoin(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("coursesToJoin()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-
+        assertSidObject(customer);
         return customerService.findCoursesToJoin(customer);
     }
 
@@ -121,10 +115,8 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> coursesToRegister(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("coursesToRegister()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-
+        assertSidObject(customer);
         return customerService.findCoursesToRegister(customer);
     }
 
@@ -132,11 +124,9 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public void joinCourse(@PathVariable(ApiKeys.SID) String sid, @RequestBody Course course) {
         LOGGER.info("joinCourse()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-        Assert.notNull(course);
-
+        assertSidObject(customer);
+        assertNotNull(course, "course");
         customerService.joinCourse(customer, course);
     }
 
@@ -144,11 +134,9 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public void subscribeCourse(@PathVariable(ApiKeys.SID) String sid, @RequestBody Course course) {
         LOGGER.info("subscribeCourse()");
-
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-        Assert.notNull(course);
-
+        assertSidObject(customer);
+        assertNotNull(course, "course");
         customerService.joinCourse(customer, course);
     }
 
@@ -156,9 +144,7 @@ public class CustomerController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Customer> findSimilar(@RequestBody Customer customer) {
         LOGGER.info("findSimilar()");
-
-        Assert.notNull(customer);
-
+        assertNotNull(customer, "customer");
         return customerService.findSimilar(customer);
     }
 
@@ -168,11 +154,11 @@ public class CustomerController {
         LOGGER.info("buyTicket()");
 
         Customer customer = customerService.getBySid(sid);
-        Assert.notNull(customer);
-        Assert.notNull(ticket);
-        Assert.notNull(ticket.getType());
+        assertSidObject(customer);
+        assertNotNull(ticket, "ticket");
+        assertNotNull(ticket.getType(), "type");
         TicketType type = ticketTypeService.getBySid(ticket.getType().getSid());
-        Assert.notNull(type);
+        assertSidObject(type);
         ticket.setType(type);
         ticketService.buy(customer, ticket);
         return customer;

@@ -46,12 +46,12 @@ angular.module('activePortal', [
                     var $translate = $filter('translate');
                     var result = $translate(rejection.data.message);
                     if (rejection.data.field) {
-                        result += ": " + rejection.data.field;
+                        result += rejection.data.field;
                     }
                     notificationService.error(result);
                 }
                 else {
-                    notificationService.error("Błąd " + status);
+                    notificationService.error("Wystąpił nieoczekiwany błąd [" + status + "]");
                 }
                 return $q.reject(rejection);
             }

@@ -100,7 +100,6 @@ module.exports = function (grunt) {
                 src: [
                     '<%= build_dir %>/*',
                     '<%= compile_dir %>/*',
-                    '!<%= compile_dir %>/_old/**',
                     '!<%= compile_dir %>/WEB-INF/**'
                 ]
             },

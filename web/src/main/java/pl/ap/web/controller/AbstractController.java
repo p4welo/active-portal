@@ -2,6 +2,7 @@ package pl.ap.web.controller;
 
 import pl.ap.domain.common.IdentifiableEntity;
 import pl.ap.web.exceptions.InvalidParameterException;
+import pl.ap.web.exceptions.NullParameterException;
 import pl.ap.web.exceptions.SidNotFoundException;
 
 /**
@@ -11,7 +12,7 @@ public abstract class AbstractController {
 
     protected static void assertNotNull(Object o, String field) {
         if (o == null) {
-            throw new InvalidParameterException(field);
+            throw new NullParameterException(field);
         }
     }
 

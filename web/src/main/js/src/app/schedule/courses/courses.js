@@ -104,7 +104,8 @@ angular.module('activePortal.schedule')
                         rooms: function () {
                             return $scope.rooms;
                         }
-                    }
+                    },
+                    backdrop: 'static'
                 }
             ).result.then(
                 function () {
@@ -151,7 +152,8 @@ angular.module('activePortal.schedule')
                             course: function () {
                                 return course;
                             }
-                        }
+                        },
+                        backdrop: 'static'
                     }
                 ).result.then(
                     function () {
@@ -178,7 +180,8 @@ angular.module('activePortal.schedule')
                 $modal.open(
                     {
                         templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                        controller: "deleteConfirmDialogCtrl"
+                        controller: "deleteConfirmDialogCtrl",
+                        backdrop: 'static'
                     }
                 ).result.then(
                     function () {

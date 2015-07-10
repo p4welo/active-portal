@@ -15,8 +15,10 @@ import java.util.List;
 
 /**
  * Created by parado on 26.03.14.
+ * Deprecated feature in case of WordPress post management used
  */
 @RestController
+@Deprecated
 public class NewsController {
     private static final Logger LOGGER = Logger.getLogger(NewsController.class);
 

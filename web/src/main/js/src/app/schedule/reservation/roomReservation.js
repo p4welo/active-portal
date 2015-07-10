@@ -32,7 +32,8 @@ angular.module('activePortal.schedule')
                         rooms: function () {
                             return $scope.roomList;
                         }
-                    }
+                    },
+                    backdrop: 'static'
                 }
             ).result.then(
                 function () {
@@ -124,7 +125,8 @@ angular.module('activePortal.schedule')
                         event: function () {
                             return cell.event;
                         }
-                    }
+                    },
+                    backdrop: 'static'
                 }
             ).result.then(
                 function () {

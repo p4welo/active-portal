@@ -19,7 +19,8 @@ angular.module('activePortal.schedule')
             $modal.open(
                 {
                     templateUrl: 'common/modal/deleteConfirm.tpl.html',
-                    controller: "deleteConfirmDialogCtrl"
+                    controller: "deleteConfirmDialogCtrl",
+                    backdrop: 'static'
                 }
             ).result.then(
                 function () {

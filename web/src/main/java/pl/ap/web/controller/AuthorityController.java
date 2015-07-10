@@ -24,7 +24,7 @@ import java.util.List;
  * Created by parado on 2014-10-21.
  */
 @RestController
-public class AuthorityController {
+public class AuthorityController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(AuthorityController.class);
 
     @Resource
@@ -53,7 +53,7 @@ public class AuthorityController {
         LOGGER.info("findByRole()");
 
         Role role = roleService.getBySid(sid);
-        Assert.notNull(role);
+        assertSidObject(role);
 
         List<Authority> all = authorityService.findAll();
         List<Authority> authorities = authorityService.findByRole(role);
@@ -95,8 +95,8 @@ public class AuthorityController {
         LOGGER.info("checkAuthority()");
 
         Role role = roleService.getBySid(sid);
-        Assert.notNull(role);
-        Assert.notNull(authority);
+        assertSidObject(role);
+        assertNotNull(authority, "authority");
 
         roleService.checkAuthority(role, authority);
 
@@ -112,8 +112,8 @@ public class AuthorityController {
         LOGGER.info("uncheckAuthority()");
 
         Role role = roleService.getBySid(sid);
-        Assert.notNull(role);
-        Assert.notNull(authority);
+        assertSidObject(role);
+        assertNotNull(authority, "authority");
 
         roleService.uncheckAuthority(role, authority);
 

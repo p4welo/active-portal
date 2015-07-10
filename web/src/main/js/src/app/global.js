@@ -13,7 +13,8 @@ angular.module('activePortal')
             $modal.open({
                 templateUrl: 'common/modal/scanTicket.tpl.html',
                 controller: "scanTicketDialogCtrl",
-                size: 'sm'
+                size: 'sm',
+                backdrop: 'static'
             });
         };
         $rootScope.log = function (message) {
