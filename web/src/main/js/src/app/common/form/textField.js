@@ -2,27 +2,32 @@ angular.module('activePortal.common')
 
     .directive('formTextField', function () {
         return {
-            restrict: 'EA',
+            restrict: 'E',
             scope: {
-                ngModel: '=',
+                object: '=',
                 label: "@",
                 field: "@",
-                onSave: "&"
+                onSave: "="
             },
+            replace: true,
             templateUrl: 'common/form/textField.tpl.html',
             controller: function ($scope) {
                 $scope.editing = false;
 
                 $scope.edit = function () {
-                    $scope.oldValue = $scope.ngModel[$scope.field];
+                    $scope.oldValue = $scope.object[$scope.field];
                     $scope.editing = true;
                 };
                 $scope.cancel = function () {
-                    $scope.ngModel[$scope.field] = $scope.oldValue;
+                    $scope.object[$scope.field] = $scope.oldValue;
                     $scope.editing = false;
                 };
                 $scope.save = function () {
-                    //$scope.onSave();
+                    $scope.saving = true;
+                    $scope.onSave($scope.object, $scope.field, function () {
+                        $scope.saving = false;
+                        $scope.edit = false;
+                    });
                 };
             }
         };

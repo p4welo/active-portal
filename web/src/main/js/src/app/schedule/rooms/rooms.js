@@ -68,14 +68,14 @@ angular.module('activePortal.schedule')
                 return;
             }
             $scope.selected = angular.copy(room);
-            OBJECT_PROPERTIES.forEach(function (property) {
-                $scope.selected[property] = {
-                    value: room[property],
-                    edit: false,
-                    saving: false,
-                    oldVal: {}
-                };
-            });
+            //OBJECT_PROPERTIES.forEach(function (property) {
+            //    $scope.selected[property] = {
+            //        value: room[property],
+            //        edit: false,
+            //        saving: false,
+            //        oldVal: {}
+            //    };
+            //});
         };
         $scope.edit = function (object, property) {
             object[property].edit = true;
@@ -85,18 +85,15 @@ angular.module('activePortal.schedule')
             object[property].value = object[property].oldVal;
             object[property].edit = false;
         };
-        $scope.save = function (object, property) {
-            object[property].saving = true;
+        $scope.save = function (object, property, callback) {
             if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.rooms, {sid: object.sid});
-                obj[NAME_KEY] = object[NAME_KEY].value;
+                obj[NAME_KEY] = object[NAME_KEY];
                 if (obj !== undefined) {
                     roomHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
-                            object[property].edit = false;
-                            object[property].saving = false;
-
                             notificationService.success("Pomyślnie zapisano");
+                            callback();
                             roomHttpClient.findAll().$promise.then(
                                 function (result) {
                                     $scope.rooms = result;
@@ -105,6 +102,26 @@ angular.module('activePortal.schedule')
                 }
             }
         };
+        //$scope.save = function (object, property) {
+        //    object[property].saving = true;
+        //    if (property == NAME_KEY) {
+        //        var obj = _.findWhere($scope.rooms, {sid: object.sid});
+        //        obj[NAME_KEY] = object[NAME_KEY].value;
+        //        if (obj !== undefined) {
+        //            roomHttpClient.update({sid: object.sid}, obj).$promise.then(
+        //                function () {
+        //                    object[property].edit = false;
+        //                    object[property].saving = false;
+        //
+        //                    notificationService.success("Pomyślnie zapisano");
+        //                    roomHttpClient.findAll().$promise.then(
+        //                        function (result) {
+        //                            $scope.rooms = result;
+        //                        });
+        //                });
+        //        }
+        //    }
+        //};
 
         // =======================================
         $scope.delete = function (room) {
