@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by parado on 18.03.14.
  */
+@Deprecated
 @Entity
 @Table(name = "instructor_description")
 @Unique(fields = InstructorDescription.FIELD_SID, message = InstructorDescription.NON_UNIQUE_SID_MESSAGE, insensitive = false)

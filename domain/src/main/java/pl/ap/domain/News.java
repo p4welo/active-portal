@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by parado on 25.03.14.
  */
+@Deprecated
 @Entity
 @Table(name = "news")
 @Unique(fields = News.FIELD_SID, message = News.NON_UNIQUE_SID_MESSAGE, insensitive = false)

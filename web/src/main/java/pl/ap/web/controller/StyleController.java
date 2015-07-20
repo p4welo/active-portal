@@ -19,7 +19,7 @@ import java.util.List;
  * Created by parado on 2014-08-24.
  */
 @RestController
-public class StyleController {
+public class StyleController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(StyleController.class);
 
     @Resource
@@ -39,10 +39,8 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle create(@RequestBody CourseStyle courseStyle) {
         LOGGER.info("create()");
-
-        Assert.notNull(courseStyle);
-        Assert.notNull(courseStyle.getCategory());
-
+        assertNotNull(courseStyle, "style");
+        assertNotNull(courseStyle.getCategory(), "category");
         return styleService.save(courseStyle);
     }
 
@@ -57,10 +55,8 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
-
         CourseStyle style = styleService.getBySid(sid);
-        Assert.notNull(style);
-
+        assertSidObject(style);
         return styleService.activate(style);
     }
 
@@ -68,10 +64,8 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
-
         CourseStyle style = styleService.getBySid(sid);
-        Assert.notNull(style);
-
+        assertSidObject(style);
         return styleService.deactivate(style);
     }
 
@@ -79,10 +73,8 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> findCourses(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("findCourses()");
-
         CourseStyle style = styleService.getBySid(sid);
-        Assert.notNull(style);
-
+        assertSidObject(style);
         return courseService.findBy(Course.FIELD_STYLE, style);
     }
 
@@ -90,10 +82,8 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Course> findActiveCourses(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("findActiveCourses()");
-
         CourseStyle style = styleService.getBySid(sid);
-        Assert.notNull(style);
-
+        assertSidObject(style);
         return styleService.findActiveByStyle(style);
     }
 
@@ -101,11 +91,9 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle setCategory(@RequestBody CourseCategory category, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("setCategory()");
-
         CourseStyle style = styleService.getBySid(sid);
-        Assert.notNull(style);
-        Assert.notNull(category);
-
+        assertSidObject(style);
+        assertNotNull(category, "category");
         return styleService.setCategory(style, category);
     }
 
@@ -113,11 +101,9 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public CourseStyle update(@RequestBody CourseStyle style, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
-        Assert.notNull(styleService.getBySid(sid));
-        Assert.notNull(style);
-        Assert.isTrue(sid.equals(style.getSid()));
-
+        assertSidObject(styleService.getBySid(sid));
+        assertNotNull(style, "style");
+        assertSidIntegrity(style, sid);
         return styleService.update(style);
     }
 
@@ -125,10 +111,8 @@ public class StyleController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         CourseStyle style = styleService.getBySid(sid);
-        Assert.notNull(style);
-
+        assertSidObject(style);
         styleService.delete(style);
     }
 }

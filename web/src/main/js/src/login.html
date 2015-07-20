@@ -32,54 +32,138 @@
     <% }); %>
 </head>
 <body class="page-loading" onload='document.loginForm.login.focus();'>
-<div class="login-background">
-    <div id="login-container" style="z-index:9999;">
-        <div class="login-title text-center">
-            <h1>
-                <i class="gi gi-baseball"></i>
-                <strong>Active</strong>Portal
-                <br>
-                <small>Zaloguj się</small>
-            </h1>
+<!--<div class="login-background">-->
+    <!--<div id="login-container" style="z-index:9999;">-->
+        <!--<div class="login-title text-center">-->
+            <!--<h1>-->
+                <!--<i class="gi gi-baseball"></i>-->
+                <!--<strong>Active</strong>Portal-->
+                <!--<br>-->
+                <!--<small>Zaloguj się</small>-->
+            <!--</h1>-->
+        <!--</div>-->
+
+        <!--<div class="block remove-margin">-->
+            <!--<form name='loginForm' action='auth' method='POST' class="form-horizontal">-->
+                <!--<div class="form-group">-->
+                    <!--<div class="col-xs-12">-->
+                        <!--<div class="input-group">-->
+                            <!--<label for="login" class="input-group-addon btn">-->
+                                <!--<i class="fa fa-user"></i>-->
+                            <!--</label>-->
+                            <!--<input type="text" id="login" name='login' class="form-control" placeholder="Login" autofocus/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<div class="col-xs-12">-->
+                        <!--<div class="input-group">-->
+                            <!--<label for="password" class="input-group-addon btn">-->
+                                <!--<i class="gi gi-keys"></i>-->
+                            <!--</label>-->
+                            <!--<input type="password" id="password" name="pass" class="form-control" placeholder="Hasło">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group form-actions">-->
+                    <!--<div class="col-xs-12 text-right">-->
+                        <!--<button type="submit" class="btn btn-alt btn-primary">-->
+                            <!--<i class="fa fa-sign-in"></i>-->
+                            <!--Zaloguj-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<div class="col-xs-12">-->
+                        <!--<p class="text-center remove-margin"></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <div id="login-alt-container">
+                <!-- Title -->
+                <h1 class="push-top-bottom">
+                    <i class="gi gi-flash"></i> <strong>ProUI</strong><br>
+                    <small>Welcome to ProUI Admin Template!</small>
+                </h1>
+                <!-- END Title -->
+
+                <!-- Key Features -->
+                <ul class="fa-ul text-muted">
+                    <li><i class="fa fa-check fa-li text-success"></i> Clean &amp; Modern Design</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Fully Responsive &amp; Retina Ready</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> 10 Color Themes</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> PSD Files Included</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Widgets Collection</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Designed Pages Collection</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> .. and many more awesome features!</li>
+                </ul>
+                <!-- END Key Features -->
+
+                <!-- Footer -->
+                <footer class="text-muted push-top-bottom">
+                    <small><span id="year-copy"></span> &copy; <a href="http://goo.gl/TDOSuC" target="_blank">ProUI 3.2</a></small>
+                </footer>
+                <!-- END Footer -->
+            </div>
         </div>
+        <div class="col-md-5">
+            <div id="login-container">
+                <div class="login-title text-center">
+                    <h1>Zaloguj się</h1>
+                </div>
 
-        <div class="block remove-margin">
-            <form name='loginForm' action='auth' method='POST' class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="input-group">
-                            <label for="login" class="input-group-addon btn">
-                                <i class="fa fa-user"></i>
-                            </label>
-                            <input type="text" id="login" name='login' class="form-control" placeholder="Login" autofocus/>
+                <div class="block push-bit">
+                    <form name='loginForm' action='auth' method='POST' id="form-login" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                    <input type="text" id="login" name='login' class="form-control input-lg" placeholder="Login" autofocus/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="input-group">
-                            <label for="password" class="input-group-addon btn">
-                                <i class="gi gi-keys"></i>
-                            </label>
-                            <input type="password" id="password" name="pass" class="form-control" placeholder="Hasło">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="gi gi-keys"></i>
+                                    </span>
+                                    <input type="password" id="password" name="pass" class="form-control input-lg" placeholder="Hasło">
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group form-actions">
+                            <div class="col-xs-4">
+                                <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                                    <input type="checkbox" id="login-remember-me" name="login-remember-me" checked>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <button type="submit" class="btn btn-alt btn-primary">
+                                <i class="fa fa-sign-in"></i>
+                                Zaloguj
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 text-center">
+                                <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
+                                <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group form-actions">
-                    <div class="col-xs-12 text-right">
-                        <button type="submit" class="btn btn-alt btn-primary">
-                            <i class="fa fa-sign-in"></i>
-                            Zaloguj
-                        </button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <p class="text-center remove-margin"></p>
-                    </div>
-                </div>
-            </form>
-
+            </div>
         </div>
     </div>
 </div>

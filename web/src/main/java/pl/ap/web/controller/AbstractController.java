@@ -16,7 +16,7 @@ public abstract class AbstractController {
         }
     }
 
-    protected static void assertSidObject(Object o) {
+    protected static void assertSidObject(IdentifiableEntity o) {
         if (o == null) {
             throw new SidNotFoundException();
         }

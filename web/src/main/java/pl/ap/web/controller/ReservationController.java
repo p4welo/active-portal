@@ -23,7 +23,7 @@ import java.util.List;
  * Created by parado on 2015-05-07.
  */
 @RestController
-public class ReservationController {
+public class ReservationController extends AbstractController {
 
     private static final Logger LOGGER = Logger.getLogger(ReservationController.class);
 
@@ -37,9 +37,9 @@ public class ReservationController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<ReservationCell> findByDateRange(@RequestBody ReservationSearchDto dto) {
         LOGGER.info("findByDateRange()");
-        Assert.notNull(dto);
-        Assert.notNull(dto.getStart());
-        Assert.notNull(dto.getEnd());
+        assertNotNull(dto, "dto");
+        assertNotNull(dto.getStart(), "start");
+        assertNotNull(dto.getEnd(), "end");
         DateTime start = DateTime.parse(dto.getStart());
         DateTime end = DateTime.parse(dto.getEnd());
         LocalDate startDate = new LocalDate(start.getYear(), start.getMonthOfYear(), start.getDayOfMonth());
@@ -51,9 +51,9 @@ public class ReservationController {
     @ResponseStatus(value = HttpStatus.OK)
     public ReservationCell create(@RequestBody EventDto dto) {
         LOGGER.info("create()");
-        Assert.notNull(dto);
+        assertNotNull(dto, "dto");
         Event event = dto.getEvent();
-        Assert.notNull(event.getRoom());
+        assertNotNull(event.getRoom(), "room");
         return reservationService.create(event);
     }
 
@@ -61,12 +61,8 @@ public class ReservationController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteEvent(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         Event event = eventService.getBySid(sid);
-        if (event == null) {
-            throw new SidNotFoundException();
-        }
-
+        assertSidObject(event);
         eventService.delete(event);
     }
 }

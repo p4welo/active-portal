@@ -16,7 +16,7 @@ import java.util.List;
  * Created by parado on 2014-08-24.
  */
 @RestController
-public class RoomController {
+public class RoomController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(RoomController.class);
 
     @Resource
@@ -33,9 +33,7 @@ public class RoomController {
     @ResponseStatus(value = HttpStatus.OK)
     public Room create(@RequestBody Room room) {
         LOGGER.info("create()");
-
-        Assert.notNull(room);
-
+        assertNotNull(room, "room");
         return roomService.save(room);
     }
 
@@ -50,10 +48,8 @@ public class RoomController {
     @ResponseStatus(value = HttpStatus.OK)
     public Room activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
-
         Room room = roomService.getBySid(sid);
-        Assert.notNull(room);
-
+        assertSidObject(room);
         return roomService.activate(room);
     }
 
@@ -61,10 +57,8 @@ public class RoomController {
     @ResponseStatus(value = HttpStatus.OK)
     public Room deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
-
         Room room = roomService.getBySid(sid);
-        Assert.notNull(room);
-
+        assertSidObject(room);
         return roomService.deactivate(room);
     }
 
@@ -72,11 +66,9 @@ public class RoomController {
     @ResponseStatus(value = HttpStatus.OK)
     public Room update(@RequestBody Room room, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
-        Assert.notNull(roomService.getBySid(sid));
-        Assert.notNull(room);
+        assertSidObject(roomService.getBySid(sid));
+        assertNotNull(room, "room");
         Assert.isTrue(sid.equals(room.getSid()));
-
         return roomService.update(room);
     }
 
@@ -84,10 +76,8 @@ public class RoomController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         Room room = roomService.getBySid(sid);
-        Assert.notNull(room);
-
+        assertSidObject(room);
         roomService.delete(room);
     }
 }

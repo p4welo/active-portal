@@ -16,7 +16,7 @@ import java.util.List;
  * Created by parado on 2015-03-05.
  */
 @RestController
-public class TicketTypeController {
+public class TicketTypeController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(TicketTypeController.class);
 
     @Resource
@@ -34,10 +34,8 @@ public class TicketTypeController {
     @ResponseStatus(value = HttpStatus.OK)
     public TicketType create(@RequestBody TicketType type) {
         LOGGER.info("create()");
-
-        Assert.notNull(type);
-        Assert.notNull(type.getGroup());
-
+        assertNotNull(type, "type");
+        assertNotNull(type.getGroup(), "group");
         return ticketTypeService.save(type);
     }
 
@@ -52,10 +50,8 @@ public class TicketTypeController {
     @ResponseStatus(value = HttpStatus.OK)
     public TicketType activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
-
         TicketType type = ticketTypeService.getBySid(sid);
-        Assert.notNull(type);
-
+        assertSidObject(type);
         return ticketTypeService.activate(type);
     }
 
@@ -63,10 +59,8 @@ public class TicketTypeController {
     @ResponseStatus(value = HttpStatus.OK)
     public TicketType deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
-
         TicketType type = ticketTypeService.getBySid(sid);
-        Assert.notNull(type);
-
+        assertSidObject(type);
         return ticketTypeService.deactivate(type);
     }
 
@@ -74,11 +68,9 @@ public class TicketTypeController {
     @ResponseStatus(value = HttpStatus.OK)
     public TicketType update(@RequestBody TicketType type, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
-        Assert.notNull(ticketTypeService.getBySid(sid));
-        Assert.notNull(type);
-        Assert.isTrue(sid.equals(type.getSid()));
-
+        assertSidObject(ticketTypeService.getBySid(sid));
+        assertNotNull(type, "type");
+        assertSidIntegrity(type, sid);
         return ticketTypeService.update(type);
     }
 
@@ -86,10 +78,8 @@ public class TicketTypeController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         TicketType type = ticketTypeService.getBySid(sid);
-        Assert.notNull(type);
-
+        assertSidObject(type);
         ticketTypeService.delete(type);
     }
 }

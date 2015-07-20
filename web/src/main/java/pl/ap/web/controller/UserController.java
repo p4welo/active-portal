@@ -16,7 +16,7 @@ import java.util.List;
  * Created by parado on 2014-10-18.
  */
 @RestController
-public class UserController {
+public class UserController extends AbstractController {
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
     @Resource
@@ -33,9 +33,7 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public User create(@RequestBody User user) {
         LOGGER.info("create()");
-
-        Assert.notNull(user);
-
+        assertNotNull(user, "user");
         return userService.save(user);
     }
 
@@ -50,10 +48,8 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public User activate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("activate()");
-
         User user = userService.getBySid(sid);
-        Assert.notNull(user);
-
+        assertSidObject(user);
         return userService.activate(user);
     }
 
@@ -61,10 +57,8 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public User deactivate(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("deactivate()");
-
         User user = userService.getBySid(sid);
-        Assert.notNull(user);
-
+        assertSidObject(user);
         return userService.deactivate(user);
     }
 
@@ -72,11 +66,9 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public User update(@RequestBody User user, @PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("update()");
-
-        Assert.notNull(userService.getBySid(sid));
-        Assert.notNull(user);
-        Assert.isTrue(sid.equals(user.getSid()));
-
+        assertSidObject(userService.getBySid(sid));
+        assertNotNull(user, "user");
+        assertSidIntegrity(user, sid);
         return userService.update(user);
     }
 
@@ -84,10 +76,8 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable(ApiKeys.SID) String sid) {
         LOGGER.info("delete()");
-
         User user = userService.getBySid(sid);
-        Assert.notNull(user);
-
+        assertSidObject(user);
         userService.delete(user);
     }
 }
