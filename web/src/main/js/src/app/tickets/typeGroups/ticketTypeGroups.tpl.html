@@ -51,70 +51,8 @@
                         <div class="block">
                             <div class="col-sm-6">
                                 <div class="form-horizontal" method="post">
-                                    <form class="form-group">
-                                        <label for="name" class="col-sm-3 control-label"
-                                               ng-click="edit(selected, 'name')">Nazwa</label>
-
-                                        <div class="col-sm-9" ng-if="!selected.name.edit">
-                                            <p class="form-control-static">
-                                                <span class="btn-link" ng-bind="selected.name.value"
-                                                      ng-click="edit(selected, 'name')"></span>
-                                                &nbsp;
-                                                <i class="fa fa-edit" ng-show="selected.name.hover"></i>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-6" ng-if="selected.name.edit">
-                                            <input type="text" placeholder="Nazwa" class="form-control" id="name"
-                                                   ng-model="selected.name.value"/>
-                                        </div>
-                                        <div class="col-sm-3" ng-if="selected.name.edit">
-                                            <div class="btn" ng-if="selected.name.saving">
-                                                <i class="fa fa-spin fa-spinner"></i>
-                                            </div>
-                                            <div ng-if="!selected.name.saving">
-                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                   ng-click="cancel(selected, 'name')">
-                                                    <i class="fa fa-remove"></i>
-                                                </a>
-                                                <button class="btn btn-alt btn-primary"
-                                                        ng-click="save(selected, 'name')">
-                                                    <i class="fa fa-check"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <form class="form-group">
-                                        <label for="name" class="col-sm-3 control-label"
-                                               ng-click="edit(selected, 'description')">Uwagi</label>
-
-                                        <div class="col-sm-9" ng-if="!selected.description.edit">
-                                            <p class="form-control-static">
-                                                <span class="btn-link" ng-bind="selected.description.value"
-                                                      ng-click="edit(selected, 'description')"></span>
-                                                &nbsp;
-                                                <i class="fa fa-edit" ng-show="selected.description.hover"></i>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-6" ng-if="selected.description.edit">
-                                            <input type="text" placeholder="Nazwa" class="form-control" id="description"
-                                                   ng-model="selected.description.value"/>
-                                        </div>
-                                        <div class="col-sm-3" ng-if="selected.description.edit">
-                                            <div class="btn" ng-if="selected.description.saving">
-                                                <i class="fa fa-spin fa-spinner"></i>
-                                            </div>
-                                            <div ng-if="!selected.description.saving">
-                                                <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                   ng-click="cancel(selected, 'description')">
-                                                    <i class="fa fa-remove"></i>
-                                                </a>
-                                                <button class="btn btn-alt btn-primary"
-                                                        ng-click="save(selected, 'description')">
-                                                    <i class="fa fa-check"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <form-text-field object="selected" label="Nazwa" field="name" on-save="save"></form-text-field>
+                                    <form-text-field object="selected" label="Uwagi" field="description" on-save="save"></form-text-field>
                                 </div>
                             </div>
                         </div>

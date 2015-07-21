@@ -11,7 +11,6 @@ angular.module('activePortal.schedule')
     .controller('categoriesCtrl', function ($scope, $modal, categoryHttpClient, notificationService) {
 
         var NAME_KEY = "name";
-        var OBJECT_PROPERTIES = [NAME_KEY];
 
         // =======================================
         $scope.categoryLoading = true;
@@ -68,36 +67,16 @@ angular.module('activePortal.schedule')
                 return;
             }
             $scope.selected = angular.copy(category);
-
-            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
-                $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: category[OBJECT_PROPERTIES[i]],
-                    edit: false,
-                    saving: false,
-                    oldVal: {}
-                };
-            }
         };
-        $scope.edit = function (object, property) {
-            object[property].edit = true;
-            object[property].oldVal = object[property].value;
-        };
-        $scope.cancel = function (object, property) {
-            object[property].value = object[property].oldVal;
-            object[property].edit = false;
-        };
-        $scope.save = function (object, property) {
-            object[property].saving = true;
+        $scope.save = function (object, property, callback) {
             if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.categories, {sid: object.sid});
-                obj[NAME_KEY] = object[NAME_KEY].value;
-                if (angular.isObject(obj)) {
+                if (obj) {
+                    obj[NAME_KEY] = object[NAME_KEY];
                     categoryHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
-                            object[property].edit = false;
-                            object[property].saving = false;
-
                             notificationService.success("Pomyślnie zapisano");
+                            callback();
                             return categoryHttpClient.findAll().$promise;
                         }
                     ).then(

@@ -10,7 +10,6 @@ angular.module('activePortal.schedule')
 
     .controller('roomsCtrl', function ($scope, roomHttpClient, $modal, notificationService) {
         var NAME_KEY = "name";
-        var OBJECT_PROPERTIES = [NAME_KEY];
 
         // =======================================
         $scope.roomLoading = true;
@@ -68,22 +67,6 @@ angular.module('activePortal.schedule')
                 return;
             }
             $scope.selected = angular.copy(room);
-            //OBJECT_PROPERTIES.forEach(function (property) {
-            //    $scope.selected[property] = {
-            //        value: room[property],
-            //        edit: false,
-            //        saving: false,
-            //        oldVal: {}
-            //    };
-            //});
-        };
-        $scope.edit = function (object, property) {
-            object[property].edit = true;
-            object[property].oldVal = object[property].value;
-        };
-        $scope.cancel = function (object, property) {
-            object[property].value = object[property].oldVal;
-            object[property].edit = false;
         };
         $scope.save = function (object, property, callback) {
             if (property == NAME_KEY) {
@@ -102,26 +85,6 @@ angular.module('activePortal.schedule')
                 }
             }
         };
-        //$scope.save = function (object, property) {
-        //    object[property].saving = true;
-        //    if (property == NAME_KEY) {
-        //        var obj = _.findWhere($scope.rooms, {sid: object.sid});
-        //        obj[NAME_KEY] = object[NAME_KEY].value;
-        //        if (obj !== undefined) {
-        //            roomHttpClient.update({sid: object.sid}, obj).$promise.then(
-        //                function () {
-        //                    object[property].edit = false;
-        //                    object[property].saving = false;
-        //
-        //                    notificationService.success("Pomyślnie zapisano");
-        //                    roomHttpClient.findAll().$promise.then(
-        //                        function (result) {
-        //                            $scope.rooms = result;
-        //                        });
-        //                });
-        //        }
-        //    }
-        //};
 
         // =======================================
         $scope.delete = function (room) {

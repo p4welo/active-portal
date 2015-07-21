@@ -3,14 +3,14 @@
 
     <div class="col-sm-9" ng-if="!editing">
         <p class="form-control-static" ng-click="edit()">
-            <span class="btn-link empty-text" ng-if="object[field].length==''">[pusta wartość]</span>
+            <span class="btn-link empty-text" ng-if="!object[field] || object[field].length==''">[wprowadź wartość]</span>
             <span class="btn-link" ng-bind="object[field]"></span>
         </p>
     </div>
     <div ng-if="editing">
         <div class="col-sm-6">
             <input type="text" placeholder="{{::label}}" class="form-control" id="field" ng-model="object[field]"
-                   autofocus/>
+                   autofocus="autofocus" ng-disabled="saving"/>
         </div>
         <div class="col-sm-3">
             <div class="btn" ng-if="saving">

@@ -11,7 +11,6 @@ angular.module('activePortal.schedule')
     .controller('ticketGroupsCtrl', function ($scope, ticketTypeGroupHttpClient, notificationService, $modal) {
         var NAME_KEY = "name";
         var DESCRIPTION_KEY = "description";
-        var OBJECT_PROPERTIES = [NAME_KEY, DESCRIPTION_KEY];
 
         // =======================================
         $scope.groupLoading = true;
@@ -64,41 +63,22 @@ angular.module('activePortal.schedule')
         };
         // =======================================
         $scope.select = function (group) {
-            if ($scope.selected !== undefined && $scope.selected.sid == group.sid) {
+            if ($scope.selected && $scope.selected.sid == group.sid) {
                 $scope.selected = undefined;
                 return;
             }
             $scope.selected = angular.copy(group);
-
-            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
-                $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: group[OBJECT_PROPERTIES[i]],
-                    edit: false,
-                    saving: false,
-                    oldVal: {}
-                };
-            }
         };
-        $scope.edit = function (object, property) {
-            object[property].edit = true;
-            object[property].oldVal = object[property].value;
-        };
-        $scope.cancel = function (object, property) {
-            object[property].value = object[property].oldVal;
-            object[property].edit = false;
-        };
-        $scope.save = function (object, property) {
-            object[property].saving = true;
+        $scope.save = function (object, property, callback) {
             if (property == NAME_KEY || property == DESCRIPTION_KEY) {
                 var obj = _.findWhere($scope.groups, {sid: object.sid});
-                obj[property] = object[property].value;
-                if (obj !== undefined) {
+                if (obj) {
+                    obj[property] = object[property];
                     ticketTypeGroupHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
-                            object[property].edit = false;
-                            object[property].saving = false;
 
                             notificationService.success("Pomyślnie zapisano");
+                            callback();
                             return ticketTypeGroupHttpClient.findAll().$promise;
                         }
                     ).then(

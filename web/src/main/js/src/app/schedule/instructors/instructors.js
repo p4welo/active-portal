@@ -9,12 +9,7 @@ angular.module('activePortal.schedule')
     })
 
     .controller('instructorsCtrl', function ($scope, $modal, instructorHttpClient, notificationService) {
-        var FIRST_NAME_KEY = "firstName";
-        var LAST_NAME_KEY = "lastName";
-        var NICK_KEY = "nick";
-        var OBJECT_PROPERTIES = [FIRST_NAME_KEY, LAST_NAME_KEY, NICK_KEY];
 
-        // =======================================
         $scope.instructorLoading = true;
         instructorHttpClient.findAll().$promise.then(
             function (result) {
@@ -75,15 +70,6 @@ angular.module('activePortal.schedule')
             $scope.selectedCourses = [];
             $scope.selected = angular.copy(instructor);
 
-            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
-                $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: instructor[OBJECT_PROPERTIES[i]],
-                    edit: false,
-                    saving: false,
-                    oldVal: {}
-                };
-            }
-
             $scope.courseLoading = true;
             instructorHttpClient.courses({sid: instructor.sid}).$promise.then(
                 function (value) {
@@ -92,25 +78,14 @@ angular.module('activePortal.schedule')
                 }
             );
         };
-        $scope.edit = function (object, property) {
-            object[property].edit = true;
-            object[property].oldVal = object[property].value;
-        };
-        $scope.cancel = function (object, property) {
-            object[property].value = object[property].oldVal;
-            object[property].edit = false;
-        };
-        $scope.save = function (object, property) {
-            object[property].saving = true;
+        $scope.save = function (object, property, callback) {
             var obj = _.findWhere($scope.instructors, {sid: object.sid});
-            obj[property] = object[property].value;
-            if (obj !== undefined) {
+            if (obj) {
+                obj[property] = object[property];
                 instructorHttpClient.update({sid: object.sid}, obj).$promise.then(
                     function () {
-                        object[property].edit = false;
-                        object[property].saving = false;
-
                         notificationService.success("Pomyślnie zapisano");
+                        callback();
                         return instructorHttpClient.findAll().$promise;
                     }
                 ).then(

@@ -26,7 +26,7 @@ angular.module('activePortal.common')
                     $scope.saving = true;
                     $scope.onSave($scope.object, $scope.field, function () {
                         $scope.saving = false;
-                        $scope.edit = false;
+                        $scope.editing = false;
                     });
                 };
             }

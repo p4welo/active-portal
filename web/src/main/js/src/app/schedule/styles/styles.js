@@ -107,14 +107,6 @@ angular.module('activePortal.schedule')
             }
             $scope.selected = angular.copy(object);
 
-            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
-                $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: object[OBJECT_PROPERTIES[i]],
-                    edit: false,
-                    saving: false,
-                    oldVal: {}
-                };
-            }
             $scope.courseLoading = true;
             styleHttpClient.findActiveCourses({sid: object.sid}).$promise.then(
                 function (result) {
@@ -123,23 +115,12 @@ angular.module('activePortal.schedule')
                 }
             );
         };
-        $scope.edit = function (object, property) {
-            object[property].edit = true;
-            object[property].oldVal = object[property].value;
-        };
-        $scope.cancel = function (object, property) {
-            object[property].value = object[property].oldVal;
-            object[property].edit = false;
-        };
-        $scope.save = function (object, property) {
-            object[property].saving = true;
+        $scope.save = function (object, property, callback) {
             if (property == CATEGORY_KEY) {
-                styleHttpClient.setCategory({sid: object.sid}, object.category.value).$promise.then(
+                styleHttpClient.setCategory({sid: object.sid}, object.category).$promise.then(
                     function () {
-                        object[property].edit = false;
-                        object[property].saving = false;
-
                         notificationService.success("Pomyślnie zapisano");
+                        callback();
                         return styleHttpClient.findAll().$promise;
                     }
                 ).then(
@@ -150,14 +131,12 @@ angular.module('activePortal.schedule')
             }
             else if (property == NAME_KEY) {
                 var obj = _.findWhere($scope.styles, {sid: object.sid});
-                obj.name = object.name.value;
+                obj.name = object.name;
                 if (angular.isObject(obj)) {
                     styleHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
-                            object[property].edit = false;
-                            object[property].saving = false;
-
                             notificationService.success("Pomyślnie zapisano");
+                            callback();
                             return styleHttpClient.findAll().$promise;
                         }
                     ).then(
