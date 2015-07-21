@@ -225,21 +225,21 @@ angular.module('activePortal.schedule')
             }
             $scope.selected = angular.copy(course);
         };
-        $scope.edit = function (object, property) {
-            object[property].edit = true;
-            object[property].oldVal = object[property].value;
-            if (property == START_TIME_KEY || property == END_TIME_KEY) {
-                var obj = object[property].value.split(":");
-                object[property].value = {
-                    hours: obj[0],
-                    minutes: obj[1]
-                };
-            }
-        };
-        $scope.cancel = function (object, property) {
-            object[property].value = object[property].oldVal;
-            object[property].edit = false;
-        };
+        //$scope.edit = function (object, property) {
+        //    object[property].edit = true;
+        //    object[property].oldVal = object[property].value;
+        //    if (property == START_TIME_KEY || property == END_TIME_KEY) {
+        //        var obj = object[property].value.split(":");
+        //        object[property].value = {
+        //            hours: obj[0],
+        //            minutes: obj[1]
+        //        };
+        //    }
+        //};
+        //$scope.cancel = function (object, property) {
+        //    object[property].value = object[property].oldVal;
+        //    object[property].edit = false;
+        //};
         $scope.save = function (course, property, callback) {
             var action;
             if (property == STYLE_KEY) {
@@ -252,13 +252,7 @@ angular.module('activePortal.schedule')
                 var obj = _.findWhere($scope.classes, {sid: course.sid});
                 if (obj) {
                     var newVal = course[property];
-                    if (property == START_TIME_KEY || property == END_TIME_KEY) {
-                        obj[property] = newVal.hours + ":" + newVal.minutes;
-                        course[property] = newVal.hours + ":" + newVal.minutes;
-                    }
-                    else {
-                        obj[property] = newVal;
-                    }
+                    obj[property] = newVal;
                     action = courseHttpClient.update({sid: obj.sid}, obj);
                 }
             }

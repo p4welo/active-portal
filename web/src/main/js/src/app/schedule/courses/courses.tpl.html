@@ -105,10 +105,10 @@
                         <td>{{course.level | translate}}</td>
                         <td>{{course.room.name | translate}}</td>
                         <td>
-        <span ng-repeat="instructor in course.instructors">
-            <span ng-if="$index > 0">, </span>
-            {{instructor.firstName}} {{instructor.lastName}}
-        </span>
+                            <span ng-repeat="instructor in course.instructors">
+                                <span ng-if="$index > 0">, </span>
+                                {{instructor.firstName}} {{instructor.lastName}}
+                            </span>
                         </td>
                         <td>
                             {{ course.courseState | translate }}
@@ -129,89 +129,12 @@
                             <div class="block">
                                 <div class="col-sm-6">
                                     <div class="form-horizontal">
-
                                         <form-object-combo object="selected" list="styles" label="Nazwa" field="style" on-save="save"></form-object-combo>
                                         <form-translated-combo object="selected" list="levels" label="Poziom" field="level" on-save="save"></form-translated-combo>
                                         <form-translated-combo object="selected" list="states" label="Status" field="courseState" on-save="save"></form-translated-combo>
                                         <form-translated-combo object="selected" list="days" label="Dzień" field="day" on-save="save"></form-translated-combo>
-
-                                        <form class="form-group">
-                                            <label for="startTime" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'startTime')">Start</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.startTime.edit">
-                                                <p class="form-control-static">
-                                                    <span class="btn-link" ng-click="edit(selected, 'startTime')"
-                                                          ng-bind="selected.startTime.value"></span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.startTime.edit">
-                                                <select id="startTime" ng-model="selected.startTime.value.hours"
-                                                        ng-options="h for h in hours"
-                                                        class="form-control"
-                                                        ng-disabled="selected.startTime.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.startTime.edit">
-                                                <select id="startTime2" ng-model="selected.startTime.value.minutes"
-                                                        ng-options="m for m in minutes"
-                                                        class="form-control"
-                                                        ng-disabled="selected.startTime.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.startTime.edit">
-                                                <div class="btn" ng-if="selected.startTime.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.startTime.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'startTime')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'startTime')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <form class="form-group">
-                                            <label for="endTime" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'endTime')">Koniec</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.endTime.edit">
-                                                <p class="form-control-static">
-                        <span class="btn-link" ng-click="edit(selected, 'endTime')"
-                              ng-bind="selected.endTime.value"></span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.endTime.edit">
-                                                <select id="endTime" ng-model="selected.endTime.value.hours"
-                                                        ng-options="h for h in hours" class="form-control"
-                                                        ng-disabled="selected.endTime.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.endTime.edit">
-                                                <select id="endTime2" ng-model="selected.endTime.value.minutes"
-                                                        ng-options="m for m in minutes"
-                                                        class="form-control"
-                                                        ng-disabled="selected.endTime.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.endTime.edit">
-                                                <div class="btn" ng-if="selected.endTime.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.endTime.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'endTime')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'endTime')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
+                                        <form-time-combo object="selected" label="Start" field="startTime" on-save="save"></form-time-combo>
+                                        <form-time-combo object="selected" label="Koniec" field="endTime" on-save="save"></form-time-combo>
                                         <form-object-combo object="selected" list="rooms" label="Sala" field="room" on-save="save"></form-object-combo>
                                     </div>
                                 </div>
