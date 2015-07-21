@@ -53,40 +53,8 @@
                             <div class="block">
                                 <div class="col-sm-6">
                                     <div class="form-horizontal">
-                                        <form class="form-group">
-                                            <label for="category" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'category')">Kategoria</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.category.edit">
-                                                <p class="form-control-static">
-                                                <span class="btn-link" ng-bind="selected.category.value.name"
-                                                      ng-click="edit(selected, 'category')"></span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6" ng-if="selected.category.edit">
-                                                <select id="category" ng-model="selected.category.value"
-                                                        ng-options="c.name for c in categories | orderBy: 'name' track by c.sid"
-                                                        class="form-control"
-                                                        ng-disabled="selected.category.saving"></select>
-
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.category.edit">
-                                                <div class="btn" ng-if="selected.category.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.category.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'category')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'category')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
                                         <form-text-field object="selected" label="Nazwa" field="name" on-save="save"></form-text-field>
+                                        <form-object-combo object="selected" list="categories" label="Kategoria" field="category" on-save="save"></form-object-combo>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

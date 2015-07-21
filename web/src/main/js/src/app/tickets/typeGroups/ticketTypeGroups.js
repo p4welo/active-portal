@@ -76,7 +76,6 @@ angular.module('activePortal.schedule')
                     obj[property] = object[property];
                     ticketTypeGroupHttpClient.update({sid: object.sid}, obj).$promise.then(
                         function () {
-
                             notificationService.success("Pomyślnie zapisano");
                             callback();
                             return ticketTypeGroupHttpClient.findAll().$promise;

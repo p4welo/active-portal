@@ -218,23 +218,12 @@ angular.module('activePortal.schedule')
         };
 
         $scope.select = function (course) {
-            if (angular.isObject($scope.selected) && $scope.selected.sid == course.sid) {
+            if ($scope.selected && $scope.selected.sid == course.sid) {
                 $scope.selected = undefined;
                 $scope.lessons = [];
                 return;
             }
             $scope.selected = angular.copy(course);
-            $scope.selected.edit = false;
-
-            for (var i = 0; i < OBJECT_PROPERTIES.length; i++) {
-                $scope.selected[OBJECT_PROPERTIES[i]] = {
-                    value: course[OBJECT_PROPERTIES[i]],
-                    edit: false,
-                    saving: false,
-                    oldVal: {}
-                };
-            }
-
         };
         $scope.edit = function (object, property) {
             object[property].edit = true;
@@ -251,63 +240,41 @@ angular.module('activePortal.schedule')
             object[property].value = object[property].oldVal;
             object[property].edit = false;
         };
-        $scope.save = function (course, property) {
-            course[property].saving = true;
+        $scope.save = function (course, property, callback) {
+            var action;
             if (property == STYLE_KEY) {
-                courseHttpClient.setStyle({sid: course.sid}, course.style.value).$promise.then(
-                    function () {
-                        course[property].edit = false;
-                        course[property].saving = false;
-                        notificationService.success("Pomyślnie zapisano");
-
-                        return courseHttpClient.findAll().$promise;
-                    }
-                ).then(
-                    function (result) {
-                        $scope.classes = result;
-                    }
-                );
+                action = courseHttpClient.setStyle({sid: course.sid}, course.style);
             }
             else if (property == ROOM_KEY) {
-                courseHttpClient.setRoom({sid: course.sid}, course.room.value).$promise.then(
-                    function () {
-                        course[property].edit = false;
-                        course[property].saving = false;
-                        notificationService.success("Pomyślnie zapisano");
-
-                        return courseHttpClient.findAll().$promise;
-                    }
-                ).then(
-                    function (result) {
-                        $scope.classes = result;
-                    }
-                );
+                action = courseHttpClient.setRoom({sid: course.sid}, course.room);
             }
             else {
                 var obj = _.findWhere($scope.classes, {sid: course.sid});
-                if (angular.isObject(obj)) {
-                    var newVal = course[property].value;
+                if (obj) {
+                    var newVal = course[property];
                     if (property == START_TIME_KEY || property == END_TIME_KEY) {
                         obj[property] = newVal.hours + ":" + newVal.minutes;
-                        course[property].value = newVal.hours + ":" + newVal.minutes;
+                        course[property] = newVal.hours + ":" + newVal.minutes;
                     }
                     else {
                         obj[property] = newVal;
                     }
-                    courseHttpClient.update({sid: obj.sid}, obj).$promise.then(
-                        function () {
-                            course[property].edit = false;
-                            course[property].saving = false;
-                            notificationService.success("Pomyślnie zapisano");
-
-                            return courseHttpClient.findAll().$promise;
-                        }
-                    ).then(
-                        function (result) {
-                            $scope.classes = result;
-                        }
-                    );
+                    action = courseHttpClient.update({sid: obj.sid}, obj);
                 }
+            }
+
+            if (action) {
+                action.$promise.then(
+                    function () {
+                        notificationService.success("Pomyślnie zapisano");
+                        callback();
+                        return courseHttpClient.findAll().$promise;
+                    }
+                ).then(
+                    function (result) {
+                        $scope.classes = result;
+                    }
+                );
             }
         };
     })

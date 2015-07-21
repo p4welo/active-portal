@@ -129,141 +129,11 @@
                             <div class="block">
                                 <div class="col-sm-6">
                                     <div class="form-horizontal">
-                                        <form class="form-group">
-                                            <label for="style" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'style')">Nazwa</label>
 
-                                            <div class="col-sm-9" ng-if="!selected.style.edit">
-                                                <p class="form-control-static">
-                                                <span class="btn-link" ng-bind="selected.style.value.name"
-                                                      ng-click="edit(selected, 'style')"></span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6" ng-if="selected.style.edit">
-                                                <select id="style" ng-model="selected.style.value"
-                                                        ng-options="s.name for s in styles |orderBy: 'name' track by s.sid"
-                                                        class="form-control"
-                                                        ng-disabled="selected.style.saving"></select>
-
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.style.edit">
-                                                <div class="btn" ng-if="selected.style.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.style.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'style')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'style')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <form class="form-group">
-                                            <label for="level" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'level')">Poziom</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.level.edit">
-                                                <p class="form-control-static">
-                                                <span class="btn-link" ng-click="edit(selected, 'level')">
-                                                    {{selected.level.value | translate}}
-                                                      </span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6" ng-if="selected.level.edit">
-                                                <select id="level" ng-model="selected.level.value"
-                                                        ng-options="l | translate for l in levels"
-                                                        class="form-control"
-                                                        ng-disabled="selected.level.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.level.edit">
-                                                <div class="btn" ng-if="selected.level.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.level.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'level')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'level')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <form class="form-group">
-                                            <label for="state" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'level')">Status</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.courseState.edit">
-                                                <p class="form-control-static">
-                                                <span class="btn-link" ng-click="edit(selected, 'courseState')">
-                                                    {{selected.courseState.value | translate}}
-                                                      </span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6" ng-if="selected.courseState.edit">
-                                                <select id="state" ng-model="selected.courseState.value"
-                                                        ng-options="s | translate for s in states"
-                                                        class="form-control"
-                                                        ng-disabled="selected.courseState.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.courseState.edit">
-                                                <div class="btn" ng-if="selected.courseState.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.courseState.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'courseState')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'courseState')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <form class="form-group">
-                                            <label for="day" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'day')">Dzień</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.day.edit">
-                                                <p class="form-control-static">
-                                                <span class="btn-link" ng-click="edit(selected, 'day')">
-                                                    {{selected.day.value | translate}}
-                                                      </span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6" ng-if="selected.day.edit">
-                                                <select id="day" ng-model="selected.day.value"
-                                                        ng-options="d | translate for d in days"
-                                                        class="form-control"
-                                                        ng-disabled="selected.day.saving"></select>
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.day.edit">
-                                                <div class="btn" ng-if="selected.day.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.day.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'day')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'day')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <form-object-combo object="selected" list="styles" label="Nazwa" field="style" on-save="save"></form-object-combo>
+                                        <form-translated-combo object="selected" list="levels" label="Poziom" field="level" on-save="save"></form-translated-combo>
+                                        <form-translated-combo object="selected" list="states" label="Status" field="courseState" on-save="save"></form-translated-combo>
+                                        <form-translated-combo object="selected" list="days" label="Dzień" field="day" on-save="save"></form-translated-combo>
 
                                         <form class="form-group">
                                             <label for="startTime" class="col-sm-3 control-label"
@@ -342,39 +212,7 @@
                                             </div>
                                         </form>
 
-                                        <form class="form-group">
-                                            <label for="room" class="col-sm-3 control-label"
-                                                   ng-click="edit(selected, 'room')">Sala</label>
-
-                                            <div class="col-sm-9" ng-if="!selected.room.edit">
-                                                <p class="form-control-static">
-                                                <span class="btn-link" ng-bind="selected.room.value.name"
-                                                      ng-click="edit(selected, 'room')"></span>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6" ng-if="selected.room.edit">
-                                                <select id="room" ng-model="selected.room.value"
-                                                        ng-options="r.name for r in rooms track by r.sid"
-                                                        class="form-control"
-                                                        ng-disabled="selected.room.saving"></select>
-
-                                            </div>
-                                            <div class="col-sm-3" ng-if="selected.room.edit">
-                                                <div class="btn" ng-if="selected.room.saving">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </div>
-                                                <div ng-if="!selected.room.saving">
-                                                    <a href="javascript:void(0)" class="btn btn-alt btn-default"
-                                                       ng-click="cancel(selected, 'room')">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
-                                                    <button class="btn btn-alt btn-primary"
-                                                            ng-click="save(selected, 'room')">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <form-object-combo object="selected" list="rooms" label="Sala" field="room" on-save="save"></form-object-combo>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
