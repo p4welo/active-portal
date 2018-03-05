@@ -1,0 +1,94 @@
+<div>
+    <schedule-submenu></schedule-submenu>
+    <view-header icon-class="gi gi-certificate" header-label="Instruktorzy">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj instruktora
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
+
+    <div class="block col-xs-12">
+        <div class="table-options clearfix">
+            <div class="input-group">
+                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control"/>
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+            </div>
+        </div>
+        <div loading-indicator ng-loading="instructorLoading" class="table-responsive">
+            <table class="table table-editable table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('firstName')">
+                            Imię
+                            <i ng-class="sortIcon('firstName')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('lastName')">
+                            Nazwisko
+                            <i ng-class="sortIcon('lastName')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('nick')">
+                            Pseudonim
+                            <i ng-class="sortIcon('nick')"></i>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="instructor in instructors | filter: filterName | orderBy:sort.column:sort.descending">
+                <tr ng-click="select(instructor)" ng-class="{'selected': isEqual(selected, instructor)}">
+                    <td ng-bind="instructor.firstName"></td>
+                    <td ng-bind="instructor.lastName"></td>
+                    <td ng-bind="instructor.nick"></td>
+                </tr>
+                <tr class="table-content" ng-if="isEqual(selected, instructor)">
+                    <td colspan="4">
+                        <div class="block">
+                            <div class="col-sm-6">
+                                <div class="form-horizontal" method="post">
+                                    <form-text-field object="selected" label="Imię" field="firstName" on-save="save"></form-text-field>
+                                    <form-text-field object="selected" label="Nazwisko" field="lastName" on-save="save"></form-text-field>
+                                    <form-text-field object="selected" label="Pseudonim" field="nick" on-save="save"></form-text-field>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>Kursy</h5>
+
+                                <div loading-indicator ng-loading="courseLoading">
+                                    <p ng-if="selectedCourses.length == 0">Brak wyników spełniających kryteria.</p>
+                                    <table class="table table-vcenter table-bordered table-condensed"
+                                           id="general-table">
+                                        <tbody>
+                                        <tr ng-repeat="c in selectedCourses">
+                                            <td>
+                                                {{c.day | translate}}
+                                            </td>
+                                            <td ng-bind="c.startTime"></td>
+                                            <td ng-bind="c.style.name"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p ng-if="instructors.length == 0">Brak wyników spełniających kryteria.</p>
+        </div>
+    </div>
+</div>

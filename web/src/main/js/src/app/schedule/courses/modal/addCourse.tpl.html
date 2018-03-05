@@ -1,0 +1,116 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title" id="add-modal-label">Dodaj zajęcia</h4>
+</div>
+<div class="modal-body" ng-init="focusInput('#style')">
+    <form class="form-horizontal" role="form" name="newCourse">
+        <div class="form-group">
+            <label for="style" class="col-sm-3 control-label">
+                Nazwa
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-sm-9">
+                <select id="style" ng-model="course.style" ng-options="s.name for s in styles | orderBy: 'name'"
+                        class="form-control" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="level" class="col-sm-3 control-label">
+                Poziom
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-sm-9">
+                <select id="level" ng-model="course.level" ng-options="l | translate for l in levels"
+                        class="form-control" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="day" class="col-sm-3 control-label">
+                Dzień
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-sm-9">
+                <select id="day" ng-model="course.day" ng-options="d | translate for d in days" class="form-control"
+                        required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="startTime" class="col-sm-3 control-label">
+                Start
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-xs-4">
+                <select id="startTime" ng-model="start.hours" ng-options="h for h in hours" ng-change="onStartHoursChange(start.hours)" class="form-control" required></select>
+            </div>
+            <p class="form-control-static col-xs-1">:</p>
+            <div class="col-xs-4">
+                <select ng-model="start.minutes" ng-options="m for m in minutes" class="form-control" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="endTime" class="col-sm-3 control-label">
+                Koniec
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-xs-4">
+                <select id="endTime" ng-model="end.hours" ng-options="h for h in hours" class="form-control" required></select>
+            </div>
+            <p class="form-control-static col-xs-1">:</p>
+            <div class="col-xs-4">
+                <select ng-model="end.minutes" ng-options="m for m in minutes" class="form-control" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="instructor" class="col-sm-3 control-label">Instruktor</label>
+
+            <div class="col-sm-9">
+                <select id="instructor" ng-model="course.instructor"
+                        ng-options="i.firstName + ' ' + i.lastName for i in instructors | orderBy: 'firstName'"
+                        class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="room" class="col-sm-3 control-label">
+                Sala
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-sm-9">
+                <select id="room" ng-model="course.room" ng-options="r.name for r in rooms | orderBy: 'name'"
+                        class="form-control" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="state" class="col-sm-3 control-label">
+                Status
+                <span class="text-danger">*</span>
+            </label>
+
+            <div class="col-sm-9">
+                <select id="state" ng-model="course.courseState" ng-options="s | translate for s in states" class="form-control"
+                        required></select>
+            </div>
+        </div>
+
+        <div class="form-group text-right">
+            <label class="col-sm-offset-3">
+                <span class="text-danger">*</span>
+                <span>- pole wymagane</span>
+            </label>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save(course)" class="btn btn-alt btn-primary" ng-class="{'disabled' : newCourse.$invalid}">
+        Zapisz
+    </button>
+</div>

@@ -1,0 +1,24 @@
+<div>
+    <view-header icon-class="fa fa-tachometer" header-label="Dashboard">
+    </view-header>
+    <div class="col-sm-12 col-md-6">
+        <div class="widget">
+            <div class="widget-extra themed-background-dark-default text-center">
+                <h3 class="widget-content-light">Klienci w tygodniu</h3>
+            </div>
+            <div class="widget-extra-full text-center">
+                <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" colours="colours"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="widget">
+            <div class="widget-extra themed-background-dark-default text-center">
+                <h3 class="widget-content-light">Rozkład płci</h3>
+            </div>
+            <div class="widget-extra-full text-center">
+                <canvas id="pie" class="chart chart-pie" data="genderData" labels="genderLabels" colours="colours"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

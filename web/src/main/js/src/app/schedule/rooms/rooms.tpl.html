@@ -1,0 +1,68 @@
+<div>
+    <schedule-submenu></schedule-submenu>
+
+    <view-header icon-class="fa fa-bank" header-label="Pomieszczenia">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj pomieszczenie
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
+
+    <div class="block col-xs-12">
+        <div class="table-options clearfix">
+            <div class="input-group">
+                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+            </div>
+        </div>
+        <div loading-indicator ng-loading="roomLoading" class="table-responsive">
+            <table class="table table-editable table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('code')">
+                            Kod
+                            <i ng-class="sortIcon('code')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('name')">
+                            Nazwa
+                            <i ng-class="sortIcon('name')"></i>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="room in rooms | filter: filterName | orderBy:sort.column:sort.descending">
+                <tr ng-click="select(room)" ng-class="{'selected': isEqual(selected, room)}">
+                    <td ng-bind="room.code"></td>
+                    <td ng-bind="room.name"></td>
+                </tr>
+                <tr class="table-content" ng-if="isEqual(selected, room)">
+                    <td colspan="2">
+                        <div class="block">
+                            <div class="col-sm-6">
+                                <div class="form-horizontal" method="post">
+                                    <form-label ng-model="selected.code" label="Kod"></form-label>
+                                    <form-text-field object="selected" label="Nazwa" field="name" on-save="save"></form-text-field>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p ng-if="rooms.length == 0">Brak wyników spełniających kryteria.</p>
+        </div>
+    </div>
+</div>

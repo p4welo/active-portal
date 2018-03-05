@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>ActivePortal - platforma społeczności aktywnej</title>
+
+    <meta name="description" content="ActivePortal - platforma społeczności aktywnej">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+    <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="assets/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="assets/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="assets/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="assets/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="assets/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="assets/icon152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="assets/icon180.png" sizes="180x180">
+
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <% }); %>
+</head>
+<body ng-app="activePortal">
+<div class="splash themed-background" ng-cloak>
+    <h2>
+        <img src="assets/wheel.svg"/>
+    </h2>
+</div>
+<div id="page-wrapper" ng-cloak>
+    <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+        <div id="sidebar">
+            <div class="sidebar-scroll">
+                <div class="sidebar-content">
+                    <a href="/" class="sidebar-brand" style="font-family: 'Comfortaa', cursive; color: white">
+                        Active-Portal.pl
+                    </a>
+                    <ul class="sidebar-nav">
+                        <li>
+                            <a href ui-sref="dashboard" ui-sref-active="active open">
+                                <i class="fa fa-tachometer sidebar-nav-icon"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="sidebar-header">
+                            <span class="sidebar-header-title">KLIENCI</span>
+                        </li>
+                        <li>
+                            <a href ui-sref="customerBase" ui-sref-active="active open">
+                                <i class="gi gi-parents sidebar-nav-icon"></i>
+                                Baza klientów
+                            </a>
+                        </li>
+                        <!--<li class="sidebar-header">-->
+                            <!--<span class="sidebar-header-title">GRAFIK</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a ui-sref="rooms" ui-sref-active="active open">-->
+                                <!--<i class="fa fa-bank sidebar-nav-icon"></i>-->
+                                <!--Pomieszczenia-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a ui-sref="instructors" ui-sref-active="active open">-->
+                                <!--<i class="gi gi-certificate sidebar-nav-icon"></i>-->
+                                <!--Instruktorzy-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a ui-sref="categories" ui-sref-active="active open">-->
+                                <!--<i class="gi gi-folder_open sidebar-nav-icon"></i>-->
+                                <!--Kategorie zajęć-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a ui-sref="styles" ui-sref-active="active open">-->
+                                <!--<i class="gi gi-eyedropper sidebar-nav-icon"></i>-->
+                                <!--Style taneczne-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a ui-sref="courses" ui-sref-active="active open">
+                                <i class="gi gi-table sidebar-nav-icon"></i>
+                                Grafik zajęć
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="roomReservation" ui-sref-active="active open">
+                                <i class="fa fa-plane sidebar-nav-icon"></i>
+                                Rezerwacje
+                            </a>
+                        </li>
+                        <li class="sidebar-header">
+                            <span class="sidebar-header-title">KARNETY</span>
+                        </li>
+                        <li>
+                            <a ui-sref="ticketGroups" ui-sref-active="active open">
+                                <i class="fa fa-venus-mars sidebar-nav-icon"></i>
+                                Grupy
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="ticketTypes" ui-sref-active="active open">
+                                <i class="fa fa-tags sidebar-nav-icon"></i>
+                                Karnety
+                            </a>
+                        </li>
+                        <li class="sidebar-header">
+                            <span class="sidebar-header-title">SYSTEM</span>
+                        </li>
+                        <li>
+                            <a ui-sref="users" ui-sref-active="active open">
+                                <i class="gi gi-user sidebar-nav-icon"></i>
+                                Użytkownicy
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="authorities" ui-sref-active="active open">
+                                <i class="gi gi-keys sidebar-nav-icon"></i>
+                                Uprawnienia
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-container">
+            <header class="navbar navbar-default">
+                <ul class="nav navbar-nav-custom">
+                    <li>
+                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
+                            <i class="fa fa-bars fa-fw"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" ng-click="scan()">
+                            <i class="fa fa-barcode"></i>
+                            Przyjmij KARNET
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" ui-sref="roomReservation">
+                            <i class="fa fa-plane"></i>
+                            REZERWUJ salę
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav-custom pull-right">
+                    <li>
+                        <a href="logout" data-toggle="tooltip" data-placement="bottom" title="Wyloguj">
+                            <i class="gi gi-gi gi-exit"></i>
+                        </a>
+                    </li>
+                </ul>
+            </header>
+
+            <div id="page-content">
+                <div class="angular-view" ui-view></div>
+            </div>
+
+            <footer class="clearfix">
+                <div class="pull-right">
+                    by <a href="http://setenta.wroclaw.pl" target="_blank">Setenta</a>
+                </div>
+                <div class="pull-left">
+                    <span id="year-copy"></span>
+                    &copy;
+                    <a href="http://active-portal.pl" target="_blank">
+                        Active-Portal 1.2
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<% scripts.forEach( function ( file ) { %>
+<script type="text/javascript" src="<%= file %>"></script>
+<% }); %>
+</body>
+</html>

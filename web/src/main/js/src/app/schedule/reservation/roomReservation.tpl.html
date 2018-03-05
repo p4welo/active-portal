@@ -1,0 +1,15 @@
+<div>
+    <view-header icon-class="fa fa-plane" header-label="Rezerwacje sali">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i> Dodaj rezerwację
+            </a>
+        </li>
+
+    </view-header>
+
+    <div class="block col-xs-12">
+        <div class="loading-overlap" loading-indicator ng-loading="loading"></div>
+        <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ActivePortal - platforma społeczności aktywnej</title>
+    <meta name="unauthorized" content="true">
+
+    <meta name="description" content="ActivePortal - platforma społeczności aktywnej">
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+    <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+
+    <link rel="shortcut icon" href="assets/lib/pro-ui/img/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="assets/lib/pro-ui/img/icon152.png" sizes="152x152">
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <% }); %>
+</head>
+<body class="page-loading" onload='document.loginForm.login.focus();'>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <div id="login-alt-container">
+                <!-- Title -->
+                <h1 class="push-top-bottom" style="font-family: 'Architects Daughter', cursive;">
+                    ACTIVE-PORTAL.pl<br/>
+                    <small>platforma aktywności</small>
+                </h1>
+                <!-- END Title -->
+
+                <!-- Key Features -->
+                <ul class="fa-ul text-muted">
+                    <li><i class="fa fa-check fa-li text-success"></i> Clean &amp; Modern Design</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Fully Responsive &amp; Retina Ready</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> 10 Color Themes</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> PSD Files Included</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Widgets Collection</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> Designed Pages Collection</li>
+                    <li><i class="fa fa-check fa-li text-success"></i> .. and many more awesome features!</li>
+                </ul>
+                <!-- END Key Features -->
+
+                <!-- Footer -->
+                <footer class="text-muted push-top-bottom">
+                    <small><span id="year-copy"></span> &copy; <a href="http://goo.gl/TDOSuC" target="_blank">ProUI
+                        3.2</a></small>
+                </footer>
+                <!-- END Footer -->
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div id="login-container">
+                <div class="login-title text-center">
+                    <h1>Zaloguj się</h1>
+                </div>
+
+                <div class="block push-bit">
+                    <form name='loginForm' action='auth' method='POST' id="form-login" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                    <input type="text" id="login" name='login' class="form-control input-lg"
+                                           placeholder="Login" autofocus/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="gi gi-keys"></i>
+                                    </span>
+                                    <input type="password" id="password" name="pass" class="form-control input-lg"
+                                           placeholder="Hasło">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-actions">
+                            <div class="col-xs-4">
+                                <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                                    <input type="checkbox" id="login-remember-me" name="login-remember-me" checked>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <button type="submit" class="btn btn-alt btn-primary">
+                                    <i class="fa fa-sign-in"></i>
+                                    Zaloguj
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 text-center">
+                                <a href="javascript:void(0)" id="link-reminder-login">
+                                    <small>Zapomniałeś hasła?</small>
+                                </a> -
+                                <a href="javascript:void(0)" id="link-register-login">
+                                    <small>Utwórz nowe konto</small>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

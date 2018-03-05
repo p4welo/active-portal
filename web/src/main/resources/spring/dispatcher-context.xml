@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <context:component-scan base-package="pl.ap.web.controller" />
+    <context:component-scan base-package="pl.ap.web.exceptions" />
+
+    <mvc:annotation-driven />
+    <mvc:resources mapping="/front/**" location="classpath:/front/"/>
+    <mvc:resources mapping="/vendor/**" location="classpath:/static/vendor/"/>
+    <mvc:resources mapping="/assets/**" location="classpath:/static/assets/"/>
+    <mvc:resources mapping="/src/**" location="classpath:/static/src/"/>
+    <mvc:resources mapping="/pages/**" location="classpath:/static/pages/"/>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/pages/" />
+        <property name="suffix" value=".html" />
+    </bean>
+
+    <security:global-method-security secured-annotations="enabled"/>
+</beans>

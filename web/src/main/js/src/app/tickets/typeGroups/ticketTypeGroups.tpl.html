@@ -1,0 +1,66 @@
+<div>
+    <view-header icon-class="fa fa-venus-mars" header-label="Grupy docelowe">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj grupę
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
+
+    <div class="block col-xs-12">
+        <div class="table-options clearfix">
+            <div class="input-group">
+                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+            </div>
+        </div>
+        <div loading-indicator ng-loading="groupLoading" class="table-responsive">
+            <table class="table table-editable table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('name')">
+                            Nazwa
+                            <i ng-class="sortIcon('name')"></i>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="toggleSort('description')">
+                            Uwagi
+                            <i ng-class="sortIcon('description')"></i>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="group in groups | filter: filterName | orderBy:sort.column:sort.descending">
+                <tr ng-click="select(group)" ng-class="{'selected': isEqual(selected, group)}">
+                    <td ng-bind="group.name"></td>
+                    <td ng-bind="group.description"></td>
+                </tr>
+                <tr class="table-content" ng-if="isEqual(selected, group)">
+                    <td colspan="2">
+                        <div class="block">
+                            <div class="col-sm-6">
+                                <div class="form-horizontal" method="post">
+                                    <form-text-field object="selected" label="Nazwa" field="name" on-save="save"></form-text-field>
+                                    <form-text-field object="selected" label="Uwagi" field="description" on-save="save"></form-text-field>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p ng-if="groups.length == 0">Brak wyników spełniających kryteria.</p>
+        </div>
+    </div>
+</div>

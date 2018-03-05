@@ -1,0 +1,27 @@
+<div>
+    <view-header icon-class="fa fa-tags" header-label="Karnety">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i>
+                Dodaj karnet
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
+
+    <div class="block col-xs-12">
+        <div class="table-options clearfix">
+            <div class="input-group">
+                <input type="text" ng-model="filterName" placeholder="Szukaj..." class="form-control">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>

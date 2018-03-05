@@ -1,0 +1,13 @@
+.idea
+*.iml
+target
+bower
+node_modules
+dist
+#web/src/main/js/vendor/*
+#!web/src/main/js/vendor/proui
+npm-debug.log
+node
+web/src/main/webapp/pages
+web/src/main/resources/static
+.version

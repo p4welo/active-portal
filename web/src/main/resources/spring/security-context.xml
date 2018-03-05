@@ -1,0 +1,39 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <http use-expressions="true" disable-url-rewriting="true">
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/home" access="permitAll"/>
+        <intercept-url pattern="/front/**" access="permitAll"/>
+        <intercept-url pattern="/static/**" access="permitAll"/>
+        <intercept-url pattern="/assets/**" access="permitAll"/>
+        <intercept-url pattern="/vendor/**" access="permitAll"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+
+        <form-login login-page="/login"
+                    authentication-failure-url="/login"
+                    login-processing-url="/auth"
+                    username-parameter="login"
+                    password-parameter="pass"
+                    default-target-url="/"
+                    always-use-default-target="true"
+                />
+        <http-basic/>
+        <logout logout-success-url="/login" logout-url="/logout" invalidate-session="true"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="test" password="test" authorities="Administrator"/>
+                <user name="basia" password="misiu18" authorities="Sekretariat"/>
+                <user name="sekretariat" password="bojatanczycchce" authorities="Sekretariat"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

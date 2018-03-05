@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title" id="add-modal-label">Dodaj kategorię</h4>
+</div>
+<div class="modal-body" ng-init="focusInput('#code')">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="code" class="col-sm-3 control-label">Kod</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="code" placeholder="Kod" ng-model="category.code">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Nazwa</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="name" placeholder="Nazwa" ng-model="category.name">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save(category)" class="btn btn-alt btn-primary">Zapisz</button>
+</div>

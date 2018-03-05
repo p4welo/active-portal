@@ -1,0 +1,29 @@
+<form class="form-group">
+    <label for="field" class="col-sm-3 control-label" ng-click="edit()">{{::label}}</label>
+
+    <div class="col-sm-9" ng-if="!editing">
+        <p class="form-control-static" ng-click="edit()">
+            <span class="btn-link empty-text" ng-if="!object[field] || object[field].length==''">[wprowadź wartość]</span>
+            <span class="btn-link" ng-bind="object[field]"></span>
+        </p>
+    </div>
+    <div ng-if="editing">
+        <div class="col-sm-6">
+            <input type="text" placeholder="{{::label}}" class="form-control" id="field" ng-model="object[field]"
+                   autofocus="autofocus" ng-disabled="saving"/>
+        </div>
+        <div class="col-sm-3">
+            <div class="btn" ng-if="saving">
+                <i class="fa fa-spin fa-spinner"></i>
+            </div>
+            <div ng-if="!saving">
+                <a href="javascript:void(0)" class="btn btn-alt btn-default" ng-click="cancel()">
+                    <i class="fa fa-remove"></i>
+                </a>
+                <button class="btn btn-alt btn-primary" ng-click="save()">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

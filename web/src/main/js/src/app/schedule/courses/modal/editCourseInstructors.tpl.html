@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title" id="add-modal-label">Edytuj instruktorów</h4>
+</div>
+<div class="modal-body" ng-init="load()">
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item" ng-click="toggle(i)" ng-repeat="i in allInstructors | orderBy: 'firstName'" ng-class="{ 'active': i.isActive }">
+            {{ ::i.firstName }}
+            {{ ::i.lastName }}
+        </a>
+    </div>
+    <div class="alert alert-danger" ng-show="selectionCount>1">
+        Zaznaczyłeś <strong>więcej niż jednego instruktora</strong>. Przed zapisem upewnij się czy wprowadzone dane są poprawne.
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-alt btn-default" ng-click="cancel()">Anuluj</button>
+    <button ng-click="save()" class="btn btn-alt btn-primary">Zapisz</button>
+</div>

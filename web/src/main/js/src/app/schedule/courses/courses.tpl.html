@@ -1,0 +1,175 @@
+<div>
+    <schedule-submenu></schedule-submenu>
+    <view-header icon-class="gi gi-table" header-label="Grafik zajęć">
+        <li>
+            <a href="javascript:void(0)" ng-click="add()">
+                <i class="fa fa-plus-circle"></i> Dodaj zajęcia
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined || isActive(selected)}">
+            <a href="javascript:void(0)" ng-click="publish(selected)">
+                <i class="fa fa-eye"></i>
+                Publikuj
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined || !isActive(selected)}">
+            <a href="javascript:void(0)" ng-click="deactivate(selected)">
+                <i class="fa fa-eye-slash"></i>
+                Ukryj
+            </a>
+        </li>
+        <li ng-class="{'disabled': selected == undefined}">
+            <a href="javascript:void(0)" ng-click="delete(selected)">
+                <i class="fa fa-trash"></i>
+                Usuń
+            </a>
+        </li>
+    </view-header>
+
+    <div class="col-xs-12">
+        <div class="block">
+            <div>
+                <ul class="nav nav-pills day-select">
+                    <li ng-class="{'active' : day=='PN'}">
+                        <a ng-click="setDay('PN')">Poniedziałek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='WT'}">
+                        <a ng-click="setDay('WT')">Wtorek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SR'}">
+                        <a ng-click="setDay('SR')">Środa</a>
+                    </li>
+                    <li ng-class="{'active' : day=='CZ'}">
+                        <a ng-click="setDay('CZ')">Czwartek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='PT'}">
+                        <a ng-click="setDay('PT')">Piątek</a>
+                    </li>
+                    <li ng-class="{'active' : day=='SB'}">
+                        <a ng-click="setDay('SB')">Sobota</a>
+                    </li>
+                    <li ng-class="{'active' : day=='ND'}">
+                        <a ng-click="setDay('ND')">Niedziela</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div loading-indicator ng-loading="courseLoading" class="table-responsive">
+                <table class="table table-editable table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <a href="javascript:void(0)" ng-click="toggleSort('startTime')">
+                                Godziny
+                                <i ng-class="sortIcon('startTime')"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="javascript:void(0)" ng-click="toggleSort('style.name')">
+                                Nazwa
+                                <i ng-class="sortIcon('style.name')"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="javascript:void(0)" ng-click="toggleSort('level')">
+                                Poziom
+                                <i ng-class="sortIcon('level')"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="javascript:void(0)" ng-click="toggleSort('room.name')">
+                                Sala
+                                <i ng-class="sortIcon('room.name')"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="javascript:void(0)" ng-click="toggleSort('instructor.firstName')">
+                                Instruktor
+                                <i ng-class="sortIcon('instructor.firstName')"></i>
+                            </a>
+                        </th>
+                        <th>
+                            Dostępność
+                        </th>
+                        <th>
+                            <a href="javascript:void(0)" ng-click="toggleSort('objectState')">
+                                Status
+                                <i ng-class="sortIcon('objectState')"></i>
+                            </a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="course in classes | filter: { day : day} | orderBy:sort.column:sort.descending">
+                    <tr ng-click="select(course)" ng-class="{'selected': isEqual(selected, course)}">
+                        <td>{{course.startTime}} - {{course.endTime}}</td>
+                        <td ng-bind="course.style.name"></td>
+                        <td>{{course.level | translate}}</td>
+                        <td>{{course.room.name | translate}}</td>
+                        <td>
+                            <span ng-repeat="instructor in course.instructors">
+                                <span ng-if="$index > 0">, </span>
+                                {{instructor.firstName}} {{instructor.lastName}}
+                            </span>
+                        </td>
+                        <td>
+                            {{ course.courseState | translate }}
+                        </td>
+                        <td class="text-center object-state">
+                            <div class="themed-border-spring themed-background-spring text-center"
+                                 ng-if="isActive(course)">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="themed-border-fire themed-background-fire text-center"
+                                 ng-if="!isActive(course)">
+                                <i class="fa fa-remove"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table-content" ng-if="isEqual(selected, course)">
+                        <td colspan="7">
+                            <div class="block">
+                                <div class="col-sm-6">
+                                    <div class="form-horizontal">
+                                        <form-object-combo object="selected" list="styles" label="Nazwa" field="style" on-save="save"></form-object-combo>
+                                        <form-translated-combo object="selected" list="levels" label="Poziom" field="level" on-save="save"></form-translated-combo>
+                                        <form-translated-combo object="selected" list="states" label="Status" field="courseState" on-save="save"></form-translated-combo>
+                                        <form-translated-combo object="selected" list="days" label="Dzień" field="day" on-save="save"></form-translated-combo>
+                                        <form-time-combo object="selected" label="Start" field="startTime" on-save="save"></form-time-combo>
+                                        <form-time-combo object="selected" label="Koniec" field="endTime" on-save="save"></form-time-combo>
+                                        <form-object-combo object="selected" list="rooms" label="Sala" field="room" on-save="save"></form-object-combo>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h5 class="btn-link" ng-click="reassignInstructors(selected)">
+                                        Instruktorzy
+                                    </h5>
+
+                                    <p ng-if="selected.instructors.length == 0">Brak wyników spełniających kryteria.</p>
+
+                                    <table class="table table-condensed" id="general-table">
+                                        <tbody>
+                                        <tr ng-repeat="i in selected.instructors">
+                                            <td>
+                                                {{i.firstName}}
+                                            </td>
+                                            <td>
+                                                {{i.lastName}}
+                                            </td>
+                                            <td>
+                                                {{i.nick}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p ng-if="classes.length == 0">Brak wyników spełniających kryteria.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
